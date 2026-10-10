@@ -24,13 +24,13 @@ Your colony becomes a market town, RimWorld 1.6. You build the stalls, merchants
 
 ## Plays nicely with
 
-Hospitality, Trading Control, Trading Spot, RimToll, Rim War, Vanilla Trading Expanded. No hard dependency on any of them.
+Hospitality, Hotels and Recreation, Trading Control, Trading Spot, RimToll, Rim War, Vanilla Trading Expanded. No hard dependency on any of them.
 
 ## Credits
 
 The market stall art is by Tomson Johnson.
 
-The auction post texture is by Gerrymon, from Misc Props: Dungeon, used with permission.
+The auction post texture is by Gerrymon, from Misc Props: Dungeon, used with permission. It is not covered by the MIT license: all rights to it remain with Gerrymon, so ask them before reusing it anywhere else.
 
 ## Building
 

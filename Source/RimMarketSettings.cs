@@ -74,7 +74,7 @@ namespace RimMarket
 		public int fairCooldownDays = DefFairCooldownDays;
 		public float bargainEffect = DefBargainEffect;
 
-		public static bool ShareModeEnabled => HospitalityBridge.Active;
+		public static bool ShareModeEnabled => HospitalityBridge.Active || HotelsBridge.Active;
 
 		public int MarketTicks => (int)(marketDays * 60000f);
 

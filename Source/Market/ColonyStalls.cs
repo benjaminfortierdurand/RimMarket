@@ -156,7 +156,7 @@ namespace RimMarket.Market
 			if (!p.RaceProps.Humanlike || p.HostileTo(Faction.OfPlayer)) return false;
 			if (MarketUtility.SilverOf(p) < MarketUtility.MinGuestPurchase) return false;
 			if (p.GetLord()?.LordJob is LordJob_MarketShoppers) return true;
-			return RimMarketMod.Settings.guestsShop && HospitalityBridge.IsArrivedGuest(p);
+			return RimMarketMod.Settings.guestsShop && MarketUtility.IsShoppingGuest(p);
 		}
 
 		public static bool CustomersAround(Map map)

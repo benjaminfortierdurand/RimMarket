@@ -15,7 +15,7 @@ namespace RimMarket.Auction
 		{
 			MarketManager mgr = MarketManager.Instance;
 			if (mgr == null || pawn?.Map == null || pawn.IsColonist || !mgr.AnyAuctionOn(pawn.Map)) return 0f;
-			if (!HospitalityBridge.IsArrivedGuest(pawn)) return 0f;
+			if (!MarketUtility.IsShoppingGuest(pawn)) return 0f;
 			return base.GetChance(pawn) * (mgr.IsBidder(pawn) ? BidderChanceFactor : 1f);
 		}
 

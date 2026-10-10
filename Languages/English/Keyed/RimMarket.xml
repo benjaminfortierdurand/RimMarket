@@ -26,6 +26,7 @@
 	<RimMarket.CommandInnBed>Market inn</RimMarket.CommandInnBed>
 	<RimMarket.CommandInnBedDesc>Rent this bed out to the people who come for the market: merchants, off-duty guards and passing shoppers. They pay by the night (price in the mod settings) and leave the silver by the bed. Colonists, prisoners and slaves will not use it. A nice private room pleases them, a bedroll in a shed does not.</RimMarket.CommandInnBedDesc>
 	<RimMarket.InnBedPrisonCell>A prison cell makes a poor inn.</RimMarket.InnBedPrisonCell>
+	<RimMarket.InnBedHotelGuest>This is a hotel guest bed. Take it off the hotel first.</RimMarket.InnBedHotelGuest>
 	<RimMarket.InnBedLocked>This bed is rented out as a market inn. Turn off Market inn first.</RimMarket.InnBedLocked>
 	<RimMarket.InnBedInspect>Market inn: {0} silver a night.</RimMarket.InnBedInspect>
 	<RimMarket.InnBedInspectFree>Market inn: free of charge.</RimMarket.InnBedInspectFree>
@@ -39,8 +40,8 @@
 	<RimMarket.Settings.HaggleBonus>Haggle bonus</RimMarket.Settings.HaggleBonus>
 	<RimMarket.Settings.ColonistsBrowse>Colonists browse the stalls for recreation</RimMarket.Settings.ColonistsBrowse>
 	<RimMarket.Settings.ColonistsBrowseHint>Idle colonists wander over, look at the wares and chat with the merchant. They never spend colony silver on their own.</RimMarket.Settings.ColonistsBrowseHint>
-	<RimMarket.Settings.GuestsShop>Hospitality guests buy from the merchants</RimMarket.Settings.GuestsShop>
-	<RimMarket.Settings.GuestsShopHint>Needs Hospitality. Guests with silver in their pockets buy wares at the stalls. With the share of takings fee, the market takes its cut of every sale.</RimMarket.Settings.GuestsShopHint>
+	<RimMarket.Settings.GuestsShop>Guests buy from the merchants</RimMarket.Settings.GuestsShop>
+	<RimMarket.Settings.GuestsShopHint>Needs Hospitality or Hotels and Recreation. Guests with silver in their pockets, or budget left for their stay at your hotel, buy wares at the stalls and at your colony stall, and come to watch slave auctions. With the share of takings fee, the market takes its cut of every sale.</RimMarket.Settings.GuestsShopHint>
 	<RimMarket.Settings.Reputation>Reputation shapes the market</RimMarket.Settings.Reputation>
 	<RimMarket.Settings.ReputationHint>A good reputation brings extra caravans, rarer merchants and better prices. A bad one makes caravans camp outside and prices climb. With this off, the reputation is still kept but changes nothing.</RimMarket.Settings.ReputationHint>
 	<RimMarket.Settings.Thieves>Thieves work the market</RimMarket.Settings.Thieves>

@@ -87,7 +87,7 @@ namespace RimMarket.Buildings
 			lines.Add("RimMarket.MarkerFee".Translate(FeeModeLabel(shortForm: false)));
 			MarketManager mgr = MarketManager.Instance;
 			if (mgr != null) lines.Add("RimMarket.MarkerCollected".Translate(mgr.TotalFees));
-			if (mgr != null && HospitalityBridge.Active) lines.Add("RimMarket.MarkerGuestSales".Translate(mgr.TotalGuestSales));
+			if (mgr != null && (HospitalityBridge.Active || HotelsBridge.Active)) lines.Add("RimMarket.MarkerGuestSales".Translate(mgr.TotalGuestSales));
 			if (mgr != null && mgr.TotalColonySales > 0) lines.Add("RimMarket.MarkerColonySales".Translate(mgr.TotalColonySales));
 			if (mgr != null && mgr.ThievesCaught + mgr.ThievesEscaped + mgr.ThievesDeterred > 0)
 				lines.Add("RimMarket.MarkerSecurity".Translate(mgr.ThievesCaught, mgr.ThievesEscaped, mgr.ThievesDeterred));

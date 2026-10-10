@@ -19,3 +19,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+Exception: the auction post texture (Textures/Things/Building/RimMarket_AuctionPost.png
+and RimMarket_AuctionPost_m.png) is by Gerrymon, from Misc Props: Dungeon. It is
+used in RimMarket with the author's permission and is not covered by the MIT
+license above. All rights to it remain with Gerrymon: do not reuse it outside
+RimMarket without asking them.

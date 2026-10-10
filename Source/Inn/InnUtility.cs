@@ -59,7 +59,7 @@ namespace RimMarket.Inn
 		{
 			if (!(bed is Building_Bed)) return false;
 			CompInnBed comp = CompOf(bed);
-			return comp != null && comp.inn;
+			return comp != null && comp.inn && !Compat.HotelsBridge.IsGuestBed((Building_Bed)bed);
 		}
 	}
 
@@ -284,9 +284,14 @@ namespace RimMarket.Inn
 			for (int m = 0; m < maps.Count; m++)
 			{
 				List<Building_Bed> beds = InnBeds.On(maps[m]);
-				for (int i = 0; i < beds.Count; i++)
+				for (int i = beds.Count - 1; i >= 0; i--)
 				{
 					Building_Bed bed = beds[i];
+					if (Compat.HotelsBridge.IsGuestBed(bed))
+					{
+						InnBeds.CompOf(bed)?.SetInn(false);
+						continue;
+					}
 					List<Pawn> owners = bed.OwnersForReading;
 					for (int j = owners.Count - 1; j >= 0; j--)
 					{

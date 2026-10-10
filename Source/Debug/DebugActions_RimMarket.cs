@@ -213,7 +213,8 @@ namespace RimMarket.Debug
 				+ ", reputation " + mgr.Reputation.HeadlineLabel + " total " + mgr.Reputation.Total.ToString("F1")
 				+ " [safety " + mgr.Reputation.Score(0).ToString("F1") + " fairness " + mgr.Reputation.Score(1).ToString("F1")
 				+ " fees " + mgr.Reputation.Score(2).ToString("F1") + " appeal " + mgr.Reputation.Score(3).ToString("F1") + "]"
-				+ ", Hospitality " + (RimMarket.Compat.HospitalityBridge.Active ? (RimMarket.Compat.HospitalityBridge.Available ? "bridged" : "loaded, bridge failed") : "absent") + ":");
+				+ ", Hospitality " + (RimMarket.Compat.HospitalityBridge.Active ? (RimMarket.Compat.HospitalityBridge.Available ? "bridged" : "loaded, bridge failed") : "absent")
+				+ ", Hotels and Recreation " + (RimMarket.Compat.HotelsBridge.Active ? (RimMarket.Compat.HotelsBridge.Available ? "bridged" : "loaded, bridge failed") : "absent") + ":");
 			foreach (FactionLedger l in mgr.Ledgers)
 			{
 				if (l?.faction == null || l.rep == null) continue;

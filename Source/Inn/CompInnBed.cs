@@ -76,6 +76,7 @@ namespace RimMarket.Inn
 			};
 			Room room = parent.GetRoom();
 			if (!inn && room != null && room.IsPrisonCell) toggle.Disable("RimMarket.InnBedPrisonCell".Translate());
+			else if (!inn && Compat.HotelsBridge.IsGuestBed(Bed)) toggle.Disable("RimMarket.InnBedHotelGuest".Translate());
 			yield return toggle;
 		}
 

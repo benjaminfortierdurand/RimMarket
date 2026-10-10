@@ -157,13 +157,13 @@ namespace RimMarket.Auction
 					max = Mathf.Min(silver, Mathf.RoundToInt(value * Rand.Range(MinBidderFactor, MaxBidderFactor))),
 				});
 			}
-			if (HospitalityBridge.Active && RimMarketMod.Settings.guestsShop)
+			if ((HospitalityBridge.Active || HotelsBridge.Active) && RimMarketMod.Settings.guestsShop)
 			{
 				IReadOnlyList<Pawn> pawns = map.mapPawns.AllPawnsSpawned;
 				for (int i = 0; i < pawns.Count; i++)
 				{
 					Pawn p = pawns[i];
-					if (!HospitalityBridge.IsArrivedGuest(p) || !FactionBuysSlaves(p.Faction)) continue;
+					if (!MarketUtility.IsShoppingGuest(p) || !FactionBuysSlaves(p.Faction)) continue;
 					int silver = MarketUtility.SilverOf(p);
 					if (silver < start) continue;
 					list.Add(new AuctionBidder

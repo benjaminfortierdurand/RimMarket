@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RimMarket.AI;
+using RimMarket.Compat;
 using RimWorld;
 using Verse;
 using Verse.AI.Group;
@@ -10,7 +11,9 @@ namespace RimMarket.Market
 	{
 		public static bool Welcome(Map map, Faction faction)
 		{
-			return map != null && faction != null && !NeutralGroupIncidentUtility.AnyBlockingHostileLord(map, faction);
+			if (map == null || faction == null) return false;
+			if (HotelsBridge.Active) return BlockerFor(map, faction) == null;
+			return !NeutralGroupIncidentUtility.AnyBlockingHostileLord(map, faction);
 		}
 
 		public static Lord BlockerFor(Map map, Faction faction)
@@ -24,6 +27,7 @@ namespace RimMarket.Market
 				if (l.faction == null || l.faction == faction || l.faction == home || !l.AnyActivePawn) continue;
 				LordJob job = l.LordJob;
 				if (job != null && (!job.CanBlockHostileVisitors || job is LordJob_VoluntarilyJoinable)) continue;
+				if (HotelsBridge.PeacefulGuests(l)) continue;
 				if (l.faction.HostileTo(faction) && !l.faction.HostileTo(home)) return l;
 			}
 			return null;
@@ -40,7 +44,7 @@ namespace RimMarket.Market
 			{
 				Lord other = lords[i];
 				if (other == lord || other.faction == null || other.faction == faction || other.faction == host) continue;
-				if (other.LordJob is LordJob_MarketThief || !other.AnyActivePawn) continue;
+				if (other.LordJob is LordJob_MarketThief || !other.AnyActivePawn || HotelsBridge.PeacefulGuests(other)) continue;
 				if (!other.faction.HostileTo(faction) || other.faction.HostileTo(host)) continue;
 				return other;
 			}

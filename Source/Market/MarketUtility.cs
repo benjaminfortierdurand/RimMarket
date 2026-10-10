@@ -260,8 +260,11 @@ namespace RimMarket.Market
 		public const int MinGuestPurchase = 5;
 		public const int MaxUnitsPerPurchase = 10;
 
+		public static bool IsShoppingGuest(Pawn p) => HospitalityBridge.IsArrivedGuest(p) || HotelsBridge.IsGuest(p);
+
 		public static int SilverOf(Pawn p)
 		{
+			if (HotelsBridge.IsGuest(p)) return HotelsBridge.BudgetOf(p);
 			ThingOwner inv = p?.inventory?.innerContainer;
 			if (inv == null) return 0;
 			int n = 0;
@@ -396,6 +399,13 @@ namespace RimMarket.Market
 
 		public static int TransferSilver(Pawn from, ThingOwner to, int amount)
 		{
+			if (HotelsBridge.IsGuest(from))
+			{
+				if (to == null) return 0;
+				int paid = HotelsBridge.Spend(from, amount);
+				if (paid > 0) to.TryAdd(MakeSilver(paid));
+				return paid;
+			}
 			ThingOwner inv = from.inventory?.innerContainer;
 			if (inv == null || to == null) return 0;
 			int before = SilverOf(from);
@@ -435,6 +445,16 @@ namespace RimMarket.Market
 			float got = 0f;
 			for (int i = 0; i < pawns.Count && got < amount; i++)
 			{
+				if (HotelsBridge.IsGuest(pawns[i]))
+				{
+					int paid = HotelsBridge.Spend(pawns[i], Mathf.CeilToInt(amount - got));
+					if (paid > 0)
+					{
+						taken.Add(MakeSilver(paid));
+						got += paid;
+					}
+					continue;
+				}
 				ThingOwner inv = pawns[i]?.inventory?.innerContainer;
 				if (inv == null) continue;
 				List<Thing> carried = inv.ToList();
@@ -479,6 +499,13 @@ namespace RimMarket.Market
 				got += split.MarketValue * split.stackCount;
 			}
 			return taken;
+		}
+
+		private static Thing MakeSilver(int count)
+		{
+			Thing silver = ThingMaker.MakeThing(ThingDefOf.Silver);
+			silver.stackCount = count;
+			return silver;
 		}
 
 		public static int TakeAndPlacePayment(List<Pawn> pawns, int amount, bool takeGoods, IntVec3 cell, Map map)
