@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<HistoryEventDef>
+		<defName>RimMarket_StallRobbed</defName>
+		<label>robbed at your market</label>
+	</HistoryEventDef>
+
+	<HistoryEventDef>
+		<defName>RimMarket_ThiefCaught</defName>
+		<label>thief caught at your market</label>
+	</HistoryEventDef>
+
+	<HistoryEventDef>
+		<defName>RimMarket_AwayStall</defName>
+		<label>held a stall at their market</label>
+	</HistoryEventDef>
+
+	<HistoryEventDef>
+		<defName>RimMarket_FairPrize</defName>
+		<label>won the best stall at your fair</label>
+	</HistoryEventDef>
+
+	<HistoryEventDef>
+		<defName>RimMarket_TradeRoute</defName>
+		<label>a good day on the trade route</label>
+	</HistoryEventDef>
+
+</Defs>

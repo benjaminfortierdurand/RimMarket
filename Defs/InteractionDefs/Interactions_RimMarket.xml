@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<InteractionDef>
+		<defName>RimMarket_ChangeOfGuard</defName>
+		<label>change of guard</label>
+		<workerClass>InteractionWorker</workerClass>
+		<symbol>Things/Mote/SpeechSymbols/Chitchat</symbol>
+		<symbolSource>InitiatorFaction</symbolSource>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] handed the watch at the stall over to [RECIPIENT_nameDef].</li>
+				<li>r_logentry->[INITIATOR_nameDef] told [RECIPIENT_nameDef] that nothing happened, then described it at length.</li>
+				<li>r_logentry->[INITIATOR_nameDef] passed the watch to [RECIPIENT_nameDef], along with a list of colonists not to trust.</li>
+				<li>r_logentry->[INITIATOR_nameDef] warned [RECIPIENT_nameDef] about the colonist who keeps touching the wares.</li>
+				<li>r_logentry->[RECIPIENT_nameDef] took over the watch from [INITIATOR_nameDef], who was already yawning.</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+</Defs>

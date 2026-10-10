@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<DutyDef>
+		<defName>RimMarket_TendStall</defName>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="RimMarket.AI.JobGiver_PayStallFee" />
+				<li Class="RimMarket.Inn.JobGiver_SleepAtInn" />
+				<li Class="ThinkNode_ForbidOutsideFlagRadius">
+					<maxDistToSquadFlag>10</maxDistToSquadFlag>
+					<subNodes>
+						<li Class="ThinkNode_Subtree">
+							<treeDef>SatisfyBasicNeedsAndWork</treeDef>
+						</li>
+					</subNodes>
+				</li>
+				<li Class="RimMarket.AI.JobGiver_StandAtStall" />
+				<li Class="JobGiver_WanderNearDutyLocation">
+					<wanderRadius>2</wanderRadius>
+				</li>
+				<li Class="JobGiver_Idle" />
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
+		<defName>RimMarket_GuardStall</defName>
+		<alwaysShowWeapon>true</alwaysShowWeapon>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="RimMarket.AI.JobGiver_ChaseMarketThief" />
+				<li Class="JobGiver_TakeCombatEnhancingDrug">
+					<onlyIfInDanger>true</onlyIfInDanger>
+				</li>
+				<li Class="JobGiver_AIDefendPoint">
+					<targetAcquireRadius>65</targetAcquireRadius>
+					<targetKeepRadius>72</targetKeepRadius>
+				</li>
+				<li Class="ThinkNode_ForbidOutsideFlagRadius">
+					<maxDistToSquadFlag>16</maxDistToSquadFlag>
+					<subNodes>
+						<li Class="ThinkNode_Subtree">
+							<treeDef>SatisfyBasicNeedsAndWork</treeDef>
+						</li>
+					</subNodes>
+				</li>
+				<li Class="JobGiver_WanderNearDutyLocation">
+					<wanderRadius>8</wanderRadius>
+					<locomotionUrgencyOutsideRadius>Sprint</locomotionUrgencyOutsideRadius>
+				</li>
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
+		<defName>RimMarket_Thief</defName>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="RimMarket.AI.JobGiver_MarketThief" />
+				<li Class="JobGiver_WanderNearDutyLocation">
+					<wanderRadius>5</wanderRadius>
+				</li>
+				<li Class="JobGiver_Idle" />
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
+		<defName>RimMarket_ParkAtStall</defName>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="RimMarket.AI.JobGiver_StandAtStall" />
+				<li Class="JobGiver_WanderNearDutyLocation">
+					<wanderRadius>2</wanderRadius>
+				</li>
+				<li Class="JobGiver_Idle" />
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
+		<defName>RimMarket_GuardPost</defName>
+		<alwaysShowWeapon>true</alwaysShowWeapon>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="RimMarket.AI.JobGiver_ChaseMarketThief" />
+				<li Class="JobGiver_TakeCombatEnhancingDrug">
+					<onlyIfInDanger>true</onlyIfInDanger>
+				</li>
+				<li Class="JobGiver_AIDefendPoint">
+					<targetAcquireRadius>65</targetAcquireRadius>
+					<targetKeepRadius>72</targetKeepRadius>
+				</li>
+				<li Class="RimMarket.Inn.JobGiver_SleepAtInn" />
+				<li Class="ThinkNode_ForbidOutsideFlagRadius">
+					<maxDistToSquadFlag>10</maxDistToSquadFlag>
+					<subNodes>
+						<li Class="ThinkNode_Subtree">
+							<treeDef>SatisfyBasicNeeds</treeDef>
+						</li>
+					</subNodes>
+				</li>
+				<li Class="RimMarket.AI.JobGiver_StandAtStall" />
+				<li Class="JobGiver_Idle" />
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
+		<defName>RimMarket_WaitAtCamp</defName>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="JobGiver_AIDefendPoint">
+					<targetAcquireRadius>30</targetAcquireRadius>
+					<targetKeepRadius>40</targetKeepRadius>
+				</li>
+				<li Class="RimMarket.Inn.JobGiver_SleepAtInn" />
+				<li Class="ThinkNode_Subtree">
+					<treeDef>SatisfyBasicNeeds</treeDef>
+				</li>
+				<li Class="RimMarket.AI.JobGiver_WanderInCamp" />
+				<li Class="JobGiver_Idle" />
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
+		<defName>RimMarket_WaitNearCamp</defName>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="JobGiver_AIDefendPoint">
+					<targetAcquireRadius>30</targetAcquireRadius>
+					<targetKeepRadius>40</targetKeepRadius>
+				</li>
+				<li Class="RimMarket.Inn.JobGiver_SleepAtInn" />
+				<li Class="ThinkNode_Subtree">
+					<treeDef>SatisfyBasicNeeds</treeDef>
+				</li>
+				<li Class="RimMarket.AI.JobGiver_WanderInCamp">
+					<outsideZone>true</outsideZone>
+				</li>
+				<li Class="JobGiver_Idle" />
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
+		<defName>RimMarket_RestAtSpotDuty</defName>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="JobGiver_AIDefendPoint">
+					<targetAcquireRadius>30</targetAcquireRadius>
+					<targetKeepRadius>40</targetKeepRadius>
+				</li>
+				<li Class="RimMarket.Inn.JobGiver_SleepAtInn" />
+				<li Class="ThinkNode_Subtree">
+					<treeDef>SatisfyBasicNeeds</treeDef>
+				</li>
+				<li Class="RimMarket.AI.JobGiver_RestAtSpot" />
+				<li Class="RimMarket.AI.JobGiver_WanderInCamp" />
+				<li Class="JobGiver_Idle" />
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
+		<defName>RimMarket_ShopAtMarket</defName>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="RimMarket.Inn.JobGiver_SleepAtInn" />
+				<li Class="ThinkNode_Subtree">
+					<treeDef>SatisfyBasicNeeds</treeDef>
+				</li>
+				<li Class="RimMarket.Market.JobGiver_ShopAtMarket" />
+				<li Class="RimMarket.AI.JobGiver_WanderInCamp" />
+				<li Class="JobGiver_Idle" />
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
+		<defName>RimMarket_AttendAuctionDuty</defName>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="ThinkNode_ForbidOutsideFlagRadius">
+					<maxDistToSquadFlag>12</maxDistToSquadFlag>
+					<subNodes>
+						<li Class="ThinkNode_Subtree">
+							<treeDef>SatisfyBasicNeeds</treeDef>
+						</li>
+					</subNodes>
+				</li>
+				<li Class="RimMarket.Auction.JobGiver_AttendAuction" />
+				<li Class="JobGiver_WanderNearDutyLocation">
+					<wanderRadius>5</wanderRadius>
+				</li>
+				<li Class="JobGiver_Idle" />
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+</Defs>

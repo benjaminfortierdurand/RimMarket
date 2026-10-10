@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<WorkTypeDef>
+		<defName>RimMarket_Shopkeeping</defName>
+		<labelShort>shopkeep</labelShort>
+		<pawnLabel>Shopkeeper</pawnLabel>
+		<gerundLabel>shopkeeping</gerundLabel>
+		<description>Stand at the colony stalls while customers are in town, name a price with a straight face and take their silver. A good talker gets more for the same turnips.</description>
+		<verb>Tend</verb>
+		<naturalPriority>1080</naturalPriority>
+		<requireCapableColonist>true</requireCapableColonist>
+		<disabledForSlaves>true</disabledForSlaves>
+		<relevantSkills>
+			<li>Social</li>
+		</relevantSkills>
+		<workTags>
+			<li>Social</li>
+			<li>AllWork</li>
+		</workTags>
+	</WorkTypeDef>
+
+</Defs>

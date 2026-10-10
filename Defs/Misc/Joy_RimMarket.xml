@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<JoyKindDef>
+		<defName>RimMarket_Market</defName>
+		<label>market</label>
+	</JoyKindDef>
+
+	<JoyGiverDef>
+		<defName>RimMarket_VisitStalls</defName>
+		<giverClass>RimMarket.AI.JoyGiver_VisitStalls</giverClass>
+		<baseChance>3</baseChance>
+		<joyKind>RimMarket_Market</joyKind>
+		<desireSit>false</desireSit>
+		<requireChair>false</requireChair>
+		<requiredCapacities>
+			<li>Moving</li>
+			<li>Sight</li>
+		</requiredCapacities>
+	</JoyGiverDef>
+
+	<JoyGiverDef>
+		<defName>RimMarket_WatchAuction</defName>
+		<giverClass>RimMarket.Auction.JoyGiver_WatchAuction</giverClass>
+		<baseChance>8</baseChance>
+		<thingDefs>
+			<li>RimMarket_AuctionBlock</li>
+		</thingDefs>
+		<jobDef>RimMarket_WatchAuction</jobDef>
+		<joyKind>RimMarket_Market</joyKind>
+		<desireSit>true</desireSit>
+		<requiredCapacities>
+			<li>Sight</li>
+		</requiredCapacities>
+	</JoyGiverDef>
+
+</Defs>

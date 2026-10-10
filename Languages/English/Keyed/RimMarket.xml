@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- Settings -->
+	<RimMarket.Settings.Intro>Stalls, fees and haggling. Merchants set up in the stalls you build; the rest is up to you.</RimMarket.Settings.Intro>
+	<RimMarket.Settings.FeeMode>Stall fee</RimMarket.Settings.FeeMode>
+	<RimMarket.Settings.FeeModeCycle>Change fee mode</RimMarket.Settings.FeeModeCycle>
+	<RimMarket.Settings.FeePercent>Arrival fee, share of the goods they carry</RimMarket.Settings.FeePercent>
+	<RimMarket.Settings.FeeCap>Arrival fee cap (silver)</RimMarket.Settings.FeeCap>
+	<RimMarket.Settings.SharePercent>Share of what guests spend at the stalls (Hospitality)</RimMarket.Settings.SharePercent>
+	<RimMarket.Settings.FeeInGoods>Accept goods when they are short of silver</RimMarket.Settings.FeeInGoods>
+	<RimMarket.Settings.FeeInGoodsHint>The merchant pays the difference with wares from the caravan, dropped at the stall.</RimMarket.Settings.FeeInGoodsHint>
+	<RimMarket.Settings.TurnAwayIfBroke>Turn away caravans that cannot pay the arrival fee</RimMarket.Settings.TurnAwayIfBroke>
+	<RimMarket.Settings.TurnAwayIfBrokeHint>Off: they pay what they have and set up anyway. On: they skip the market and idle outside your walls like a vanilla caravan.</RimMarket.Settings.TurnAwayIfBrokeHint>
+	<RimMarket.Settings.WaiveAfterToll>Waive the arrival fee for factions tolled today (RimToll)</RimMarket.Settings.WaiveAfterToll>
+	<RimMarket.Settings.WaiveAfterTollHint>Only matters when RimToll is loaded. A faction that paid your toll post less than a day ago is not charged a second time at the stall.</RimMarket.Settings.WaiveAfterTollHint>
+	<RimMarket.Settings.MarketDays>Market day length (days)</RimMarket.Settings.MarketDays>
+	<RimMarket.Settings.MaxMerchants>Merchants at the market at once</RimMarket.Settings.MaxMerchants>
+	<RimMarket.Settings.ShoppersVisit>Shoppers come for the market</RimMarket.Settings.ShoppersVisit>
+	<RimMarket.Settings.ShoppersVisitHint>An hour or two after a merchant sets up, a few people from a friendly faction walk over with some silver, browse the stalls, buy what they can afford and go home about five hours later, or the next morning if they took a bed at your inn. Groups also come for your colony stalls when no merchant is in town, as often as set below. No Hospitality needed.\n\nOff: no shoppers at all. Hospitality guests still buy.</RimMarket.Settings.ShoppersVisitHint>
+	<RimMarket.ShoppersArrived>Shoppers from {0} have heard about the market and are walking over.</RimMarket.ShoppersArrived>
+	<RimMarket.ShoppersForColonyStall>Shoppers from {0} have come to see what the colony has on its stalls.</RimMarket.ShoppersForColonyStall>
+	<RimMarket.ShoppersForBargains>Shoppers from {0} heard the colony sells cheap and have come for a bargain.</RimMarket.ShoppersForBargains>
+	<RimMarket.Settings.InnPrice>Market inn, silver per night</RimMarket.Settings.InnPrice>
+	<RimMarket.Settings.InnPriceHint>What each lodger pays for a night in a bed set to Market inn. The merchant pays for the caravan's guards, shoppers pay for themselves. A miserable room at a stiff price is remembered. Zero keeps the inn free.</RimMarket.Settings.InnPriceHint>
+	<RimMarket.CommandInnBed>Market inn</RimMarket.CommandInnBed>
+	<RimMarket.CommandInnBedDesc>Rent this bed out to the people who come for the market: merchants, off-duty guards and passing shoppers. They pay by the night (price in the mod settings) and leave the silver by the bed. Colonists, prisoners and slaves will not use it. A nice private room pleases them, a bedroll in a shed does not.</RimMarket.CommandInnBedDesc>
+	<RimMarket.InnBedPrisonCell>A prison cell makes a poor inn.</RimMarket.InnBedPrisonCell>
+	<RimMarket.InnBedLocked>This bed is rented out as a market inn. Turn off Market inn first.</RimMarket.InnBedLocked>
+	<RimMarket.InnBedInspect>Market inn: {0} silver a night.</RimMarket.InnBedInspect>
+	<RimMarket.InnBedInspectFree>Market inn: free of charge.</RimMarket.InnBedInspectFree>
+	<RimMarket.InnBedLabel>Inn ({0})</RimMarket.InnBedLabel>
+	<RimMarket.InnBedLabelFree>Inn (free)</RimMarket.InnBedLabelFree>
+	<RimMarket.ReportGoingToInn>heading for a bed at the inn.</RimMarket.ReportGoingToInn>
+	<RimMarket.Settings.GuardsAtStall>Guards posted at each stall</RimMarket.Settings.GuardsAtStall>
+	<RimMarket.Settings.GuardsAtStallHint>They stand beside the counter and chase thieves. The other guards wait at your guard rest spot, the pack animals at your caravan camp. Without them, both wait just outside the market.</RimMarket.Settings.GuardsAtStallHint>
+	<RimMarket.Settings.Haggle>Haggle button in the trade window</RimMarket.Settings.Haggle>
+	<RimMarket.Settings.HaggleHint>One attempt per visit. Social skill and goodwill against the merchant's patience. Failure costs you the same amount the other way, and the merchant leaves earlier.</RimMarket.Settings.HaggleHint>
+	<RimMarket.Settings.HaggleBonus>Haggle bonus</RimMarket.Settings.HaggleBonus>
+	<RimMarket.Settings.ColonistsBrowse>Colonists browse the stalls for recreation</RimMarket.Settings.ColonistsBrowse>
+	<RimMarket.Settings.ColonistsBrowseHint>Idle colonists wander over, look at the wares and chat with the merchant. They never spend colony silver on their own.</RimMarket.Settings.ColonistsBrowseHint>
+	<RimMarket.Settings.GuestsShop>Hospitality guests buy from the merchants</RimMarket.Settings.GuestsShop>
+	<RimMarket.Settings.GuestsShopHint>Needs Hospitality. Guests with silver in their pockets buy wares at the stalls. With the share of takings fee, the market takes its cut of every sale.</RimMarket.Settings.GuestsShopHint>
+	<RimMarket.Settings.Reputation>Reputation shapes the market</RimMarket.Settings.Reputation>
+	<RimMarket.Settings.ReputationHint>A good reputation brings extra caravans, rarer merchants and better prices. A bad one makes caravans camp outside and prices climb. With this off, the reputation is still kept but changes nothing.</RimMarket.Settings.ReputationHint>
+	<RimMarket.Settings.Thieves>Thieves work the market</RimMarket.Settings.Thieves>
+	<RimMarket.Settings.ThievesHint>Now and then a pickpocket mingles with the crowd, lifts something from a counter and runs for it. The caravan's guards give chase, and your colonists can tackle a fleeing thief with a right click. The more people around a stall, the less a thief dares.</RimMarket.Settings.ThievesHint>
+	<RimMarket.Settings.ThiefMtb>Average market days between two thieves</RimMarket.Settings.ThiefMtb>
+	<RimMarket.Settings.Messages>Show market messages</RimMarket.Settings.Messages>
+	<RimMarket.Settings.Reset>Reset to defaults</RimMarket.Settings.Reset>
+
+	<!-- Fee modes -->
+	<RimMarket.FeeModeNone>none</RimMarket.FeeModeNone>
+	<RimMarket.FeeModeArrival>on arrival</RimMarket.FeeModeArrival>
+	<RimMarket.FeeModeShare>share of sales</RimMarket.FeeModeShare>
+	<RimMarket.FeeModeGlobal>{0}, as in the mod settings</RimMarket.FeeModeGlobal>
+	<RimMarket.FeeModeGlobalShort>{0} (mod)</RimMarket.FeeModeGlobalShort>
+
+	<!-- Marker gizmos and inspector -->
+	<RimMarket.ShowMarkerLabel>Show marker</RimMarket.ShowMarkerLabel>
+	<RimMarket.ShowMarkerDesc>Show or hide the spot on the ground. The market keeps working either way, and the maypole still goes up on it during a Great Fair.</RimMarket.ShowMarkerDesc>
+	<RimMarket.ShowSpotLabel>Show spot</RimMarket.ShowSpotLabel>
+	<RimMarket.ShowSpotDesc>Show or hide the spot on the ground. It keeps working either way, and you can still select it by clicking its cell.</RimMarket.ShowSpotDesc>
+	<RimMarket.OpenMarketLabel>Market open</RimMarket.OpenMarketLabel>
+	<RimMarket.OpenMarketDesc>While open, trade caravans that arrive take a free stall inside this marker's radius. Close it and new caravans idle outside your walls as usual; merchants already at a stall stay until they leave.</RimMarket.OpenMarketDesc>
+	<RimMarket.FeeModeLabel>Fee: {0}</RimMarket.FeeModeLabel>
+	<RimMarket.FeeModeDesc>How merchants pay for a stall in this market. Fee on arrival: silver counted on the counter before they set up. No fee: the stall is free. Or follow the mod setting.</RimMarket.FeeModeDesc>
+	<RimMarket.FeeModeDescShare>Share of takings: a cut of what your Hospitality guests spend at the stall, left on the counter during the visit. What you buy yourself is never taxed.</RimMarket.FeeModeDescShare>
+	<RimMarket.CloseMarketLabel>Close market now</RimMarket.CloseMarketLabel>
+	<RimMarket.CloseMarketDesc>Send every merchant home right away. They pack up and leave by the usual road. This does not close the market for future caravans.</RimMarket.CloseMarketDesc>
+	<RimMarket.CloseMarketConfirm>Send {0} merchant(s) packing right now?</RimMarket.CloseMarketConfirm>
+	<RimMarket.RadiusPlus>Radius {0} +</RimMarket.RadiusPlus>
+	<RimMarket.RadiusMinus>Radius {0} -</RimMarket.RadiusMinus>
+	<RimMarket.RadiusDesc>Stalls inside this radius belong to the market.</RimMarket.RadiusDesc>
+	<RimMarket.RadiusAuto>Auto</RimMarket.RadiusAuto>
+	<RimMarket.RadiusAutoDesc>Fit the market square to your walls, fences and doors around the marker.</RimMarket.RadiusAutoDesc>
+	<RimMarket.QuarterNotEnclosed>The square is not enclosed within {0} cells of the marker. Close it off or set the radius by hand.</RimMarket.QuarterNotEnclosed>
+	<RimMarket.QuarterAutoFit>Market square fitted to your walls: {0} cells.</RimMarket.QuarterAutoFit>
+	<RimMarket.MarketOpen>Market open</RimMarket.MarketOpen>
+	<RimMarket.MarketClosed>Market closed to new caravans</RimMarket.MarketClosed>
+	<RimMarket.MarkerStalls>Stalls: {0} ({1} free, {2} taken)</RimMarket.MarkerStalls>
+	<RimMarket.MarkerFee>Stall fee: {0}</RimMarket.MarkerFee>
+	<RimMarket.MarkerCollected>Fees collected so far: {0} silver</RimMarket.MarkerCollected>
+	<RimMarket.MarkerGuestSales>Guests have spent {0} silver at the stalls</RimMarket.MarkerGuestSales>
+	<RimMarket.MarkerColonySales>The colony stalls have taken {0} silver</RimMarket.MarkerColonySales>
+	<RimMarket.MarkerSecurity>Thieves caught {0}, got away {1}, scared off {2}.</RimMarket.MarkerSecurity>
+	<RimMarket.MarkerHidden>Marker hidden</RimMarket.MarkerHidden>
+	<RimMarket.SpotHidden>Spot hidden</RimMarket.SpotHidden>
+	<RimMarket.TradingControlNote>A Trading Control spot is on this map: caravans wait there until a stall is free.</RimMarket.TradingControlNote>
+
+	<!-- Stall inspector and gizmos -->
+	<RimMarket.StallFree>Free</RimMarket.StallFree>
+	<RimMarket.StallNoMarker>No market marker covers this stall</RimMarket.StallNoMarker>
+	<RimMarket.StallMarketClosed>The market is closed</RimMarket.StallMarketClosed>
+	<RimMarket.StallBlocked>The merchant's spot is blocked</RimMarket.StallBlocked>
+	<RimMarket.StallUnreachable>Merchants cannot reach the merchant's spot from the map edge</RimMarket.StallUnreachable>
+	<RimMarket.StallTaken>{0} of {1} ({2})</RimMarket.StallTaken>
+	<RimMarket.StallTimeLeft>Packs up in {0} hours</RimMarket.StallTimeLeft>
+	<RimMarket.StallFeePaid>Stall fee paid: {0} silver</RimMarket.StallFeePaid>
+	<RimMarket.StallFeeDue>Stall fee due: {0} silver</RimMarket.StallFeeDue>
+	<RimMarket.StallFeeUnpaid>Stall fee: they had nothing to pay with</RimMarket.StallFeeUnpaid>
+	<RimMarket.StallFeeWaived>Stall fee waived</RimMarket.StallFeeWaived>
+	<RimMarket.StallShare>Share collected: {0} silver ({1} owed)</RimMarket.StallShare>
+	<RimMarket.StallHaggleOpen>Haggling: not tried yet</RimMarket.StallHaggleOpen>
+	<RimMarket.StallHaggleWon>Haggling: better prices</RimMarket.StallHaggleWon>
+	<RimMarket.StallHaggleLost>Haggling: the merchant took offence</RimMarket.StallHaggleLost>
+	<RimMarket.ColonyStallToggle>Colony stall</RimMarket.ColonyStallToggle>
+	<RimMarket.ColonyStallToggleDesc>Keep this stall for the colony's own goods. Visiting merchants will look elsewhere. Choose what it sells, how many and at what price in its sales table; your haulers bring the goods over, shoppers and guests pay at the counter, and the silver lands at the end of it for someone to put away.\n\nSwitching it back clears the table and puts whatever is left on the counter down in front of it.</RimMarket.ColonyStallToggleDesc>
+	<RimMarket.ColonyStallBusy>{0} is trading from this stall</RimMarket.ColonyStallBusy>
+	<RimMarket.ColonyStallSetup>Set up the stall</RimMarket.ColonyStallSetup>
+	<RimMarket.ColonyStallSetupDesc>Open the sales table: what this stall sells, how many and at what price.</RimMarket.ColonyStallSetupDesc>
+	<RimMarket.ColonyStallEmpty>Colony stall: nothing for sale yet. Use Set up the stall.</RimMarket.ColonyStallEmpty>
+	<RimMarket.ColonyStallForSale>Colony stall, for sale:</RimMarket.ColonyStallForSale>
+	<RimMarket.ColonyStallOrderLine>  {0}: {1} to sell, {2} on the counter, {3} of value</RimMarket.ColonyStallOrderLine>
+	<RimMarket.ColonyStallMoreOrders>  and {0} more</RimMarket.ColonyStallMoreOrders>
+	<RimMarket.StallSetupTitle>{0}: sales table</RimMarket.StallSetupTitle>
+	<RimMarket.StallSetupIntro>Choose what goes on the counter, how many and at what price. Your haulers bring the goods over by themselves and the stall stops once the count is sold. Customers pay with their own silver; the dearer the article, the more of them walk on.</RimMarket.StallSetupIntro>
+	<RimMarket.StallSetupOnlyForSale>Only what is for sale</RimMarket.StallSetupOnlyForSale>
+	<RimMarket.StallSetupItem>Article</RimMarket.StallSetupItem>
+	<RimMarket.StallSetupAvailable>In the colony</RimMarket.StallSetupAvailable>
+	<RimMarket.StallSetupOnCounter>On the counter</RimMarket.StallSetupOnCounter>
+	<RimMarket.StallSetupToSell>To sell</RimMarket.StallSetupToSell>
+	<RimMarket.StallSetupPrice>Price</RimMarket.StallSetupPrice>
+	<RimMarket.StallSetupAll>All</RimMarket.StallSetupAll>
+	<RimMarket.StallSetupAdjustTip>How many to sell, out of what the colony has. Shift: 10 at a time. Ctrl: 100 at a time. All: everything, or nothing if it is already everything.</RimMarket.StallSetupAdjustTip>
+	<RimMarket.StallSetupPriceHeaderTip>The asking price, as a share of what the article is worth. Shift: 25% at a time.</RimMarket.StallSetupPriceHeaderTip>
+	<RimMarket.StallSetupPriceTip>{0} of what it is worth: {1} silver each. At this price a customer who fancies it buys it {2} of the time.</RimMarket.StallSetupPriceTip>
+	<RimMarket.StallSetupSummary>{0} articles to sell across {1} lines, about {2} silver if it all goes.</RimMarket.StallSetupSummary>
+	<RimMarket.StallSetupSummaryNone>Nothing for sale yet.</RimMarket.StallSetupSummaryNone>
+	<RimMarket.StallSetupDrawOff>Shoppers are switched off in the mod settings. Only Hospitality guests buy here.</RimMarket.StallSetupDrawOff>
+	<RimMarket.StallSetupDraw>At these prices a group of shoppers comes about once every {0}, while the market is open in the daytime.</RimMarket.StallSetupDraw>
+	<RimMarket.StallSetupDrawBargain>Word of the bargains gets around: a group of shoppers comes about once every {0}, while the market is open in the daytime.</RimMarket.StallSetupDrawBargain>
+	<RimMarket.StallSetupDrawDear>At these prices word gets around slowly: a group of shoppers comes about once every {0}, while the market is open in the daytime.</RimMarket.StallSetupDrawDear>
+	<RimMarket.StallSetupNothing>Nothing in the colony matches.</RimMarket.StallSetupNothing>
+	<RimMarket.ColonyStallKeeper>Shopkeeper: {0}</RimMarket.ColonyStallKeeper>
+	<RimMarket.ColonyStallNoKeeper>No shopkeeper at the counter, so nothing sells</RimMarket.ColonyStallNoKeeper>
+	<RimMarket.ColonyStallTakings>Sold so far: {0} silver over {1} sales</RimMarket.ColonyStallTakings>
+	<RimMarket.ColonyStallNothingToSell>The stall has nothing to sell</RimMarket.ColonyStallNothingToSell>
+	<RimMarket.StallWatch>On watch: {0}</RimMarket.StallWatch>
+	<RimMarket.StallRelief>Change of guard: {0} is coming to take over from {1}</RimMarket.StallRelief>
+	<RimMarket.StallGuestSales>Sold to guests: {0} silver</RimMarket.StallGuestSales>
+	<RimMarket.TradeGizmoLabel>Trade</RimMarket.TradeGizmoLabel>
+	<RimMarket.TradeGizmoDesc>Send a colonist to the counter to trade with {0}.</RimMarket.TradeGizmoDesc>
+	<RimMarket.TraderBusy>the merchant is not trading right now</RimMarket.TraderBusy>
+	<RimMarket.MessageNoNegotiator>Nobody can trade at this stall right now.</RimMarket.MessageNoNegotiator>
+	<RimMarket.PlaceMerchantCellBlocked>The merchant's spot (outlined in white) must be free.</RimMarket.PlaceMerchantCellBlocked>
+	<RimMarket.PaintAwning>Paint the awning</RimMarket.PaintAwning>
+	<RimMarket.PaintAwningDesc>Pick an edge, a pattern and two colours for this stall's awning. Merchants have opinions about stripes. They keep them to themselves, mostly.</RimMarket.PaintAwningDesc>
+	<RimMarket.AwningTitle>Paint the awning</RimMarket.AwningTitle>
+	<RimMarket.AwningEdge>Edge</RimMarket.AwningEdge>
+	<RimMarket.AwningPattern>Pattern</RimMarket.AwningPattern>
+	<RimMarket.AwningCanvas>Canvas colour</RimMarket.AwningCanvas>
+	<RimMarket.AwningStripe>Pattern colour</RimMarket.AwningStripe>
+	<RimMarket.AwningRandom>Surprise me</RimMarket.AwningRandom>
+	<RimMarket.AwningApplyAll>Apply to every stall</RimMarket.AwningApplyAll>
+	<RimMarket.AwningAppliedAll>{0} other stalls repainted to match.</RimMarket.AwningAppliedAll>
+	<RimMarket.PlaceCanopyOverlap>Too close to another stall: the awnings would overlap.</RimMarket.PlaceCanopyOverlap>
+	<RimMarket.PlaceCustomerCellBlocked>The customer's spot (outlined in cyan) must be free.</RimMarket.PlaceCustomerCellBlocked>
+	<RimMarket.PlaceTakesNeighbourSpot>Would take the merchant or customer spot of the stall next door. Neighbours have long memories.</RimMarket.PlaceTakesNeighbourSpot>
+	<RimMarket.PlaceSpotUnderStall>The merchant or customer spot would end up inside another stall.</RimMarket.PlaceSpotUnderStall>
+
+	<!-- Trade window -->
+	<RimMarket.HaggleButton>Haggle</RimMarket.HaggleButton>
+	<RimMarket.HaggleTip>{0} tries to talk the prices down. One attempt per visit. Success: {1}% better prices both ways. Failure: {1}% worse, and the merchant packs up earlier.</RimMarket.HaggleTip>
+	<RimMarket.HaggleDone>Haggled: {0}% better</RimMarket.HaggleDone>
+	<RimMarket.HaggleFailed>Haggle failed: {0}% worse</RimMarket.HaggleFailed>
+	<RimMarket.MoteDeal>Deal!</RimMarket.MoteDeal>
+	<RimMarket.MoteRefused>No.</RimMarket.MoteRefused>
+	<RimMarket.MoteBought>{0}: {1} silver</RimMarket.MoteBought>
+	<RimMarket.MoteThief>Thief!</RimMarket.MoteThief>
+	<RimMarket.MoteNotToday>Not today.</RimMarket.MoteNotToday>
+	<RimMarket.MoteGotYou>Got you!</RimMarket.MoteGotYou>
+	<RimMarket.MoteSlipped>Slipped away!</RimMarket.MoteSlipped>
+	<RimMarket.MoteReturned>Returned</RimMarket.MoteReturned>
+	<RimMarket.ReportFleeing>running off with stolen goods.</RimMarket.ReportFleeing>
+
+	<!-- Thieves -->
+	<RimMarket.TackleThief>Tackle {0}</RimMarket.TackleThief>
+	<RimMarket.TackleIncapable>{0} is incapable of violence</RimMarket.TackleIncapable>
+	<RimMarket.MessageSnatched>Thief! {0} grabbed {1} from the {2} stall and is running for it. Right-click the thief with a colonist to tackle them.</RimMarket.MessageSnatched>
+	<RimMarket.MessageThiefDeterred>{0} eyed the stalls, counted the people watching and decided to be honest today.</RimMarket.MessageThiefDeterred>
+	<RimMarket.MessageThiefCaughtBy>{0} tackled the thief {1}. The goods go back to the merchant. Caught red-handed, the thief can go to prison without upsetting their faction, or you can leave them to limp home when they come to.</RimMarket.MessageThiefCaughtBy>
+	<RimMarket.MessageThiefCaught>The thief {0} is down. The goods go back to the merchant. Caught red-handed, the thief can go to prison without upsetting their faction, or you can leave them to limp home when they come to.</RimMarket.MessageThiefCaught>
+	<RimMarket.MessageCulpritCaptured>{0} was caught red-handed. {1} will not hold the arrest against you, and will not thank you for letting them go either.</RimMarket.MessageCulpritCaptured>
+	<RimMarket.CaughtRedHanded>caught red-handed, no hard feelings</RimMarket.CaughtRedHanded>
+	<RimMarket.MessageThiefEscaped>The thief got away with {0}. The {1} merchant blames your market and will pack up early.</RimMarket.MessageThiefEscaped>
+
+	<!-- Messages -->
+	<RimMarket.MessageTakingStall>The {0} caravan is heading for the market. {1} takes a stall.</RimMarket.MessageTakingStall>
+	<RimMarket.MessageMarketFull>The market is full: the {0} caravan waits outside until a merchant leaves.</RimMarket.MessageMarketFull>
+	<RimMarket.MessageNoFreeStall>Every stall is taken: the {0} caravan waits outside until one frees up.</RimMarket.MessageNoFreeStall>
+	<RimMarket.MessageNoReachableStall>The {0} caravan cannot reach any free stall. Select a stall to see what is blocking it.</RimMarket.MessageNoReachableStall>
+	<RimMarket.MessageCannotAfford>The {0} caravan cannot afford the {1} silver stall fee and stays outside the market.</RimMarket.MessageCannotAfford>
+	<RimMarket.MessageFeePaid>{0} paid the stall fee: {1} silver on the counter.</RimMarket.MessageFeePaid>
+	<RimMarket.MessageFeeUnpaid>The {0} merchant had nothing to pay the stall fee with. The stall is theirs anyway.</RimMarket.MessageFeeUnpaid>
+	<RimMarket.MessageSharePaid>{0} left the market's share on the counter: {1} silver.</RimMarket.MessageSharePaid>
+	<RimMarket.MessagePackingUp>The {0} merchant packs up and leaves the market.</RimMarket.MessagePackingUp>
+	<RimMarket.MessageMarketClosedLeaving>The market is closing: the {0} merchant packs up.</RimMarket.MessageMarketClosedLeaving>
+	<RimMarket.MessageStallGone>The stall is gone: the {0} merchant packs up and leaves.</RimMarket.MessageStallGone>
+	<RimMarket.MessageLeavingEarly>The {0} merchant leaves the market early.</RimMarket.MessageLeavingEarly>
+	<RimMarket.MessageFeudLeaving>The {0} merchant will not trade next to {1}, who are now their enemies, and packs up before anyone draws steel.</RimMarket.MessageFeudLeaving>
+	<RimMarket.MessageMovingStall>The {0} merchant moves to another stall.</RimMarket.MessageMovingStall>
+	<RimMarket.MessageMarketClosed>Market closed: {0} merchant(s) sent packing.</RimMarket.MessageMarketClosed>
+	<RimMarket.MessageHaggleWon>{0} talked the merchant down: {1}% better prices.</RimMarket.MessageHaggleWon>
+	<RimMarket.MessageHaggleLost>{0} pushed too hard. {1} is offended: worse prices, and the stall closes earlier.</RimMarket.MessageHaggleLost>
+
+	<!-- Reputation -->
+	<RimMarket.ReputationLabel>Reputation</RimMarket.ReputationLabel>
+	<RimMarket.ReputationDesc>See what merchants say about your market, and what it changes.</RimMarket.ReputationDesc>
+	<RimMarket.MarkerReputation>Reputation: {0}</RimMarket.MarkerReputation>
+	<RimMarket.StallRepBetter>Your market's reputation: prices {0}% better</RimMarket.StallRepBetter>
+	<RimMarket.StallRepWorse>Your market's reputation: prices {0}% worse</RimMarket.StallRepWorse>
+
+	<RimMarket.AxisSafety>Safety</RimMarket.AxisSafety>
+	<RimMarket.AxisFairness>Fair dealing</RimMarket.AxisFairness>
+	<RimMarket.AxisFees>Fees</RimMarket.AxisFees>
+	<RimMarket.AxisAppeal>Appeal</RimMarket.AxisAppeal>
+	<RimMarket.RepSafe>safe</RimMarket.RepSafe>
+	<RimMarket.RepCutthroat>cutthroat</RimMarket.RepCutthroat>
+	<RimMarket.RepHonest>honest</RimMarket.RepHonest>
+	<RimMarket.RepGrasping>grasping</RimMarket.RepGrasping>
+	<RimMarket.RepLowTax>low taxes</RimMarket.RepLowTax>
+	<RimMarket.RepRacket>racket</RimMarket.RepRacket>
+	<RimMarket.RepLively>lively</RimMarket.RepLively>
+	<RimMarket.RepShabby>shabby</RimMarket.RepShabby>
+
+	<RimMarket.RepUnknown>unknown</RimMarket.RepUnknown>
+	<RimMarket.RepNotorious>notorious</RimMarket.RepNotorious>
+	<RimMarket.RepDubious>dubious</RimMarket.RepDubious>
+	<RimMarket.RepUnremarkable>unremarkable</RimMarket.RepUnremarkable>
+	<RimMarket.RepRespectable>respectable</RimMarket.RepRespectable>
+	<RimMarket.RepRenowned>renowned</RimMarket.RepRenowned>
+
+	<RimMarket.RepWindowTitle>Market reputation: {0}</RimMarket.RepWindowTitle>
+	<RimMarket.RepNotEstablished>Too few market days so far for anyone to have an opinion. Hold a few markets.</RimMarket.RepNotEstablished>
+	<RimMarket.RepEffectsHeader>What it changes:</RimMarket.RepEffectsHeader>
+	<RimMarket.RepEffectCaravans>Word travels: an extra caravan comes for the market about every {0} days.</RimMarket.RepEffectCaravans>
+	<RimMarket.RepEffectRare>Rare merchants are more likely to make the trip.</RimMarket.RepEffectRare>
+	<RimMarket.RepEffectRefusal>About {0}% of caravans refuse to set up at your market.</RimMarket.RepEffectRefusal>
+	<RimMarket.RepEffectPricesBetter>Merchants give {0}% better prices at your stalls.</RimMarket.RepEffectPricesBetter>
+	<RimMarket.RepEffectPricesWorse>Merchants charge {0}% more at your stalls.</RimMarket.RepEffectPricesWorse>
+	<RimMarket.RepEffectNone>Nothing yet. Your market is neither famous nor infamous.</RimMarket.RepEffectNone>
+	<RimMarket.RepEffectsOff>Reputation effects are turned off in the mod settings.</RimMarket.RepEffectsOff>
+	<RimMarket.RepJournal>Recent market days</RimMarket.RepJournal>
+	<RimMarket.RepJournalEmpty>No market day yet.</RimMarket.RepJournalEmpty>
+	<RimMarket.RepJournalLine>{0} ago: {1} of {2} packed up {3}.</RimMarket.RepJournalLine>
+	<RimMarket.RepJournalLineReasons>{0} ago: {1} of {2} packed up {3} ({4}).</RimMarket.RepJournalLineReasons>
+	<RimMarket.RepGlobal>Whole market (all factions)</RimMarket.RepGlobal>
+	<RimMarket.RepFactionTitle>In the eyes of {0}: {1}</RimMarket.RepFactionTitle>
+	<RimMarket.RepFactionNote>The bars show what they remember of their own visits. Their opinion mixes that memory ({0}%) with what everyone says about your market.</RimMarket.RepFactionNote>
+	<RimMarket.RepFactionUnknown>Too few visits from {0} so far for them to trust their own memory.</RimMarket.RepFactionUnknown>
+	<RimMarket.RepEffectsHeaderFaction>What it changes for their caravans:</RimMarket.RepEffectsHeaderFaction>
+	<RimMarket.RepEffectRefusalFaction>Their caravans refuse to set up about {0}% of the time.</RimMarket.RepEffectRefusalFaction>
+	<RimMarket.VerdictPleased>with a smile</RimMarket.VerdictPleased>
+	<RimMarket.VerdictGrumbling>grumbling</RimMarket.VerdictGrumbling>
+	<RimMarket.VerdictNeutral>without a word</RimMarket.VerdictNeutral>
+
+	<RimMarket.MessageVerdictPleased>The {0} merchant packs up with a smile: {1}.</RimMarket.MessageVerdictPleased>
+	<RimMarket.MessageVerdictGrumbling>The {0} merchant packs up grumbling about {1}.</RimMarket.MessageVerdictGrumbling>
+	<RimMarket.MessageRefuseUnsafe>The {0} caravan has heard your market is a den of thieves and camps outside.</RimMarket.MessageRefuseUnsafe>
+	<RimMarket.MessageRefuseUnfair>The {0} caravan has heard merchants get a raw deal at your market and camps outside.</RimMarket.MessageRefuseUnfair>
+	<RimMarket.MessageRefuseRacket>The {0} caravan will not pay your racket and camps outside.</RimMarket.MessageRefuseRacket>
+	<RimMarket.MessageRefuseShabby>The {0} caravan has heard your market is not worth the detour and camps outside.</RimMarket.MessageRefuseShabby>
+	<RimMarket.MessageRefuseGrudge>The {0} caravan remembers its last market day here and camps outside.</RimMarket.MessageRefuseGrudge>
+	<RimMarket.TakingsLine>Takings: {0}.</RimMarket.TakingsLine>
+	<RimMarket.TakingsNone>No business done.</RimMarket.TakingsNone>
+	<RimMarket.TakingsBought>you bought {0} silver of goods</RimMarket.TakingsBought>
+	<RimMarket.TakingsSold>you sold them {0} silver worth</RimMarket.TakingsSold>
+	<RimMarket.TakingsGuests>guests spent {0}</RimMarket.TakingsGuests>
+	<RimMarket.TakingsFees>the market collected {0} in fees</RimMarket.TakingsFees>
+	<RimMarket.TakingsInn>the inn earned {0}</RimMarket.TakingsInn>
+
+	<!-- Away stalls -->
+	<RimMarket.Settings.AwayStalls>Hold stalls at other settlements' markets</RimMarket.Settings.AwayStalls>
+	<RimMarket.Settings.AwayStallsHint>Lets a caravan set up a stall at a friendly settlement for one market day and sell its goods to the townsfolk. Allies charge a smaller stall fee. Food and medicine stay with the caravan.</RimMarket.Settings.AwayStallsHint>
+	<RimMarket.AwayOption>Hold a market stall at {0} (one day)</RimMarket.AwayOption>
+	<RimMarket.AwayReport>going to hold a stall at {0}</RimMarket.AwayReport>
+	<RimMarket.AwayAlreadyHolding>already holding a stall</RimMarket.AwayAlreadyHolding>
+	<RimMarket.AwayStallTaken>another of your caravans holds a stall here</RimMarket.AwayStallTaken>
+	<RimMarket.AwayCooldown>their market saw your stall recently, come back in {0}</RimMarket.AwayCooldown>
+	<RimMarket.AwayNoSeller>no one able to trade</RimMarket.AwayNoSeller>
+	<RimMarket.AwayNothingToSell>nothing they want to buy</RimMarket.AwayNothingToSell>
+	<RimMarket.AwayCannotStart>{0}: cannot hold a stall ({1}).</RimMarket.AwayCannotStart>
+	<RimMarket.AwayStarted>{0} sets up a stall at the {1} market for one market day. The stall fee is {2}% of sales.</RimMarket.AwayStarted>
+	<RimMarket.AwayTownHolding>Your caravan {0} holds a stall at the market here.</RimMarket.AwayTownHolding>
+	<RimMarket.AwayTownCooldown>Your stall was here recently. Their market will have you back in {0}.</RimMarket.AwayTownCooldown>
+	<RimMarket.AwayCaravanInspect>Holding a stall at {0}: {1} left, {2} items sold for {3} silver.</RimMarket.AwayCaravanInspect>
+	<RimMarket.AwayInspectFestival>Festival day: twice the usual crowd.</RimMarket.AwayInspectFestival>
+	<RimMarket.AwayInspectRival>A rival merchant is taking half the customers.</RimMarket.AwayInspectRival>
+	<RimMarket.AwayPackUpLabel>Pack up the stall</RimMarket.AwayPackUpLabel>
+	<RimMarket.AwayPackUpDesc>Close the stall now and get ready to leave. Moving the caravan does the same.</RimMarket.AwayPackUpDesc>
+	<RimMarket.AwayEventRival>A rival merchant has set up across the square at {0}. Half your customers wander over to them.</RimMarket.AwayEventRival>
+	<RimMarket.AwayEventFestival>It is a festival day at {0}. Twice the usual crowd, and everyone has spending money.</RimMarket.AwayEventFestival>
+	<RimMarket.AwayEventRich>A wealthy customer bought the {0} for {1} silver without haggling, which is rude in its own way.</RimMarket.AwayEventRich>
+	<RimMarket.AwayEventPickpocketCaught>{0} caught a pickpocket by the wrist before anything left the stall.</RimMarket.AwayEventPickpocketCaught>
+	<RimMarket.AwayEventPickpocket>A pickpocket walked off with {0} {1}. Nobody saw a thing, as is traditional.</RimMarket.AwayEventPickpocket>
+	<RimMarket.AwayLost>Your stall at {0} is gone: the caravan or the market is no longer there.</RimMarket.AwayLost>
+	<RimMarket.AwayEndNormal>{0} packs up its stall at {1} at the end of the market day.</RimMarket.AwayEndNormal>
+	<RimMarket.AwayEndPackedUp>{0} packs up its stall at {1} early.</RimMarket.AwayEndPackedUp>
+	<RimMarket.AwayEndMoved>{0} left {1} and took its stall along.</RimMarket.AwayEndMoved>
+	<RimMarket.AwayEndSoldOut>{0} sold everything the {1} market wanted and packs up.</RimMarket.AwayEndSoldOut>
+	<RimMarket.AwayTakings>Takings: {0} items sold for {1} silver, {2} of it paid to the market.</RimMarket.AwayTakings>
+	<RimMarket.AwayNoSales>Nothing sold.</RimMarket.AwayNoSales>
+
+	<!-- Slave auctions -->
+	<RimMarket.Settings.SlaveAuctions>Slave auctions at the market</RimMarket.Settings.SlaveAuctions>
+	<RimMarket.Settings.SlaveAuctionsHint>When a caravan with slaves for sale sets up at your market and an auction post stands in the square, the slaver auctions them there, one lot at a time. Buyers from other factions come to bid, your guests join in, and so can you.</RimMarket.Settings.SlaveAuctionsHint>
+	<RimMarket.AuctionBuyerNamed>{0} of {1}</RimMarket.AuctionBuyerNamed>
+	<RimMarket.AuctionBuyersComing>Buyers are on their way for the auction: {0}. They take a seat in front of the post, bid with their own silver and leave with whatever they win.</RimMarket.AuctionBuyersComing>
+	<RimMarket.AuctionIdle>No auction under way.</RimMarket.AuctionIdle>
+	<RimMarket.AuctionNextLot>Auction under way: next lot in {0}.</RimMarket.AuctionNextLot>
+	<RimMarket.AuctionLotLine>Lot {0}: {1}, worth about {2} silver.</RimMarket.AuctionLotLine>
+	<RimMarket.AuctionBidLine>Current bid: {0} silver by {1}. The gavel falls in {2}.</RimMarket.AuctionBidLine>
+	<RimMarket.AuctionColonySilver>Your colony has {0} silver to bid with.</RimMarket.AuctionColonySilver>
+	<RimMarket.AuctionLeaderYou>your colony</RimMarket.AuctionLeaderYou>
+	<RimMarket.AuctionLeaderNone>nobody yet</RimMarket.AuctionLeaderNone>
+	<RimMarket.AuctionBidLabel>Bid {0}</RimMarket.AuctionBidLabel>
+	<RimMarket.AuctionBidDesc>Bid {1} silver for {0}. If nobody outbids you before the gavel falls, the silver comes out of your stockpiles and {0} is yours, as if bought from the slaver.</RimMarket.AuctionBidDesc>
+	<RimMarket.AuctionYouLead>your colony holds the highest bid</RimMarket.AuctionYouLead>
+	<RimMarket.AuctionNotEnoughSilver>not enough silver in your stockpiles for a bid of {0}</RimMarket.AuctionNotEnoughSilver>
+	<RimMarket.AuctionAnnounced>The {0} slaver will auction off the slaves they brought ({1} lots) at your auction post in two hours. Bring silver.</RimMarket.AuctionAnnounced>
+	<RimMarket.AuctionLotOpen>Lot {0} at the post: {1}. Bidding opens at {2} silver.</RimMarket.AuctionLotOpen>
+	<RimMarket.AuctionLotWithdrawn>{0} was taken off the post.</RimMarket.AuctionLotWithdrawn>
+	<RimMarket.AuctionOver>The {0} slaver closes the auction.</RimMarket.AuctionOver>
+	<RimMarket.AuctionOutbid>{0} outbids your colony at {1} silver.</RimMarket.AuctionOutbid>
+	<RimMarket.AuctionCannotPay>Your colony could not pay for {0} when the gavel fell. The slaver keeps them.</RimMarket.AuctionCannotPay>
+	<RimMarket.AuctionSoldToYou>Sold to your colony: {0}, for {1} silver.</RimMarket.AuctionSoldToYou>
+	<RimMarket.AuctionSoldTo>{0} sold to {1} for {2} silver.</RimMarket.AuctionSoldTo>
+	<RimMarket.AuctionNoTakers>No takers for {0}. The slaver keeps them.</RimMarket.AuctionNoTakers>
+	<RimMarket.AuctionNoSlaves>The {0} slaver has no one to sell this time, so there is no auction.</RimMarket.AuctionNoSlaves>
+	<RimMarket.AuctionNoSlavesIdeo>The {0} slaver has no one to sell: their ideology does not approve of slavery, whatever the sign on the wagon says. No auction today.</RimMarket.AuctionNoSlavesIdeo>
+	<RimMarket.AuctionNoBlock>The {0} slaver brought slaves to sell ({1}), but no auction post stands in this market square.</RimMarket.AuctionNoBlock>
+
+	<!-- Alerts -->
+	<RimMarket.AlertNoStall>Caravan needs a stall</RimMarket.AlertNoStall>
+	<RimMarket.AlertNoStallDesc>These caravans want to set up at your market but cannot:\n\n{0}\n\nBuild another stall, or clear the way to a free one. They set up as soon as one is free, and camp outside until then.</RimMarket.AlertNoStallDesc>
+	<RimMarket.WaitNoFreeStall>every stall is taken</RimMarket.WaitNoFreeStall>
+	<RimMarket.WaitUnreachable>the free stalls are out of their reach</RimMarket.WaitUnreachable>
+	<RimMarket.WaitMarketFull>the market has reached its merchant limit (mod settings)</RimMarket.WaitMarketFull>
+	<RimMarket.AlertThief>Thief on the run</RimMarket.AlertThief>
+	<RimMarket.AlertThiefDesc>Running off with a merchant's goods:\n\n{0}\n\nRight-click a thief with a colonist to tackle them before they reach the edge of the map.</RimMarket.AlertThiefDesc>
+	<RimMarket.MessageWordSpread>Word of your market has spread: a caravan from {0} ({1}) is coming for the market day.</RimMarket.MessageWordSpread>
+
+	<RimMarket.ReasonMerchantHurt>the merchant getting hurt</RimMarket.ReasonMerchantHurt>
+	<RimMarket.ReasonCaravanHurt>losing people from the caravan</RimMarket.ReasonCaravanHurt>
+	<RimMarket.ReasonSafe>a quiet, safe square</RimMarket.ReasonSafe>
+	<RimMarket.ReasonFullDay>a full market day</RimMarket.ReasonFullDay>
+	<RimMarket.ReasonClosedEarly>being sent packing early</RimMarket.ReasonClosedEarly>
+	<RimMarket.ReasonStallGone>losing the stall</RimMarket.ReasonStallGone>
+	<RimMarket.ReasonNoFee>a free stall</RimMarket.ReasonNoFee>
+	<RimMarket.ReasonGentleFee>a gentle fee</RimMarket.ReasonGentleFee>
+	<RimMarket.ReasonSteepFee>a steep fee</RimMarket.ReasonSteepFee>
+	<RimMarket.ReasonRacket>a fee that smells of racket</RimMarket.ReasonRacket>
+	<RimMarket.ReasonTaxedTwice>being taxed twice in one day</RimMarket.ReasonTaxedTwice>
+	<RimMarket.ReasonHandsome>a handsome square</RimMarket.ReasonHandsome>
+	<RimMarket.ReasonShabby>a shabby square</RimMarket.ReasonShabby>
+	<RimMarket.ReasonBigMarket>a proper market with plenty of stalls</RimMarket.ReasonBigMarket>
+	<RimMarket.ReasonGoodSales>good sales to your guests</RimMarket.ReasonGoodSales>
+	<RimMarket.ReasonBusy>plenty of browsers</RimMarket.ReasonBusy>
+	<RimMarket.ReasonInnFine>a good night at your inn</RimMarket.ReasonInnFine>
+	<RimMarket.ReasonInnPoor>a flea-bitten night at your inn</RimMarket.ReasonInnPoor>
+	<RimMarket.ReasonInnSteep>paying through the nose for a bed</RimMarket.ReasonInnSteep>
+	<RimMarket.ReasonThiefCaught>a thief caught</RimMarket.ReasonThiefCaught>
+	<RimMarket.ReasonThiefDeterred>a thief scared off</RimMarket.ReasonThiefDeterred>
+	<RimMarket.ReasonRobbed>a thief who got away</RimMarket.ReasonRobbed>
+	<RimMarket.ReasonHaggledHard>hard haggling</RimMarket.ReasonHaggledHard>
+	<RimMarket.ReasonInsulted>an insulting haggle</RimMarket.ReasonInsulted>
+
+	<RimMarket.Settings.ColonyShopperDays>Shoppers for the colony stalls, at fair prices: one group every {0} days</RimMarket.Settings.ColonyShopperDays>
+	<RimMarket.Settings.ColonyShopperDaysHint>How often a group of shoppers walks over for the colony stalls when no merchant is in town, counting only daytime market hours, with prices at 110% of value. Cheaper or dearer stalls change this, as set below.</RimMarket.Settings.ColonyShopperDaysHint>
+	<RimMarket.Settings.BargainEffect>How much prices sway the shoppers: {0}</RimMarket.Settings.BargainEffect>
+	<RimMarket.Settings.BargainEffectHint>100%: shoppers come twice as often to a stall selling at 85% of value or less, and about a third as often at double the value. 0%: prices change nothing about how often they come, only whether they buy. 200%: bargains are the talk of the region.</RimMarket.Settings.BargainEffectHint>
+	<RimMarket.Settings.Shopkeepers>Colony stalls need a shopkeeper</RimMarket.Settings.Shopkeepers>
+	<RimMarket.Settings.ShopkeepersHint>Off: colony stalls sell on their own, on trust. On: a colonist with the Shopkeep work type has to stand at the counter while customers are in town. Their Social skill raises prices, customers buy a little more readily, and every sale teaches them something. The Shopkeep column appears in the Work tab after a restart.</RimMarket.Settings.ShopkeepersHint>
+	<RimMarket.FairAnnounceLabel>Announce a Great Fair</RimMarket.FairAnnounceLabel>
+	<RimMarket.FairAnnounceDesc>Send heralds to every friendly faction: in {1} days your market holds a Great Fair, from dawn to dusk. Up to {2} caravans set up at once, crowds of shoppers walk over with fuller purses, your colonists make a day of it, and pickpockets make a week of it. A good fair does wonders for the market's name.\n\nThe heralds cost {0} silver.</RimMarket.FairAnnounceDesc>
+	<RimMarket.FairAnnounceConfirm>Hold a Great Fair on {0}? The heralds cost {1} silver, paid now.</RimMarket.FairAnnounceConfirm>
+	<RimMarket.FairCancelLabel>Cancel the Great Fair</RimMarket.FairCancelLabel>
+	<RimMarket.FairCancelDesc>Call the fair off. The heralds keep their silver.</RimMarket.FairCancelDesc>
+	<RimMarket.FairCancelConfirm>Call off the Great Fair? The heralds will not give the silver back, and they will tell everyone why.</RimMarket.FairCancelConfirm>
+	<RimMarket.FairCancelled>The Great Fair is off.</RimMarket.FairCancelled>
+	<RimMarket.FairCancelledMarker>The market marker is gone, and the Great Fair with it.</RimMarket.FairCancelledMarker>
+	<RimMarket.FairAlreadyPlanned>A Great Fair is already planned</RimMarket.FairAlreadyPlanned>
+	<RimMarket.FairTooSoon>The last fair is still the talk of the road. Wait {0}.</RimMarket.FairTooSoon>
+	<RimMarket.FairNeedStalls>Needs at least {0} market stalls around the marker</RimMarket.FairNeedStalls>
+	<RimMarket.FairNoSilver>Needs {0} silver for the heralds</RimMarket.FairNoSilver>
+	<RimMarket.FairAnnouncedLabel>Great Fair announced</RimMarket.FairAnnouncedLabel>
+	<RimMarket.FairAnnouncedText>The heralds are on the road. Your market holds a Great Fair on {0}, from {1}h to {2}h.\n\nOn the day, caravans from every friendly faction will try to set up at once, and crowds of shoppers will follow them. Keep the stalls free and the square safe.</RimMarket.FairAnnouncedText>
+	<RimMarket.FairOpens>The Great Fair is open. Caravans are on their way.</RimMarket.FairOpens>
+	<RimMarket.FairCrowd>A crowd from {0} has come for the fair.</RimMarket.FairCrowd>
+	<RimMarket.FairOverLabel>The Great Fair is over</RimMarket.FairOverLabel>
+	<RimMarket.FairOverText>The Great Fair is over and the square smells of trampled grass.\n\nCaravans: {0} ({1}).\nCrowds of shoppers: {2}.\nStall fees taken: {3} silver.\nSold at the colony stalls: {4} silver.\nSpent by visitors with the merchants: {5} silver.\nThieves caught: {6}. Thieves who got away: {7}.\n\nWord of the fair is spreading, and the market's name with it. The caravans pack up tomorrow morning.</RimMarket.FairOverText>
+	<RimMarket.FairOverEmpty>Nobody came to the Great Fair. The heralds swear they told everyone. The market's name has not improved.</RimMarket.FairOverEmpty>
+	<RimMarket.FairPrizeMote>Best stall of the fair!</RimMarket.FairPrizeMote>
+	<RimMarket.FairPrizeMerchant>The judges have spoken: {0} of {1} runs the best stall of the Great Fair, with {2} silver taken since dawn. {1} is flattered (+{3} goodwill).</RimMarket.FairPrizeMerchant>
+	<RimMarket.FairPrizeColony>The judges have spoken: the best stall of the Great Fair is the colony's own, with {0} silver taken since dawn. Your colonists will not stop talking about it.</RimMarket.FairPrizeColony>
+	<RimMarket.FairOverWinner>Best stall: {0} of {1}, with {2} silver taken.</RimMarket.FairOverWinner>
+	<RimMarket.FairOverWinnerColony>Best stall: the colony's own, with {0} silver taken.</RimMarket.FairOverWinnerColony>
+	<RimMarket.FairInspectAnnounced>Great Fair announced for {0}, from {1}h</RimMarket.FairInspectAnnounced>
+	<RimMarket.FairInspectRunning>Great Fair today: {0} caravans, {1} crowds of shoppers, until {2}h</RimMarket.FairInspectRunning>
+	<RimMarket.AlertFairSoon>Great Fair in {0}</RimMarket.AlertFairSoon>
+	<RimMarket.AlertFairSoonDesc>The Great Fair opens on {0} at {1}h. Keep the market stalls free and the market open: caravans will try to set up all at once, and crowds will follow.</RimMarket.AlertFairSoonDesc>
+	<RimMarket.AlertFairToday>Great Fair today</RimMarket.AlertFairToday>
+	<RimMarket.AlertFairTodayDesc>The Great Fair runs until {0}h. Expect caravans, crowds, cheerful colonists and busy pickpockets.</RimMarket.AlertFairTodayDesc>
+	<RimMarket.Settings.Fair>Great Fairs</RimMarket.Settings.Fair>
+	<RimMarket.Settings.FairHint>A button on the market marker announces a Great Fair a few days ahead: a day of caravans, crowds and bunting. Off: no fairs.</RimMarket.Settings.FairHint>
+	<RimMarket.Settings.FairCost>Heralds: {0} silver</RimMarket.Settings.FairCost>
+	<RimMarket.Settings.FairCooldown>Days between fairs: {0}</RimMarket.Settings.FairCooldown>
+	<RimMarket.Settings.TradeRoutes>Trade routes</RimMarket.Settings.TradeRoutes>
+	<RimMarket.Settings.TradeRoutesHint>Adds a Trade routes option when you talk to a faction by comms console, or by bird post with Medieval Overhaul. For a fee in silver, one of their towns sends a convoy to your market every week or two, and you can watch it travel on the world map. Roads near hostile towns (or through hostile territory, with Faction Territories and Vassalage) get convoys ambushed; an escort costs more and helps. Off: no new routes and no convoys leave, but existing routes are kept.</RimMarket.Settings.TradeRoutesHint>
+	<RimMarket.Settings.RouteOpenCost>Price to open a route: {0} (about {1} silver for a town 20 tiles away)</RimMarket.Settings.RouteOpenCost>
+	<RimMarket.Settings.RouteToll>Fee per convoy: {0} (about {1} silver from 20 tiles away, 0% lets convoys come for free)</RimMarket.Settings.RouteToll>
+	<RimMarket.Settings.SpecialOrders>Special orders</RimMarket.Settings.SpecialOrders>
+	<RimMarket.Settings.SpecialOrdersHint>From the comms console (or a messenger table with Medieval Overhaul), pay a faction to bring a caravan full of what you asked for. They set up at a stall and skip the stall fee, since you already paid them to come.</RimMarket.Settings.SpecialOrdersHint>
+	<RimMarket.OrderOption>Special order</RimMarket.OrderOption>
+	<RimMarket.OrderPending>{0} is already filling an order for you.</RimMarket.OrderPending>
+	<RimMarket.OrderLimit>Your market can only wait on {0} orders at a time.</RimMarket.OrderLimit>
+	<RimMarket.OrderPickSettlement>Which town of {0} should fill the order? The farther it is, the longer the wait and the bigger the bill.</RimMarket.OrderPickSettlement>
+	<RimMarket.OrderPickWhat>What should {0} bring?\n\nPick a family of goods: they load a caravan with that sort of thing on top of their usual stock. The order only pays for the trip. You still buy the goods at their prices when they arrive, and they skip the stall fee.\n\nAfter something specific? Post a wanted notice from the comms console instead, and let every friendly town make you an offer.\n\nSilver in the colony: {1}.</RimMarket.OrderPickWhat>
+	<RimMarket.OrderFamilySmall>{0}, a cartload ({1} silver)</RimMarket.OrderFamilySmall>
+	<RimMarket.OrderFamilyLarge>{0}, a full caravan ({1} silver)</RimMarket.OrderFamilyLarge>
+	<RimMarket.OrderFamilyNothing>{0} has nothing of the sort to sell.</RimMarket.OrderFamilyNothing>
+	<RimMarket.OrderFamily_Provisions>food and medicine</RimMarket.OrderFamily_Provisions>
+	<RimMarket.OrderFamily_Materials>cloth and materials</RimMarket.OrderFamily_Materials>
+	<RimMarket.OrderFamily_Arms>weapons and armour</RimMarket.OrderFamily_Arms>
+	<RimMarket.OrderFamily_Luxuries>luxuries</RimMarket.OrderFamily_Luxuries>
+	<RimMarket.OrderWhatSmall>a cartload of {0}</RimMarket.OrderWhatSmall>
+	<RimMarket.OrderWhatLarge>a full caravan of {0}</RimMarket.OrderWhatLarge>
+	<RimMarket.OrderPlaced>Order sent to {0}: {1}, for {2} silver. They need a little while to gather it before they set off.</RimMarket.OrderPlaced>
+	<RimMarket.OrderPendingNode>Your order from {0}: {1}. Paid: {2} silver.
+
+{3}</RimMarket.OrderPendingNode>
+	<RimMarket.OrderStatusPacking>They are still gathering the goods, leaving in about {0}.</RimMarket.OrderStatusPacking>
+	<RimMarket.OrderLeft>Your order left {0}. About {1} on the road.</RimMarket.OrderLeft>
+	<RimMarket.OrderArrivedLabel>Special order arrived</RimMarket.OrderArrivedLabel>
+	<RimMarket.OrderArrivedText>The {0} caravan from {1} has arrived with your order: {2}.\n\nThey will take a stall without paying the fee, the trip being already paid for. Family orders are sold at their usual prices, nobody said anything about discounts. Goods from a wanted notice are already paid for and will be handed over.</RimMarket.OrderArrivedText>
+	<RimMarket.OrderTurnedBack>The caravan from {1} waited at the edge of your land and gave up. {2} silver of your order comes back.</RimMarket.OrderTurnedBack>
+	<RimMarket.OrderCancelledGone>{0} can no longer fill your order from {1}. {2} silver comes back.</RimMarket.OrderCancelledGone>
+	<RimMarket.OrderCancelledHostile>{0} turned on you, and your order from {1} with it. {2} silver comes back, which is more than most enemies would do.</RimMarket.OrderCancelledHostile>
+	<RimMarket.OrderCancelledHome>Your order from {1} has nowhere to go. {2} silver comes back.</RimMarket.OrderCancelledHome>
+	<RimMarket.OrderCancelledNoRoad>The caravan from {1} cannot find a road to you. {2} silver comes back.</RimMarket.OrderCancelledNoRoad>
+	<RimMarket.OrderCancelledLost>Your order from {1} never made it. {2} silver comes back, the rest is somebody else's loot now.</RimMarket.OrderCancelledLost>
+	<RimMarket.OrderWindowValue>Value of the goods: {0}</RimMarket.OrderWindowValue>
+	<RimMarket.WantedCallLabel>Post a wanted notice</RimMarket.WantedCallLabel>
+	<RimMarket.WantedCallInfo>Ask every friendly town for something specific and see who answers.</RimMarket.WantedCallInfo>
+	<RimMarket.WantedDisabled>special orders are turned off in the settings</RimMarket.WantedDisabled>
+	<RimMarket.WantedAlreadyOut>a notice is already out</RimMarket.WantedAlreadyOut>
+	<RimMarket.WantedWindowTitle>Wanted notice</RimMarket.WantedWindowTitle>
+	<RimMarket.WantedWindowIntro>Name exactly what you want, up to {0} different goods. The notice goes to every town that is not at war with you. Over the next few days some of them answer with an offer: a price, a delay, sometimes only part of the lot, and now and then a barter instead of silver.\n\nOffers usually cost the trip plus a good share of the goods' value, less if they like you. The offer pays for the goods: when the caravan arrives, they are yours.</RimMarket.WantedWindowIntro>
+	<RimMarket.WantedPost>Post the notice</RimMarket.WantedPost>
+	<RimMarket.WantedPosted>Your wanted notice is out. Offers should trickle in over the next few days.</RimMarket.WantedPosted>
+	<RimMarket.WantedNobody>Nobody seems interested in your notice. Try other goods, or make some friends first.</RimMarket.WantedNobody>
+	<RimMarket.WantedOfferIn>{0} answered your wanted notice: {1}.</RimMarket.WantedOfferIn>
+	<RimMarket.WantedSilverWord>{0} silver</RimMarket.WantedSilverWord>
+	<RimMarket.WantedBarterWord>a barter</RimMarket.WantedBarterWord>
+	<RimMarket.WantedClosed>Your wanted notice has run its course.</RimMarket.WantedClosed>
+	<RimMarket.WantedGizmo>Wanted notice ({0})</RimMarket.WantedGizmo>
+	<RimMarket.WantedGizmoDesc>See the offers that came in for your wanted notice, accept one, or take the notice down.</RimMarket.WantedGizmoDesc>
+	<RimMarket.WantedBoardTitle>Offers on your wanted notice</RimMarket.WantedBoardTitle>
+	<RimMarket.WantedBoardHead>You asked for: {0}.</RimMarket.WantedBoardHead>
+	<RimMarket.WantedBoardWaiting>More answers may still come.</RimMarket.WantedBoardWaiting>
+	<RimMarket.WantedBoardNone>No offers yet. Towns take their time.</RimMarket.WantedBoardNone>
+	<RimMarket.WantedOfferTitle>{0}, from {1}. Here in about {2}. {3}</RimMarket.WantedOfferTitle>
+	<RimMarket.WantedPartial>(only part of what you asked)</RimMarket.WantedPartial>
+	<RimMarket.WantedPaySilver>Price: {0} silver, paid now.</RimMarket.WantedPaySilver>
+	<RimMarket.WantedPayBarter>Barter: they want {0}, collected when they arrive. If it is gone by then, {1} silver instead.</RimMarket.WantedPayBarter>
+	<RimMarket.WantedBarterMissing>You do not have it in storage right now.</RimMarket.WantedBarterMissing>
+	<RimMarket.WantedExpires>Offer stands for {0}.</RimMarket.WantedExpires>
+	<RimMarket.WantedAccept>Accept</RimMarket.WantedAccept>
+	<RimMarket.WantedAccepted>You accepted the offer from {0}. The goods leave {1} shortly.</RimMarket.WantedAccepted>
+	<RimMarket.WantedWithdraw>Take the notice down</RimMarket.WantedWithdraw>
+	<RimMarket.WantedWithdrawConfirm>Take the notice down? Every offer on it is dropped.</RimMarket.WantedWithdrawConfirm>
+	<RimMarket.WantedBarterTaken>{0} collected the barter: {1}.</RimMarket.WantedBarterTaken>
+	<RimMarket.WantedBarterSilver>The barter goods were gone, so {0} took {1} silver instead.</RimMarket.WantedBarterSilver>
+	<RimMarket.WantedBarterFailedLabel>Barter fell through</RimMarket.WantedBarterFailedLabel>
+	<RimMarket.WantedBarterFailedText>{0} came for {1}, or {2} silver, and found neither. They keep your goods and remember the trip.</RimMarket.WantedBarterFailedText>
+	<RimMarket.WantedHandedOver>{0} handed over your goods: {1}.</RimMarket.WantedHandedOver>
+	<RimMarket.AlertWantedOffers>Offers on your notice: {0}</RimMarket.AlertWantedOffers>
+	<RimMarket.AlertWantedOffersDesc>Towns answered your wanted notice. Click to see their offers.</RimMarket.AlertWantedOffersDesc>
+	<RimMarket.OrderTooManyLines>One order holds {0} different goods at most.</RimMarket.OrderTooManyLines>
+	<RimMarket.OrderTooBig>One order is worth {0} at most. Even the finest caravans have limits.</RimMarket.OrderTooBig>
+	<RimMarket.ConvoyCarryingOrder>Carrying your order: {0}</RimMarket.ConvoyCarryingOrder>
+	<RimMarket.StallOrderLine>Here on your special order: no stall fee.</RimMarket.StallOrderLine>
+	<RimMarket.RoutesOption>Trade routes ({0}/{1})</RimMarket.RoutesOption>
+	<RimMarket.RoutesNode>A trade route with {0}: one of their towns sends a merchant convoy to your market at a set pace. You pay once to open the route, then a convoy fee each time a convoy arrives. Your market's reputation lets it keep {1} route(s) in all.</RimMarket.RoutesNode>
+	<RimMarket.RouteLine>{0}: {1}, every {2} days. {3}</RimMarket.RouteLine>
+	<RimMarket.RouteStatusOnRoad>A convoy is on the road, arriving in about {0}.</RimMarket.RouteStatusOnRoad>
+	<RimMarket.RouteStatusWaiting>A convoy is waiting at the edge of your land.</RimMarket.RouteStatusWaiting>
+	<RimMarket.RouteStatusNext>Next convoy leaves in about {0}.</RimMarket.RouteStatusNext>
+	<RimMarket.RouteOpen>Open a trade route</RimMarket.RouteOpen>
+	<RimMarket.RouteClose>Close the route from {0}</RimMarket.RouteClose>
+	<RimMarket.RouteCloseConfirm>Close the trade route from {0}? Its convoys stop coming, the one on the road turns back, and the fee stays spent.</RimMarket.RouteCloseConfirm>
+	<RimMarket.RouteCloseYes>Close it</RimMarket.RouteCloseYes>
+	<RimMarket.RoutePickSettlement>Which town of {0} should send the convoys? The farther it is, the longer the road and the higher the fee.</RimMarket.RoutePickSettlement>
+	<RimMarket.RouteSettlementOption>{0} ({1} tiles, about {2} on the road, {3})</RimMarket.RouteSettlementOption>
+	<RimMarket.RouteRiskSafe>a safe road</RimMarket.RouteRiskSafe>
+	<RimMarket.RouteRisk>{0} chance of an ambush, mostly {1}</RimMarket.RouteRisk>
+	<RimMarket.RouteEscortNote>On this road, about {0} of convoys run into trouble, mostly from {1}. An escort brings that down to about {2}, and escorted convoys that are attacked usually come through.</RimMarket.RouteEscortNote>
+	<RimMarket.RouteWeeklyEscort>Every week, with an escort: {0} silver to open, then {1} per convoy</RimMarket.RouteWeeklyEscort>
+	<RimMarket.RouteFortnightlyEscort>Every two weeks, with an escort: {0} silver to open, then {1} per convoy</RimMarket.RouteFortnightlyEscort>
+	<RimMarket.RouteStatusAttacked>The convoy is under attack by {0}!</RimMarket.RouteStatusAttacked>
+	<RimMarket.RouteStatusEscort>Escorted.</RimMarket.RouteStatusEscort>
+	<RimMarket.RouteStatusAmbushes>Ambushed {0} time(s), {1} convoy(s) lost.</RimMarket.RouteStatusAmbushes>
+	<RimMarket.ConvoyAmbushed>The trade convoy from {0} has been ambushed by {1}!</RimMarket.ConvoyAmbushed>
+	<RimMarket.ConvoyRepelled>The trade convoy from {0} fought off {1} and is back on the road, a few hours late.</RimMarket.ConvoyRepelled>
+	<RimMarket.ConvoyPlundered>The trade convoy from {0} got away from {1}, minus about {2} of its goods. It carries on with what is left.</RimMarket.ConvoyPlundered>
+	<RimMarket.ConvoyLost>The trade convoy from {0} was overrun by {1}. The next one leaves as planned.</RimMarket.ConvoyLost>
+	<RimMarket.ConvoyUnderAttack>Under attack by {0}! The fight should be over in about {1}.</RimMarket.ConvoyUnderAttack>
+	<RimMarket.ConvoyEscorted>Travelling with an escort.</RimMarket.ConvoyEscorted>
+	<RimMarket.ConvoyPlunderedLine>Lost about {0} of its goods on the way.</RimMarket.ConvoyPlunderedLine>
+	<RimMarket.RouteNoTowns>They have no town to send convoys from.</RimMarket.RouteNoTowns>
+	<RimMarket.RouteNoRoad>No road reaches your market from there.</RimMarket.RouteNoRoad>
+	<RimMarket.RouteExists>A route from this town is already open.</RimMarket.RouteExists>
+	<RimMarket.RoutePickKind>What should the convoys from {0} bring?</RimMarket.RoutePickKind>
+	<RimMarket.RouteNoKinds>They have no merchant they are willing to send your way.</RimMarket.RouteNoKinds>
+	<RimMarket.RoutePickCadence>How often should the {0} convoy leave {1}? You pay once to open the route, then a convoy fee each time a convoy arrives, in silver from your stores and home area (you have {2}). If nobody can pay the fee, the convoy turns back, and the town counts it against the route.</RimMarket.RoutePickCadence>
+	<RimMarket.RouteWeekly>Every week: {0} silver to open, then {1} per convoy</RimMarket.RouteWeekly>
+	<RimMarket.RouteFortnightly>Every two weeks: {0} silver to open, then {1} per convoy</RimMarket.RouteFortnightly>
+	<RimMarket.RouteTollPaid>The convoy from {0} has arrived. {1} silver paid for the trip.</RimMarket.RouteTollPaid>
+	<RimMarket.RouteTollUnpaid>The convoy from {0} turned back: nobody could pay the {1} silver convoy fee. Strike {2} of {3} for the route.</RimMarket.RouteTollUnpaid>
+	<RimMarket.RouteStatusToll>Convoy fee: {0} silver.</RimMarket.RouteStatusToll>
+	<RimMarket.RouteNoSilver>Not enough silver ({0} needed).</RimMarket.RouteNoSilver>
+	<RimMarket.RouteOpened>Agreed. The first {1} convoy leaves {0} within a day or so. You will see it on the world map.</RimMarket.RouteOpened>
+	<RimMarket.RouteHostile>They are hostile.</RimMarket.RouteHostile>
+	<RimMarket.RouteNeedsMarket>This colony needs an open market first.</RimMarket.RouteNeedsMarket>
+	<RimMarket.RouteUnknown>{0} have never traded at your market or hosted your stall. Start there.</RimMarket.RouteUnknown>
+	<RimMarket.RouteGrudge>{0} holds a grudge against your market.</RimMarket.RouteGrudge>
+	<RimMarket.RouteLimit>Your market can keep {0} route(s) at its current reputation. A better name allows more.</RimMarket.RouteLimit>
+	<RimMarket.RouteConvoyLeft>A trade convoy has left {0} for your market with a {1}. It should arrive in about {2}.</RimMarket.RouteConvoyLeft>
+	<RimMarket.RouteConvoyWaiting>The trade convoy from {0} waits at the edge of your land: their enemies are at your market.</RimMarket.RouteConvoyWaiting>
+	<RimMarket.RouteConvoyDelayed>The trade convoy from {0} has reached your land but cannot come in yet. It will try again.</RimMarket.RouteConvoyDelayed>
+	<RimMarket.RouteConvoyTurnedBack>The trade convoy from {0} gave up waiting and went home.</RimMarket.RouteConvoyTurnedBack>
+	<RimMarket.RouteStrike>{0} are losing faith in the trade route after a bad day at your market ({1} of {2}).</RimMarket.RouteStrike>
+	<RimMarket.RouteClosedGone>The trade route with {0} is closed: {1} is no longer theirs to send convoys from.</RimMarket.RouteClosedGone>
+	<RimMarket.RouteClosedHostile>The trade route with {0} is closed: they are now hostile.</RimMarket.RouteClosedHostile>
+	<RimMarket.RouteClosedHome>The trade route with {0} is closed: your market town is gone.</RimMarket.RouteClosedHome>
+	<RimMarket.RouteClosedGrudge>{0} closes the trade route from {1}: they no longer trust your market.</RimMarket.RouteClosedGrudge>
+	<RimMarket.RouteClosedStrikes>{0} close the trade route from {1} after too many bad days at your market.</RimMarket.RouteClosedStrikes>
+	<RimMarket.RouteClosedNoRoad>The trade route with {0} is closed: no road reaches your market from {1} any more.</RimMarket.RouteClosedNoRoad>
+	<RimMarket.ConvoyBound>Bound for {0}, arriving in about {1}.</RimMarket.ConvoyBound>
+	<RimMarket.ConvoyWaiting>Waiting to enter {0}.</RimMarket.ConvoyWaiting>
+	<RimMarket.ConvoyCarrying>Merchant: {0}.</RimMarket.ConvoyCarrying>
+
+</LanguageData>

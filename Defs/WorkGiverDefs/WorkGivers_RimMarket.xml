@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<WorkGiverDef>
+		<defName>RimMarket_TendColonyStall</defName>
+		<label>tend colony stalls</label>
+		<giverClass>RimMarket.Jobs.WorkGiver_TendColonyStall</giverClass>
+		<workType>RimMarket_Shopkeeping</workType>
+		<priorityInType>50</priorityInType>
+		<verb>tend</verb>
+		<gerund>tending</gerund>
+		<requiredCapacities>
+			<li>Talking</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
+</Defs>

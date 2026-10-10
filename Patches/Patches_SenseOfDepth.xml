@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Sense Of Depth For Tall Buildings</li>
+		</mods>
+		<match Class="PatchOperationAddModExtension">
+			<success>Always</success>
+			<xpath>/Defs/ThingDef[defName="RimMarket_Stall" or defName="RimMarket_AuctionBlock"]</xpath>
+			<value>
+				<li Class="SenseOfDepthForTallBuilding.AddBackSideLayer">
+					<apply>False</apply>
+				</li>
+			</value>
+		</match>
+	</Operation>
+
+</Patch>

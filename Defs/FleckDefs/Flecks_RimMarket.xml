@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>RimMarket_Petal</defName>
+		<graphicData>
+			<texPath>Things/Fair/RimMarket_Petal</texPath>
+			<renderInstanced>true</renderInstanced>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0.25</fadeInTime>
+		<solidTime>2.6</solidTime>
+		<fadeOutTime>1.2</fadeOutTime>
+	</FleckDef>
+
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>RimMarket_SkyLantern</defName>
+		<graphicData>
+			<texPath>Things/Fair/RimMarket_SkyLantern</texPath>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>1</fadeInTime>
+		<solidTime>9</solidTime>
+		<fadeOutTime>4</fadeOutTime>
+		<growthRate>-0.025</growthRate>
+	</FleckDef>
+
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>RimMarket_LanternGlow</defName>
+		<graphicData>
+			<texPath>Things/Mote/FireGlow</texPath>
+			<shaderType>MoteGlow</shaderType>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>1</fadeInTime>
+		<solidTime>9</solidTime>
+		<fadeOutTime>4</fadeOutTime>
+		<growthRate>-0.08</growthRate>
+	</FleckDef>
+
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>RimMarket_FireworkRocket</defName>
+		<graphicData>
+			<texPath>Things/Fair/RimMarket_Spark</texPath>
+			<shaderType>MoteGlow</shaderType>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0</fadeInTime>
+		<solidTime>1.1</solidTime>
+		<fadeOutTime>0.1</fadeOutTime>
+	</FleckDef>
+
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>RimMarket_FireworkSpark</defName>
+		<graphicData>
+			<texPath>Things/Fair/RimMarket_Spark</texPath>
+			<shaderType>MoteGlow</shaderType>
+			<renderInstanced>true</renderInstanced>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0</fadeInTime>
+		<solidTime>0.45</solidTime>
+		<fadeOutTime>1.1</fadeOutTime>
+		<speedPerTime>-1.6~-1.2</speedPerTime>
+		<acceleration>(0,0,-0.5)</acceleration>
+	</FleckDef>
+
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>RimMarket_FireworkFlash</defName>
+		<graphicData>
+			<texPath>Things/Mote/FireGlow</texPath>
+			<shaderType>MoteGlow</shaderType>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0.04</fadeInTime>
+		<solidTime>0.1</solidTime>
+		<fadeOutTime>0.7</fadeOutTime>
+	</FleckDef>
+
+</Defs>

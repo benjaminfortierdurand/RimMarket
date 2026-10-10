@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>RimMarket</name>
+	<authors>
+		<li>BenFD</li>
+	</authors>
+	<packageId>forti.rimmarket</packageId>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<modVersion>0.1.0</modVersion>
+	<modIconPath>UI/RimMarketIcon</modIconPath>
+	<description>RimMarket is not another trade window. You build the stalls, merchants show up and set up shop in them, guests come to spend, and you tax the lot. Whether they come back depends on how the last fair went.
+
+Place a market marker and build empty stalls around it. When a trade caravan arrives and finds a free stall, the merchant walks over and stands behind the counter, one guard takes up a post beside the stall, the pack animals wait at the caravan camp, a spot you mark on the ground and can wall in wherever the square has no room for livestock (without one, they wait just outside the market), and the rest of the escort sits around the guard rest spot eating from their packs. The wares are laid out on the counter. Trade from the stall or from the merchant, with the usual trade window, and try your luck at haggling once per visit. Merchants pay a stall fee on arrival, counted out on the counter, stay a full market day, then pack up and leave.
+
+Idle colonists wander over to look at the wares, which does wonders for their mood and nothing for your finances. With Hospitality, guests with silver in their pockets actually buy things, and you can have the stalls take a share of every sale instead of a fee at the door.
+
+Everything runs on buildings you place. The marker can be hidden once the square is built, the stall takes the colour of the wood or metal you build it from, and a button on the marker closes the market and sends everyone home.
+
+Works alongside Hospitality, Trading Control, Rim War, RimToll and the usual suspects. Requires Harmony only.
+
+Credits: the market stall art is by Tomson Johnson. The auction post texture is by Gerrymon, from Misc Props: Dungeon, used with permission.
+BenFD</description>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>Orion.Hospitality</li>
+		<li>forti.rimtoll</li>
+		<li>TradingControl.Tad.Rimworld.Core</li>
+	</loadAfter>
+</ModMetaData>

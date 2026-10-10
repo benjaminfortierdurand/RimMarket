@@ -1,0 +1,21 @@
+# Jamais sur GitHub : code decompile du jeu et notes de travail
+.research/
+_concept/
+.claude/
+
+# Build artifacts
+Source/bin/
+Source/obj/
+1.6/Assemblies/*.pdb
+*.pdb
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store

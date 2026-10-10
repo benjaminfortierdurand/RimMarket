@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<WorldObjectDef>
+		<defName>RimMarket_TradeConvoy</defName>
+		<label>trade convoy</label>
+		<description>Merchants on their way to your market along a trade route, with guards, pack animals and more optimism than the roads deserve.</description>
+		<worldObjectClass>RimMarket.Routes.TradeConvoy</worldObjectClass>
+		<texture>World/WorldObjects/RimMarket_TradeConvoy</texture>
+		<useDynamicDrawer>true</useDynamicDrawer>
+		<expandingIcon>true</expandingIcon>
+		<expandingIconTexture>World/WorldObjects/Expanding/RimMarket_TradeConvoy</expandingIconTexture>
+		<expandingIconPriority>90</expandingIconPriority>
+		<expandMore>true</expandMore>
+	</WorldObjectDef>
+
+</Defs>

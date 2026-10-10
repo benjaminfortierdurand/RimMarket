@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>RimMarket_MarketMarker</defName>
+		<label>market marker</label>
+		<description>A spot painted on the ground that marks the centre of your market square. Build stalls around it: any stall inside the marker's radius belongs to this market. Select the marker to set the radius by hand or let the auto button fit it to your walls and fences, choose how the stall fee is collected, open or close the market, and hide the spot once the square looks the way you want. During a Great Fair the maypole goes up right on it.\n\nTrade caravans that find a free stall here set up shop in it instead of idling outside your walls.</description>
+		<thingClass>RimMarket.Buildings.Building_MarketMarker</thingClass>
+		<graphicData>
+			<texPath>Things/Building/RimMarket_MarketSpot</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<drawSize>(1,1)</drawSize>
+		</graphicData>
+		<category>Building</category>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<passability>Standable</passability>
+		<pathCost>0</pathCost>
+		<size>(1,1)</size>
+		<rotatable>false</rotatable>
+		<useHitPoints>false</useHitPoints>
+		<selectable>true</selectable>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<statBases>
+			<WorkToBuild>0</WorkToBuild>
+		</statBases>
+		<designationCategory>Misc</designationCategory>
+		<uiOrder>2005</uiOrder>
+		<building>
+			<sowTag>SupportPlantsOnly</sowTag>
+			<canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+			<ai_chillDestination>false</ai_chillDestination>
+			<wakeDormantPawnsOnConstruction>false</wakeDormantPawnsOnConstruction>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+		</building>
+		<comps>
+			<li Class="RimMarket.Buildings.CompProperties_MarketQuarter" />
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>RimMarket_CaravanCamp</defName>
+		<label>caravan camp</label>
+		<thingClass>RimMarket.Buildings.Building_MarketSpot</thingClass>
+		<description>A spot marked on the ground that tells visiting caravans where to leave their pack animals while the merchant works the market. The wares in the saddlebags still count for trading, however far the animals are from the counter.
+
+Select the spot to set the radius, fit it to your walls and fences, or hide it once you know where it is. Wall the camp in and the animals stay put: they do not open doors. Off-duty guards wait at the guard rest spot, or just outside the camp if you have none. Without a camp, the animals wait just outside the market, out of the shoppers' way.</description>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/RimMarket_CaravanCampSpot</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<drawSize>(1,1)</drawSize>
+		</graphicData>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<statBases>
+			<WorkToBuild>0</WorkToBuild>
+		</statBases>
+		<useHitPoints>false</useHitPoints>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<designationCategory>Misc</designationCategory>
+		<passability>Standable</passability>
+		<rotatable>false</rotatable>
+		<building>
+			<sowTag>SupportPlantsOnly</sowTag>
+			<canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+			<ai_chillDestination>false</ai_chillDestination>
+			<wakeDormantPawnsOnConstruction>false</wakeDormantPawnsOnConstruction>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+		</building>
+		<comps>
+			<li Class="RimMarket.Buildings.CompProperties_MarketQuarter">
+				<defaultRadius>8</defaultRadius>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>RimMarket_GuardRestSpot</defName>
+		<label>guard rest spot</label>
+		<thingClass>RimMarket.Buildings.Building_MarketSpot</thingClass>
+		<description>Designates where the guards of visiting caravans spend their time off while one of them stands post at the stall. They sit on any chair, stool or bench inside the spot's radius, or stand if there is none, trade gossip, eat from their packs and sleep on the ground when night comes. Select the spot to set the radius, fit it to your walls, or hide it.\n\nWithout a rest spot, off-duty guards hang around just outside the caravan camp, keeping an eye on the animals, or wait with the animals outside the market if there is no camp either.</description>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/RimMarket_GuardRestSpot</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<drawSize>(1,1)</drawSize>
+		</graphicData>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<statBases>
+			<WorkToBuild>0</WorkToBuild>
+		</statBases>
+		<useHitPoints>false</useHitPoints>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<designationCategory>Misc</designationCategory>
+		<passability>Standable</passability>
+		<rotatable>false</rotatable>
+		<building>
+			<sowTag>SupportPlantsOnly</sowTag>
+			<canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+			<ai_chillDestination>false</ai_chillDestination>
+			<wakeDormantPawnsOnConstruction>false</wakeDormantPawnsOnConstruction>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+		</building>
+		<comps>
+			<li Class="RimMarket.Buildings.CompProperties_MarketQuarter">
+				<defaultRadius>6</defaultRadius>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>RimMarket_Stall</defName>
+		<label>market stall</label>
+		<description>An empty market stall: a counter with an awning over it. Build it inside a market marker's radius and leave the merchant's spot at the end of the counter free (outlined in white while placing). When a trade caravan comes to the market, its merchant takes the stall and stands at the end of the counter with the wares laid out under the awning, one guard keeps watch beside it, the pack animals wait at the caravan camp and the other guards at the guard rest spot. Trade from the stall or from the merchant.\n\nOr make it a colony stall and sell your own goods: choose what, how many and at what price in its sales table, your haulers bring them over, and shoppers and guests pay at the counter.\n\nMerchants open your doors like any friendly visitor, but the square must be reachable from the map edge. The counter and its legs take the colour of the material you build it from. The awning is yours to paint: pick an edge, a pattern and two colours.</description>
+		<thingClass>RimMarket.Buildings.Building_MarketStall</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Stall/RimMarket_StallBase1</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+			<drawOffsetNorth>(0,0,0.5)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,0.5)</drawOffsetSouth>
+			<drawOffsetEast>(0,0,-0.05)</drawOffsetEast>
+			<drawOffsetWest>(0,0,-0.05)</drawOffsetWest>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<category>Building</category>
+		<altitudeLayer>Building</altitudeLayer>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<passability>Impassable</passability>
+		<fillPercent>0.35</fillPercent>
+		<disableImpassableShotOverConfigError>true</disableImpassableShotOverConfigError>
+		<blockWind>false</blockWind>
+		<holdsRoof>false</holdsRoof>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.3</staticSunShadowHeight>
+		<size>(3,1)</size>
+		<rotatable>true</rotatable>
+		<useHitPoints>true</useHitPoints>
+		<selectable>true</selectable>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<tickerType>Never</tickerType>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>3</Beauty>
+			<Mass>30</Mass>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costStuffCount>75</costStuffCount>
+		<designationCategory>Misc</designationCategory>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<placeWorkers>
+			<li>RimMarket.Buildings.PlaceWorker_MarketStall</li>
+		</placeWorkers>
+		<comps>
+			<li Class="RimMarket.Buildings.CompProperties_MarketStall">
+				<waresOffset>(0,0,-0.1)</waresOffset>
+				<verticalWares>1</verticalWares>
+				<verticalWaresOffset>(0,0,-0.08)</verticalWaresOffset>
+				<verticalWaresScale>0.7</verticalWaresScale>
+				<paintableRoof>true</paintableRoof>
+				<frontBunting>true</frontBunting>
+				<merchantAtSide>true</merchantAtSide>
+				<customerReachVertical>2</customerReachVertical>
+				<canvasX>-1.7~1.7</canvasX>
+				<canvasZ>-0.1~1.85</canvasZ>
+				<canvasXVertical>-1.0~1.0</canvasXVertical>
+				<canvasZVertical>-1.3~1.85</canvasZVertical>
+				<buntingAnchorVertical>(0,0,1.85)</buntingAnchorVertical>
+				<bannerOffset>(1.5,0,-0.42)</bannerOffset>
+				<bannerOffsetVertical>(0.85,0,-1.65)</bannerOffsetVertical>
+			</li>
+		</comps>
+		<building>
+			<isPlayerEjectable>true</isPlayerEjectable>
+			<paintable>true</paintable>
+			<ai_chillDestination>true</ai_chillDestination>
+			<canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+		</building>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureBase">
+		<defName>RimMarket_AuctionBlock</defName>
+		<label>auction post</label>
+		<description>A post with iron rings and a length of chain, planted where the crowd can see it. When a caravan with slaves for sale sets up at your market, the slaver chains each lot to the post in turn and takes bids. Buyers from other factions come to sit and bid, your guests join in, and so can you: select the post while a lot is up. Build it inside a market marker's radius, with a few chairs in front if you want the buyers comfortable.\n\nWhether your colonists can stomach the sight depends on what they believe about slavery.</description>
+		<thingClass>RimMarket.Auction.Building_AuctionBlock</thingClass>
+		<graphicData>
+			<texPath>Things/Building/RimMarket_AuctionPost</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,3)</drawSize>
+			<drawOffset>(0,0,0.1)</drawOffset>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<uiIconScale>0.6</uiIconScale>
+		<tickerType>Never</tickerType>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Standable</passability>
+		<pathCost>30</pathCost>
+		<fillPercent>0.35</fillPercent>
+		<rotatable>false</rotatable>
+		<designationCategory>Misc</designationCategory>
+		<size>(1,1)</size>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costStuffCount>45</costStuffCount>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>700</WorkToBuild>
+			<Mass>20</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>-4</Beauty>
+			<TerrorSource MayRequire="Ludeon.RimWorld.Ideology">6</TerrorSource>
+		</statBases>
+		<building>
+			<joyKind>RimMarket_Market</joyKind>
+			<watchBuildingStandDistanceRange>2~6</watchBuildingStandDistanceRange>
+			<watchBuildingStandRectWidth>7</watchBuildingStandRectWidth>
+			<watchBuildingInSameRoom>false</watchBuildingInSameRoom>
+		</building>
+	</ThingDef>
+
+</Defs>

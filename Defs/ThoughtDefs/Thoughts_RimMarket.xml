@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThoughtDef>
+		<defName>RimMarket_BrowsedMarket</defName>
+		<durationDays>1</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>browsed the market</label>
+				<description>I wandered past the stalls, fingered the cloth and argued about prices I had no intention of paying. Lovely afternoon.</description>
+				<baseMoodEffect>2</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimMarket_BoughtAtMarket</defName>
+		<durationDays>1.5</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>bought something at the market</label>
+				<description>I bought something at the market. I probably did not need it. That is not the point.</description>
+				<baseMoodEffect>4</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimMarket_WentToFair</defName>
+		<durationDays>3</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>went to the Great Fair</label>
+				<description>Bunting, crowds, six caravans and a man selling roasted nuts at a scandalous price. Our little town felt like a city for a day.</description>
+				<baseMoodEffect>6</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimMarket_FairStallWon</defName>
+		<durationDays>3</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>our stall won the fair</label>
+				<description>Six caravans of professional merchants, and the best stall at the fair was ours. Turnips, mostly. Very good turnips.</description>
+				<baseMoodEffect>4</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimMarket_SlaveAuctionHeld</defName>
+		<durationDays>3</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>slave auction in town</label>
+				<description>People were sold on the block at our market today, the proper way, with bids and a gavel. Business as it should be.</description>
+				<baseMoodEffect>3</baseMoodEffect>
+			</li>
+			<li>
+				<label>slave auction in town</label>
+				<description>They sold people at our market today. I looked the other way. It did not help much.</description>
+				<baseMoodEffect>-2</baseMoodEffect>
+			</li>
+			<li>
+				<label>slave auction in town</label>
+				<description>People were auctioned like cattle in our own market square. I keep hearing the bids.</description>
+				<baseMoodEffect>-4</baseMoodEffect>
+			</li>
+			<li>
+				<label>slave auction in town</label>
+				<description>We let them sell human beings on a block in our town. What kind of place have we become?</description>
+				<baseMoodEffect>-6</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+</Defs>

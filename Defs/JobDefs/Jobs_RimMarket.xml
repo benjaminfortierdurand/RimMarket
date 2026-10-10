@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<JobDef>
+		<defName>RimMarket_PostWantedNotice</defName>
+		<driverClass>RimMarket.Orders.JobDriver_PostWantedNotice</driverClass>
+		<reportString>writing a wanted notice.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_StandAtStall</defName>
+		<driverClass>RimMarket.Jobs.JobDriver_StandAtStall</driverClass>
+		<reportString>minding the stall.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_StandOnBlock</defName>
+		<driverClass>RimMarket.Auction.JobDriver_StandOnBlock</driverClass>
+		<reportString>chained to the auction post.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_WatchAuction</defName>
+		<driverClass>RimMarket.Auction.JobDriver_WatchAuction</driverClass>
+		<reportString>watching the auction.</reportString>
+		<joyDuration>2500</joyDuration>
+		<joyMaxParticipants>16</joyMaxParticipants>
+		<joyKind>RimMarket_Market</joyKind>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_AttendAuction</defName>
+		<driverClass>RimMarket.Auction.JobDriver_AttendAuction</driverClass>
+		<reportString>attending the auction.</reportString>
+		<casualInterruptible>true</casualInterruptible>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_RestAtSpot</defName>
+		<driverClass>RimMarket.AI.JobDriver_RestAtSpot</driverClass>
+		<reportString>off duty.</reportString>
+		<casualInterruptible>true</casualInterruptible>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_CheckAnimals</defName>
+		<driverClass>RimMarket.AI.JobDriver_RestAtSpot</driverClass>
+		<reportString>checking on the pack animals.</reportString>
+		<casualInterruptible>true</casualInterruptible>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_SleepAtInn</defName>
+		<driverClass>RimMarket.Inn.JobDriver_SleepAtInn</driverClass>
+		<reportString>sleeping at the inn.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+		<neverShowWeapon>true</neverShowWeapon>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_PayStallFee</defName>
+		<driverClass>RimMarket.Jobs.JobDriver_PayStallFee</driverClass>
+		<reportString>paying the stall fee.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_BrowseStall</defName>
+		<driverClass>RimMarket.Jobs.JobDriver_VisitStall</driverClass>
+		<reportString>browsing the market stall.</reportString>
+		<joyDuration>1200</joyDuration>
+		<joyMaxParticipants>6</joyMaxParticipants>
+		<joyKind>RimMarket_Market</joyKind>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_BuyAtStall</defName>
+		<driverClass>RimMarket.Jobs.JobDriver_VisitStall</driverClass>
+		<reportString>shopping at the market stall.</reportString>
+		<joyDuration>900</joyDuration>
+		<joyMaxParticipants>6</joyMaxParticipants>
+		<joyKind>RimMarket_Market</joyKind>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_Snatch</defName>
+		<driverClass>RimMarket.Jobs.JobDriver_MarketSnatch</driverClass>
+		<reportString>browsing the market stall.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_CatchThief</defName>
+		<driverClass>RimMarket.Jobs.JobDriver_CatchThief</driverClass>
+		<reportString>chasing TargetA.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<playerInterruptible>true</playerInterruptible>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_TradeAtStall</defName>
+		<driverClass>RimMarket.Jobs.JobDriver_TradeAtStall</driverClass>
+		<reportString>trading at the stall.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<playerInterruptible>true</playerInterruptible>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>RimMarket_TendColonyStall</defName>
+		<driverClass>RimMarket.Jobs.JobDriver_TendColonyStall</driverClass>
+		<reportString>minding the colony stall.</reportString>
+		<casualInterruptible>true</casualInterruptible>
+		<playerInterruptible>true</playerInterruptible>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+</Defs>
