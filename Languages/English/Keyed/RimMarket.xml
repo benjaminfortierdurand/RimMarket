@@ -2,21 +2,40 @@
 <LanguageData>
 
 	<!-- Settings -->
-	<RimMarket.Settings.Intro>Stalls, fees and haggling. Merchants set up in the stalls you build; the rest is up to you.</RimMarket.Settings.Intro>
 	<RimMarket.Settings.FeeMode>Stall fee</RimMarket.Settings.FeeMode>
-	<RimMarket.Settings.FeeModeCycle>Change fee mode</RimMarket.Settings.FeeModeCycle>
-	<RimMarket.Settings.FeePercent>Arrival fee, share of the goods they carry</RimMarket.Settings.FeePercent>
-	<RimMarket.Settings.FeeCap>Arrival fee cap (silver)</RimMarket.Settings.FeeCap>
-	<RimMarket.Settings.SharePercent>Share of what guests spend at the stalls (Hospitality)</RimMarket.Settings.SharePercent>
-	<RimMarket.Settings.FeeInGoods>Accept goods when they are short of silver</RimMarket.Settings.FeeInGoods>
+	<RimMarket.Settings.TabMarket>Market</RimMarket.Settings.TabMarket>
+	<RimMarket.Settings.TabVisitors>Visitors</RimMarket.Settings.TabVisitors>
+	<RimMarket.Settings.TabEvents>Events</RimMarket.Settings.TabEvents>
+	<RimMarket.Settings.TabTrade>Trade</RimMarket.Settings.TabTrade>
+	<RimMarket.Settings.ResetTab>Reset this tab</RimMarket.Settings.ResetTab>
+	<RimMarket.Settings.CaptionCaravans>Caravans</RimMarket.Settings.CaptionCaravans>
+	<RimMarket.Settings.CaptionColony>Colony stalls and inn</RimMarket.Settings.CaptionColony>
+	<RimMarket.Settings.Days>{0} d</RimMarket.Settings.Days>
+	<RimMarket.Settings.FeeModeHint>How caravans pay for their stall: on arrival, as a share of what guests spend (Hospitality or Hotels and Recreation), or not at all. Each market marker can set its own.</RimMarket.Settings.FeeModeHint>
+	<RimMarket.Settings.FeePercentHint>The arrival fee is this share of the value of the goods the caravan carries.</RimMarket.Settings.FeePercentHint>
+	<RimMarket.Settings.FeeCapHint>The arrival fee never goes above this, in silver.</RimMarket.Settings.FeeCapHint>
+	<RimMarket.Settings.SharePercentHint>The market's cut of what guests spend at the stalls, left on the counter during the visit. What you buy yourself is never taxed.</RimMarket.Settings.SharePercentHint>
+	<RimMarket.Settings.MarketDaysHint>How long a caravan stays at its stall before packing up.</RimMarket.Settings.MarketDaysHint>
+	<RimMarket.Settings.MaxMerchantsHint>How many caravans can trade at your market at the same time.</RimMarket.Settings.MaxMerchantsHint>
+	<RimMarket.Settings.HaggleBonusHint>What a good haggle takes off the prices, and what a bad one adds.</RimMarket.Settings.HaggleBonusHint>
+	<RimMarket.Settings.ThiefMtbHint>Average number of market days between two thieves.</RimMarket.Settings.ThiefMtbHint>
+	<RimMarket.Settings.MessagesHint>Messages in the corner of the screen about what happens at the market.</RimMarket.Settings.MessagesHint>
+	<RimMarket.Settings.FairCostHint>What the heralds charge to announce a Great Fair, in silver.</RimMarket.Settings.FairCostHint>
+	<RimMarket.Settings.FairCooldownHint>The least number of days between two Great Fairs.</RimMarket.Settings.FairCooldownHint>
+	<RimMarket.Settings.RouteOpenCostHint>Scales the price to open a route: about {0} silver for a town 20 tiles away.</RimMarket.Settings.RouteOpenCostHint>
+	<RimMarket.Settings.RouteTollHint>Scales the fee paid for each convoy: about {0} silver from 20 tiles away. 0% lets convoys come for free.</RimMarket.Settings.RouteTollHint>
+	<RimMarket.Settings.FeePercent>Share of their goods</RimMarket.Settings.FeePercent>
+	<RimMarket.Settings.FeeCap>At most</RimMarket.Settings.FeeCap>
+	<RimMarket.Settings.SharePercent>Share of guest spending</RimMarket.Settings.SharePercent>
+	<RimMarket.Settings.FeeInGoods>Take goods if short of silver</RimMarket.Settings.FeeInGoods>
 	<RimMarket.Settings.FeeInGoodsHint>The merchant pays the difference with wares from the caravan, dropped at the stall.</RimMarket.Settings.FeeInGoodsHint>
-	<RimMarket.Settings.TurnAwayIfBroke>Turn away caravans that cannot pay the arrival fee</RimMarket.Settings.TurnAwayIfBroke>
+	<RimMarket.Settings.TurnAwayIfBroke>Turn away those who can't pay</RimMarket.Settings.TurnAwayIfBroke>
 	<RimMarket.Settings.TurnAwayIfBrokeHint>Off: they pay what they have and set up anyway. On: they skip the market and idle outside your walls like a vanilla caravan.</RimMarket.Settings.TurnAwayIfBrokeHint>
-	<RimMarket.Settings.WaiveAfterToll>Waive the arrival fee for factions tolled today (RimToll)</RimMarket.Settings.WaiveAfterToll>
+	<RimMarket.Settings.WaiveAfterToll>Free after a RimToll toll</RimMarket.Settings.WaiveAfterToll>
 	<RimMarket.Settings.WaiveAfterTollHint>Only matters when RimToll is loaded. A faction that paid your toll post less than a day ago is not charged a second time at the stall.</RimMarket.Settings.WaiveAfterTollHint>
-	<RimMarket.Settings.MarketDays>Market day length (days)</RimMarket.Settings.MarketDays>
-	<RimMarket.Settings.MaxMerchants>Merchants at the market at once</RimMarket.Settings.MaxMerchants>
-	<RimMarket.Settings.ShoppersVisit>Shoppers come for the market</RimMarket.Settings.ShoppersVisit>
+	<RimMarket.Settings.MarketDays>Market day</RimMarket.Settings.MarketDays>
+	<RimMarket.Settings.MaxMerchants>Merchants at once</RimMarket.Settings.MaxMerchants>
+	<RimMarket.Settings.ShoppersVisit>Passing shoppers</RimMarket.Settings.ShoppersVisit>
 	<RimMarket.Settings.ShoppersVisitHint>An hour or two after a merchant sets up, a few people from a friendly faction walk over with some silver, browse the stalls, buy what they can afford and go home about five hours later, or the next morning if they took a bed at your inn. Groups also come for your colony stalls when no merchant is in town, as often as set below. No Hospitality needed.\n\nOff: no shoppers at all. Hospitality guests still buy.</RimMarket.Settings.ShoppersVisitHint>
 	<RimMarket.ShoppersArrived>Shoppers from {0} have heard about the market and are walking over.</RimMarket.ShoppersArrived>
 	<RimMarket.ShoppersForColonyStall>Shoppers from {0} have come to see what the colony has on its stalls.</RimMarket.ShoppersForColonyStall>
@@ -33,22 +52,24 @@
 	<RimMarket.InnBedLabel>Inn ({0})</RimMarket.InnBedLabel>
 	<RimMarket.InnBedLabelFree>Inn (free)</RimMarket.InnBedLabelFree>
 	<RimMarket.ReportGoingToInn>heading for a bed at the inn.</RimMarket.ReportGoingToInn>
-	<RimMarket.Settings.GuardsAtStall>Guards posted at each stall</RimMarket.Settings.GuardsAtStall>
+	<RimMarket.Settings.GuardsAtStall>Guards per stall</RimMarket.Settings.GuardsAtStall>
 	<RimMarket.Settings.GuardsAtStallHint>They stand beside the counter and chase thieves. The other guards wait at your guard rest spot, the pack animals at your caravan camp. Without them, both wait just outside the market.</RimMarket.Settings.GuardsAtStallHint>
-	<RimMarket.Settings.Haggle>Haggle button in the trade window</RimMarket.Settings.Haggle>
+	<RimMarket.Settings.MaxGuards>Guards per caravan, at most</RimMarket.Settings.MaxGuards>
+	<RimMarket.Settings.MaxGuardsHint>Caravans heading for a map with a market bring no more guards than this, the strongest ones. The rest stay home. Always at least one more than the guards per stall, so someone can take over.</RimMarket.Settings.MaxGuardsHint>
+	<RimMarket.Settings.NoLimit>No limit</RimMarket.Settings.NoLimit>
+	<RimMarket.Settings.Haggle>Haggling</RimMarket.Settings.Haggle>
 	<RimMarket.Settings.HaggleHint>One attempt per visit. Social skill and goodwill against the merchant's patience. Failure costs you the same amount the other way, and the merchant leaves earlier.</RimMarket.Settings.HaggleHint>
-	<RimMarket.Settings.HaggleBonus>Haggle bonus</RimMarket.Settings.HaggleBonus>
-	<RimMarket.Settings.ColonistsBrowse>Colonists browse the stalls for recreation</RimMarket.Settings.ColonistsBrowse>
+	<RimMarket.Settings.HaggleBonus>Bonus</RimMarket.Settings.HaggleBonus>
+	<RimMarket.Settings.ColonistsBrowse>Colonists browse the stalls</RimMarket.Settings.ColonistsBrowse>
 	<RimMarket.Settings.ColonistsBrowseHint>Idle colonists wander over, look at the wares and chat with the merchant. They never spend colony silver on their own.</RimMarket.Settings.ColonistsBrowseHint>
-	<RimMarket.Settings.GuestsShop>Guests buy from the merchants</RimMarket.Settings.GuestsShop>
+	<RimMarket.Settings.GuestsShop>Guests shop at the stalls</RimMarket.Settings.GuestsShop>
 	<RimMarket.Settings.GuestsShopHint>Needs Hospitality or Hotels and Recreation. Guests with silver in their pockets, or budget left for their stay at your hotel, buy wares at the stalls and at your colony stall, and come to watch slave auctions. With the share of takings fee, the market takes its cut of every sale.</RimMarket.Settings.GuestsShopHint>
-	<RimMarket.Settings.Reputation>Reputation shapes the market</RimMarket.Settings.Reputation>
+	<RimMarket.Settings.Reputation>Reputation</RimMarket.Settings.Reputation>
 	<RimMarket.Settings.ReputationHint>A good reputation brings extra caravans, rarer merchants and better prices. A bad one makes caravans camp outside and prices climb. With this off, the reputation is still kept but changes nothing.</RimMarket.Settings.ReputationHint>
-	<RimMarket.Settings.Thieves>Thieves work the market</RimMarket.Settings.Thieves>
+	<RimMarket.Settings.Thieves>Thieves</RimMarket.Settings.Thieves>
 	<RimMarket.Settings.ThievesHint>Now and then a pickpocket mingles with the crowd, lifts something from a counter and runs for it. The caravan's guards give chase, and your colonists can tackle a fleeing thief with a right click. The more people around a stall, the less a thief dares.</RimMarket.Settings.ThievesHint>
-	<RimMarket.Settings.ThiefMtb>Average market days between two thieves</RimMarket.Settings.ThiefMtb>
-	<RimMarket.Settings.Messages>Show market messages</RimMarket.Settings.Messages>
-	<RimMarket.Settings.Reset>Reset to defaults</RimMarket.Settings.Reset>
+	<RimMarket.Settings.ThiefMtb>One every</RimMarket.Settings.ThiefMtb>
+	<RimMarket.Settings.Messages>Market messages</RimMarket.Settings.Messages>
 
 	<!-- Fee modes -->
 	<RimMarket.FeeModeNone>none</RimMarket.FeeModeNone>
@@ -66,7 +87,7 @@
 	<RimMarket.OpenMarketDesc>While open, trade caravans that arrive take a free stall inside this marker's radius. Close it and new caravans idle outside your walls as usual; merchants already at a stall stay until they leave.</RimMarket.OpenMarketDesc>
 	<RimMarket.FeeModeLabel>Fee: {0}</RimMarket.FeeModeLabel>
 	<RimMarket.FeeModeDesc>How merchants pay for a stall in this market. Fee on arrival: silver counted on the counter before they set up. No fee: the stall is free. Or follow the mod setting.</RimMarket.FeeModeDesc>
-	<RimMarket.FeeModeDescShare>Share of takings: a cut of what your Hospitality guests spend at the stall, left on the counter during the visit. What you buy yourself is never taxed.</RimMarket.FeeModeDescShare>
+	<RimMarket.FeeModeDescShare>Share of takings: a cut of what your guests (Hospitality or Hotels and Recreation) spend at the stall, left on the counter during the visit. What you buy yourself is never taxed.</RimMarket.FeeModeDescShare>
 	<RimMarket.CloseMarketLabel>Close market now</RimMarket.CloseMarketLabel>
 	<RimMarket.CloseMarketDesc>Send every merchant home right away. They pack up and leave by the usual road. This does not close the market for future caravans.</RimMarket.CloseMarketDesc>
 	<RimMarket.CloseMarketConfirm>Send {0} merchant(s) packing right now?</RimMarket.CloseMarketConfirm>
@@ -272,7 +293,7 @@
 	<RimMarket.TakingsInn>the inn earned {0}</RimMarket.TakingsInn>
 
 	<!-- Away stalls -->
-	<RimMarket.Settings.AwayStalls>Hold stalls at other settlements' markets</RimMarket.Settings.AwayStalls>
+	<RimMarket.Settings.AwayStalls>Stalls in other towns</RimMarket.Settings.AwayStalls>
 	<RimMarket.Settings.AwayStallsHint>Lets a caravan set up a stall at a friendly settlement for one market day and sell its goods to the townsfolk. Allies charge a smaller stall fee. Food and medicine stay with the caravan.</RimMarket.Settings.AwayStallsHint>
 	<RimMarket.AwayOption>Hold a market stall at {0} (one day)</RimMarket.AwayOption>
 	<RimMarket.AwayReport>going to hold a stall at {0}</RimMarket.AwayReport>
@@ -304,7 +325,7 @@
 	<RimMarket.AwayNoSales>Nothing sold.</RimMarket.AwayNoSales>
 
 	<!-- Slave auctions -->
-	<RimMarket.Settings.SlaveAuctions>Slave auctions at the market</RimMarket.Settings.SlaveAuctions>
+	<RimMarket.Settings.SlaveAuctions>Slave auctions</RimMarket.Settings.SlaveAuctions>
 	<RimMarket.Settings.SlaveAuctionsHint>When a caravan with slaves for sale sets up at your market and an auction post stands in the square, the slaver auctions them there, one lot at a time. Buyers from other factions come to bid, your guests join in, and so can you.</RimMarket.Settings.SlaveAuctionsHint>
 	<RimMarket.AuctionBuyerNamed>{0} of {1}</RimMarket.AuctionBuyerNamed>
 	<RimMarket.AuctionBuyersComing>Buyers are on their way for the auction: {0}. They take a seat in front of the post, bid with their own silver and leave with whatever they win.</RimMarket.AuctionBuyersComing>
@@ -367,9 +388,9 @@
 	<RimMarket.ReasonHaggledHard>hard haggling</RimMarket.ReasonHaggledHard>
 	<RimMarket.ReasonInsulted>an insulting haggle</RimMarket.ReasonInsulted>
 
-	<RimMarket.Settings.ColonyShopperDays>Shoppers for the colony stalls, at fair prices: one group every {0} days</RimMarket.Settings.ColonyShopperDays>
+	<RimMarket.Settings.ColonyShopperDays>Colony stall shoppers, one group every</RimMarket.Settings.ColonyShopperDays>
 	<RimMarket.Settings.ColonyShopperDaysHint>How often a group of shoppers walks over for the colony stalls when no merchant is in town, counting only daytime market hours, with prices at 110% of value. Cheaper or dearer stalls change this, as set below.</RimMarket.Settings.ColonyShopperDaysHint>
-	<RimMarket.Settings.BargainEffect>How much prices sway the shoppers: {0}</RimMarket.Settings.BargainEffect>
+	<RimMarket.Settings.BargainEffect>Price sway</RimMarket.Settings.BargainEffect>
 	<RimMarket.Settings.BargainEffectHint>100%: shoppers come twice as often to a stall selling at 85% of value or less, and about a third as often at double the value. 0%: prices change nothing about how often they come, only whether they buy. 200%: bargains are the talk of the region.</RimMarket.Settings.BargainEffectHint>
 	<RimMarket.Settings.Shopkeepers>Colony stalls need a shopkeeper</RimMarket.Settings.Shopkeepers>
 	<RimMarket.Settings.ShopkeepersHint>Off: colony stalls sell on their own, on trust. On: a colonist with the Shopkeep work type has to stand at the counter while customers are in town. Their Social skill raises prices, customers buy a little more readily, and every sale teaches them something. The Shopkeep column appears in the Work tab after a restart.</RimMarket.Settings.ShopkeepersHint>
@@ -405,12 +426,12 @@
 	<RimMarket.AlertFairTodayDesc>The Great Fair runs until {0}h. Expect caravans, crowds, cheerful colonists and busy pickpockets.</RimMarket.AlertFairTodayDesc>
 	<RimMarket.Settings.Fair>Great Fairs</RimMarket.Settings.Fair>
 	<RimMarket.Settings.FairHint>A button on the market marker announces a Great Fair a few days ahead: a day of caravans, crowds and bunting. Off: no fairs.</RimMarket.Settings.FairHint>
-	<RimMarket.Settings.FairCost>Heralds: {0} silver</RimMarket.Settings.FairCost>
-	<RimMarket.Settings.FairCooldown>Days between fairs: {0}</RimMarket.Settings.FairCooldown>
+	<RimMarket.Settings.FairCost>Heralds cost</RimMarket.Settings.FairCost>
+	<RimMarket.Settings.FairCooldown>Between two fairs</RimMarket.Settings.FairCooldown>
 	<RimMarket.Settings.TradeRoutes>Trade routes</RimMarket.Settings.TradeRoutes>
 	<RimMarket.Settings.TradeRoutesHint>Adds a Trade routes option when you talk to a faction by comms console, or by bird post with Medieval Overhaul. For a fee in silver, one of their towns sends a convoy to your market every week or two, and you can watch it travel on the world map. Roads near hostile towns (or through hostile territory, with Faction Territories and Vassalage) get convoys ambushed; an escort costs more and helps. Off: no new routes and no convoys leave, but existing routes are kept.</RimMarket.Settings.TradeRoutesHint>
-	<RimMarket.Settings.RouteOpenCost>Price to open a route: {0} (about {1} silver for a town 20 tiles away)</RimMarket.Settings.RouteOpenCost>
-	<RimMarket.Settings.RouteToll>Fee per convoy: {0} (about {1} silver from 20 tiles away, 0% lets convoys come for free)</RimMarket.Settings.RouteToll>
+	<RimMarket.Settings.RouteOpenCost>Price to open</RimMarket.Settings.RouteOpenCost>
+	<RimMarket.Settings.RouteToll>Fee per convoy</RimMarket.Settings.RouteToll>
 	<RimMarket.Settings.SpecialOrders>Special orders</RimMarket.Settings.SpecialOrders>
 	<RimMarket.Settings.SpecialOrdersHint>From the comms console (or a messenger table with Medieval Overhaul), pay a faction to bring a caravan full of what you asked for. They set up at a stall and skip the stall fee, since you already paid them to come.</RimMarket.Settings.SpecialOrdersHint>
 	<RimMarket.OrderOption>Special order</RimMarket.OrderOption>

@@ -72,6 +72,9 @@ namespace RimMarket.Inn
 		private const int NightEnd = 6;
 		private const float PoorImpressiveness = 15f;
 		private const float FineImpressiveness = 45f;
+		private const int RankMerchant = 0;
+		private const int RankGuard = 1;
+		private const int RankShopper = 2;
 
 		public static readonly Color SheetColor = new Color32(150, 60, 95, 255);
 
@@ -157,18 +160,87 @@ namespace RimMarket.Inn
 			Building_Bed owned = p.ownership?.OwnedBed;
 			if (owned != null && CanUse(owned, p)) return owned;
 			List<Building_Bed> beds = InnBeds.On(p.Map);
+			int rank = Rank(p);
+			Building_Bed best = null;
+			float bestDist = float.MaxValue;
+			int free = 0;
+			for (int i = 0; i < beds.Count; i++)
+			{
+				Building_Bed bed = beds[i];
+				if (bed == owned || !CanUse(bed, p)) continue;
+				free++;
+				float d = bed.Position.DistanceToSquared(p.Position);
+				if (d >= bestDist) continue;
+				best = bed;
+				bestDist = d;
+			}
+			if (best != null && free > Unhoused(p.Map, rank)) return best;
+			return Bump(p, rank, beds);
+		}
+
+		private static int Rank(Pawn p)
+		{
+			Lord lord = p?.GetLord();
+			if (lord == null || lord.LordJob is LordJob_MarketShoppers) return RankShopper;
+			StallVisit v = MarketManager.Instance?.VisitFor(lord);
+			if (v == null) return RankShopper;
+			return v.trader == p ? RankMerchant : RankGuard;
+		}
+
+		private static int Unhoused(Map map, int rank)
+		{
+			MarketManager mgr = MarketManager.Instance;
+			if (mgr == null || rank == RankMerchant) return 0;
+			int n = 0;
+			IReadOnlyList<StallVisit> visits = mgr.Visits;
+			for (int i = 0; i < visits.Count; i++)
+			{
+				StallVisit v = visits[i];
+				if (v.closed || v.map != map || v.lord == null) continue;
+				List<Pawn> pawns = v.lord.ownedPawns;
+				bool afford = Price <= 0 || SilverAmong(pawns) >= Price;
+				for (int j = 0; j < pawns.Count; j++)
+				{
+					Pawn o = pawns[j];
+					if ((o == v.trader ? RankMerchant : RankGuard) >= rank || o.needs?.rest == null || !MayLodge(o)) continue;
+					Building_Bed bed = o.ownership?.OwnedBed;
+					if (bed != null && InnBeds.IsInn(bed)) continue;
+					if (afford || Paid(o)) n++;
+				}
+			}
+			return n;
+		}
+
+		private static Building_Bed Bump(Pawn p, int rank, List<Building_Bed> beds)
+		{
+			if (rank == RankShopper) return null;
 			Building_Bed best = null;
 			float bestDist = float.MaxValue;
 			for (int i = 0; i < beds.Count; i++)
 			{
 				Building_Bed bed = beds[i];
-				if (bed == owned) continue;
 				float d = bed.Position.DistanceToSquared(p.Position);
-				if (d >= bestDist || !CanUse(bed, p)) continue;
+				if (d >= bestDist || !Bumpable(bed, p, rank)) continue;
 				best = bed;
 				bestDist = d;
 			}
-			return best;
+			if (best == null) return null;
+			EvictAll(best);
+			return CanUse(best, p) ? best : null;
+		}
+
+		private static bool Bumpable(Building_Bed bed, Pawn p, int rank)
+		{
+			if (!bed.Spawned || bed.Map != p.Map || bed.Faction != Faction.OfPlayer || bed.CurOccupants.Any()) return false;
+			List<Pawn> owners = bed.OwnersForReading;
+			if (owners.Count == 0) return false;
+			for (int i = 0; i < owners.Count; i++)
+			{
+				if (owners[i] == p || Rank(owners[i]) <= rank) return false;
+			}
+			if (!p.CanReserve(bed, bed.SleepingSlotsCount, 0)) return false;
+			if (bed.Position.GetDangerFor(p, p.Map) == Danger.Deadly) return false;
+			return p.CanReach(bed, PathEndMode.OnCell, Danger.Some);
 		}
 
 		public static bool Charge(Pawn p, Building_Bed bed)

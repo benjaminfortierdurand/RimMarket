@@ -24,7 +24,7 @@ namespace RimMarket.AI
 			strikes++;
 			if (strikes < StrikesNeeded) return false;
 			strikes = 0;
-			Report(lord, stuck);
+			if (Prefs.DevMode) Report(lord, stuck);
 			return true;
 		}
 

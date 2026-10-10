@@ -24,7 +24,7 @@ namespace RimMarket.Fair
 		public const int MinStalls = 3;
 		public const int WaveTicks = 5000;
 		public const int LastWaveMargin = 10000;
-		public const int BuntingLinger = 30000;
+		public const int BuntingLinger = 2500;
 		public const float ShopperPurse = 1.5f;
 		public const float JoyFactor = 3f;
 		public const float ThiefFactor = 3f;

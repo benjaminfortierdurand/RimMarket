@@ -45,6 +45,7 @@ namespace RimMarket.Fair
 		private const float TightSag = 0.35f;
 		private const float PoleCenterZ = 1.625f;
 		private static readonly Vector3 PoleSize = new Vector3(1f, 1f, 4.25f);
+		private const float PoleSplitZ = 0.25f;
 		private const float CrownTexCenterZ = 3.05f;
 		private static readonly Vector3 CrownSize = new Vector3(1.75f, 1f, 1.75f);
 		private const float CrownZ = 3.18f;
@@ -89,6 +90,9 @@ namespace RimMarket.Fair
 		private static readonly Material CrownMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleCrown", ShaderDatabase.Cutout);
 		private static readonly Material MetalMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleMetal", ShaderDatabase.Cutout);
 		private static readonly Material MetalTopMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleMetalTop", ShaderDatabase.Cutout);
+		private static readonly float PoleSplitV = (PoleSplitZ - PoleCenterZ) / PoleSize.z + 0.5f;
+		private static readonly Mesh PoleFoot = Slice(0f, PoleSplitV);
+		private static readonly Mesh PoleShaft = Slice(PoleSplitV, 1f);
 		private static readonly Dictionary<Color, Material> ribbonMats = new Dictionary<Color, Material>();
 
 		private struct Span
@@ -260,18 +264,35 @@ namespace RimMarket.Fair
 			if (mastBase.x < view.minX - 1 || mastBase.x > view.maxX + 2) return;
 			if (mastBase.z + MastHeight < view.minZ || mastBase.z - 1f > view.maxZ + 1) return;
 			float topAlt = ropeAlt + Altitudes.AltInc * 3f;
-			DrawMastPart(metalMast ? MetalMat : PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc);
+			Material pole = metalMast ? MetalMat : PoleMat;
+			DrawMastPart(pole, PoleCenterZ, PoleSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, PoleFoot);
+			DrawMastPart(pole, PoleCenterZ, PoleSize, AltitudeLayer.PawnState.AltitudeFor(), PoleShaft);
 			if (metalMast) DrawMastPart(MetalTopMat, MetalTopCenterZ, MetalTopSize, topAlt);
 			else DrawMastPart(CrownMat, CrownTexCenterZ, CrownSize, topAlt);
 			if (metalMast && night > 0f)
 				DrawMastPart(GlowMat(LampColor, night), LampZ, new Vector3(LampGlowSize, 1f, LampGlowSize), ropeAlt - Altitudes.AltInc);
 		}
 
-		private void DrawMastPart(Material mat, float z, Vector3 size, float alt)
+		private void DrawMastPart(Material mat, float z, Vector3 size, float alt, Mesh mesh = null)
 		{
 			Vector3 pos = mastBase + new Vector3(0f, 0f, z);
 			pos.y = alt;
-			Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(pos, Quaternion.identity, size), mat, 0);
+			Graphics.DrawMesh(mesh ?? MeshPool.plane10, Matrix4x4.TRS(pos, Quaternion.identity, size), mat, 0);
+		}
+
+		private static Mesh Slice(float from, float to)
+		{
+			var mesh = new Mesh();
+			mesh.vertices = new[]
+			{
+				new Vector3(-0.5f, 0f, from - 0.5f), new Vector3(-0.5f, 0f, to - 0.5f),
+				new Vector3(0.5f, 0f, to - 0.5f), new Vector3(0.5f, 0f, from - 0.5f),
+			};
+			mesh.uv = new[] { new Vector2(0f, from), new Vector2(0f, to), new Vector2(1f, to), new Vector2(1f, from) };
+			mesh.triangles = new[] { 0, 1, 2, 0, 2, 3 };
+			mesh.RecalculateNormals();
+			mesh.RecalculateBounds();
+			return mesh;
 		}
 
 		private static void DrawRibbon(Span span, float alt, float wind, float time, int seed)

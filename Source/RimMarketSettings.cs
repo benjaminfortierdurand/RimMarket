@@ -19,6 +19,8 @@ namespace RimMarket
 		public const float DefMarketDays = 1f;
 		public const int DefMaxMerchants = 3;
 		public const int DefGuardsAtStall = 1;
+		public const int DefMaxGuards = 4;
+		public const int NoGuardLimit = 10;
 		public const bool DefHaggleEnabled = true;
 		public const float DefHaggleBonus = 0.05f;
 		public const bool DefShowMessages = true;
@@ -51,6 +53,7 @@ namespace RimMarket
 		public float marketDays = DefMarketDays;
 		public int maxMerchants = DefMaxMerchants;
 		public int guardsAtStall = DefGuardsAtStall;
+		public int maxGuards = DefMaxGuards;
 		public bool haggleEnabled = DefHaggleEnabled;
 		public float haggleBonus = DefHaggleBonus;
 		public bool showMessages = DefShowMessages;
@@ -75,6 +78,8 @@ namespace RimMarket
 		public float bargainEffect = DefBargainEffect;
 
 		public static bool ShareModeEnabled => HospitalityBridge.Active || HotelsBridge.Active;
+
+		public int GuardCap => maxGuards >= NoGuardLimit ? int.MaxValue : System.Math.Max(maxGuards, guardsAtStall + 1);
 
 		public int MarketTicks => (int)(marketDays * 60000f);
 
@@ -104,7 +109,7 @@ namespace RimMarket
 			}
 		}
 
-		public void ResetToDefaults()
+		public void ResetMarket()
 		{
 			feeMode = DefFeeMode;
 			feePercent = DefFeePercent;
@@ -116,28 +121,41 @@ namespace RimMarket
 			marketDays = DefMarketDays;
 			maxMerchants = DefMaxMerchants;
 			guardsAtStall = DefGuardsAtStall;
+			maxGuards = DefMaxGuards;
 			haggleEnabled = DefHaggleEnabled;
 			haggleBonus = DefHaggleBonus;
-			showMessages = DefShowMessages;
+		}
+
+		public void ResetVisitors()
+		{
 			colonistsBrowse = DefColonistsBrowse;
 			guestsShop = DefGuestsShop;
 			shoppersVisit = true;
+			colonyShopperDays = DefColonyShopperDays;
+			bargainEffect = DefBargainEffect;
+			shopkeepers = DefShopkeepers;
+			innPrice = DefInnPrice;
+		}
+
+		public void ResetEvents()
+		{
 			thievesEnabled = DefThievesEnabled;
 			thiefMtbDays = DefThiefMtbDays;
-			reputationEffects = DefReputationEffects;
-			awayStalls = DefAwayStalls;
 			slaveAuctions = DefSlaveAuctions;
-			innPrice = DefInnPrice;
-			tradeRoutes = DefTradeRoutes;
-			specialOrders = DefSpecialOrders;
-			routeOpenFactor = DefRouteOpenFactor;
-			routeTollFactor = DefRouteTollFactor;
-			shopkeepers = DefShopkeepers;
-			colonyShopperDays = DefColonyShopperDays;
 			fairEnabled = DefFairEnabled;
 			fairCost = DefFairCost;
 			fairCooldownDays = DefFairCooldownDays;
-			bargainEffect = DefBargainEffect;
+			reputationEffects = DefReputationEffects;
+			showMessages = DefShowMessages;
+		}
+
+		public void ResetTrade()
+		{
+			tradeRoutes = DefTradeRoutes;
+			routeOpenFactor = DefRouteOpenFactor;
+			routeTollFactor = DefRouteTollFactor;
+			specialOrders = DefSpecialOrders;
+			awayStalls = DefAwayStalls;
 		}
 
 		public override void ExposeData()
@@ -153,6 +171,7 @@ namespace RimMarket
 			Scribe_Values.Look(ref marketDays, "marketDays", DefMarketDays);
 			Scribe_Values.Look(ref maxMerchants, "maxMerchants", DefMaxMerchants);
 			Scribe_Values.Look(ref guardsAtStall, "guardsAtStall", DefGuardsAtStall);
+			Scribe_Values.Look(ref maxGuards, "maxGuards", DefMaxGuards);
 			Scribe_Values.Look(ref haggleEnabled, "haggleEnabled", DefHaggleEnabled);
 			Scribe_Values.Look(ref haggleBonus, "haggleBonus", DefHaggleBonus);
 			Scribe_Values.Look(ref showMessages, "showMessages", DefShowMessages);

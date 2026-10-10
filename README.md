@@ -10,7 +10,7 @@ Your colony becomes a market town, RimWorld 1.6. You build the stalls, merchants
 - A stall fee on arrival, paid in silver on the counter.
 - One haggle attempt per visit, straight from the trade window.
 - Idle colonists browse the stalls for recreation. They never spend colony silver on their own.
-- With Hospitality, guests buy from the merchants, and the market can take a share of every sale instead of a fee on arrival.
+- With Hospitality or Hotels and Recreation, guests buy from the merchants, and the market can take a share of every sale instead of a fee on arrival.
 - Shoppers from friendly factions walk over while a merchant is set up, spend their own silver and go home a few hours later.
 - Trade routes: talk to a faction by comms console (or by bird post with Medieval Overhaul), pay a fee in silver, and one of their towns sends a merchant convoy to your market every week or two. You can watch it crawl across the world map. Good days strengthen the route; bad ones wear it out.
 - Any stall can be made a colony stall: a sales table says what to sell, how many and at what price, your haulers bring the goods over, and shoppers and guests pay at the counter. An optional Shopkeep work type puts a colonist behind it. With Vanilla Trading Expanded, what the stall sells counts toward its supply and demand.
