@@ -23,7 +23,8 @@ SOFTWARE.
 ---
 
 Exception: the auction post texture (Textures/Things/Building/RimMarket_AuctionPost.png
-and RimMarket_AuctionPost_m.png) is by Gerrymon, from Misc Props: Dungeon. It is
-used in RimMarket with the author's permission and is not covered by the MIT
-license above. All rights to it remain with Gerrymon: do not reuse it outside
+and RimMarket_AuctionPost_m.png) is by Gerrymon, from Misc Props: Dungeon, and the
+modern variant (RimMarket_AuctionPostModern.png and RimMarket_AuctionPostModern_m.png)
+reuses its chains. Both are used in RimMarket with the author's permission and are
+not covered by the MIT license above. All rights to it remain with Gerrymon: do not reuse it outside
 RimMarket without asking them.

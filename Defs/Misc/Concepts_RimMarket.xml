@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ConceptDef>
+		<defName>RimMarket_Concept_Guide</defName>
+		<label>the market guide</label>
+		<priority>70</priority>
+		<helpText>Your market marker has a Guide button. It shows, step by step, what your market still needs on this map, with buttons to place each piece, and a page that explains why no caravan has come yet.</helpText>
+	</ConceptDef>
+
+	<ConceptDef>
+		<defName>RimMarket_Concept_Stall</defName>
+		<label>market stalls</label>
+		<priority>60</priority>
+		<helpText>A stall needs the merchant's spot at the end of its counter free, and a way in from the map edge. Paint its awning from here, or make it a colony stall to sell your own goods.</helpText>
+	</ConceptDef>
+
+	<ConceptDef>
+		<defName>RimMarket_Concept_Spots</defName>
+		<label>market spots</label>
+		<priority>55</priority>
+		<helpText>Pack animals wait at the caravan camp and off duty guards at the guard rest spot. Fence the camp in and the animals stay put. You can hide a spot once you know where it is.</helpText>
+	</ConceptDef>
+
+</Defs>

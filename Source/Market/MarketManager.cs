@@ -753,6 +753,7 @@ namespace RimMarket.Market
 
 		private List<GreatFair> fairs = new List<GreatFair>();
 		private int lastFairTick;
+		private bool guideOffered;
 
 		public bool AnyFair => fairs.Count > 0;
 
@@ -775,6 +776,14 @@ namespace RimMarket.Market
 		public void AddFair(GreatFair fair)
 		{
 			if (fair != null && !fairs.Contains(fair)) fairs.Add(fair);
+		}
+
+		public void OfferGuide(Building_MarketMarker marker)
+		{
+			if (guideOffered) return;
+			guideOffered = true;
+			Find.LetterStack.ReceiveLetter("RimMarket.GuideLetterLabel".Translate(), "RimMarket.GuideLetterText".Translate(),
+				LetterDefOf.NeutralEvent, new LookTargets(marker));
 		}
 
 		public void RemoveFair(GreatFair fair)
@@ -1618,6 +1627,7 @@ namespace RimMarket.Market
 			Scribe_Deep.Look(ref notice, "wantedNotice");
 			Scribe_Collections.Look(ref fairs, "fairs", LookMode.Deep);
 			Scribe_Values.Look(ref lastFairTick, "lastFairTick");
+			Scribe_Values.Look(ref guideOffered, "guideOffered");
 			if (Scribe.mode == LoadSaveMode.PostLoadInit)
 			{
 				if (fairs == null) fairs = new List<GreatFair>();

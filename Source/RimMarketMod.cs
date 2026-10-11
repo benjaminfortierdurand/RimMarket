@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using HarmonyLib;
 using RimMarket.Compat;
+using RimMarket.UI;
 using UnityEngine;
 using Verse;
 
@@ -33,6 +34,7 @@ namespace RimMarket
 		private const float SliderShare = 0.36f;
 		private const float FooterHeight = 40f;
 		private const float ResetWidth = 180f;
+		private const float GuideWidth = 220f;
 
 		private static int tab;
 		private static Vector2 scroll;
@@ -70,6 +72,8 @@ namespace RimMarket
 			}
 			viewHeight = y;
 			Widgets.EndScrollView();
+			if (Widgets.ButtonText(new Rect(footer.x, footer.y, GuideWidth, footer.height), "RimMarket.Settings.OpenGuide".Translate()))
+				Window_MarketGuide.Open();
 			if (Widgets.ButtonText(new Rect(footer.xMax - ResetWidth, footer.y, ResetWidth, footer.height), "RimMarket.Settings.ResetTab".Translate()))
 			{
 				switch (tab)
@@ -144,6 +148,7 @@ namespace RimMarket
 			{
 				s.fairCost = Mathf.RoundToInt(Slider("FairCost", s.fairCost, 0f, 5000f, 100f, s.fairCost.ToString(), Hint("FairCost"), SubIndent));
 				s.fairCooldownDays = Mathf.RoundToInt(Slider("FairCooldown", s.fairCooldownDays, 5f, 60f, 1f, Days(s.fairCooldownDays), Hint("FairCooldown"), SubIndent));
+				Check("FairPictures", ref s.fairPictures, Hint("FairPictures"), SubIndent);
 			}
 			Check("Reputation", ref s.reputationEffects, Hint("Reputation"));
 			Check("Messages", ref s.showMessages, Hint("Messages"));

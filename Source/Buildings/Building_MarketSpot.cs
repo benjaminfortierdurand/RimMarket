@@ -31,6 +31,7 @@ namespace RimMarket.Buildings
 		public override IEnumerable<Gizmo> GetGizmos()
 		{
 			foreach (Gizmo g in base.GetGizmos()) yield return g;
+			if (Faction == RimWorld.Faction.OfPlayer) RimWorld.LessonAutoActivator.TeachOpportunity(RimMarketDefOf.RimMarket_Concept_Spots, RimWorld.OpportunityType.GoodToKnow);
 			yield return new Command_Toggle
 			{
 				defaultLabel = "RimMarket.ShowSpotLabel".Translate(),

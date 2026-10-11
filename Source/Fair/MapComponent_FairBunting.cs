@@ -180,7 +180,7 @@ namespace RimMarket.Fair
 					a = left,
 					b = right,
 					color = ColorOf(all[i]) ?? DefaultColor,
-					lights = all[i].Props.stringLights,
+					lights = all[i].Modern,
 					tight = true,
 				});
 			}
@@ -340,7 +340,7 @@ namespace RimMarket.Fair
 					a = Toward(a, At(b)),
 					b = Toward(b, At(a)),
 					color = ColorOf(a) ?? ColorOf(b) ?? DefaultColor,
-					lights = a.Props.stringLights || b.Props.stringLights,
+					lights = a.Modern || b.Modern,
 				});
 			}
 		}

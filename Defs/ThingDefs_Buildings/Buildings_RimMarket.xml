@@ -113,7 +113,7 @@ Select the spot to set the radius, fit it to your walls and fences, or hide it o
 	<ThingDef ParentName="BuildingBase">
 		<defName>RimMarket_Stall</defName>
 		<label>market stall</label>
-		<description>An empty market stall: a counter with an awning over it. Build it inside a market marker's radius and leave the merchant's spot at the end of the counter free (outlined in white while placing). When a trade caravan comes to the market, its merchant takes the stall and stands at the end of the counter with the wares laid out under the awning, one guard keeps watch beside it, the pack animals wait at the caravan camp and the other guards at the guard rest spot. Trade from the stall or from the merchant.\n\nOr make it a colony stall and sell your own goods: choose what, how many and at what price in its sales table, your haulers bring them over, and shoppers and guests pay at the counter.\n\nMerchants open your doors like any friendly visitor, but the square must be reachable from the map edge. The counter and its legs take the colour of the material you build it from. The awning is yours to paint: pick an edge, a pattern and two colours.</description>
+		<description>An empty market stall: a counter with an awning over it. Build it inside a market marker's radius and leave the merchant's spot at the end of the counter free (outlined in white while placing). When a trade caravan comes to the market, its merchant takes the stall and stands at the end of the counter with the wares laid out under the awning, one guard keeps watch beside it, the pack animals wait at the caravan camp and the other guards at the guard rest spot. Trade from the stall or from the merchant.\n\nOr make it a colony stall and sell your own goods: choose what, how many and at what price in its sales table, your haulers bring them over, and shoppers and guests pay at the counter.\n\nMerchants open your doors like any friendly visitor, but the square must be reachable from the map edge. The counter and its legs take the colour of the material you build it from. The awning is yours to paint: pick an edge, a pattern and two colours. Built from metal, it hangs string lights instead of bunting during a fair.</description>
 		<thingClass>RimMarket.Buildings.Building_MarketStall</thingClass>
 		<graphicData>
 			<texPath>Things/Building/Stall/RimMarket_StallBase1</texPath>
@@ -233,6 +233,20 @@ Select the spot to set the radius, fit it to your walls and fences, or hide it o
 			<watchBuildingStandRectWidth>7</watchBuildingStandRectWidth>
 			<watchBuildingInSameRoom>false</watchBuildingInSameRoom>
 		</building>
+		<comps>
+			<li MayRequire="OskarPotocki.VanillaFactionsExpanded.Core" Class="VEF.Buildings.CompProperties_RandomBuildingGraphic">
+				<startAsRandom>false</startAsRandom>
+				<disableRandomButton>true</disableRandomButton>
+				<randomGraphics>
+					<li>Things/Building/RimMarket_AuctionPost</li>
+					<li>Things/Building/RimMarket_AuctionPostModern</li>
+				</randomGraphics>
+				<optionalNames>
+					<li>Iron post</li>
+					<li>Steel pillar</li>
+				</optionalNames>
+			</li>
+		</comps>
 	</ThingDef>
 
 </Defs>

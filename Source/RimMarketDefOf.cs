@@ -77,6 +77,12 @@ namespace RimMarket
 
 		public static ThingDef RimMarket_AuctionBlock;
 
+		public static ConceptDef RimMarket_Concept_Guide;
+
+		public static ConceptDef RimMarket_Concept_Stall;
+
+		public static ConceptDef RimMarket_Concept_Spots;
+
 		public static JobDef RimMarket_StandOnBlock;
 
 		public static JobDef RimMarket_AttendAuction;

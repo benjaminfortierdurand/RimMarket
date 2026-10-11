@@ -39,7 +39,7 @@ namespace RimMarket.Buildings
 			Quaternion q = Quaternion.AngleAxis(sway, Vector3.up);
 			Vector3 pos = top + q * new Vector3(0f, 0f, -Size.z / 2f);
 			pos.y = AltitudeLayer.PawnState.AltitudeFor() + Altitudes.AltInc;
-			Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(pos, q, Size), ClothMat(color, stall.Props.stringLights), 0);
+			Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(pos, q, Size), ClothMat(color, stall.Modern), 0);
 			Material icon = IconMat(faction, color);
 			if (icon == null) return;
 			Vector3 ip = pos + q * new Vector3(0f, 0f, IconRise);

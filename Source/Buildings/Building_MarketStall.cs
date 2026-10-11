@@ -280,6 +280,7 @@ namespace RimMarket.Buildings
 		{
 			foreach (Gizmo g in base.GetGizmos()) yield return g;
 			if (Faction != Faction.OfPlayer) yield break;
+			LessonAutoActivator.TeachOpportunity(RimMarketDefOf.RimMarket_Concept_Stall, OpportunityType.GoodToKnow);
 			StallVisit visit = Stall?.Visit;
 			var toggle = new Command_Toggle
 			{

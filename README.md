@@ -30,7 +30,7 @@ Hospitality, Hotels and Recreation, Trading Control, Trading Spot, RimToll, Rim 
 
 The market stall art is by Tomson Johnson.
 
-The auction post texture is by Gerrymon, from Misc Props: Dungeon, used with permission. It is not covered by the MIT license: all rights to it remain with Gerrymon, so ask them before reusing it anywhere else.
+The auction post texture is by Gerrymon, from Misc Props: Dungeon, used with permission. The modern steel pillar variant reuses its chains. It is not covered by the MIT license: all rights to it remain with Gerrymon, so ask them before reusing it anywhere else.
 
 ## Building
 

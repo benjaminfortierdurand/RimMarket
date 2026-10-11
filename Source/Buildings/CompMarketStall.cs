@@ -57,6 +57,8 @@ namespace RimMarket.Buildings
 
 		public CompProperties_MarketStall Props => (CompProperties_MarketStall)props;
 
+		public bool Modern => Props.stringLights || parent.Stuff?.stuffProps?.categories?.Contains(StuffCategoryDefOf.Metallic) == true;
+
 		public IntVec3 Position => parent.Position;
 
 		public Map Map => parent.Map;

@@ -39,6 +39,7 @@ namespace RimMarket.Buildings
 			if (def.MadeFromStuff && Stuff == null) SetStuffDirect(GenStuff.DefaultStuffFor(def));
 			base.SpawnSetup(map, respawningAfterLoad);
 			quarter = GetComp<CompMarketQuarter>();
+			if (!respawningAfterLoad && Faction == Faction.OfPlayer) MarketManager.Instance?.OfferGuide(this);
 		}
 
 		public override void ExposeData()
@@ -153,6 +154,15 @@ namespace RimMarket.Buildings
 		public override IEnumerable<Gizmo> GetGizmos()
 		{
 			foreach (Gizmo g in base.GetGizmos()) yield return g;
+			if (Faction == Faction.OfPlayer) LessonAutoActivator.TeachOpportunity(RimMarketDefOf.RimMarket_Concept_Guide, OpportunityType.GoodToKnow);
+
+			yield return new Command_Action
+			{
+				defaultLabel = "RimMarket.Guide.GizmoLabel".Translate(),
+				defaultDesc = "RimMarket.Guide.GizmoDesc".Translate(),
+				icon = TexButton.Info,
+				action = () => Window_MarketGuide.Open(),
+			};
 
 			yield return new Command_Toggle
 			{

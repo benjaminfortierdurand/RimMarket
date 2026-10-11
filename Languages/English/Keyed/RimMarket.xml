@@ -409,6 +409,13 @@
 	<RimMarket.FairAnnouncedLabel>Great Fair announced</RimMarket.FairAnnouncedLabel>
 	<RimMarket.FairAnnouncedText>The heralds are on the road. Your market holds a Great Fair on {0}, from {1}h to {2}h.\n\nOn the day, caravans from every friendly faction will try to set up at once, and crowds of shoppers will follow them. Keep the stalls free and the square safe.</RimMarket.FairAnnouncedText>
 	<RimMarket.FairOpens>The Great Fair is open. Caravans are on their way.</RimMarket.FairOpens>
+	<RimMarket.FairOpenTitle>The Great Fair is open</RimMarket.FairOpenTitle>
+	<RimMarket.FairOpenStory>Bunting on every stall, petals on the wind, and the maypole has been up since dawn. The heralds did their job: up to {0} caravans are on the road, and the first crowds are already at the gate.
+
+At {1}h the judges pick the best stall. The fair runs until {2}h.</RimMarket.FairOpenStory>
+	<RimMarket.FairGoToSquare>Go to the square</RimMarket.FairGoToSquare>
+	<RimMarket.FairGoToWinner>See the best stall</RimMarket.FairGoToWinner>
+	<RimMarket.FairContinue>Continue</RimMarket.FairContinue>
 	<RimMarket.FairCrowd>A crowd from {0} has come for the fair.</RimMarket.FairCrowd>
 	<RimMarket.FairOverLabel>The Great Fair is over</RimMarket.FairOverLabel>
 	<RimMarket.FairOverText>The Great Fair is over and the square smells of trampled grass.\n\nCaravans: {0} ({1}).\nCrowds of shoppers: {2}.\nStall fees taken: {3} silver.\nSold at the colony stalls: {4} silver.\nSpent by visitors with the merchants: {5} silver.\nThieves caught: {6}. Thieves who got away: {7}.\n\nWord of the fair is spreading, and the market's name with it. The caravans pack up tomorrow morning.</RimMarket.FairOverText>
@@ -426,6 +433,8 @@
 	<RimMarket.AlertFairTodayDesc>The Great Fair runs until {0}h. Expect caravans, crowds, cheerful colonists and busy pickpockets.</RimMarket.AlertFairTodayDesc>
 	<RimMarket.Settings.Fair>Great Fairs</RimMarket.Settings.Fair>
 	<RimMarket.Settings.FairHint>A button on the market marker announces a Great Fair a few days ahead: a day of caravans, crowds and bunting. Off: no fairs.</RimMarket.Settings.FairHint>
+	<RimMarket.Settings.FairPictures>Illustrated opening and closing</RimMarket.Settings.FairPictures>
+	<RimMarket.Settings.FairPicturesHint>The fair opens and closes with a picture window that pauses the game. Off: a message at the opening and a letter at the closing.</RimMarket.Settings.FairPicturesHint>
 	<RimMarket.Settings.FairCost>Heralds cost</RimMarket.Settings.FairCost>
 	<RimMarket.Settings.FairCooldown>Between two fairs</RimMarket.Settings.FairCooldown>
 	<RimMarket.Settings.TradeRoutes>Trade routes</RimMarket.Settings.TradeRoutes>
@@ -563,4 +572,71 @@
 	<RimMarket.ConvoyWaiting>Waiting to enter {0}.</RimMarket.ConvoyWaiting>
 	<RimMarket.ConvoyCarrying>Merchant: {0}.</RimMarket.ConvoyCarrying>
 
+
+	<!-- Guide -->
+	<RimMarket.Settings.OpenGuide>Open the market guide</RimMarket.Settings.OpenGuide>
+	<RimMarket.Guide.GizmoLabel>Guide</RimMarket.Guide.GizmoLabel>
+	<RimMarket.Guide.GizmoDesc>Open the market guide: where to place everything, what your market still needs on this map, and why no caravan has come yet.</RimMarket.Guide.GizmoDesc>
+	<RimMarket.GuideLetterLabel>Your first market</RimMarket.GuideLetterLabel>
+	<RimMarket.GuideLetterText>The marker is down. Now build a few market stalls inside its radius, keep the merchant's spot at the end of each counter free, and leave caravans a way in from the map edge.\n\nSelect the marker and press Guide to see, step by step, what your market still needs and why no caravan has come yet.</RimMarket.GuideLetterText>
+	<RimMarket.Guide.Title>Market guide</RimMarket.Guide.Title>
+	<RimMarket.Guide.Progress>Your market: {0} of {1} steps done</RimMarket.Guide.Progress>
+	<RimMarket.Guide.NoMap>Load a colony to see where your market stands.</RimMarket.Guide.NoMap>
+	<RimMarket.Guide.Optional>optional</RimMarket.Guide.Optional>
+	<RimMarket.Guide.More>More to do</RimMarket.Guide.More>
+	<RimMarket.Guide.On>on</RimMarket.Guide.On>
+	<RimMarket.Guide.Off>off</RimMarket.Guide.Off>
+	<RimMarket.Guide.PlaceMarker>Place a marker</RimMarket.Guide.PlaceMarker>
+	<RimMarket.Guide.ShowMarker>Show the marker</RimMarket.Guide.ShowMarker>
+	<RimMarket.Guide.PlaceStall>Place a stall</RimMarket.Guide.PlaceStall>
+	<RimMarket.Guide.ShowStalls>Show my stalls</RimMarket.Guide.ShowStalls>
+	<RimMarket.Guide.PlaceCamp>Place a caravan camp</RimMarket.Guide.PlaceCamp>
+	<RimMarket.Guide.PlaceRest>Place a guard rest spot</RimMarket.Guide.PlaceRest>
+	<RimMarket.Guide.PlaceAuction>Place an auction post</RimMarket.Guide.PlaceAuction>
+	<RimMarket.Guide.OpenSettings>Open the settings</RimMarket.Guide.OpenSettings>
+	<RimMarket.Guide.MarkerTitle>The market marker</RimMarket.Guide.MarkerTitle>
+	<RimMarket.Guide.MarkerBody>Everything starts with the market marker (Architect, Misc). Put it in the middle of your square: every stall within its radius belongs to the market.\n\nSelect it to fit the radius to your walls in one click, set the stall fee, open or close the market, see your reputation and announce a Great Fair. Once the square is built you can hide it.</RimMarket.Guide.MarkerBody>
+	<RimMarket.Guide.MarkerPlaced>A market marker on this map</RimMarket.Guide.MarkerPlaced>
+	<RimMarket.Guide.MarkerOpen>The market is open</RimMarket.Guide.MarkerOpen>
+	<RimMarket.Guide.StallsTitle>Your stalls</RimMarket.Guide.StallsTitle>
+	<RimMarket.Guide.StallsBody>Build market stalls (Architect, Misc) inside the marker's radius. Each one needs its merchant's spot free: the cell at the end of the counter, outlined in white while you place it.\n\nCaravans walk in from the map edge and open your doors like any friendly visitor, so leave them a way in. The counter takes the colour of its material, and the awning is yours to paint from the stall.</RimMarket.Guide.StallsBody>
+	<RimMarket.Guide.StallInside>At least one stall inside the marker's radius</RimMarket.Guide.StallInside>
+	<RimMarket.Guide.StallNoneOutside>No stall left outside the marker's radius</RimMarket.Guide.StallNoneOutside>
+	<RimMarket.Guide.StallSpotFree>The merchant's spot is free on every stall</RimMarket.Guide.StallSpotFree>
+	<RimMarket.Guide.StallFromEdge>Caravans can walk to every stall from the map edge</RimMarket.Guide.StallFromEdge>
+	<RimMarket.Guide.StallThree>Three stalls or more, for a Great Fair</RimMarket.Guide.StallThree>
+	<RimMarket.Guide.SpotsTitle>Camp and rest spot</RimMarket.Guide.SpotsTitle>
+	<RimMarket.Guide.SpotsBody>Two spots keep the square tidy (Architect, Misc). The caravan camp is where the pack animals wait: fence it in and they stay put. The guard rest spot is where off duty guards sit, chat and eat while one of them stands post at the stall.\n\nBoth are optional. Without them, animals and guards wait just outside the market. Each spot can be hidden once you know where it is.</RimMarket.Guide.SpotsBody>
+	<RimMarket.Guide.SpotCamp>A caravan camp for the pack animals</RimMarket.Guide.SpotCamp>
+	<RimMarket.Guide.SpotRest>A guard rest spot for the escort</RimMarket.Guide.SpotRest>
+	<RimMarket.Guide.FeesTitle>Fees and haggling</RimMarket.Guide.FeesTitle>
+	<RimMarket.Guide.FeesBody>Merchants pay a stall fee on arrival, counted out on the counter, then stay a market day. Trade with them from the stall or by talking to the merchant, with the usual trade window.\n\nOnce per visit you can haggle from the trade window: it uses your negotiator's Social skill, and a failure costs as much as a success would have gained. The fee, haggling and the length of a market day are in the mod settings, and a marker can set its own fee.</RimMarket.Guide.FeesBody>
+	<RimMarket.Guide.FeeMode>Stall fee: {0}</RimMarket.Guide.FeeMode>
+	<RimMarket.Guide.FeeHaggle>Haggling: {0}</RimMarket.Guide.FeeHaggle>
+	<RimMarket.Guide.FeeDay>Market day: {0}</RimMarket.Guide.FeeDay>
+	<RimMarket.Guide.ColonyStallTitle>Your colony stall</RimMarket.Guide.ColonyStallTitle>
+	<RimMarket.Guide.ColonyStallBody>Any stall can sell your own goods: select it and make it a colony stall. Its sales table lists what you own. Pick what to sell, how many and at what price, and your haulers bring the goods over.\n\nShoppers from friendly factions and your guests pay at the counter. Cheaper prices bring shoppers by more often.</RimMarket.Guide.ColonyStallBody>
+	<RimMarket.Guide.ColonyStallBuilt>A colony stall</RimMarket.Guide.ColonyStallBuilt>
+	<RimMarket.Guide.ColonyStallStocked>Goods on its sales table</RimMarket.Guide.ColonyStallStocked>
+	<RimMarket.Guide.InnTitle>The inn</RimMarket.Guide.InnTitle>
+	<RimMarket.Guide.InnBody>Any bed can become an inn bed: select it and press the market inn button. Merchants, their guards and shoppers pay by the night, and a caravan pays out of its packs. Merchants and their guards get the beds first.\n\nA fine private room makes your market more appealing. A poor room or a steep price does the opposite.</RimMarket.Guide.InnBody>
+	<RimMarket.Guide.InnBed>At least one inn bed</RimMarket.Guide.InnBed>
+	<RimMarket.Guide.FairTitle>The Great Fair</RimMarket.Guide.FairTitle>
+	<RimMarket.Guide.FairBody>With three stalls or more, the marker can announce a Great Fair three days ahead. On the day, up to six caravans set up at once, crowds of shoppers come with fuller purses, and your colonists come to enjoy it.\n\nAt six in the evening the judges pick the best stall. The fair closes at ten with sky lanterns, or fireworks if most stalls are built from metal.</RimMarket.Guide.FairBody>
+	<RimMarket.Guide.AuctionTitle>Slave auctions</RimMarket.Guide.AuctionTitle>
+	<RimMarket.Guide.AuctionBody>Build an auction post (Architect, Misc) inside the market. When a caravan brings slaves, the auction is announced two hours ahead and buyers come to sit in front of the post. Each lot opens at half its value.\n\nSelect the post while a lot is up to bid. If nobody outbids you, the silver comes out of your stockpiles and the slave joins your colony.</RimMarket.Guide.AuctionBody>
+	<RimMarket.Guide.AuctionPost>An auction post</RimMarket.Guide.AuctionPost>
+	<RimMarket.Guide.RoutesTitle>Routes, orders and notices</RimMarket.Guide.RoutesTitle>
+	<RimMarket.Guide.RoutesBody>From the comms console you can open a trade route (a town sends a convoy every week or two), place a special order for a cartload of goods, or post a wanted notice. Towns answer the notice over the next days, and you accept their offers from the marker.\n\nYour own caravans can also hold a stall in a friendly town for a market day.</RimMarket.Guide.RoutesBody>
+	<RimMarket.Guide.DiagTitle>Why no caravan?</RimMarket.Guide.DiagTitle>
+	<RimMarket.Guide.DiagBody>Trade caravans come at the storyteller's pace, about one every few days, and a good reputation brings extra ones. If one came and walked past your market, the reason is in the list below.</RimMarket.Guide.DiagBody>
+	<RimMarket.Guide.DiagOpen>The market is open</RimMarket.Guide.DiagOpen>
+	<RimMarket.Guide.DiagFreeStall>A free stall with its merchant's spot clear</RimMarket.Guide.DiagFreeStall>
+	<RimMarket.Guide.DiagReach>A free stall caravans can reach from the map edge</RimMarket.Guide.DiagReach>
+	<RimMarket.Guide.DiagRoom>Room for another merchant ({0} of {1} taken)</RimMarket.Guide.DiagRoom>
+	<RimMarket.Guide.DiagFactions>Friendly factions that send caravans: {0}</RimMarket.Guide.DiagFactions>
+	<RimMarket.Guide.DiagNoRefuse>No faction refuses your market</RimMarket.Guide.DiagNoRefuse>
+	<RimMarket.Guide.DiagRefuse>Your reputation keeps some away: {0}</RimMarket.Guide.DiagRefuse>
+	<RimMarket.Guide.DiagBroke>Caravans that cannot pay the stall fee are turned away (mod settings)</RimMarket.Guide.DiagBroke>
+	<RimMarket.Guide.DiagWaiting>A caravan from {0} is waiting: {1}</RimMarket.Guide.DiagWaiting>
 </LanguageData>
