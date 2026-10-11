@@ -21,6 +21,7 @@ namespace RimMarket.Orders
 		public Faction threat;
 		public bool partial;
 		public int expiresTick;
+		public bool haggled;
 
 		public bool Barter => barter.Count > 0;
 
@@ -40,6 +41,7 @@ namespace RimMarket.Orders
 			Scribe_References.Look(ref threat, "threat");
 			Scribe_Values.Look(ref partial, "partial");
 			Scribe_Values.Look(ref expiresTick, "expiresTick");
+			Scribe_Values.Look(ref haggled, "haggled");
 			if (Scribe.mode != LoadSaveMode.PostLoadInit) return;
 			if (goods == null) goods = new List<ThingDefCountClass>();
 			goods.RemoveAll(g => g == null || g.thingDef == null || g.count <= 0);

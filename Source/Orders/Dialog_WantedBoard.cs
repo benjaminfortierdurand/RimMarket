@@ -10,6 +10,7 @@ namespace RimMarket.Orders
 	public class Dialog_WantedBoard : Window
 	{
 		private const float RowHeight = 92f;
+		private const float RowGap = 6f;
 		private const float AcceptWidth = 140f;
 		private const float FooterHeight = 46f;
 
@@ -64,21 +65,29 @@ namespace RimMarket.Orders
 
 		private void DrawOffers(Rect rect, WantedNotice n, Map map)
 		{
-			var view = new Rect(0f, 0f, rect.width - 16f, n.offers.Count * RowHeight);
-			Widgets.BeginScrollView(rect, ref scroll, view);
 			List<WantedOffer> offers = new List<WantedOffer>(n.offers);
+			float width = rect.width - 16f;
+			var heights = new List<float>();
+			float total = 0f;
 			for (int i = 0; i < offers.Count; i++)
 			{
-				if (DrawOffer(new Rect(0f, i * RowHeight, view.width, RowHeight - 6f), offers[i], map)) break;
+				float h = Mathf.Max(RowHeight, Text.CalcHeight(OfferText(offers[i], map), width - 12f - AcceptWidth - 10f) + 16f);
+				heights.Add(h);
+				total += h + RowGap;
+			}
+			var view = new Rect(0f, 0f, width, total);
+			Widgets.BeginScrollView(rect, ref scroll, view);
+			float y = 0f;
+			for (int i = 0; i < offers.Count; i++)
+			{
+				if (DrawOffer(new Rect(0f, y, view.width, heights[i]), offers[i], map)) break;
+				y += heights[i] + RowGap;
 			}
 			Widgets.EndScrollView();
 		}
 
-		private bool DrawOffer(Rect r, WantedOffer o, Map map)
+		private static string OfferText(WantedOffer o, Map map)
 		{
-			Widgets.DrawMenuSection(r);
-			Rect inner = r.ContractedBy(6f);
-			var text = new Rect(inner.x, inner.y, inner.width - AcceptWidth - 10f, inner.height);
 			string title = "RimMarket.WantedOfferTitle".Translate(o.faction.Name.Colorize(o.faction.Color), o.settlement.LabelCap,
 				(o.travelTicks + 30000).ToStringTicksToPeriod(), TradeRouteUtility.RiskText(o.risk, o.threat));
 			string goods = WantedUtility.ListOf(o.goods);
@@ -92,8 +101,42 @@ namespace RimMarket.Orders
 			}
 			else pay = "RimMarket.WantedPaySilver".Translate(o.price);
 			int left = Mathf.Max(0, o.expiresTick - Find.TickManager.TicksGame);
-			Widgets.Label(text, title + "\n" + goods + "\n" + pay + "  " + "RimMarket.WantedExpires".Translate(left.ToStringTicksToPeriod()).Colorize(ColoredText.SubtleGrayColor));
-			var accept = new Rect(inner.xMax - AcceptWidth, inner.y + (inner.height - 36f) / 2f, AcceptWidth, 36f);
+			return title + "\n" + goods + "\n" + pay + "  " + "RimMarket.WantedExpires".Translate(left.ToStringTicksToPeriod()).Colorize(ColoredText.SubtleGrayColor);
+		}
+
+		private static void DrawHaggle(Rect rect, WantedOffer o, Map map)
+		{
+			Pawn negotiator = WantedUtility.BestNegotiator(map);
+			string why = o.haggled ? "RimMarket.WantedHaggleDone".Translate().ToString()
+				: negotiator == null ? "RimMarket.WantedHaggleNoOne".Translate().ToString() : null;
+			if (why != null)
+			{
+				Widgets.ButtonText(rect, "RimMarket.WantedHaggle".Translate(), active: false);
+				TooltipHandler.TipRegion(rect, why);
+				return;
+			}
+			TooltipHandler.TipRegion(rect, "RimMarket.WantedHaggleDesc".Translate(negotiator.LabelShort));
+			if (!Widgets.ButtonText(rect, "RimMarket.WantedHaggle".Translate())) return;
+			var options = new List<FloatMenuOption>();
+			for (int i = 0; i < WantedUtility.HaggleCuts.Length; i++)
+			{
+				int step = i;
+				string key = WantedUtility.HaggleWalkout[i] >= 1f ? "RimMarket.WantedHaggleAskSure" : WantedUtility.HaggleWalkout[i] > 0f ? "RimMarket.WantedHaggleAskRisky" : "RimMarket.WantedHaggleAsk";
+				string label = key.Translate(WantedUtility.HaggleCuts[i].ToStringPercent(), WantedUtility.HaggleChance(o, negotiator, i).ToStringPercent());
+				options.Add(new FloatMenuOption(label, () => WantedUtility.Haggle(o, map, negotiator, step)));
+			}
+			Find.WindowStack.Add(new FloatMenu(options, "RimMarket.WantedHaggleMenu".Translate(negotiator.LabelShort)));
+		}
+
+		private bool DrawOffer(Rect r, WantedOffer o, Map map)
+		{
+			Widgets.DrawMenuSection(r);
+			Rect inner = r.ContractedBy(6f);
+			var text = new Rect(inner.x, inner.y, inner.width - AcceptWidth - 10f, inner.height);
+			Widgets.Label(text, OfferText(o, map));
+			var accept = new Rect(inner.xMax - AcceptWidth, inner.y + 2f, AcceptWidth, 36f);
+			var haggle = new Rect(accept.x, accept.yMax + 6f, AcceptWidth, 32f);
+			DrawHaggle(haggle, o, map);
 			string why = WantedUtility.CannotAccept(o, map);
 			if (why != null)
 			{

@@ -45,21 +45,22 @@ namespace RimMarket.Orders
 			return new DiaOption("GoBack".Translate()) { linkLateBind = FactionDialogMaker.ResetToRoot(faction, negotiator) };
 		}
 
-		private static DiaNode PendingNode(Pawn negotiator, Faction faction, SpecialOrder o)
+		public static string OrderStatus(SpecialOrder o)
 		{
-			string status;
+			if (o.arrivedLordId >= 0) return "RimMarket.DealsAtMarket".Translate();
 			if (o.convoy != null && !o.convoy.Destroyed)
 			{
-				if (o.convoy.UnderAttack) status = "RimMarket.RouteStatusAttacked".Translate(o.convoy.attacker?.Name ?? "?").ToString();
-				else if (o.convoy.Waiting) status = "RimMarket.RouteStatusWaiting".Translate().ToString();
-				else status = "RimMarket.RouteStatusOnRoad".Translate(o.convoy.TicksLeft.ToStringTicksToPeriod()).ToString();
+				if (o.convoy.UnderAttack) return "RimMarket.RouteStatusAttacked".Translate(o.convoy.attacker?.Name ?? "?");
+				if (o.convoy.Waiting) return "RimMarket.RouteStatusWaiting".Translate();
+				return "RimMarket.RouteStatusOnRoad".Translate(o.convoy.TicksLeft.ToStringTicksToPeriod());
 			}
-			else
-			{
-				int left = System.Math.Max(0, o.departTick - Find.TickManager.TicksGame);
-				status = "RimMarket.OrderStatusPacking".Translate(left.ToStringTicksToPeriod()).ToString();
-			}
-			var node = new DiaNode("RimMarket.OrderPendingNode".Translate(o.SettlementName, SpecialOrderUtility.What(o), o.paid, status));
+			int left = System.Math.Max(0, o.departTick - Find.TickManager.TicksGame);
+			return "RimMarket.OrderStatusPacking".Translate(left.ToStringTicksToPeriod());
+		}
+
+		private static DiaNode PendingNode(Pawn negotiator, Faction faction, SpecialOrder o)
+		{
+			var node = new DiaNode("RimMarket.OrderPendingNode".Translate(o.SettlementName, SpecialOrderUtility.What(o), o.paid, OrderStatus(o)));
 			node.options.Add(Back(negotiator, faction));
 			return node;
 		}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="CommsConsole"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="CommsConsole"]/comps</xpath>
+			<value>
+				<li Class="RimMarket.Buildings.CompProperties_MarketDeals" />
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="DankPyon_ScribeTable"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="DankPyon_ScribeTable"]/comps</xpath>
+			<value>
+				<li Class="RimMarket.Buildings.CompProperties_MarketDeals" />
+			</value>
+		</match>
+	</Operation>
+
+</Patch>

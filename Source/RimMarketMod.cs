@@ -148,7 +148,6 @@ namespace RimMarket
 			{
 				s.fairCost = Mathf.RoundToInt(Slider("FairCost", s.fairCost, 0f, 5000f, 100f, s.fairCost.ToString(), Hint("FairCost"), SubIndent));
 				s.fairCooldownDays = Mathf.RoundToInt(Slider("FairCooldown", s.fairCooldownDays, 5f, 60f, 1f, Days(s.fairCooldownDays), Hint("FairCooldown"), SubIndent));
-				Check("FairPictures", ref s.fairPictures, Hint("FairPictures"), SubIndent);
 			}
 			Check("Reputation", ref s.reputationEffects, Hint("Reputation"));
 			Check("Messages", ref s.showMessages, Hint("Messages"));

@@ -39,7 +39,6 @@ namespace RimMarket
 		public const bool DefShopkeepers = false;
 		public const float DefColonyShopperDays = 1.2f;
 		public const bool DefFairEnabled = true;
-		public const bool DefFairPictures = true;
 		public const int DefFairCost = 1500;
 		public const int DefFairCooldownDays = 15;
 		public const float DefBargainEffect = 1f;
@@ -74,7 +73,6 @@ namespace RimMarket
 		public bool shopkeepers = DefShopkeepers;
 		public float colonyShopperDays = DefColonyShopperDays;
 		public bool fairEnabled = DefFairEnabled;
-		public bool fairPictures = DefFairPictures;
 		public int fairCost = DefFairCost;
 		public int fairCooldownDays = DefFairCooldownDays;
 		public float bargainEffect = DefBargainEffect;
@@ -145,7 +143,6 @@ namespace RimMarket
 			thiefMtbDays = DefThiefMtbDays;
 			slaveAuctions = DefSlaveAuctions;
 			fairEnabled = DefFairEnabled;
-			fairPictures = DefFairPictures;
 			fairCost = DefFairCost;
 			fairCooldownDays = DefFairCooldownDays;
 			reputationEffects = DefReputationEffects;
@@ -194,7 +191,6 @@ namespace RimMarket
 			Scribe_Values.Look(ref shopkeepers, "shopkeepers", DefShopkeepers);
 			Scribe_Values.Look(ref colonyShopperDays, "colonyShopperDays", DefColonyShopperDays);
 			Scribe_Values.Look(ref fairEnabled, "fairEnabled", DefFairEnabled);
-			Scribe_Values.Look(ref fairPictures, "fairPictures", DefFairPictures);
 			Scribe_Values.Look(ref fairCost, "fairCost", DefFairCost);
 			Scribe_Values.Look(ref fairCooldownDays, "fairCooldownDays", DefFairCooldownDays);
 			Scribe_Values.Look(ref bargainEffect, "bargainEffect", DefBargainEffect);

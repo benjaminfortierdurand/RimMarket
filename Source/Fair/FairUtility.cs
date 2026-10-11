@@ -170,10 +170,7 @@ namespace RimMarket.Fair
 			fair.caravansDue = Mathf.Min(MaxCaravans, free);
 			fair.nextCaravanTick = Now;
 			fair.nextWaveTick = Now + WaveTicks;
-			if (RimMarketMod.Settings.fairPictures)
-				Window_GreatFair.ShowOpening(fair, "RimMarket.FairOpenStory".Translate(fair.caravansDue, JudgeHour, CloseHour));
-			else
-				Messages.Message("RimMarket.FairOpens".Translate(), new LookTargets(fair.marker), MessageTypeDefOf.PositiveEvent);
+			Messages.Message("RimMarket.FairOpens".Translate(), new LookTargets(fair.marker), MessageTypeDefOf.PositiveEvent);
 			MapComponent_MarketShow.On(fair.map)?.Opening(fair);
 		}
 
@@ -333,11 +330,8 @@ namespace RimMarket.Fair
 					? "RimMarket.FairOverWinnerColony".Translate(fair.winnerScore).ToString()
 					: "RimMarket.FairOverWinner".Translate(fair.winnerName ?? "?", fair.winnerFaction.Name, fair.winnerScore).ToString());
 			}
-			LetterDef def = fair.factions.Count == 0 ? LetterDefOf.NeutralEvent : LetterDefOf.PositiveEvent;
-			if (RimMarketMod.Settings.fairPictures)
-				Window_GreatFair.ShowClosing(fair, "RimMarket.FairOverLabel".Translate(), text, def);
-			else
-				Find.LetterStack.ReceiveLetter("RimMarket.FairOverLabel".Translate(), text, def, new LookTargets(fair.marker));
+			Find.LetterStack.ReceiveLetter("RimMarket.FairOverLabel".Translate(), text,
+				fair.factions.Count == 0 ? LetterDefOf.NeutralEvent : LetterDefOf.PositiveEvent, new LookTargets(fair.marker));
 		}
 
 		public static string InspectLine(GreatFair fair)

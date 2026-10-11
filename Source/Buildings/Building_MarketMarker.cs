@@ -207,7 +207,7 @@ namespace RimMarket.Buildings
 			foreach (Gizmo g in FairGizmos()) yield return g;
 
 			MarketManager mgr = MarketManager.Instance;
-			if (mgr != null && Spawned && mgr.ActiveVisits(Map) > 0)
+			if (mgr != null && Spawned && mgr.ActiveVisits(this) > 0)
 			{
 				yield return new Command_Action
 				{
@@ -215,8 +215,8 @@ namespace RimMarket.Buildings
 					defaultDesc = "RimMarket.CloseMarketDesc".Translate(),
 					icon = RimMarketIcons.CloseMarket,
 					action = () => Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
-						"RimMarket.CloseMarketConfirm".Translate(mgr.ActiveVisits(Map)),
-						() => mgr.CloseMarket(Map),
+						"RimMarket.CloseMarketConfirm".Translate(mgr.ActiveVisits(this)),
+						() => mgr.CloseMarket(this),
 						destructive: true)),
 				};
 			}

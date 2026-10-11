@@ -51,15 +51,15 @@ namespace RimMarket.Fair
 		private const float CrownZ = 3.18f;
 		private const float CrownRadiusX = 0.52f;
 		private const float CrownRadiusZ = 0.18f;
-		private const float MetalTopCenterZ = 3.6f;
-		private static readonly Vector3 MetalTopSize = new Vector3(0.75f, 1f, 0.75f);
-		private const float RingZ = 3.5f;
-		private const float RingRadiusX = 0.2f;
-		private const float RingRadiusZ = 0.07f;
-		private const float LampZ = 3.76f;
-		private const float LampGlowSize = 2.6f;
+		private const float TowerCenterZ = 1.785f;
+		private static readonly Vector3 TowerSize = new Vector3(2f, 1f, 4.609f);
+		private const float RingZ = 3.55f;
+		private const float RingRadiusX = 0.55f;
+		private const float RingRadiusZ = 0.12f;
+		private const float LampZ = 3.97f;
+		private const float LampGlowSize = 3.4f;
 		private static readonly Color LampColor = new Color(1f, 0.88f, 0.66f);
-		private const float MastHeight = 4f;
+		private const float MastHeight = 4.2f;
 		private const float RibbonRange = 11f;
 		private const int MaxRibbons = 8;
 		private const float MinRibbonAngle = 14f;
@@ -88,11 +88,13 @@ namespace RimMarket.Fair
 		private static readonly Dictionary<Color, Material> forkMats = new Dictionary<Color, Material>();
 		private static readonly Material PoleMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypolePole", ShaderDatabase.Cutout);
 		private static readonly Material CrownMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleCrown", ShaderDatabase.Cutout);
-		private static readonly Material MetalMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleMetal", ShaderDatabase.Cutout);
-		private static readonly Material MetalTopMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleMetalTop", ShaderDatabase.Cutout);
+		private static readonly Material MetalMat = MaterialPool.MatFrom("Things/Fair/RimMarket_LightTower", ShaderDatabase.Cutout);
 		private static readonly float PoleSplitV = (PoleSplitZ - PoleCenterZ) / PoleSize.z + 0.5f;
 		private static readonly Mesh PoleFoot = Slice(0f, PoleSplitV);
 		private static readonly Mesh PoleShaft = Slice(PoleSplitV, 1f);
+		private static readonly float TowerSplitV = (PoleSplitZ - TowerCenterZ) / TowerSize.z + 0.5f;
+		private static readonly Mesh TowerFoot = Slice(0f, TowerSplitV);
+		private static readonly Mesh TowerShaft = Slice(TowerSplitV, 1f);
 		private static readonly Dictionary<Color, Material> ribbonMats = new Dictionary<Color, Material>();
 
 		private struct Span
@@ -264,11 +266,17 @@ namespace RimMarket.Fair
 			if (mastBase.x < view.minX - 1 || mastBase.x > view.maxX + 2) return;
 			if (mastBase.z + MastHeight < view.minZ || mastBase.z - 1f > view.maxZ + 1) return;
 			float topAlt = ropeAlt + Altitudes.AltInc * 3f;
-			Material pole = metalMast ? MetalMat : PoleMat;
-			DrawMastPart(pole, PoleCenterZ, PoleSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, PoleFoot);
-			DrawMastPart(pole, PoleCenterZ, PoleSize, AltitudeLayer.PawnState.AltitudeFor(), PoleShaft);
-			if (metalMast) DrawMastPart(MetalTopMat, MetalTopCenterZ, MetalTopSize, topAlt);
-			else DrawMastPart(CrownMat, CrownTexCenterZ, CrownSize, topAlt);
+			if (metalMast)
+			{
+				DrawMastPart(MetalMat, TowerCenterZ, TowerSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, TowerFoot);
+				DrawMastPart(MetalMat, TowerCenterZ, TowerSize, AltitudeLayer.PawnState.AltitudeFor(), TowerShaft);
+			}
+			else
+			{
+				DrawMastPart(PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, PoleFoot);
+				DrawMastPart(PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.PawnState.AltitudeFor(), PoleShaft);
+				DrawMastPart(CrownMat, CrownTexCenterZ, CrownSize, topAlt);
+			}
 			if (metalMast && night > 0f)
 				DrawMastPart(GlowMat(LampColor, night), LampZ, new Vector3(LampGlowSize, 1f, LampGlowSize), ropeAlt - Altitudes.AltInc);
 		}

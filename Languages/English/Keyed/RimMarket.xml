@@ -89,7 +89,7 @@
 	<RimMarket.FeeModeDesc>How merchants pay for a stall in this market. Fee on arrival: silver counted on the counter before they set up. No fee: the stall is free. Or follow the mod setting.</RimMarket.FeeModeDesc>
 	<RimMarket.FeeModeDescShare>Share of takings: a cut of what your guests (Hospitality or Hotels and Recreation) spend at the stall, left on the counter during the visit. What you buy yourself is never taxed.</RimMarket.FeeModeDescShare>
 	<RimMarket.CloseMarketLabel>Close market now</RimMarket.CloseMarketLabel>
-	<RimMarket.CloseMarketDesc>Send every merchant home right away. They pack up and leave by the usual road. This does not close the market for future caravans.</RimMarket.CloseMarketDesc>
+	<RimMarket.CloseMarketDesc>Send every merchant at this market's stalls home right away. They pack up and leave by the usual road. Other markets on the map are not touched, and this does not close the market for future caravans.</RimMarket.CloseMarketDesc>
 	<RimMarket.CloseMarketConfirm>Send {0} merchant(s) packing right now?</RimMarket.CloseMarketConfirm>
 	<RimMarket.RadiusPlus>Radius {0} +</RimMarket.RadiusPlus>
 	<RimMarket.RadiusMinus>Radius {0} -</RimMarket.RadiusMinus>
@@ -409,13 +409,6 @@
 	<RimMarket.FairAnnouncedLabel>Great Fair announced</RimMarket.FairAnnouncedLabel>
 	<RimMarket.FairAnnouncedText>The heralds are on the road. Your market holds a Great Fair on {0}, from {1}h to {2}h.\n\nOn the day, caravans from every friendly faction will try to set up at once, and crowds of shoppers will follow them. Keep the stalls free and the square safe.</RimMarket.FairAnnouncedText>
 	<RimMarket.FairOpens>The Great Fair is open. Caravans are on their way.</RimMarket.FairOpens>
-	<RimMarket.FairOpenTitle>The Great Fair is open</RimMarket.FairOpenTitle>
-	<RimMarket.FairOpenStory>Bunting on every stall, petals on the wind, and the maypole has been up since dawn. The heralds did their job: up to {0} caravans are on the road, and the first crowds are already at the gate.
-
-At {1}h the judges pick the best stall. The fair runs until {2}h.</RimMarket.FairOpenStory>
-	<RimMarket.FairGoToSquare>Go to the square</RimMarket.FairGoToSquare>
-	<RimMarket.FairGoToWinner>See the best stall</RimMarket.FairGoToWinner>
-	<RimMarket.FairContinue>Continue</RimMarket.FairContinue>
 	<RimMarket.FairCrowd>A crowd from {0} has come for the fair.</RimMarket.FairCrowd>
 	<RimMarket.FairOverLabel>The Great Fair is over</RimMarket.FairOverLabel>
 	<RimMarket.FairOverText>The Great Fair is over and the square smells of trampled grass.\n\nCaravans: {0} ({1}).\nCrowds of shoppers: {2}.\nStall fees taken: {3} silver.\nSold at the colony stalls: {4} silver.\nSpent by visitors with the merchants: {5} silver.\nThieves caught: {6}. Thieves who got away: {7}.\n\nWord of the fair is spreading, and the market's name with it. The caravans pack up tomorrow morning.</RimMarket.FairOverText>
@@ -433,8 +426,6 @@ At {1}h the judges pick the best stall. The fair runs until {2}h.</RimMarket.Fai
 	<RimMarket.AlertFairTodayDesc>The Great Fair runs until {0}h. Expect caravans, crowds, cheerful colonists and busy pickpockets.</RimMarket.AlertFairTodayDesc>
 	<RimMarket.Settings.Fair>Great Fairs</RimMarket.Settings.Fair>
 	<RimMarket.Settings.FairHint>A button on the market marker announces a Great Fair a few days ahead: a day of caravans, crowds and bunting. Off: no fairs.</RimMarket.Settings.FairHint>
-	<RimMarket.Settings.FairPictures>Illustrated opening and closing</RimMarket.Settings.FairPictures>
-	<RimMarket.Settings.FairPicturesHint>The fair opens and closes with a picture window that pauses the game. Off: a message at the opening and a letter at the closing.</RimMarket.Settings.FairPicturesHint>
 	<RimMarket.Settings.FairCost>Heralds cost</RimMarket.Settings.FairCost>
 	<RimMarket.Settings.FairCooldown>Between two fairs</RimMarket.Settings.FairCooldown>
 	<RimMarket.Settings.TradeRoutes>Trade routes</RimMarket.Settings.TradeRoutes>
@@ -444,13 +435,13 @@ At {1}h the judges pick the best stall. The fair runs until {2}h.</RimMarket.Fai
 	<RimMarket.Settings.SpecialOrders>Special orders</RimMarket.Settings.SpecialOrders>
 	<RimMarket.Settings.SpecialOrdersHint>From the comms console (or a messenger table with Medieval Overhaul), pay a faction to bring a caravan full of what you asked for. They set up at a stall and skip the stall fee, since you already paid them to come.</RimMarket.Settings.SpecialOrdersHint>
 	<RimMarket.OrderOption>Special order</RimMarket.OrderOption>
-	<RimMarket.OrderPending>{0} is already filling an order for you.</RimMarket.OrderPending>
-	<RimMarket.OrderLimit>Your market can only wait on {0} orders at a time.</RimMarket.OrderLimit>
+	<RimMarket.OrderPending>an order is already on its way</RimMarket.OrderPending>
+	<RimMarket.OrderLimit>order limit reached ({0})</RimMarket.OrderLimit>
 	<RimMarket.OrderPickSettlement>Which town of {0} should fill the order? The farther it is, the longer the wait and the bigger the bill.</RimMarket.OrderPickSettlement>
 	<RimMarket.OrderPickWhat>What should {0} bring?\n\nPick a family of goods: they load a caravan with that sort of thing on top of their usual stock. The order only pays for the trip. You still buy the goods at their prices when they arrive, and they skip the stall fee.\n\nAfter something specific? Post a wanted notice from the comms console instead, and let every friendly town make you an offer.\n\nSilver in the colony: {1}.</RimMarket.OrderPickWhat>
 	<RimMarket.OrderFamilySmall>{0}, a cartload ({1} silver)</RimMarket.OrderFamilySmall>
 	<RimMarket.OrderFamilyLarge>{0}, a full caravan ({1} silver)</RimMarket.OrderFamilyLarge>
-	<RimMarket.OrderFamilyNothing>{0} has nothing of the sort to sell.</RimMarket.OrderFamilyNothing>
+	<RimMarket.OrderFamilyNothing>nothing of the sort to sell</RimMarket.OrderFamilyNothing>
 	<RimMarket.OrderFamily_Provisions>food and medicine</RimMarket.OrderFamily_Provisions>
 	<RimMarket.OrderFamily_Materials>cloth and materials</RimMarket.OrderFamily_Materials>
 	<RimMarket.OrderFamily_Arms>weapons and armour</RimMarket.OrderFamily_Arms>
@@ -498,6 +489,18 @@ At {1}h the judges pick the best stall. The fair runs until {2}h.</RimMarket.Fai
 	<RimMarket.WantedBarterMissing>You do not have it in storage right now.</RimMarket.WantedBarterMissing>
 	<RimMarket.WantedExpires>Offer stands for {0}.</RimMarket.WantedExpires>
 	<RimMarket.WantedAccept>Accept</RimMarket.WantedAccept>
+	<RimMarket.WantedHaggle>Haggle</RimMarket.WantedHaggle>
+	<RimMarket.WantedHaggleDesc>{0}, your best talker, haggles over this offer. One try per offer. Ask for a little and they may say no, ask for too much and they may take the offer back.</RimMarket.WantedHaggleDesc>
+	<RimMarket.WantedHaggleMenu>{0} asks for</RimMarket.WantedHaggleMenu>
+	<RimMarket.WantedHaggleAsk>{0} off ({1} chance)</RimMarket.WantedHaggleAsk>
+	<RimMarket.WantedHaggleAskRisky>{0} off ({1} chance, they may walk away if it fails)</RimMarket.WantedHaggleAskRisky>
+	<RimMarket.WantedHaggleAskSure>{0} off ({1} chance, they walk away if it fails)</RimMarket.WantedHaggleAskSure>
+	<RimMarket.WantedHaggleDone>Already haggled over this offer.</RimMarket.WantedHaggleDone>
+	<RimMarket.WantedHaggleNoOne>None of your colonists here can negotiate.</RimMarket.WantedHaggleNoOne>
+	<RimMarket.WantedHaggleWon>{0} talked {1} down. The offer is now {2} silver.</RimMarket.WantedHaggleWon>
+	<RimMarket.WantedHaggleWonBarter>{0} talked {1} down. They ask for less in trade.</RimMarket.WantedHaggleWonBarter>
+	<RimMarket.WantedHaggleRefused>{0} won't budge. The offer stands as it was.</RimMarket.WantedHaggleRefused>
+	<RimMarket.WantedHaggleWalked>{0} took offence and withdrew the offer.</RimMarket.WantedHaggleWalked>
 	<RimMarket.WantedAccepted>You accepted the offer from {0}. The goods leave {1} shortly.</RimMarket.WantedAccepted>
 	<RimMarket.WantedWithdraw>Take the notice down</RimMarket.WantedWithdraw>
 	<RimMarket.WantedWithdrawConfirm>Take the notice down? Every offer on it is dropped.</RimMarket.WantedWithdrawConfirm>
@@ -540,23 +543,24 @@ At {1}h the judges pick the best stall. The fair runs until {2}h.</RimMarket.Fai
 	<RimMarket.ConvoyEscorted>Travelling with an escort.</RimMarket.ConvoyEscorted>
 	<RimMarket.ConvoyPlunderedLine>Lost about {0} of its goods on the way.</RimMarket.ConvoyPlunderedLine>
 	<RimMarket.RouteNoTowns>They have no town to send convoys from.</RimMarket.RouteNoTowns>
-	<RimMarket.RouteNoRoad>No road reaches your market from there.</RimMarket.RouteNoRoad>
-	<RimMarket.RouteExists>A route from this town is already open.</RimMarket.RouteExists>
+	<RimMarket.RouteNoRoad>no road to your market</RimMarket.RouteNoRoad>
+	<RimMarket.RouteExists>a route is already open</RimMarket.RouteExists>
 	<RimMarket.RoutePickKind>What should the convoys from {0} bring?</RimMarket.RoutePickKind>
-	<RimMarket.RouteNoKinds>They have no merchant they are willing to send your way.</RimMarket.RouteNoKinds>
+	<RimMarket.RouteNoKinds>no merchant willing to come</RimMarket.RouteNoKinds>
 	<RimMarket.RoutePickCadence>How often should the {0} convoy leave {1}? You pay once to open the route, then a convoy fee each time a convoy arrives, in silver from your stores and home area (you have {2}). If nobody can pay the fee, the convoy turns back, and the town counts it against the route.</RimMarket.RoutePickCadence>
 	<RimMarket.RouteWeekly>Every week: {0} silver to open, then {1} per convoy</RimMarket.RouteWeekly>
 	<RimMarket.RouteFortnightly>Every two weeks: {0} silver to open, then {1} per convoy</RimMarket.RouteFortnightly>
 	<RimMarket.RouteTollPaid>The convoy from {0} has arrived. {1} silver paid for the trip.</RimMarket.RouteTollPaid>
 	<RimMarket.RouteTollUnpaid>The convoy from {0} turned back: nobody could pay the {1} silver convoy fee. Strike {2} of {3} for the route.</RimMarket.RouteTollUnpaid>
 	<RimMarket.RouteStatusToll>Convoy fee: {0} silver.</RimMarket.RouteStatusToll>
-	<RimMarket.RouteNoSilver>Not enough silver ({0} needed).</RimMarket.RouteNoSilver>
+	<RimMarket.RouteNoSilver>{0} silver needed</RimMarket.RouteNoSilver>
 	<RimMarket.RouteOpened>Agreed. The first {1} convoy leaves {0} within a day or so. You will see it on the world map.</RimMarket.RouteOpened>
-	<RimMarket.RouteHostile>They are hostile.</RimMarket.RouteHostile>
-	<RimMarket.RouteNeedsMarket>This colony needs an open market first.</RimMarket.RouteNeedsMarket>
-	<RimMarket.RouteUnknown>{0} have never traded at your market or hosted your stall. Start there.</RimMarket.RouteUnknown>
-	<RimMarket.RouteGrudge>{0} holds a grudge against your market.</RimMarket.RouteGrudge>
-	<RimMarket.RouteLimit>Your market can keep {0} route(s) at its current reputation. A better name allows more.</RimMarket.RouteLimit>
+	<RimMarket.RouteHostile>they are hostile</RimMarket.RouteHostile>
+	<RimMarket.RouteNeedsMarket>no open market in this colony</RimMarket.RouteNeedsMarket>
+	<RimMarket.RouteUnknownHelp>{0} have never traded at your market or hosted your stall. Trade with them there first, then come back.</RimMarket.RouteUnknownHelp>
+	<RimMarket.RouteUnknown>they don't know your market yet</RimMarket.RouteUnknown>
+	<RimMarket.RouteGrudge>they hold a grudge against your market</RimMarket.RouteGrudge>
+	<RimMarket.RouteLimit>route limit reached</RimMarket.RouteLimit>
 	<RimMarket.RouteConvoyLeft>A trade convoy has left {0} for your market with a {1}. It should arrive in about {2}.</RimMarket.RouteConvoyLeft>
 	<RimMarket.RouteConvoyWaiting>The trade convoy from {0} waits at the edge of your land: their enemies are at your market.</RimMarket.RouteConvoyWaiting>
 	<RimMarket.RouteConvoyDelayed>The trade convoy from {0} has reached your land but cannot come in yet. It will try again.</RimMarket.RouteConvoyDelayed>
@@ -639,4 +643,38 @@ At {1}h the judges pick the best stall. The fair runs until {2}h.</RimMarket.Fai
 	<RimMarket.Guide.DiagRefuse>Your reputation keeps some away: {0}</RimMarket.Guide.DiagRefuse>
 	<RimMarket.Guide.DiagBroke>Caravans that cannot pay the stall fee are turned away (mod settings)</RimMarket.Guide.DiagBroke>
 	<RimMarket.Guide.DiagWaiting>A caravan from {0} is waiting: {1}</RimMarket.Guide.DiagWaiting>
+
+	<!-- Deals -->
+	<RimMarket.DealsGizmo>Market deals ({0})</RimMarket.DealsGizmo>
+	<RimMarket.DealsGizmoDesc>See everything your market has under way: trade routes and their convoys, special orders, your wanted notice and its offers, and your own caravans holding a stall in another town.</RimMarket.DealsGizmoDesc>
+	<RimMarket.DealsTitle>Market deals</RimMarket.DealsTitle>
+	<RimMarket.DealsTabRoutes>Trade routes ({0}/{1})</RimMarket.DealsTabRoutes>
+	<RimMarket.DealsTabOrders>Special orders ({0})</RimMarket.DealsTabOrders>
+	<RimMarket.DealsTabWanted>Wanted notice ({0})</RimMarket.DealsTabWanted>
+	<RimMarket.DealsTabAway>Away stalls ({0})</RimMarket.DealsTabAway>
+	<RimMarket.DealsColTown>Town</RimMarket.DealsColTown>
+	<RimMarket.DealsColMerchant>Merchant</RimMarket.DealsColMerchant>
+	<RimMarket.DealsColGoods>Goods</RimMarket.DealsColGoods>
+	<RimMarket.DealsColSold>Sold</RimMarket.DealsColSold>
+	<RimMarket.DealsColStatus>Status</RimMarket.DealsColStatus>
+	<RimMarket.DealsEvery>every {0} days</RimMarket.DealsEvery>
+	<RimMarket.DealsPaid>{0} silver paid</RimMarket.DealsPaid>
+	<RimMarket.DealsAtMarket>Their caravan is at your market.</RimMarket.DealsAtMarket>
+	<RimMarket.DealsShowConvoy>Show convoy</RimMarket.DealsShowConvoy>
+	<RimMarket.DealsShowTown>Show town</RimMarket.DealsShowTown>
+	<RimMarket.DealsShowCaravan>Show caravan</RimMarket.DealsShowCaravan>
+	<RimMarket.DealsOpenBoard>Offers board</RimMarket.DealsOpenBoard>
+	<RimMarket.DealsYourNotice>Your notice</RimMarket.DealsYourNotice>
+	<RimMarket.DealsNoticeStatus>{0} town(s) still to answer, {1} offer(s) so far. Replies close in {2}.</RimMarket.DealsNoticeStatus>
+	<RimMarket.DealsOffer>Offers it for {0}, delivered in about {1}.</RimMarket.DealsOffer>
+	<RimMarket.DealsPrice>{0} silver</RimMarket.DealsPrice>
+	<RimMarket.DealsBarter>a barter</RimMarket.DealsBarter>
+	<RimMarket.DealsSold>{0} item(s), {1} silver</RimMarket.DealsSold>
+	<RimMarket.DealsAwayStatus>{0} holds the stall for another {1}.</RimMarket.DealsAwayStatus>
+	<RimMarket.DealsNoRoutes>No trade route open. Talk to a faction from a comms console to open one.</RimMarket.DealsNoRoutes>
+	<RimMarket.DealsNoOrders>No special order under way. Place one by talking to a faction from a comms console.</RimMarket.DealsNoOrders>
+	<RimMarket.DealsNoNotice>No wanted notice posted. Post one from a comms console.</RimMarket.DealsNoNotice>
+	<RimMarket.DealsNoAway>None of your caravans is holding a stall. Send one to a friendly town and pick "Hold a market stall" when it gets there.</RimMarket.DealsNoAway>
+	<RimMarket.DealsHintComms>Open, close or change these from a comms console, by talking to the faction.</RimMarket.DealsHintComms>
+	<RimMarket.DealsHintAway>A caravan packs up on its own at the end of the market day.</RimMarket.DealsHintAway>
 </LanguageData>

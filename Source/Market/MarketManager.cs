@@ -1174,13 +1174,28 @@ namespace RimMarket.Market
 			waitingReason.Remove(lord.loadID);
 		}
 
-		public void CloseMarket(Map map)
+		public int ActiveVisits(Building_MarketMarker marker)
+		{
+			int n = 0;
+			for (int i = 0; i < visits.Count; i++)
+			{
+				if (BelongsTo(visits[i], marker)) n++;
+			}
+			return n;
+		}
+
+		private static bool BelongsTo(StallVisit v, Building_MarketMarker marker)
+		{
+			return marker != null && v.StallOk && v.map == marker.Map && MarketUtility.MarkerFor(v.stall) == marker;
+		}
+
+		public void CloseMarket(Building_MarketMarker marker)
 		{
 			int n = 0;
 			for (int i = 0; i < visits.Count; i++)
 			{
 				StallVisit v = visits[i];
-				if (v.map != map || v.closed) continue;
+				if (v.closed || !BelongsTo(v, marker)) continue;
 				v.closed = true;
 				v.endReason = StallVisit.EndClosed;
 				n++;

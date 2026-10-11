@@ -89,7 +89,7 @@ namespace RimMarket.UI
 			new GuideChapter { key = "Inn", art = Art("Inn"), checks = InnChecks },
 			new GuideChapter
 			{
-				key = "Fair", art = ContentFinder<Texture2D>.Get("UI/Events/RimMarket_FairOpen", false), advanced = true, checks = FairChecks,
+				key = "Fair", art = Art("Fair"), advanced = true, checks = FairChecks,
 				actions = { Show("RimMarket.Guide.ShowMarker", Markers) },
 			},
 			new GuideChapter

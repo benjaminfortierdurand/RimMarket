@@ -51,6 +51,11 @@ namespace RimMarket.Routes
 				text.Append("\n\n");
 				text.Append("RimMarket.RouteLine".Translate(r.SettlementName, r.kind?.label ?? "?", r.intervalDays, RouteStatus(r)));
 			}
+			if (mgr.LedgerFor(faction) == null)
+			{
+				text.Append("\n\n");
+				text.Append("RimMarket.RouteUnknownHelp".Translate(faction.Name));
+			}
 			var node = new DiaNode(text.ToString());
 			var open = new DiaOption("RimMarket.RouteOpen".Translate());
 			string why = TradeRouteUtility.CannotOpen(mgr, faction, map);
@@ -66,7 +71,7 @@ namespace RimMarket.Routes
 			return node;
 		}
 
-		private static string RouteStatus(TradeRoute r)
+		public static string RouteStatus(TradeRoute r)
 		{
 			string status;
 			if (r.convoy != null && !r.convoy.Destroyed)

@@ -28,6 +28,16 @@ namespace RimMarket.Orders
 		private const float StrangerMarkup = 2.2f;
 		private const float BarterValue = 1.1f;
 		private const int RefusedGoodwill = -10;
+		private const float HaggleXp = 500f;
+		private const float HaggleSkillWeight = 0.04f;
+		private const int HaggleSkillPivot = 6;
+		private const float HaggleGoodwillWeight = 1f / 400f;
+		private const float HaggleMinChance = 0.05f;
+		private const float HaggleMaxChance = 0.95f;
+
+		public static readonly float[] HaggleCuts = { 0.1f, 0.2f, 0.35f };
+		private static readonly float[] HaggleBase = { 0.85f, 0.6f, 0.35f };
+		public static readonly float[] HaggleWalkout = { 0f, 0.5f, 1f };
 
 		private static MarketManager Mgr => MarketManager.Instance;
 
@@ -255,6 +265,62 @@ namespace RimMarket.Orders
 			if (mgr.Orders.Count >= SpecialOrderUtility.MaxOrders) return "RimMarket.OrderLimit".Translate(SpecialOrderUtility.MaxOrders);
 			if (!o.Barter && AuctionUtility.ColonySilver(map) < o.price) return "RimMarket.RouteNoSilver".Translate(o.price);
 			return null;
+		}
+
+		public static Pawn BestNegotiator(Map map)
+		{
+			if (map == null) return null;
+			Pawn best = null;
+			int bestLevel = -1;
+			foreach (Pawn p in map.mapPawns.FreeColonistsSpawned)
+			{
+				if (p.Downed || p.Dead || p.InMentalState || p.skills == null) continue;
+				SkillRecord social = p.skills.GetSkill(SkillDefOf.Social);
+				if (social == null || social.TotallyDisabled || social.Level <= bestLevel) continue;
+				best = p;
+				bestLevel = social.Level;
+			}
+			return best;
+		}
+
+		public static float HaggleChance(WantedOffer o, Pawn negotiator, int step)
+		{
+			int social = negotiator?.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0;
+			float chance = HaggleBase[step] + HaggleSkillWeight * (social - HaggleSkillPivot) + (o.faction?.PlayerGoodwill ?? 0) * HaggleGoodwillWeight;
+			return Mathf.Clamp(chance, HaggleMinChance, HaggleMaxChance);
+		}
+
+		public static void Haggle(WantedOffer o, Map map, Pawn negotiator, int step)
+		{
+			MarketManager mgr = Mgr;
+			WantedNotice n = mgr?.Notice;
+			if (n == null || o == null || o.haggled || negotiator == null || step < 0 || step >= HaggleCuts.Length) return;
+			o.haggled = true;
+			negotiator.skills?.Learn(SkillDefOf.Social, HaggleXp, direct: true);
+			string town = o.settlement?.LabelCap ?? "?";
+			if (Rand.Chance(HaggleChance(o, negotiator, step)))
+			{
+				float keep = 1f - HaggleCuts[step];
+				if (o.Barter)
+				{
+					for (int i = 0; i < o.barter.Count; i++) o.barter[i].count = Mathf.Max(1, Mathf.RoundToInt(o.barter[i].count * keep));
+					o.barterFallback = Round10(o.barterFallback * keep);
+					Messages.Message("RimMarket.WantedHaggleWonBarter".Translate(negotiator.LabelShort, town), MessageTypeDefOf.PositiveEvent, historical: false);
+				}
+				else
+				{
+					o.price = Round10(o.price * keep);
+					Messages.Message("RimMarket.WantedHaggleWon".Translate(negotiator.LabelShort, town, o.price), MessageTypeDefOf.PositiveEvent, historical: false);
+				}
+				return;
+			}
+			if (Rand.Chance(HaggleWalkout[step]))
+			{
+				n.offers.Remove(o);
+				Messages.Message("RimMarket.WantedHaggleWalked".Translate(town), MessageTypeDefOf.NegativeEvent, historical: false);
+				return;
+			}
+			Messages.Message("RimMarket.WantedHaggleRefused".Translate(town), MessageTypeDefOf.NeutralEvent, historical: false);
 		}
 
 		public static bool HasBarterNow(WantedOffer o, Map map)
