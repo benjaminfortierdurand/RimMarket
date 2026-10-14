@@ -14,4 +14,17 @@
 		</requiredCapacities>
 	</WorkGiverDef>
 
+	<WorkGiverDef>
+		<defName>RimMarket_StockColonyStall</defName>
+		<label>stock colony stalls</label>
+		<giverClass>RimMarket.Jobs.WorkGiver_StockColonyStall</giverClass>
+		<workType>Hauling</workType>
+		<priorityInType>19</priorityInType>
+		<verb>stock</verb>
+		<gerund>stocking</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
 </Defs>

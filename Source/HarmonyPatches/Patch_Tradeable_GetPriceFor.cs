@@ -11,7 +11,7 @@ namespace RimMarket.HarmonyPatches
 	{
 		public static void Postfix(Tradeable __instance, TradeAction action, ref float __result)
 		{
-			if (!MarketManager.AnyVisits) return;
+			if (!MarketManager.AnyVisits || TradeSession.giftMode || TradeSession.TradeCurrency == TradeCurrency.Favor) return;
 			if (action == TradeAction.None || __instance.IsCurrency) return;
 			if (!(TradeSession.trader is Pawn trader)) return;
 			StallVisit v = MarketManager.Instance.VisitFor(trader);

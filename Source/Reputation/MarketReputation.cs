@@ -200,17 +200,6 @@ namespace RimMarket.Reputation
 			}
 		}
 
-		public void DebugSet(float perAxis)
-		{
-			for (int i = 0; i < AxisCount; i++)
-			{
-				scores[i] = Mathf.Clamp(perAxis, -AxisLimit, AxisLimit);
-				stages[i] = 0;
-				RecomputeStage(i);
-			}
-			lifetimePoints = perAxis == 0f ? 0f : Mathf.Max(lifetimePoints, EstablishedAt);
-		}
-
 		public void ExposeData()
 		{
 			Scribe_Collections.Look(ref scores, "scores", LookMode.Value);

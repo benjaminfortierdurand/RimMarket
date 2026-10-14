@@ -173,6 +173,7 @@ namespace RimMarket.Market
 		public static int FeeFor(Lord lord)
 		{
 			RimMarketSettings s = RimMarketMod.Settings;
+			if (TraderCaravanUtility.FindTrader(lord)?.TraderKind?.tradeCurrency == TradeCurrency.Favor) return 0;
 			if (s.waiveFeeAfterToll && RimTollBridge.Available && lord.faction != null)
 			{
 				int last = RimTollBridge.LastTollTick(lord.faction);

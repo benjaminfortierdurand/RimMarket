@@ -60,6 +60,7 @@ namespace RimMarket.Market
 		public int routeId;
 		public int orderId;
 		public List<Pawn> posted = new List<Pawn>();
+		public List<Pawn> members = new List<Pawn>();
 		public List<int> postedSince = new List<int>();
 		public Pawn reliefIn;
 		public int reliefSlot = -1;
@@ -149,6 +150,7 @@ namespace RimMarket.Market
 			Scribe_Values.Look(ref routeId, "routeId");
 			Scribe_Values.Look(ref orderId, "orderId");
 			Scribe_Collections.Look(ref posted, "posted", LookMode.Reference);
+			Scribe_Collections.Look(ref members, "members", LookMode.Reference);
 			Scribe_Collections.Look(ref postedSince, "postedSince", LookMode.Value);
 			Scribe_References.Look(ref reliefIn, "reliefIn");
 			Scribe_Values.Look(ref reliefSlot, "reliefSlot", -1);
@@ -160,6 +162,8 @@ namespace RimMarket.Market
 			Scribe_Collections.Look(ref reasonValues, "reasonValues", LookMode.Value);
 			if (Scribe.mode == LoadSaveMode.PostLoadInit)
 			{
+				if (members == null) members = new List<Pawn>();
+				members.RemoveAll(p => p == null);
 				if (repDeltas == null) repDeltas = new List<float>();
 				while (repDeltas.Count < 4) repDeltas.Add(0f);
 				if (reasonKeys == null) reasonKeys = new List<string>();

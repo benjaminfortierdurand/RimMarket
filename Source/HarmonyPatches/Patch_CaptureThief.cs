@@ -19,6 +19,15 @@ namespace RimMarket.HarmonyPatches
 		}
 	}
 
+	[HarmonyPatch(typeof(Faction), nameof(Faction.Notify_MemberStripped))]
+	public static class Patch_Faction_MemberStripped
+	{
+		public static bool Prefix(Pawn member, Faction violator)
+		{
+			return violator == null || !violator.IsPlayer || !ThiefUtility.CaughtThief(member);
+		}
+	}
+
 	[HarmonyPatch(typeof(FloatMenuOptionProvider_CapturePawn), "GetSingleOptionFor",
 		new[] { typeof(Pawn), typeof(FloatMenuContext) })]
 	public static class Patch_FloatMenuCapture

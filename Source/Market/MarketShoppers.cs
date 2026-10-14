@@ -137,21 +137,6 @@ namespace RimMarket.Market
 			return Send(v.map, v.stall, v.faction);
 		}
 
-		public static string LastFailure;
-
-		public static string WhyNotFaction(Faction f, Map map)
-		{
-			if (f.defeated) return "defeated";
-			if (f.Hidden) return "hidden";
-			if (f.temporary) return "temporary";
-			if (!f.def.humanlikeFaction) return "not humanlike";
-			if (MarketUtility.CivilianKind(f) == null) return "no civilians to send (no humanlike pawn kinds)";
-			if (f.HostileTo(Faction.OfPlayer)) return "hostile to you";
-			Lord blocker = MarketTruce.BlockerFor(map, f);
-			if (blocker != null) return "at war with " + (blocker.faction?.Name ?? "?") + ", whose people are on the map (" + (blocker.LordJob?.GetType().Name ?? "?") + ")";
-			return null;
-		}
-
 		private static IntVec3 Destination(Map map, CompMarketStall stall, Thing marker)
 		{
 			IntVec3 c = stall.CustomerCell;
@@ -165,37 +150,17 @@ namespace RimMarket.Market
 
 		public static string Send(Map map, CompMarketStall stall, Faction exclude, float purse = 1f)
 		{
-			LastFailure = null;
-			if (map == null || stall == null || !stall.Spawned)
-			{
-				LastFailure = "the stall is gone";
-				return null;
-			}
+			if (map == null || stall == null || !stall.Spawned) return null;
 			Thing marker = MarketUtility.MarkerFor(stall);
-			if (marker == null)
-			{
-				LastFailure = "the stall is not inside a market marker's square";
-				return null;
-			}
+			if (marker == null) return null;
 			Faction faction = PickFaction(exclude, map);
-			if (faction == null)
-			{
-				LastFailure = "no friendly faction can come right now (none left, or a group at war with them is already on the map)";
-				return null;
-			}
+			if (faction == null) return null;
 			IntVec3 target = Destination(map, stall, marker);
 			if (!RCellFinder.TryFindRandomPawnEntryCell(out IntVec3 entry, map, CellFinder.EdgeRoadChance_Friendly, false,
 				c => map.reachability.CanReach(c, target, PathEndMode.OnCell, TraverseParms.For(TraverseMode.PassDoors))))
-			{
-				LastFailure = "no path from the map edge to the stall (walled in, or the cells around it are blocked)";
 				return null;
-			}
 			PawnKindDef kind = MarketUtility.CivilianKind(faction);
-			if (kind == null)
-			{
-				LastFailure = "no civilians to send";
-				return null;
-			}
+			if (kind == null) return null;
 			var group = new List<Pawn>();
 			int size = Rand.RangeInclusive(1, 3);
 			for (int i = 0; i < size; i++)

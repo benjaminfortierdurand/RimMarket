@@ -532,17 +532,6 @@ namespace RimMarket.Market
 				p.jobs?.EndCurrentJob(JobCondition.InterruptForced);
 		}
 
-		public int DebugAdvanceAuctions()
-		{
-			int now = Find.TickManager.TicksGame;
-			for (int i = 0; i < auctions.Count; i++)
-			{
-				if (auctions[i].state == SlaveAuction.StateWaiting) auctions[i].nextLotTick = now;
-				else auctions[i].lotEndTick = now;
-			}
-			return auctions.Count;
-		}
-
 		private void CancelAuction(SlaveAuction a)
 		{
 			ReleaseFromBlock(a.lot);
@@ -680,35 +669,6 @@ namespace RimMarket.Market
 				? "RimMarket.AwayTakings".Translate(st.itemsSold, Mathf.RoundToInt(st.gross), Mathf.RoundToInt(st.fees)).ToString()
 				: "RimMarket.AwayNoSales".Translate().ToString();
 			AwayStallUtility.Say(head + " " + takings, st, st.itemsSold > 0 ? MessageTypeDefOf.PositiveEvent : MessageTypeDefOf.NeutralEvent);
-		}
-
-		public void DebugRunAwayDay()
-		{
-			for (int i = awayStalls.Count - 1; i >= 0; i--)
-			{
-				AwayStall st = awayStalls[i];
-				while (st.nextHourTick <= st.endTick)
-				{
-					st.nextHourTick += AwayStallUtility.HourTicks;
-					AwayStallUtility.RunHour(st);
-				}
-				EndAwayStall(st, AwayStall.EndNormal);
-			}
-		}
-
-		public void DebugClearAwayCooldowns()
-		{
-			awayCooldowns.Clear();
-		}
-
-		public void DebugSetLedger(Faction faction, float perAxis)
-		{
-			LedgerFor(faction, create: true)?.DebugSet(perAxis);
-		}
-
-		public void DebugClearLedgers()
-		{
-			ledgers.Clear();
 		}
 
 		public void Notify_Browsed(CompMarketStall stall)
@@ -1046,6 +1006,11 @@ namespace RimMarket.Market
 			if (auction != null) Step(() => CancelAuction(auction));
 			Step(() =>
 			{
+				LeavingGroup group = Stragglers.Watch(v);
+				if (group != null) leaving.Add(group);
+			});
+			Step(() =>
+			{
 				if (v.feeMode == RimMarketSettings.FeeShare && v.shareOwed >= 1f && v.LordAlive && v.StallOk)
 					MarketUtility.CollectShare(v);
 			});
@@ -1304,6 +1269,7 @@ namespace RimMarket.Market
 			thefts.Add(t);
 			v.robbed = true;
 			thief.guilt?.Notify_Guilty();
+			MarkThief(thief);
 			if (v.trader != null && v.trader.Spawned)
 				MoteMaker.ThrowText(v.trader.DrawPos, v.map, "RimMarket.MoteThief".Translate(), 4f);
 			Say("RimMarket.MessageSnatched", thief.LabelShortCap, t.lootLabel, v.faction?.Name ?? "?",
@@ -1367,8 +1333,22 @@ namespace RimMarket.Market
 			t.thief?.GetLord()?.ReceiveMemo(LordJob_MarketThief.MemoLeave);
 		}
 
+		private const int KnownThievesKept = 100;
+
+		private List<int> knownThieves = new List<int>();
+
+		public void MarkThief(Pawn thief)
+		{
+			if (thief == null || knownThieves.Contains(thief.thingIDNumber)) return;
+			knownThieves.Add(thief.thingIDNumber);
+			if (knownThieves.Count > KnownThievesKept) knownThieves.RemoveAt(0);
+		}
+
+		public bool WasThief(Pawn p) => p != null && knownThieves.Contains(p.thingIDNumber);
+
 		public void Notify_CulpritCaptured(Pawn thief, Faction faction)
 		{
+			MarkThief(thief);
 			thief.mindState?.SetNoAidRelationsGainUntilTick(int.MaxValue);
 			if (!MessagesRepeatAvoider.MessageShowAllowed("RimMarket.CulpritCaptured." + thief.thingIDNumber, 99999f)) return;
 			Say("RimMarket.MessageCulpritCaptured", thief.LabelShortCap, faction?.Name ?? "?",
@@ -1465,6 +1445,7 @@ namespace RimMarket.Market
 					EndVisit(v, StallVisit.EndLordGone);
 					continue;
 				}
+				Stragglers.Remember(v);
 				LordToil cur = v.lord.CurLordToil;
 				if (cur is LordToil_ExitMapAndEscortCarriers || cur is LordToil_ExitMap || cur is LordToil_ExitMapTraderFighting)
 				{
@@ -1545,6 +1526,8 @@ namespace RimMarket.Market
 			return false;
 		}
 
+		private List<LeavingGroup> leaving = new List<LeavingGroup>();
+
 		public override void GameComponentTick()
 		{
 			if (Find.TickManager.TicksGame % ReputationInterval == 0)
@@ -1555,6 +1538,7 @@ namespace RimMarket.Market
 				if (orders.Count > 0) Step(() => RimMarket.Orders.SpecialOrderUtility.OrdersTick(this));
 				if (notice != null) Step(() => RimMarket.Orders.WantedUtility.Tick(this));
 				if (S.shoppersVisit) Step(ColonyShoppers);
+				if (leaving.Count > 0) Step(() => Stragglers.Tick(leaving));
 			}
 			if (awayStalls.Count > 0 && Find.TickManager.TicksGame % AwayCheckInterval == 0) Step(AwayTick);
 			if (fairs.Count > 0 && Find.TickManager.TicksGame % FairCheckInterval == 0) Step(FairTick);
@@ -1643,8 +1627,13 @@ namespace RimMarket.Market
 			Scribe_Collections.Look(ref fairs, "fairs", LookMode.Deep);
 			Scribe_Values.Look(ref lastFairTick, "lastFairTick");
 			Scribe_Values.Look(ref guideOffered, "guideOffered");
+			Scribe_Collections.Look(ref leaving, "leaving", LookMode.Deep);
+			Scribe_Collections.Look(ref knownThieves, "knownThieves", LookMode.Value);
 			if (Scribe.mode == LoadSaveMode.PostLoadInit)
 			{
+				if (knownThieves == null) knownThieves = new List<int>();
+				if (leaving == null) leaving = new List<LeavingGroup>();
+				leaving.RemoveAll(g => g == null || g.faction == null);
 				if (fairs == null) fairs = new List<GreatFair>();
 				fairs.RemoveAll(f => f == null || f.map == null);
 				if (innPaid == null) innPaid = new Dictionary<int, int>();

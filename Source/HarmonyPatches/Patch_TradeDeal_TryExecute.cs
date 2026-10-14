@@ -12,7 +12,7 @@ namespace RimMarket.HarmonyPatches
 		public static void Prefix(TradeDeal __instance, out Vector2 __state)
 		{
 			__state = Vector2.zero;
-			if (!MarketManager.AnyVisits || TradeSession.giftMode) return;
+			if (!MarketManager.AnyVisits || TradeSession.giftMode || TradeSession.TradeCurrency == TradeCurrency.Favor) return;
 			if (!(TradeSession.trader is Pawn trader) || MarketManager.Instance.VisitFor(trader) == null) return;
 			foreach (Tradeable t in __instance.AllTradeables)
 			{

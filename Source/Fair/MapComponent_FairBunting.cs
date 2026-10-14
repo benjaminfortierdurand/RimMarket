@@ -47,6 +47,8 @@ namespace RimMarket.Fair
 		private static readonly Vector3 PoleSize = new Vector3(1f, 1f, 4.25f);
 		private const float PoleSplitZ = 0.25f;
 		private const float CrownTexCenterZ = 3.05f;
+		private const float FlowersCenterZ = -0.13f;
+		private static readonly Vector3 FlowersSize = new Vector3(1.6f, 1f, 1f);
 		private static readonly Vector3 CrownSize = new Vector3(1.75f, 1f, 1.75f);
 		private const float CrownZ = 3.18f;
 		private const float CrownRadiusX = 0.52f;
@@ -89,6 +91,8 @@ namespace RimMarket.Fair
 		private static readonly Material PoleMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypolePole", ShaderDatabase.Cutout);
 		private static readonly Material CrownMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleCrown", ShaderDatabase.Cutout);
 		private static readonly Material MetalMat = MaterialPool.MatFrom("Things/Fair/RimMarket_LightTower", ShaderDatabase.Cutout);
+		private static readonly Material FlowersBackMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleFlowersBack", ShaderDatabase.Cutout);
+		private static readonly Material FlowersFrontMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleFlowersFront", ShaderDatabase.Cutout);
 		private static readonly float PoleSplitV = (PoleSplitZ - PoleCenterZ) / PoleSize.z + 0.5f;
 		private static readonly Mesh PoleFoot = Slice(0f, PoleSplitV);
 		private static readonly Mesh PoleShaft = Slice(PoleSplitV, 1f);
@@ -273,7 +277,9 @@ namespace RimMarket.Fair
 			}
 			else
 			{
+				DrawMastPart(FlowersBackMat, FlowersCenterZ, FlowersSize, AltitudeLayer.Building.AltitudeFor());
 				DrawMastPart(PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, PoleFoot);
+				DrawMastPart(FlowersFrontMat, FlowersCenterZ, FlowersSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc * 2f);
 				DrawMastPart(PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.PawnState.AltitudeFor(), PoleShaft);
 				DrawMastPart(CrownMat, CrownTexCenterZ, CrownSize, topAlt);
 			}

@@ -143,8 +143,16 @@ namespace RimMarket.Inn
 		public static bool CanAfford(Pawn p)
 		{
 			int price = Price;
-			return price <= 0 || Paid(p) || SilverAmong(Payers(p)) >= price;
+			return price <= 0 || Paid(p) || Free(p) || SilverAmong(Payers(p)) >= price;
 		}
+
+		public static bool Free(Pawn p)
+		{
+			Lord lord = p?.GetLord();
+			return lord != null && FreeVisit(MarketManager.Instance?.VisitFor(lord));
+		}
+
+		private static bool FreeVisit(StallVisit v) => v?.trader?.TraderKind?.tradeCurrency == TradeCurrency.Favor;
 
 		public static bool CanUse(Building_Bed bed, Pawn p)
 		{
@@ -198,7 +206,7 @@ namespace RimMarket.Inn
 				StallVisit v = visits[i];
 				if (v.closed || v.map != map || v.lord == null) continue;
 				List<Pawn> pawns = v.lord.ownedPawns;
-				bool afford = Price <= 0 || SilverAmong(pawns) >= Price;
+				bool afford = Price <= 0 || FreeVisit(v) || SilverAmong(pawns) >= Price;
 				for (int j = 0; j < pawns.Count; j++)
 				{
 					Pawn o = pawns[j];
@@ -249,7 +257,7 @@ namespace RimMarket.Inn
 			if (mgr == null || p == null || bed == null || !bed.Spawned) return false;
 			int now = Find.TickManager.TicksGame;
 			if (mgr.InnPaidUntil(p) > now) return true;
-			int price = Price;
+			int price = Free(p) ? 0 : Price;
 			int got = 0;
 			if (price > 0)
 			{
@@ -373,16 +381,6 @@ namespace RimMarket.Inn
 						else bed.CompAssignableToPawn.ForceRemovePawn(o);
 					}
 				}
-			}
-		}
-
-		public static void Tire(Map map)
-		{
-			IReadOnlyList<Pawn> pawns = map.mapPawns.AllPawnsSpawned;
-			for (int i = 0; i < pawns.Count; i++)
-			{
-				Pawn p = pawns[i];
-				if (MayLodge(p) && p.needs?.rest != null) p.needs.rest.CurLevel = 0.2f;
 			}
 		}
 	}

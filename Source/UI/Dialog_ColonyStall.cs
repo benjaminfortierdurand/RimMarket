@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using RimMarket.Buildings;
 using RimMarket.Market;
 using RimWorld;
@@ -14,10 +15,32 @@ namespace RimMarket.UI
 		private const float ButtonSize = 24f;
 		private const int RefreshFrames = 120;
 		private const float ColItem = 250f;
+		private const float ColQuality = 120f;
+		private const int Slots = 8;
+		private const int NoQuality = 7;
 		private const float ColAvailable = 95f;
 		private const float ColCounter = 95f;
 		private const float ColToSell = 160f;
 		private const float SilverIcon = 20f;
+		private const int CountMaxDigits = 6;
+
+		private static readonly Regex Digits = new Regex("^[0-9]*$");
+
+		private static readonly QualityRange[] Presets =
+		{
+			QualityRange.All,
+			new QualityRange(QualityCategory.Awful, QualityCategory.Awful),
+			new QualityRange(QualityCategory.Awful, QualityCategory.Poor),
+			new QualityRange(QualityCategory.Awful, QualityCategory.Normal),
+			new QualityRange(QualityCategory.Awful, QualityCategory.Good),
+			new QualityRange(QualityCategory.Awful, QualityCategory.Excellent),
+			new QualityRange(QualityCategory.Awful, QualityCategory.Masterwork),
+			new QualityRange(QualityCategory.Good, QualityCategory.Legendary),
+			new QualityRange(QualityCategory.Excellent, QualityCategory.Legendary),
+			new QualityRange(QualityCategory.Masterwork, QualityCategory.Legendary),
+			new QualityRange(QualityCategory.Masterwork, QualityCategory.Masterwork),
+			new QualityRange(QualityCategory.Legendary, QualityCategory.Legendary),
+		};
 
 		private class Row
 		{
@@ -25,9 +48,16 @@ namespace RimMarket.UI
 			public int available;
 			public float unitValue;
 			public float price = ColonyStalls.DefaultPriceFactor;
+			public string buffer;
+			public QualityRange quality = QualityRange.All;
+			public bool hasQuality;
+			public int[] onMap = new int[Slots];
+			public int[] all = new int[Slots];
+			public float[] worth = new float[Slots];
 		}
 
 		private readonly Building_MarketStall stall;
+		private Row editing;
 		private readonly QuickSearchWidget search = new QuickSearchWidget();
 		private readonly Dictionary<ThingDef, Row> rows = new Dictionary<ThingDef, Row>();
 		private readonly List<Row> shown = new List<Row>();
@@ -35,7 +65,7 @@ namespace RimMarket.UI
 		private int refreshFrame = -9999;
 		private bool onlyForSale;
 
-		public override Vector2 InitialSize => new Vector2(880f, 680f);
+		public override Vector2 InitialSize => new Vector2(1000f, 680f);
 
 		public Dialog_ColonyStall(Building_MarketStall stall)
 		{
@@ -50,8 +80,7 @@ namespace RimMarket.UI
 		private void Refresh()
 		{
 			refreshFrame = Time.frameCount;
-			var counts = new Dictionary<ThingDef, int>();
-			var values = new Dictionary<ThingDef, float>();
+			foreach (Row r in rows.Values) Clear(r);
 			Map map = stall.Map;
 			List<Thing> things = map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableEver);
 			for (int i = 0; i < things.Count; i++)
@@ -59,39 +88,76 @@ namespace RimMarket.UI
 				Thing t = things[i];
 				if (!t.Spawned || t.Position.Fogged(map) || t.IsForbidden(Faction.OfPlayer)) continue;
 				if (!ColonyStalls.CanSell(t.def) || !MarketUtility.Tradeable(t)) continue;
-				counts.TryGetValue(t.def, out int n);
-				counts[t.def] = n + t.stackCount;
-				values.TryGetValue(t.def, out float v);
-				values[t.def] = v + t.MarketValue * t.stackCount;
+				Count(RowFor(t.def), t, true);
 			}
 			IReadOnlyList<Thing> stock = stall.Stock;
-			for (int i = 0; i < stock.Count; i++)
-			{
-				Thing t = stock[i];
-				values.TryGetValue(t.def, out float v);
-				values[t.def] = v + t.MarketValue * t.stackCount;
-				if (!counts.ContainsKey(t.def)) counts[t.def] = 0;
-			}
+			for (int i = 0; i < stock.Count; i++) Count(RowFor(stock[i].def), stock[i], false);
 			IReadOnlyList<StallOrder> orders = stall.Orders;
-			for (int i = 0; i < orders.Count; i++)
+			for (int i = 0; i < orders.Count; i++) RowFor(orders[i].def);
+			foreach (Row r in rows.Values) Recount(r);
+		}
+
+		private Row RowFor(ThingDef def)
+		{
+			if (rows.TryGetValue(def, out Row row)) return row;
+			row = new Row { def = def, hasQuality = def.HasComp(typeof(CompQuality)) };
+			StallOrder order = stall.OrderFor(def);
+			if (order != null)
 			{
-				if (!counts.ContainsKey(orders[i].def)) counts[orders[i].def] = 0;
+				row.price = order.priceFactor;
+				row.quality = order.quality;
 			}
-			foreach (Row r in rows.Values) r.available = 0;
-			foreach (KeyValuePair<ThingDef, int> kv in counts)
+			rows[def] = row;
+			return row;
+		}
+
+		private static void Clear(Row r)
+		{
+			for (int i = 0; i < Slots; i++)
 			{
-				if (!rows.TryGetValue(kv.Key, out Row row))
-				{
-					row = new Row { def = kv.Key };
-					StallOrder order = stall.OrderFor(kv.Key);
-					if (order != null) row.price = order.priceFactor;
-					rows[kv.Key] = row;
-				}
-				row.available = kv.Value;
-				int total = kv.Value + stall.HeldOf(kv.Key);
-				values.TryGetValue(kv.Key, out float value);
-				row.unitValue = total > 0 && value > 0f ? value / total : kv.Key.BaseMarketValue;
+				r.onMap[i] = 0;
+				r.all[i] = 0;
+				r.worth[i] = 0f;
 			}
+		}
+
+		private static void Count(Row r, Thing t, bool onMap)
+		{
+			int slot = t.TryGetQuality(out QualityCategory q) ? (int)q : NoQuality;
+			if (onMap) r.onMap[slot] += t.stackCount;
+			r.all[slot] += t.stackCount;
+			r.worth[slot] += t.MarketValue * t.stackCount;
+		}
+
+		private static int OnMap(Row r)
+		{
+			int n = 0;
+			for (int i = 0; i < Slots; i++) n += r.onMap[i];
+			return n;
+		}
+
+		private static bool InRange(Row r, int slot) => slot == NoQuality || r.quality.Includes((QualityCategory)slot);
+
+		private static int Sum(Row r, int[] counts)
+		{
+			int n = 0;
+			for (int i = 0; i < Slots; i++)
+			{
+				if (InRange(r, i)) n += counts[i];
+			}
+			return n;
+		}
+
+		private static void Recount(Row r)
+		{
+			r.available = Sum(r, r.onMap);
+			int n = Sum(r, r.all);
+			float worth = 0f;
+			for (int i = 0; i < Slots; i++)
+			{
+				if (InRange(r, i)) worth += r.worth[i];
+			}
+			r.unitValue = n > 0 && worth > 0f ? worth / n : r.def.BaseMarketValue;
 		}
 
 		private void BuildShown()
@@ -101,7 +167,7 @@ namespace RimMarket.UI
 			{
 				bool forSale = stall.OrderFor(r.def) != null;
 				if (onlyForSale && !forSale) continue;
-				if (!forSale && r.available <= 0 && stall.HeldOf(r.def) <= 0) continue;
+				if (!forSale && OnMap(r) <= 0 && stall.HeldOf(r.def) <= 0) continue;
 				if (search.filter.Active && !search.filter.Matches(r.def)) continue;
 				shown.Add(r);
 			}
@@ -115,6 +181,7 @@ namespace RimMarket.UI
 				Close();
 				return;
 			}
+			if (editing != null && GUI.GetNameOfFocusedControl() != FieldName(editing)) Commit();
 			if (Time.frameCount - refreshFrame > RefreshFrames) Refresh();
 			BuildShown();
 
@@ -205,6 +272,10 @@ namespace RimMarket.UI
 			Widgets.Label(new Rect(x + 58f, rect.y, ColItem - 58f, rect.height), "RimMarket.StallSetupItem".Translate());
 			x += ColItem;
 			Text.Anchor = TextAnchor.MiddleCenter;
+			var qualityRect = new Rect(x, rect.y, ColQuality, rect.height);
+			Widgets.Label(qualityRect, "RimMarket.StallSetupQuality".Translate());
+			TooltipHandler.TipRegion(qualityRect, "RimMarket.StallSetupQualityTip".Translate());
+			x += ColQuality;
 			Widgets.Label(new Rect(x, rect.y, ColAvailable, rect.height), "RimMarket.StallSetupAvailable".Translate());
 			x += ColAvailable;
 			Widgets.Label(new Rect(x, rect.y, ColCounter, rect.height), "RimMarket.StallSetupOnCounter".Translate());
@@ -241,17 +312,28 @@ namespace RimMarket.UI
 			x += ColItem;
 
 			Text.Anchor = TextAnchor.MiddleCenter;
-			Widgets.Label(new Rect(x, rect.y, ColAvailable, rect.height), row.available.ToString());
+			if (row.hasQuality) DrawQuality(new Rect(x + 4f, mid, ColQuality - 8f, ButtonSize), row);
+			else
+			{
+				GUI.color = Color.gray;
+				Widgets.Label(new Rect(x, rect.y, ColQuality, rect.height), "-");
+				GUI.color = Color.white;
+			}
+			x += ColQuality;
+			var availableRect = new Rect(x, rect.y, ColAvailable, rect.height);
+			Widgets.Label(availableRect, row.available.ToString());
+			if (row.hasQuality) TooltipHandler.TipRegion(availableRect, Breakdown(row));
 			x += ColAvailable;
 			Widgets.Label(new Rect(x, rect.y, ColCounter, rect.height), held > 0 ? held.ToString() : "-");
 			x += ColCounter;
 
 			int step = GenUI.CurrentAdjustmentMultiplier();
 			float bx = x + 4f;
+			TooltipHandler.TipRegion(new Rect(bx, mid, ColToSell - 8f, ButtonSize), "RimMarket.StallSetupAdjustTip".Translate());
 			if (Widgets.ButtonText(new Rect(bx, mid, ButtonSize, ButtonSize), "-") && toSell > 0)
 				Apply(row, Mathf.Max(0, toSell - step));
 			bx += ButtonSize;
-			Widgets.Label(new Rect(bx, rect.y, 52f, rect.height), toSell > 0 ? toSell.ToString() : "0");
+			DrawCount(new Rect(bx + 3f, mid, 46f, ButtonSize), row, toSell);
 			bx += 52f;
 			if (Widgets.ButtonText(new Rect(bx, mid, ButtonSize, ButtonSize), "+") && toSell < max)
 				Apply(row, Mathf.Min(max, toSell + step));
@@ -282,9 +364,113 @@ namespace RimMarket.UI
 
 		private static int PriceSteps() => Event.current.shift ? 5 : 1;
 
+		private static string FieldName(Row row) => "RimMarketToSell" + row.def.defName;
+
+		private void DrawCount(Rect rect, Row row, int toSell)
+		{
+			string name = FieldName(row);
+			if (editing != row) row.buffer = toSell.ToString();
+			GUI.SetNextControlName(name);
+			string text = Widgets.TextField(rect, row.buffer, CountMaxDigits, Digits);
+			if (GUI.GetNameOfFocusedControl() != name) return;
+			if (editing != row)
+			{
+				if (editing != null) Commit();
+				editing = row;
+			}
+			row.buffer = text;
+		}
+
+		private void Commit()
+		{
+			Row row = editing;
+			editing = null;
+			if (row == null || stall == null || !stall.Spawned || !stall.ColonyStall) return;
+			int typed = row.buffer.NullOrEmpty() ? 0 : int.Parse(row.buffer);
+			typed = Mathf.Clamp(typed, 0, row.available + stall.HeldOf(row.def));
+			if (typed != (stall.OrderFor(row.def)?.toSell ?? 0)) Apply(row, typed);
+		}
+
+		public override void OnAcceptKeyPressed()
+		{
+			if (editing == null)
+			{
+				base.OnAcceptKeyPressed();
+				return;
+			}
+			Commit();
+			Verse.UI.UnfocusCurrentControl();
+		}
+
+		public override void PreClose()
+		{
+			base.PreClose();
+			Commit();
+		}
+
 		private void Apply(Row row, int toSell)
 		{
-			stall.SetOrder(row.def, toSell, row.price);
+			if (editing == row)
+			{
+				editing = null;
+				Verse.UI.UnfocusCurrentControl();
+			}
+			stall.SetOrder(row.def, toSell, row.price, row.quality);
+		}
+
+		private void DrawQuality(Rect rect, Row row)
+		{
+			if (!Widgets.ButtonText(rect, ShortLabel(row.quality))) return;
+			var options = new List<FloatMenuOption>();
+			for (int i = 0; i < Presets.Length; i++)
+			{
+				QualityRange range = Presets[i];
+				int n = 0;
+				for (int q = 0; q < NoQuality; q++)
+				{
+					if (range.Includes((QualityCategory)q)) n += row.onMap[q];
+				}
+				options.Add(new FloatMenuOption(LongLabel(range) + " (" + n + ")", () => SetQuality(row, range)));
+			}
+			Find.WindowStack.Add(new FloatMenu(options));
+		}
+
+		private void SetQuality(Row row, QualityRange range)
+		{
+			row.quality = range;
+			Recount(row);
+			StallOrder order = stall.OrderFor(row.def);
+			if (order != null) stall.SetOrder(row.def, order.toSell, row.price, range);
+		}
+
+		private static bool IsAll(QualityRange r) => r.min == QualityCategory.Awful && r.max == QualityCategory.Legendary;
+
+		private static string ShortLabel(QualityRange r)
+		{
+			if (IsAll(r)) return "RimMarket.QualityAnyShort".Translate();
+			if (r.min == r.max) return "RimMarket.QualityOnly".Translate(r.min.GetLabel()).CapitalizeFirst();
+			if (r.min == QualityCategory.Awful) return "RimMarket.QualityUpTo".Translate(r.max.GetLabel());
+			if (r.max == QualityCategory.Legendary) return "RimMarket.QualityFromShort".Translate(r.min.GetLabel().CapitalizeFirst());
+			return r.min.GetLabel().CapitalizeFirst() + " - " + r.max.GetLabel();
+		}
+
+		private static string LongLabel(QualityRange r)
+		{
+			if (IsAll(r)) return "RimMarket.QualityAny".Translate();
+			if (r.min == r.max) return "RimMarket.QualityOnly".Translate(r.min.GetLabel()).CapitalizeFirst();
+			if (r.min == QualityCategory.Awful) return "RimMarket.QualityOrWorse".Translate(r.max.GetLabel()).CapitalizeFirst();
+			if (r.max == QualityCategory.Legendary) return "RimMarket.QualityOrBetter".Translate(r.min.GetLabel()).CapitalizeFirst();
+			return ShortLabel(r);
+		}
+
+		private static string Breakdown(Row row)
+		{
+			var parts = new List<string>();
+			for (int q = 0; q < NoQuality; q++)
+			{
+				if (row.onMap[q] > 0) parts.Add(((QualityCategory)q).GetLabel() + " " + row.onMap[q]);
+			}
+			return parts.Count == 0 ? "RimMarket.StallSetupNoneAround".Translate().ToString() : string.Join(", ", parts);
 		}
 
 		private void SetPrice(Row row, float price)

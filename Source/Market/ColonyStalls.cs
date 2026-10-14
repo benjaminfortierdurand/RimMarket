@@ -315,20 +315,5 @@ namespace RimMarket.Market
 			if (s.sales > 0) lines.Add("RimMarket.ColonyStallTakings".Translate(s.takings, s.sales));
 			return string.Join("\n", lines);
 		}
-
-		public static void DebugFill(Building_MarketStall s)
-		{
-			string[] names = { "MealSimple", "MedicineHerbal", "Cloth", "Beer", "Pemmican", "Jade" };
-			for (int i = 0; i < names.Length; i++)
-			{
-				ThingDef def = DefDatabase<ThingDef>.GetNamedSilentFail(names[i]);
-				if (def == null) continue;
-				Thing t = ThingMaker.MakeThing(def, def.MadeFromStuff ? GenStuff.DefaultStuffFor(def) : null);
-				int count = Mathf.Min(def.stackLimit, Rand.RangeInclusive(5, 20));
-				s.SetOrder(def, s.HeldOf(def) + count, s.OrderFor(def)?.priceFactor ?? DefaultPriceFactor);
-				t.stackCount = count;
-				if (!s.StockOwner.TryAdd(t)) t.Destroy();
-			}
-		}
 	}
 }

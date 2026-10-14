@@ -144,7 +144,17 @@
 	<RimMarket.StallSetupToSell>To sell</RimMarket.StallSetupToSell>
 	<RimMarket.StallSetupPrice>Price</RimMarket.StallSetupPrice>
 	<RimMarket.StallSetupAll>All</RimMarket.StallSetupAll>
-	<RimMarket.StallSetupAdjustTip>How many to sell, out of what the colony has. Shift: 10 at a time. Ctrl: 100 at a time. All: everything, or nothing if it is already everything.</RimMarket.StallSetupAdjustTip>
+	<RimMarket.StallSetupQuality>Quality</RimMarket.StallSetupQuality>
+	<RimMarket.StallSetupQualityTip>Only goods in this quality range go on the counter. Pick a range to get rid of your poor stuff, or to sell only the good things.</RimMarket.StallSetupQualityTip>
+	<RimMarket.StallSetupNoneAround>None on the map right now.</RimMarket.StallSetupNoneAround>
+	<RimMarket.QualityAny>Any quality</RimMarket.QualityAny>
+	<RimMarket.QualityAnyShort>Any</RimMarket.QualityAnyShort>
+	<RimMarket.QualityOnly>{0} only</RimMarket.QualityOnly>
+	<RimMarket.QualityOrWorse>{0} or worse</RimMarket.QualityOrWorse>
+	<RimMarket.QualityOrBetter>{0} or better</RimMarket.QualityOrBetter>
+	<RimMarket.QualityUpTo>Up to {0}</RimMarket.QualityUpTo>
+	<RimMarket.QualityFromShort>{0}+</RimMarket.QualityFromShort>
+	<RimMarket.StallSetupAdjustTip>How many to sell, out of what the colony has. Type a number in the box, or use the buttons: hold Shift for 10 at a time, Ctrl for 100. All: everything, or nothing if it is already everything.</RimMarket.StallSetupAdjustTip>
 	<RimMarket.StallSetupPriceHeaderTip>The asking price, as a share of what the article is worth. Shift: 25% at a time.</RimMarket.StallSetupPriceHeaderTip>
 	<RimMarket.StallSetupPriceTip>{0} of what it is worth: {1} silver each. At this price a customer who fancies it buys it {2} of the time.</RimMarket.StallSetupPriceTip>
 	<RimMarket.StallSetupSummary>{0} articles to sell across {1} lines, about {2} silver if it all goes.</RimMarket.StallSetupSummary>
@@ -164,6 +174,12 @@
 	<RimMarket.TradeGizmoLabel>Trade</RimMarket.TradeGizmoLabel>
 	<RimMarket.TradeGizmoDesc>Send a colonist to the counter to trade with {0}.</RimMarket.TradeGizmoDesc>
 	<RimMarket.TraderBusy>the merchant is not trading right now</RimMarket.TraderBusy>
+	<RimMarket.TradeNotNow>{0} can't trade right now: {1}.</RimMarket.TradeNotNow>
+	<RimMarket.TradeWhyGone>gone</RimMarket.TradeWhyGone>
+	<RimMarket.TradeWhyAsleep>asleep, come back when they wake up</RimMarket.TradeWhyAsleep>
+	<RimMarket.TradeWhyUnwell>not in a fit state</RimMarket.TradeWhyUnwell>
+	<RimMarket.TradeWhyLeaving>packing up to leave</RimMarket.TradeWhyLeaving>
+	<RimMarket.TradeWhyBusy>busy with something else, try again in a moment</RimMarket.TradeWhyBusy>
 	<RimMarket.MessageNoNegotiator>Nobody can trade at this stall right now.</RimMarket.MessageNoNegotiator>
 	<RimMarket.PlaceMerchantCellBlocked>The merchant's spot (outlined in white) must be free.</RimMarket.PlaceMerchantCellBlocked>
 	<RimMarket.PaintAwning>Paint the awning</RimMarket.PaintAwning>

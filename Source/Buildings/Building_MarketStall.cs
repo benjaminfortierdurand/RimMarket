@@ -36,6 +36,12 @@ namespace RimMarket.Buildings
 		public int toSell;
 		public float priceFactor = ColonyStalls.DefaultPriceFactor;
 		public int sold;
+		public QualityRange quality = QualityRange.All;
+
+		public bool Allows(Thing t)
+		{
+			return !t.TryGetQuality(out QualityCategory q) || quality.Includes(q);
+		}
 
 		public void ExposeData()
 		{
@@ -43,10 +49,11 @@ namespace RimMarket.Buildings
 			Scribe_Values.Look(ref toSell, "toSell");
 			Scribe_Values.Look(ref priceFactor, "priceFactor", ColonyStalls.DefaultPriceFactor);
 			Scribe_Values.Look(ref sold, "sold");
+			Scribe_Values.Look(ref quality, "quality", QualityRange.All);
 		}
 	}
 
-	public class Building_MarketStall : Building, IThingHolderEvents<Thing>, IHaulEnroute, IHaulDestination, IStoreSettingsParent, IHaulSource, IThingHolder
+	public class Building_MarketStall : Building, IThingHolderEvents<Thing>, IHaulEnroute, IHaulDestination, IStoreSettingsParent, IHaulSource, IThingHolder, IApparelSource
 	{
 		private bool colonyStall;
 		private StallStock stock;
@@ -118,6 +125,10 @@ namespace RimMarket.Buildings
 
 		public bool HaulSourceEnabled => true;
 
+		public bool ApparelSourceEnabled => false;
+
+		public bool RemoveApparel(Apparel apparel) => stock.Remove(apparel);
+
 		public StorageSettings GetStoreSettings() => settings;
 
 		public StorageSettings GetParentStoreSettings() => def.building?.fixedStorageSettings;
@@ -139,9 +150,11 @@ namespace RimMarket.Buildings
 
 		public bool Accepts(Thing t)
 		{
-			if (!colonyStall || t == null || OrderFor(t.def) == null) return false;
+			if (!colonyStall || t == null) return false;
+			StallOrder order = OrderFor(t.def);
+			if (order == null) return false;
 			if (stock.Contains(t)) return true;
-			return stock.CanAcceptAnyOf(t);
+			return order.Allows(t) && stock.CanAcceptAnyOf(t);
 		}
 
 		public int HeldOf(ThingDef def)
@@ -167,7 +180,7 @@ namespace RimMarket.Buildings
 			return RoomFor(stuff);
 		}
 
-		public void SetOrder(ThingDef def, int toSell, float priceFactor)
+		public void SetOrder(ThingDef def, int toSell, float priceFactor, QualityRange quality)
 		{
 			if (def == null) return;
 			StallOrder order = OrderFor(def);
@@ -184,6 +197,7 @@ namespace RimMarket.Buildings
 				}
 				order.toSell = toSell;
 				order.priceFactor = priceFactor;
+				order.quality = quality;
 			}
 			TrimStock();
 			if (Spawned) MapHeld.listerHaulables.Notify_HaulSourceChanged(this);
@@ -206,7 +220,8 @@ namespace RimMarket.Buildings
 			{
 				Thing t = stock[i];
 				kept.TryGetValue(t.def, out int already);
-				int keep = Mathf.Clamp((OrderFor(t.def)?.toSell ?? 0) - already, 0, t.stackCount);
+				StallOrder order = OrderFor(t.def);
+				int keep = order != null && order.Allows(t) ? Mathf.Clamp(order.toSell - already, 0, t.stackCount) : 0;
 				kept[t.def] = already + keep;
 				int excess = t.stackCount - keep;
 				if (excess > 0) stock.TryDrop(t, DropCell(), Map, ThingPlaceMode.Near, excess, out _);
@@ -313,12 +328,6 @@ namespace RimMarket.Buildings
 				defaultDesc = "RimMarket.ColonyStallSetupDesc".Translate(),
 				icon = RimMarketIcons.StallSetup,
 				action = () => Find.WindowStack.Add(new Dialog_ColonyStall(this)),
-			};
-			if (!DebugSettings.godMode) yield break;
-			yield return new Command_Action
-			{
-				defaultLabel = "DEV: Fill with test goods",
-				action = () => ColonyStalls.DebugFill(this),
 			};
 		}
 

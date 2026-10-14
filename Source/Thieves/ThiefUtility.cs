@@ -83,6 +83,13 @@ namespace RimMarket.Thieves
 			return p != null && p.guilt != null && p.guilt.IsGuilty && p.GetLord()?.LordJob is LordJob_MarketThief;
 		}
 
+		public static bool CaughtThief(Pawn p)
+		{
+			if (IsCulprit(p)) return true;
+			if (MarketManager.Instance?.WasThief(p) != true) return false;
+			return p.IsPrisonerOfColony || p.Downed || (p.guilt != null && p.guilt.IsGuilty);
+		}
+
 		public static void OrderCapture(Pawn capturer, Pawn thief)
 		{
 			Building_Bed bed = RestUtility.FindBedFor(thief, capturer, false, false, GuestStatus.Prisoner)
