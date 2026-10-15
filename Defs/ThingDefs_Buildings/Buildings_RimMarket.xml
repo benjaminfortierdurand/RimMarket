@@ -42,7 +42,7 @@
 		<defName>RimMarket_CaravanCamp</defName>
 		<label>caravan camp</label>
 		<thingClass>RimMarket.Buildings.Building_MarketSpot</thingClass>
-		<description>A spot marked on the ground that tells visiting caravans where to leave their pack animals while the merchant works the market. The wares in the saddlebags still count for trading, however far the animals are from the counter.
+		<description>A spot marked on the ground that tells visiting caravans where to leave their pack animals while the merchant works the market. The wares in the saddlebags still count for trading, however far the animals are from the counter, and what you buy is handed over at the counter.
 
 Select the spot to set the radius, fit it to your walls and fences, or hide it once you know where it is. Wall the camp in and the animals stay put: they do not open doors. Off-duty guards wait at the guard rest spot, or just outside the camp if you have none. Without a camp, the animals wait just outside the market, out of the shoppers' way.</description>
 		<drawerType>MapMeshAndRealTime</drawerType>
