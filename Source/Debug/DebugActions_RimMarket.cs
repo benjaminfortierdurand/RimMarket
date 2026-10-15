@@ -1,9 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using LudeonTK;
 using RimMarket.Market;
 using RimMarket.Reputation;
 using RimWorld;
 using Verse;
+using Verse.AI;
 using Verse.AI.Group;
 
 namespace RimMarket.Debug
@@ -16,6 +19,33 @@ namespace RimMarket.Debug
 		private static void EndAll()
 		{
 			MarketManager.Instance?.DebugEndAll();
+		}
+
+		[DebugAction("RimMarket", "Send visitors home",
+			actionType = DebugActionType.ToolMap,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void SendHome()
+		{
+			Map map = Find.CurrentMap;
+			if (map == null) return;
+			Pawn clicked = Verse.UI.MouseCell().GetThingList(map).OfType<Pawn>().FirstOrDefault(p => p.Faction != null && !p.Faction.IsPlayer
+				&& !p.Faction.HostileTo(Faction.OfPlayer) && p.HostFaction == null && !p.IsPrisoner && !p.IsSlave);
+			if (clicked == null) return;
+			Lord lord = clicked.GetLord();
+			StallVisit visit = lord != null ? MarketManager.Instance?.VisitFor(lord) : null;
+			if (visit != null)
+			{
+				visit.closed = true;
+				visit.endReason = StallVisit.EndClosed;
+				Messages.Message("[RimMarket] " + clicked.Faction.Name + " market visit closed, the caravan packs up.", new LookTargets(clicked), MessageTypeDefOf.NeutralEvent, false);
+				return;
+			}
+			List<Pawn> group = lord != null ? lord.ownedPawns.ToList() : new List<Pawn> { clicked };
+			group.RemoveAll(p => p == null || !p.Spawned || p.Dead || p.Downed || p.Faction != clicked.Faction || p.HostFaction != null || p.IsPrisoner || p.IsSlave);
+			if (group.Count == 0) return;
+			for (int i = 0; i < group.Count; i++) group[i].GetLord()?.RemovePawn(group[i]);
+			LordMaker.MakeNewLord(clicked.Faction, new LordJob_ExitMapBest(LocomotionUrgency.Jog, canDig: true), map, group);
+			Messages.Message("[RimMarket] " + group.Count + " " + clicked.Faction.Name + " visitors sent home.", new LookTargets(group), MessageTypeDefOf.NeutralEvent, false);
 		}
 
 		[DebugAction("RimMarket", "Log market state",
