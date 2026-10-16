@@ -3,6 +3,7 @@ using System.Reflection;
 using HarmonyLib;
 using RimWorld;
 using Verse;
+using Verse.AI.Group;
 
 namespace RimMarket.Compat
 {
@@ -14,6 +15,10 @@ namespace RimMarket.Compat
 		private static MethodInfo memoryFor;
 		private static FieldInfo lastTollTick;
 		private static FieldInfo suppressPatch;
+		private static Type tollVisit;
+		private static FieldInfo caseIdField;
+		private static MethodInfo getCase;
+		private static FieldInfo originalJobField;
 
 		public static bool Available
 		{
@@ -41,6 +46,11 @@ namespace RimMarket.Compat
 				lastTollTick = memory.GetField("lastTollTick", BindingFlags.Public | BindingFlags.Instance);
 				suppressPatch = state.GetField("SuppressPatch", BindingFlags.Public | BindingFlags.Static);
 				if (suppressPatch != null && suppressPatch.FieldType != typeof(bool)) suppressPatch = null;
+				tollVisit = AccessTools.TypeByName("RimToll.AI.LordJob_TollVisit");
+				caseIdField = tollVisit?.GetField("caseId", BindingFlags.Public | BindingFlags.Instance);
+				getCase = state.GetMethod("GetCase", BindingFlags.Public | BindingFlags.Instance, null, new[] { typeof(int) }, null);
+				originalJobField = AccessTools.TypeByName("RimToll.TollCase")?.GetField("originalJob", BindingFlags.Public | BindingFlags.Instance);
+				if (caseIdField != null && caseIdField.FieldType != typeof(int)) caseIdField = null;
 			}
 			catch (Exception e)
 			{
@@ -49,6 +59,7 @@ namespace RimMarket.Compat
 				resentmentFor = null;
 				memoryFor = null;
 				lastTollTick = null;
+				caseIdField = null;
 			}
 		}
 
@@ -98,6 +109,27 @@ namespace RimMarket.Compat
 			{
 				Log.Warning("[RimMarket] RimToll resentment read failed: " + e.Message);
 				return 0f;
+			}
+		}
+
+		public static LordJob OriginalJob(Lord lord)
+		{
+			LordJob job = lord?.LordJob;
+			if (job == null) return null;
+			Resolve();
+			if (tollVisit == null || caseIdField == null || getCase == null || originalJobField == null || !tollVisit.IsInstanceOfType(job)) return null;
+			try
+			{
+				object inst = Instance();
+				if (inst == null) return null;
+				object tollCase = getCase.Invoke(inst, new object[] { (int)caseIdField.GetValue(job) });
+				return tollCase == null ? null : originalJobField.GetValue(tollCase) as LordJob;
+			}
+			catch (Exception e)
+			{
+				Log.Warning("[RimMarket] RimToll toll case read failed: " + e.Message);
+				caseIdField = null;
+				return null;
 			}
 		}
 

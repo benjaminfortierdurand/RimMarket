@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RimMarket.Buildings;
+using RimMarket.Compat;
 using RimMarket.Inn;
 using RimWorld;
 using UnityEngine;
@@ -114,7 +115,7 @@ namespace RimMarket.Market
 			List<Lord> lords = map.lordManager.lords;
 			for (int i = 0; i < lords.Count; i++)
 			{
-				if (lords[i].LordJob is LordJob_MarketShoppers) n++;
+				if (lords[i].LordJob is LordJob_MarketShoppers || RimTollBridge.OriginalJob(lords[i]) is LordJob_MarketShoppers) n++;
 			}
 			return n;
 		}
