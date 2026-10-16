@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -14,6 +15,9 @@ namespace RimMarket.Orders
 		private const float CountWidth = 150f;
 		private const float StepButton = 26f;
 		private const float FooterHeight = 60f;
+		private const int CountMaxDigits = 6;
+
+		private static readonly Regex Digits = new Regex("^[0-9]*$");
 
 		private readonly Map map;
 		private readonly List<ThingDef> all;
@@ -21,6 +25,8 @@ namespace RimMarket.Orders
 		private readonly QuickSearchWidget search = new QuickSearchWidget();
 		private readonly List<ThingDef> shown = new List<ThingDef>();
 		private Vector2 scroll;
+		private ThingDef editing;
+		private string buffer;
 
 		public override Vector2 InitialSize => new Vector2(780f, 680f);
 
@@ -43,6 +49,7 @@ namespace RimMarket.Orders
 
 		public override void DoWindowContents(Rect inRect)
 		{
+			if (editing != null && GUI.GetNameOfFocusedControl() != FieldName(editing)) Commit();
 			Text.Font = GameFont.Medium;
 			Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 34f), "RimMarket.WantedWindowTitle".Translate());
 			Text.Font = GameFont.Small;
@@ -95,8 +102,10 @@ namespace RimMarket.Orders
 				Change(d, count - GenUI.CurrentAdjustmentMultiplier());
 				SoundDefOf.Tick_Low.PlayOneShotOnCamera();
 			}
-			Text.Anchor = TextAnchor.MiddleCenter;
-			Widgets.Label(new Rect(cx + StepButton, r.y, CountWidth - StepButton * 2f, r.height), count.ToString());
+			Text.Anchor = TextAnchor.UpperLeft;
+			var field = new Rect(cx + StepButton + 3f, r.y + 3f, CountWidth - StepButton * 2f - 6f, r.height - 6f);
+			DrawCount(field, d, count);
+			TooltipHandler.TipRegion(field, "RimMarket.WantedCountTip".Translate());
 			if (Widgets.ButtonText(new Rect(r.xMax - StepButton, r.y + 2f, StepButton, r.height - 4f), "+"))
 			{
 				Change(d, count + GenUI.CurrentAdjustmentMultiplier());
@@ -105,8 +114,66 @@ namespace RimMarket.Orders
 			Text.Anchor = TextAnchor.UpperLeft;
 		}
 
+		private static string FieldName(ThingDef d) => "RimMarketWanted" + d.defName;
+
+		private void DrawCount(Rect rect, ThingDef d, int count)
+		{
+			string name = FieldName(d);
+			string shownText = editing == d ? buffer : count.ToString();
+			GUI.SetNextControlName(name);
+			string text = Widgets.TextField(rect, shownText, CountMaxDigits, Digits);
+			if (GUI.GetNameOfFocusedControl() != name) return;
+			if (editing != d)
+			{
+				if (editing != null) Commit();
+				editing = d;
+			}
+			buffer = text;
+		}
+
+		private void Commit()
+		{
+			ThingDef d = editing;
+			editing = null;
+			if (d == null) return;
+			int typed = buffer.NullOrEmpty() ? 0 : int.Parse(buffer);
+			wanted.TryGetValue(d, out int before);
+			if (typed == before) return;
+			float unit = SpecialOrderUtility.UnitValue(d);
+			float room = SpecialOrderUtility.MaxGoodsValue - (GoodsValue() - unit * before);
+			int fit = unit > 0f ? Mathf.FloorToInt(room / unit) : typed;
+			if (typed > fit)
+			{
+				Messages.Message("RimMarket.OrderTooBig".Translate(SpecialOrderUtility.MaxGoodsValue.ToStringMoney()), MessageTypeDefOf.RejectInput, historical: false);
+				typed = Mathf.Max(fit, before);
+			}
+			Change(d, typed);
+		}
+
+		public override void OnAcceptKeyPressed()
+		{
+			if (editing == null)
+			{
+				base.OnAcceptKeyPressed();
+				return;
+			}
+			Commit();
+			Verse.UI.UnfocusCurrentControl();
+		}
+
+		public override void PreClose()
+		{
+			base.PreClose();
+			Commit();
+		}
+
 		private void Change(ThingDef d, int count)
 		{
+			if (editing == d)
+			{
+				editing = null;
+				Verse.UI.UnfocusCurrentControl();
+			}
 			if (count <= 0)
 			{
 				wanted.Remove(d);

@@ -486,6 +486,7 @@
 	<RimMarket.WantedWindowTitle>Wanted notice</RimMarket.WantedWindowTitle>
 	<RimMarket.WantedWindowIntro>Name exactly what you want, up to {0} different goods. The notice goes to every town that is not at war with you. Over the next few days some of them answer with an offer: a price, a delay, sometimes only part of the lot, and now and then a barter instead of silver.\n\nOffers usually cost the trip plus a good share of the goods' value, less if they like you. The offer pays for the goods: when the caravan arrives, they are yours.</RimMarket.WantedWindowIntro>
 	<RimMarket.WantedPost>Post the notice</RimMarket.WantedPost>
+	<RimMarket.WantedCountTip>Type an amount, then press Enter or click elsewhere. The buttons go faster with Shift (10 at a time) or Ctrl (100 at a time).</RimMarket.WantedCountTip>
 	<RimMarket.WantedPosted>Your wanted notice is out. Offers should trickle in over the next few days.</RimMarket.WantedPosted>
 	<RimMarket.WantedNobody>Nobody seems interested in your notice. Try other goods, or make some friends first.</RimMarket.WantedNobody>
 	<RimMarket.WantedOfferIn>{0} answered your wanted notice: {1}.</RimMarket.WantedOfferIn>
