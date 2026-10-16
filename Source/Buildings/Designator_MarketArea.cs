@@ -12,6 +12,7 @@ namespace RimMarket.Buildings
 
 		private readonly CompMarketQuarter quarter;
 		private readonly bool add;
+		private readonly Texture2D badge;
 
 		public override bool DragDrawMeasurements => true;
 
@@ -21,9 +22,11 @@ namespace RimMarket.Buildings
 		{
 			this.quarter = quarter;
 			this.add = add;
-			defaultLabel = (add ? "RimMarket.AreaPaint" : "RimMarket.AreaErase").Translate();
-			defaultDesc = (add ? "RimMarket.AreaPaintDesc" : "RimMarket.AreaEraseDesc").Translate();
+			string kind = quarter?.AreaKey ?? "Market";
+			defaultLabel = ((add ? "RimMarket.AreaPaint" : "RimMarket.AreaErase") + kind).Translate();
+			defaultDesc = ((add ? "RimMarket.AreaPaintDesc" : "RimMarket.AreaEraseDesc") + kind).Translate();
 			icon = add ? RimMarketIcons.AreaExpand : RimMarketIcons.AreaClear;
+			badge = quarter?.parent?.def?.uiIcon;
 			useMouseIcon = true;
 			soundDragSustain = add ? SoundDefOf.Designate_DragAreaAdd : SoundDefOf.Designate_DragAreaDelete;
 			soundDragChanged = add ? SoundDefOf.Designate_DragZone_Changed : null;
@@ -41,7 +44,7 @@ namespace RimMarket.Buildings
 				if (!quarter.InReach(c)) return "RimMarket.AreaTooFar".Translate(Mathf.RoundToInt(CompMarketQuarter.MaxRadius));
 				return !quarter.HasRegion || !quarter.InQuarter(c);
 			}
-			if (quarter.IsMarkerCell(c)) return "RimMarket.AreaKeepMarker".Translate();
+			if (quarter.IsMarkerCell(c)) return ("RimMarket.AreaKeep" + quarter.AreaKey).Translate();
 			return quarter.InQuarter(c);
 		}
 
@@ -73,9 +76,11 @@ namespace RimMarket.Buildings
 		{
 			base.DrawIcon(rect, buttonMat, parms);
 			float size = rect.width * BadgeSize;
-			var badge = new Rect(rect.xMax - size - rect.width * 0.04f, rect.yMax - size - rect.height * 0.04f, size, size);
+			var spot = new Rect(rect.xMax - size - rect.width * 0.04f, rect.yMax - size - rect.height * 0.04f, size, size);
+			if (badge == null) return;
 			GUI.color = parms.lowLight ? new Color(1f, 1f, 1f, 0.6f) : Color.white;
-			Widgets.DrawTextureFitted(badge, RimMarketIcons.PaintAwning, 1f);
+			GUI.DrawTexture(spot, RimMarketIcons.AreaBadge);
+			GUI.DrawTexture(spot, badge);
 			GUI.color = Color.white;
 		}
 	}

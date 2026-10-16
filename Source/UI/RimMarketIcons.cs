@@ -19,14 +19,13 @@ namespace RimMarket.UI
 		public static readonly Texture2D PaintAwning = Load("RimMarket_PaintAwning");
 		public static readonly Texture2D WantedNotice = Load("RimMarket_WantedNotice");
 		public static readonly Texture2D Deals = Load("RimMarket_Deals");
+		public static readonly Texture2D AreaBadge = Load("RimMarket_AreaBadge");
 		public static readonly Texture2D StallSetup =
 			ContentFinder<Texture2D>.Get("UI/Commands/SellableItems", reportFailure: false) ?? Trade;
 		public static readonly Texture2D Plus =
 			ContentFinder<Texture2D>.Get("UI/Buttons/Plus", reportFailure: false) ?? Trade;
 		public static readonly Texture2D Minus =
 			ContentFinder<Texture2D>.Get("UI/Buttons/Minus", reportFailure: false) ?? Trade;
-		public static readonly Texture2D Auto =
-			ContentFinder<Texture2D>.Get("UI/Buttons/AutoRebuild", reportFailure: false) ?? Plus;
 		public static readonly Texture2D AreaExpand =
 			ContentFinder<Texture2D>.Get("UI/Designators/AreaAllowedExpand", reportFailure: false) ?? Plus;
 		public static readonly Texture2D AreaClear =

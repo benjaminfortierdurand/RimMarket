@@ -84,26 +84,29 @@
 	<RimMarket.ShowSpotLabel>Show spot</RimMarket.ShowSpotLabel>
 	<RimMarket.ShowSpotDesc>Show or hide the spot on the ground. It keeps working either way, and you can still select it by clicking its cell.</RimMarket.ShowSpotDesc>
 	<RimMarket.OpenMarketLabel>Market open</RimMarket.OpenMarketLabel>
-	<RimMarket.OpenMarketDesc>While open, trade caravans that arrive take a free stall inside this marker's radius. Close it and new caravans idle outside your walls as usual; merchants already at a stall stay until they leave.</RimMarket.OpenMarketDesc>
+	<RimMarket.OpenMarketDesc>While open, trade caravans that arrive take a free stall inside this marker's area. Close it and new caravans idle outside your walls as usual; merchants already at a stall stay until they leave.</RimMarket.OpenMarketDesc>
 	<RimMarket.FeeModeLabel>Fee: {0}</RimMarket.FeeModeLabel>
 	<RimMarket.FeeModeDesc>How merchants pay for a stall in this market. Fee on arrival: silver counted on the counter before they set up. No fee: the stall is free. Or follow the mod setting.</RimMarket.FeeModeDesc>
 	<RimMarket.FeeModeDescShare>Share of takings: a cut of what your guests (Hospitality or Hotels and Recreation) spend at the stall, left on the counter during the visit. What you buy yourself is never taxed.</RimMarket.FeeModeDescShare>
 	<RimMarket.CloseMarketLabel>Close market now</RimMarket.CloseMarketLabel>
 	<RimMarket.CloseMarketDesc>Send every merchant at this market's stalls home right away. They pack up and leave by the usual road. Other markets on the map are not touched, and this does not close the market for future caravans.</RimMarket.CloseMarketDesc>
 	<RimMarket.CloseMarketConfirm>Send {0} merchant(s) packing right now?</RimMarket.CloseMarketConfirm>
-	<RimMarket.RadiusPlus>Radius {0} +</RimMarket.RadiusPlus>
-	<RimMarket.RadiusMinus>Radius {0} -</RimMarket.RadiusMinus>
-	<RimMarket.RadiusDesc>Stalls inside this radius belong to the market. Changing it turns a painted or fitted square back into a circle.</RimMarket.RadiusDesc>
-	<RimMarket.RadiusAuto>Auto</RimMarket.RadiusAuto>
-	<RimMarket.RadiusAutoDesc>Fit the market square to your walls, fences and doors around the marker.</RimMarket.RadiusAutoDesc>
-	<RimMarket.QuarterNotEnclosed>The square is not enclosed within {0} cells of the marker. Close it off or set the radius by hand.</RimMarket.QuarterNotEnclosed>
-	<RimMarket.QuarterAutoFit>Market square fitted to your walls: {0} cells.</RimMarket.QuarterAutoFit>
-	<RimMarket.AreaPaint>Paint market area</RimMarket.AreaPaint>
-	<RimMarket.AreaPaintDesc>Drag to add cells to the market square, like a stockpile zone. Once you paint, your shape replaces the circle. The radius buttons bring the circle back.</RimMarket.AreaPaintDesc>
-	<RimMarket.AreaErase>Erase market area</RimMarket.AreaErase>
-	<RimMarket.AreaEraseDesc>Drag to take cells out of the market square. The marker always stays inside.</RimMarket.AreaEraseDesc>
-	<RimMarket.AreaTooFar>Too far from the marker, the market reaches {0} cells at most.</RimMarket.AreaTooFar>
-	<RimMarket.AreaKeepMarker>The marker has to stay inside the market.</RimMarket.AreaKeepMarker>
+	<RimMarket.AreaPaintMarket>Paint market area</RimMarket.AreaPaintMarket>
+	<RimMarket.AreaPaintDescMarket>Drag to add cells to the market square, like a stockpile zone. Once you paint, your shape replaces the circle.</RimMarket.AreaPaintDescMarket>
+	<RimMarket.AreaEraseMarket>Erase market area</RimMarket.AreaEraseMarket>
+	<RimMarket.AreaEraseDescMarket>Drag to take cells out of the market square. The marker always stays inside.</RimMarket.AreaEraseDescMarket>
+	<RimMarket.AreaKeepMarket>The marker has to stay inside the market.</RimMarket.AreaKeepMarket>
+	<RimMarket.AreaPaintCamp>Paint camp area</RimMarket.AreaPaintCamp>
+	<RimMarket.AreaPaintDescCamp>Drag to add cells where the pack animals wait, like a stockpile zone. Once you paint, your shape replaces the circle.</RimMarket.AreaPaintDescCamp>
+	<RimMarket.AreaEraseCamp>Erase camp area</RimMarket.AreaEraseCamp>
+	<RimMarket.AreaEraseDescCamp>Drag to take cells out of the camp. The spot always stays inside.</RimMarket.AreaEraseDescCamp>
+	<RimMarket.AreaKeepCamp>The camp spot has to stay inside its area.</RimMarket.AreaKeepCamp>
+	<RimMarket.AreaPaintGuard>Paint guard area</RimMarket.AreaPaintGuard>
+	<RimMarket.AreaPaintDescGuard>Drag to add cells where off duty guards sit, chat and eat, like a stockpile zone. Once you paint, your shape replaces the circle.</RimMarket.AreaPaintDescGuard>
+	<RimMarket.AreaEraseGuard>Erase guard area</RimMarket.AreaEraseGuard>
+	<RimMarket.AreaEraseDescGuard>Drag to take cells out of the guards' area. The spot always stays inside.</RimMarket.AreaEraseDescGuard>
+	<RimMarket.AreaKeepGuard>The rest spot has to stay inside its area.</RimMarket.AreaKeepGuard>
+	<RimMarket.AreaTooFar>Too far, this area reaches {0} cells at most from its spot.</RimMarket.AreaTooFar>
 	<RimMarket.MarketOpen>Market open</RimMarket.MarketOpen>
 	<RimMarket.MarketClosed>Market closed to new caravans</RimMarket.MarketClosed>
 	<RimMarket.MarkerStalls>Stalls: {0} ({1} free, {2} taken)</RimMarket.MarkerStalls>
@@ -605,7 +608,7 @@
 	<RimMarket.Guide.GizmoLabel>Guide</RimMarket.Guide.GizmoLabel>
 	<RimMarket.Guide.GizmoDesc>Open the market guide: where to place everything, what your market still needs on this map, and why no caravan has come yet.</RimMarket.Guide.GizmoDesc>
 	<RimMarket.GuideLetterLabel>Your first market</RimMarket.GuideLetterLabel>
-	<RimMarket.GuideLetterText>The marker is down. Now build a few market stalls inside its radius, keep the merchant's spot at the end of each counter free, and leave caravans a way in from the map edge.\n\nSelect the marker and press Guide to see, step by step, what your market still needs and why no caravan has come yet.</RimMarket.GuideLetterText>
+	<RimMarket.GuideLetterText>The marker is down. Now build a few market stalls inside its area, keep the merchant's spot at the end of each counter free, and leave caravans a way in from the map edge.\n\nSelect the marker and press Guide to see, step by step, what your market still needs and why no caravan has come yet.</RimMarket.GuideLetterText>
 	<RimMarket.Guide.Title>Market guide</RimMarket.Guide.Title>
 	<RimMarket.Guide.Progress>Your market: {0} of {1} steps done</RimMarket.Guide.Progress>
 	<RimMarket.Guide.NoMap>Load a colony to see where your market stands.</RimMarket.Guide.NoMap>
@@ -622,18 +625,18 @@
 	<RimMarket.Guide.PlaceAuction>Place an auction post</RimMarket.Guide.PlaceAuction>
 	<RimMarket.Guide.OpenSettings>Open the settings</RimMarket.Guide.OpenSettings>
 	<RimMarket.Guide.MarkerTitle>The market marker</RimMarket.Guide.MarkerTitle>
-	<RimMarket.Guide.MarkerBody>Everything starts with the market marker (Architect, Misc). Put it in the middle of your square: every stall within its radius belongs to the market.\n\nSelect it to fit the radius to your walls in one click or paint the square by hand like a stockpile, set the stall fee, open or close the market, see your reputation and announce a Great Fair. Once the square is built you can hide it.</RimMarket.Guide.MarkerBody>
+	<RimMarket.Guide.MarkerBody>Everything starts with the market marker (Architect, Misc). Put it in the middle of your square: every stall inside its area belongs to the market. The area is a circle around it at first.\n\nSelect it to paint the area by hand like a stockpile or erase part of it, set the stall fee, open or close the market, see your reputation and announce a Great Fair. Once the square is built you can hide it.</RimMarket.Guide.MarkerBody>
 	<RimMarket.Guide.MarkerPlaced>A market marker on this map</RimMarket.Guide.MarkerPlaced>
 	<RimMarket.Guide.MarkerOpen>The market is open</RimMarket.Guide.MarkerOpen>
 	<RimMarket.Guide.StallsTitle>Your stalls</RimMarket.Guide.StallsTitle>
-	<RimMarket.Guide.StallsBody>Build market stalls (Architect, Misc) inside the marker's radius. Each one needs its merchant's spot free: the cell at the end of the counter, outlined in white while you place it.\n\nCaravans walk in from the map edge and open your doors like any friendly visitor, so leave them a way in. The counter takes the colour of its material, and the awning is yours to paint from the stall.</RimMarket.Guide.StallsBody>
-	<RimMarket.Guide.StallInside>At least one stall inside the marker's radius</RimMarket.Guide.StallInside>
-	<RimMarket.Guide.StallNoneOutside>No stall left outside the marker's radius</RimMarket.Guide.StallNoneOutside>
+	<RimMarket.Guide.StallsBody>Build market stalls (Architect, Misc) inside the marker's area. Each one needs its merchant's spot free: the cell at the end of the counter, outlined in white while you place it.\n\nCaravans walk in from the map edge and open your doors like any friendly visitor, so leave them a way in. The counter takes the colour of its material, and the awning is yours to paint from the stall.</RimMarket.Guide.StallsBody>
+	<RimMarket.Guide.StallInside>At least one stall inside the marker's area</RimMarket.Guide.StallInside>
+	<RimMarket.Guide.StallNoneOutside>No stall left outside the marker's area</RimMarket.Guide.StallNoneOutside>
 	<RimMarket.Guide.StallSpotFree>The merchant's spot is free on every stall</RimMarket.Guide.StallSpotFree>
 	<RimMarket.Guide.StallFromEdge>Caravans can walk to every stall from the map edge</RimMarket.Guide.StallFromEdge>
 	<RimMarket.Guide.StallThree>Three stalls or more, for a Great Fair</RimMarket.Guide.StallThree>
 	<RimMarket.Guide.SpotsTitle>Camp and rest spot</RimMarket.Guide.SpotsTitle>
-	<RimMarket.Guide.SpotsBody>Two spots keep the square tidy (Architect, Misc). The caravan camp is where the pack animals wait: fence it in and they stay put. The guard rest spot is where off duty guards sit, chat and eat while one of them stands post at the stall.\n\nBoth are optional. Without them, animals and guards wait just outside the market. Each spot can be hidden once you know where it is.</RimMarket.Guide.SpotsBody>
+	<RimMarket.Guide.SpotsBody>Two spots keep the square tidy (Architect, Misc). The caravan camp is where the pack animals wait: fence it in and they stay put. The guard rest spot is where off duty guards sit, chat and eat while one of them stands post at the stall. Select a spot to paint its area by hand, like a stockpile.\n\nBoth are optional. Without them, animals and guards wait just outside the market. Each spot can be hidden once you know where it is.</RimMarket.Guide.SpotsBody>
 	<RimMarket.Guide.SpotCamp>A caravan camp for the pack animals</RimMarket.Guide.SpotCamp>
 	<RimMarket.Guide.SpotRest>A guard rest spot for the escort</RimMarket.Guide.SpotRest>
 	<RimMarket.Guide.FeesTitle>Fees and haggling</RimMarket.Guide.FeesTitle>

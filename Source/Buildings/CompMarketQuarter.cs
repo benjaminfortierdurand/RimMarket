@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using RimMarket.UI;
-using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -9,6 +7,7 @@ namespace RimMarket.Buildings
 	public class CompProperties_MarketQuarter : CompProperties
 	{
 		public float defaultRadius = CompMarketQuarter.DefRadius;
+		public string areaKey = "Market";
 
 		public CompProperties_MarketQuarter() { compClass = typeof(CompMarketQuarter); }
 	}
@@ -24,6 +23,8 @@ namespace RimMarket.Buildings
 		private HashSet<IntVec3> regionSet;
 
 		public float Radius => radius;
+
+		public string AreaKey => (props as CompProperties_MarketQuarter)?.areaKey ?? "Market";
 
 		public bool HasRegion => regionCells != null && regionCells.Count > 0;
 
@@ -103,80 +104,8 @@ namespace RimMarket.Buildings
 
 		public override IEnumerable<Gizmo> CompGetGizmosExtra()
 		{
-			yield return new Command_Action
-			{
-				defaultLabel = "RimMarket.RadiusPlus".Translate(radius.ToString("F0")),
-				defaultDesc = "RimMarket.RadiusDesc".Translate(),
-				icon = RimMarketIcons.Plus,
-				action = () => { radius = Mathf.Min(MaxRadius, radius + 1f); ClearRegion(); },
-			};
-			yield return new Command_Action
-			{
-				defaultLabel = "RimMarket.RadiusMinus".Translate(radius.ToString("F0")),
-				defaultDesc = "RimMarket.RadiusDesc".Translate(),
-				icon = RimMarketIcons.Minus,
-				action = () => { radius = Mathf.Max(MinRadius, radius - 1f); ClearRegion(); },
-			};
-			yield return new Command_Action
-			{
-				defaultLabel = "RimMarket.RadiusAuto".Translate(),
-				defaultDesc = "RimMarket.RadiusAutoDesc".Translate(),
-				icon = RimMarketIcons.Auto,
-				action = AutoFit,
-			};
 			yield return new Designator_MarketArea(this, add: true);
 			yield return new Designator_MarketArea(this, add: false);
-		}
-
-		private void ClearRegion()
-		{
-			regionCells = null;
-			regionSet = null;
-		}
-
-		private void AutoFit()
-		{
-			Map map = parent.Map;
-			if (map == null || !parent.Spawned) return;
-			IntVec3 origin = parent.Position;
-			float limit = MaxRadius + 2f;
-			var visited = new HashSet<IntVec3> { origin };
-			var reached = new List<IntVec3> { origin };
-			var queue = new Queue<IntVec3>();
-			queue.Enqueue(origin);
-			float maxDist = 0f;
-			bool leaked = false;
-			IntVec3[] dirs = { IntVec3.North, IntVec3.South, IntVec3.East, IntVec3.West };
-			while (queue.Count > 0)
-			{
-				IntVec3 c = queue.Dequeue();
-				for (int i = 0; i < dirs.Length; i++)
-				{
-					IntVec3 n = c + dirs[i];
-					if (!visited.Add(n)) continue;
-					if (!n.InBounds(map)) { leaked = true; continue; }
-					if (!n.Walkable(map)) continue;
-					Building edifice = n.GetEdifice(map);
-					if (edifice is Building_Door) continue;
-					if (edifice != null && edifice.def.IsFence) continue;
-					float dist = n.DistanceTo(origin);
-					if (dist > limit) { leaked = true; continue; }
-					if (dist > maxDist) maxDist = dist;
-					reached.Add(n);
-					queue.Enqueue(n);
-				}
-			}
-			if (leaked)
-			{
-				Messages.Message("RimMarket.QuarterNotEnclosed".Translate(Mathf.RoundToInt(MaxRadius)),
-					MessageTypeDefOf.RejectInput, historical: false);
-				return;
-			}
-			regionCells = reached;
-			regionSet = null;
-			radius = Mathf.Clamp(Mathf.Ceil(maxDist), MinRadius, MaxRadius);
-			Messages.Message("RimMarket.QuarterAutoFit".Translate(reached.Count),
-				MessageTypeDefOf.NeutralEvent, historical: false);
 		}
 	}
 }

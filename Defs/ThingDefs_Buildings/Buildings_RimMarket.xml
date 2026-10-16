@@ -71,6 +71,7 @@ Select the spot to set the radius, fit it to your walls and fences, or hide it o
 		<comps>
 			<li Class="RimMarket.Buildings.CompProperties_MarketQuarter">
 				<defaultRadius>8</defaultRadius>
+				<areaKey>Camp</areaKey>
 			</li>
 		</comps>
 	</ThingDef>
@@ -106,6 +107,7 @@ Select the spot to set the radius, fit it to your walls and fences, or hide it o
 		<comps>
 			<li Class="RimMarket.Buildings.CompProperties_MarketQuarter">
 				<defaultRadius>6</defaultRadius>
+				<areaKey>Guard</areaKey>
 			</li>
 		</comps>
 	</ThingDef>
