@@ -27,6 +27,10 @@ namespace RimMarket.UI
 			ContentFinder<Texture2D>.Get("UI/Buttons/Minus", reportFailure: false) ?? Trade;
 		public static readonly Texture2D Auto =
 			ContentFinder<Texture2D>.Get("UI/Buttons/AutoRebuild", reportFailure: false) ?? Plus;
+		public static readonly Texture2D AreaExpand =
+			ContentFinder<Texture2D>.Get("UI/Designators/AreaAllowedExpand", reportFailure: false) ?? Plus;
+		public static readonly Texture2D AreaClear =
+			ContentFinder<Texture2D>.Get("UI/Designators/AreaAllowedClear", reportFailure: false) ?? Minus;
 
 		private static Texture2D Load(string name)
 			=> ContentFinder<Texture2D>.Get("UI/Commands/" + name, reportFailure: false)

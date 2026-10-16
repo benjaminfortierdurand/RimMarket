@@ -48,6 +48,45 @@ namespace RimMarket.Buildings
 			return parent.Spawned && c.DistanceTo(parent.Position) <= radius + 0.5f;
 		}
 
+		public bool InReach(IntVec3 c) => parent.Spawned && c.DistanceTo(parent.Position) <= MaxRadius + 0.5f;
+
+		public bool IsMarkerCell(IntVec3 c) => parent.Spawned && parent.OccupiedRect().Contains(c);
+
+		public void DrawArea()
+		{
+			if (!parent.Spawned) return;
+			if (HasRegion) GenDraw.DrawFieldEdges(regionCells);
+			else GenDraw.DrawRadiusRing(parent.Position, radius);
+		}
+
+		public void Paint(List<IntVec3> cells, bool add)
+		{
+			if (!parent.Spawned || cells == null) return;
+			HashSet<IntVec3> set = HasRegion ? new HashSet<IntVec3>(regionCells) : StartCells(add);
+			for (int i = 0; i < cells.Count; i++)
+			{
+				if (add) set.Add(cells[i]);
+				else if (!IsMarkerCell(cells[i])) set.Remove(cells[i]);
+			}
+			foreach (IntVec3 c in parent.OccupiedRect().Cells) set.Add(c);
+			regionCells = new List<IntVec3>(set);
+			regionSet = null;
+			float maxDist = 0f;
+			for (int i = 0; i < regionCells.Count; i++) maxDist = Mathf.Max(maxDist, regionCells[i].DistanceTo(parent.Position));
+			radius = Mathf.Clamp(Mathf.Ceil(maxDist), MinRadius, MaxRadius);
+		}
+
+		private HashSet<IntVec3> StartCells(bool add)
+		{
+			var set = new HashSet<IntVec3>();
+			if (add) return set;
+			foreach (IntVec3 c in CellRect.CenteredOn(parent.Position, Mathf.CeilToInt(radius) + 1).Cells)
+			{
+				if (c.InBounds(parent.Map) && c.DistanceTo(parent.Position) <= radius + 0.5f) set.Add(c);
+			}
+			return set;
+		}
+
 		public override void PostExposeData()
 		{
 			base.PostExposeData();
@@ -59,9 +98,7 @@ namespace RimMarket.Buildings
 		public override void PostDrawExtraSelectionOverlays()
 		{
 			base.PostDrawExtraSelectionOverlays();
-			if (!parent.Spawned) return;
-			if (HasRegion) GenDraw.DrawFieldEdges(regionCells);
-			else GenDraw.DrawRadiusRing(parent.Position, radius);
+			DrawArea();
 		}
 
 		public override IEnumerable<Gizmo> CompGetGizmosExtra()
@@ -87,6 +124,8 @@ namespace RimMarket.Buildings
 				icon = RimMarketIcons.Auto,
 				action = AutoFit,
 			};
+			yield return new Designator_MarketArea(this, add: true);
+			yield return new Designator_MarketArea(this, add: false);
 		}
 
 		private void ClearRegion()
