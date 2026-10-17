@@ -288,7 +288,7 @@ namespace RimMarket.Orders
 					traderKind = o.kind,
 					forced = true,
 				};
-				if (Compat.RimTollBridge.WithoutBooth(() => IncidentDefOf.TraderCaravanArrival.Worker.TryExecute(parms)))
+				if (ConvoyBattleUtility.ArriveWith(convoy, () => Compat.RimTollBridge.WithoutBooth(() => IncidentDefOf.TraderCaravanArrival.Worker.TryExecute(parms))))
 				{
 					Lord lord = TradeRouteUtility.NewestTraderLord(map, o.faction);
 					o.arrivedLordId = lord?.loadID ?? -1;

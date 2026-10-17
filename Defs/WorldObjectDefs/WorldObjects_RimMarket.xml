@@ -14,4 +14,20 @@
 		<expandMore>true</expandMore>
 	</WorldObjectDef>
 
+	<WorldObjectDef ParentName="StaticWorldObjectBase">
+		<defName>RimMarket_ConvoyBattle</defName>
+		<label>convoy fight</label>
+		<description>A trade convoy circled up and fighting for its goods, with your people in the middle of it.</description>
+		<worldObjectClass>RimMarket.Routes.ConvoyBattle</worldObjectClass>
+		<texture>World/WorldObjects/Ambush</texture>
+		<expandingIcon>true</expandingIcon>
+		<expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>
+		<expandingIconPriority>85</expandingIconPriority>
+		<expandMore>true</expandMore>
+		<isTempIncidentMapOwner>true</isTempIncidentMapOwner>
+		<comps>
+			<li Class="WorldObjectCompProperties_FormCaravan" />
+		</comps>
+	</WorldObjectDef>
+
 </Defs>

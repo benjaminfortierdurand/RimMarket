@@ -934,7 +934,8 @@ namespace RimMarket.Market
 			}
 			Building_MarketMarker marker = MarketUtility.MarkerFor(stall);
 			RimMarket.Orders.SpecialOrder order = OrderForLord(lord);
-			int feeMode = order != null ? RimMarketSettings.FeeNone : marker?.EffectiveFeeMode ?? S.FeeModeSafe;
+			TradeRoute route = RouteForLord(lord);
+			int feeMode = order != null || (route != null && route.freeVisit) ? RimMarketSettings.FeeNone : marker?.EffectiveFeeMode ?? S.FeeModeSafe;
 			int fee = feeMode == RimMarketSettings.FeeArrival ? MarketUtility.FeeFor(lord) : 0;
 			if (fee > 0 && S.turnAwayIfBroke)
 			{
@@ -965,10 +966,11 @@ namespace RimMarket.Market
 				wealthAtArrival = MarketUtility.CarriedWealth(lord),
 				tolledToday = ReputationUtility.TolledToday(lord.faction),
 				repPriceBonus = S.reputationEffects ? OpinionOf(lord.faction).PriceBonus : 0f,
-				routeId = RouteForLord(lord)?.id ?? 0,
+				routeId = route?.id ?? 0,
 				orderId = order?.id ?? 0,
 			};
 			visits.Add(v);
+			if (route != null) route.freeVisit = false;
 			stall.Notify_VisitStarted();
 			if (order != null && order.Specific) RimMarket.Orders.SpecialOrderUtility.HandOver(order, stall.CustomerCell, map);
 			MarketUtility.TopUpFood(lord, full: true);

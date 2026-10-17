@@ -25,6 +25,7 @@ namespace RimMarket.Routes
 		public int ambushes;
 		public int convoysLost;
 		public int toll;
+		public bool freeVisit;
 
 		public string SettlementName => settlement?.LabelCap ?? "?";
 
@@ -49,6 +50,7 @@ namespace RimMarket.Routes
 			Scribe_Values.Look(ref ambushes, "ambushes");
 			Scribe_Values.Look(ref convoysLost, "convoysLost");
 			Scribe_Values.Look(ref toll, "toll");
+			Scribe_Values.Look(ref freeVisit, "freeVisit");
 		}
 	}
 }

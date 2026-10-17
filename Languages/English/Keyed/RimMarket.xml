@@ -565,9 +565,24 @@
 	<RimMarket.ConvoyRepelled>The trade convoy from {0} fought off {1} and is back on the road, a few hours late.</RimMarket.ConvoyRepelled>
 	<RimMarket.ConvoyPlundered>The trade convoy from {0} got away from {1}, minus about {2} of its goods. It carries on with what is left.</RimMarket.ConvoyPlundered>
 	<RimMarket.ConvoyLost>The trade convoy from {0} was overrun by {1}. The next one leaves as planned.</RimMarket.ConvoyLost>
-	<RimMarket.ConvoyUnderAttack>Under attack by {0}! The fight should be over in about {1}.</RimMarket.ConvoyUnderAttack>
+	<RimMarket.ConvoyUnderAttack>Under attack by {0}! They can hold out for about {1}.</RimMarket.ConvoyUnderAttack>
+	<RimMarket.ConvoyUnderAttackHelped>Under attack by {0}! Your people are fighting alongside them.</RimMarket.ConvoyUnderAttackHelped>
 	<RimMarket.ConvoyEscorted>Travelling with an escort.</RimMarket.ConvoyEscorted>
 	<RimMarket.ConvoyPlunderedLine>Lost about {0} of its goods on the way.</RimMarket.ConvoyPlunderedLine>
+	<RimMarket.ConvoyAmbushedLabel>Convoy ambushed</RimMarket.ConvoyAmbushedLabel>
+	<RimMarket.ConvoyAmbushedHelp>The trade convoy from {0} has been ambushed by {1}!\n\nThey circled up and can hold out for about {2}. Send a caravan if you want to lend a hand, or let them sort it out.</RimMarket.ConvoyAmbushedHelp>
+	<RimMarket.HelpConvoy>Help the convoy</RimMarket.HelpConvoy>
+	<RimMarket.HelpingConvoy>going to help the convoy from {0}</RimMarket.HelpingConvoy>
+	<RimMarket.HelpNotAtWar>you're not at war with {0}</RimMarket.HelpNotAtWar>
+	<RimMarket.HelpNoRoom>something else is already going on there</RimMarket.HelpNoRoom>
+	<RimMarket.HelpFailed>Couldn't set up the convoy fight, they'll have to manage on their own.</RimMarket.HelpFailed>
+	<RimMarket.ConvoyBattleLabel>Convoy under attack</RimMarket.ConvoyBattleLabel>
+	<RimMarket.ConvoyBattleText>{0} found the convoy from {1} circled up and under attack by {2}.\n\nKeep {3} alive and drive the attackers off. If the merchant dies or gets dragged away, the convoy is lost.</RimMarket.ConvoyBattleText>
+	<RimMarket.ConvoySavedLabel>Convoy saved</RimMarket.ConvoySavedLabel>
+	<RimMarket.ConvoySavedText>The attackers are gone. The merchants from {0} load up their wounded and get back on the road.\n\n{1} won't forget it: +{2} goodwill.</RimMarket.ConvoySavedText>
+	<RimMarket.ConvoySavedFee>Their stall fee is on the house when they arrive.</RimMarket.ConvoySavedFee>
+	<RimMarket.ConvoyFellLabel>Convoy lost</RimMarket.ConvoyFellLabel>
+	<RimMarket.ConvoyFellText>The merchant from {0} is gone, and the convoy with them. Whatever they carried is lying around for anyone who wants it.</RimMarket.ConvoyFellText>
 	<RimMarket.RouteNoTowns>They have no town to send convoys from.</RimMarket.RouteNoTowns>
 	<RimMarket.RouteNoRoad>no road to your market</RimMarket.RouteNoRoad>
 	<RimMarket.RouteExists>a route is already open</RimMarket.RouteExists>

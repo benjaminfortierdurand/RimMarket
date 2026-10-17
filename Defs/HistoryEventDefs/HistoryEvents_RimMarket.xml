@@ -26,4 +26,9 @@
 		<label>a good day on the trade route</label>
 	</HistoryEventDef>
 
+	<HistoryEventDef>
+		<defName>RimMarket_ConvoySaved</defName>
+		<label>saved their convoy</label>
+	</HistoryEventDef>
+
 </Defs>

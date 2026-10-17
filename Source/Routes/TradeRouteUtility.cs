@@ -183,9 +183,18 @@ namespace RimMarket.Routes
 
 		public static void StartAmbush(TradeConvoy convoy, Faction attacker)
 		{
-			convoy.BeginAmbush(attacker, Find.TickManager.TicksGame + Rand.Range(AmbushMinTicks, AmbushMaxTicks));
+			int now = Find.TickManager.TicksGame;
+			convoy.BeginAmbush(attacker, now + Rand.Range(AmbushMinTicks, AmbushMaxTicks));
 			TradeRoute r = RouteOf(convoy);
 			if (r != null) r.ambushes++;
+			if (ConvoyBattleUtility.CanHelp(convoy).Accepted)
+			{
+				int hold = ConvoyBattleUtility.HoldOutTicks(convoy);
+				convoy.ambushUntil = now + hold;
+				Find.LetterStack.ReceiveLetter("RimMarket.ConvoyAmbushedLabel".Translate(),
+					"RimMarket.ConvoyAmbushedHelp".Translate(FromName(convoy), attacker?.Name ?? "?", hold.ToStringTicksToPeriod()), LetterDefOf.ThreatSmall, new LookTargets(convoy));
+				return;
+			}
 			if (ShowMessages)
 				Messages.Message("RimMarket.ConvoyAmbushed".Translate(FromName(convoy), attacker?.Name ?? "?"),
 					new LookTargets(convoy), MessageTypeDefOf.ThreatSmall, historical: true);
@@ -213,6 +222,14 @@ namespace RimMarket.Routes
 					Messages.Message("RimMarket.ConvoyPlundered".Translate(from, enemy, plunder.ToStringPercent()), new LookTargets(convoy), MessageTypeDefOf.NegativeEvent, historical: true);
 				return;
 			}
+			LoseConvoy(convoy);
+			if (ShowMessages)
+				Messages.Message("RimMarket.ConvoyLost".Translate(from, enemy), MessageTypeDefOf.NegativeEvent, historical: true);
+		}
+
+		public static void LoseConvoy(TradeConvoy convoy)
+		{
+			TradeRoute r = RouteOf(convoy);
 			if (r != null)
 			{
 				r.convoysLost++;
@@ -220,8 +237,6 @@ namespace RimMarket.Routes
 			}
 			Orders.SpecialOrderUtility.Notify_ConvoyLost(convoy);
 			if (!convoy.Destroyed) convoy.Destroy();
-			if (ShowMessages)
-				Messages.Message("RimMarket.ConvoyLost".Translate(from, enemy), MessageTypeDefOf.NegativeEvent, historical: true);
 		}
 
 		public static void Plunder(Lord lord, float fraction)
@@ -435,7 +450,7 @@ namespace RimMarket.Routes
 					traderKind = r.kind,
 					forced = true,
 				};
-				if (RimTollBridge.WithoutBooth(() => IncidentDefOf.TraderCaravanArrival.Worker.TryExecute(parms)))
+				if (ConvoyBattleUtility.ArriveWith(convoy, () => RimTollBridge.WithoutBooth(() => IncidentDefOf.TraderCaravanArrival.Worker.TryExecute(parms))))
 				{
 					Lord lord = NewestTraderLord(map, r.faction);
 					r.arrivedLordId = lord?.loadID ?? -1;

@@ -22,10 +22,13 @@ namespace RimMarket.Routes
 		public int ambushUntil = -1;
 		public float plunder;
 		private bool ambushedThisTrip;
+		public ConvoyBattle battle;
+		private List<Pawn> survivors = new List<Pawn>();
+		private bool pinPending;
 		private Material cachedMat;
 		private Material attackedMat;
 
-		private static readonly Color AttackedTint = new Color(1f, 0.5f, 0.5f);
+		private const string AttackedTexture = "World/WorldObjects/RimMarket_TradeConvoyAttacked";
 
 		public bool Waiting => waitingSince >= 0;
 
@@ -46,6 +49,45 @@ namespace RimMarket.Routes
 
 		public bool AtEnd => index >= path.Count - 1;
 
+		public bool HasSurvivors => survivors.Count > 0;
+
+		public List<Pawn> Survivors => survivors;
+
+		public void AddSurvivor(Pawn p)
+		{
+			if (p == null || survivors.Contains(p)) return;
+			survivors.Add(p);
+			pinPending = true;
+		}
+
+		public void ClearSurvivors()
+		{
+			Unpin();
+			survivors.Clear();
+		}
+
+		private void Pin()
+		{
+			for (int i = 0; i < survivors.Count; i++)
+			{
+				if (survivors[i] != null && Find.WorldPawns.Contains(survivors[i])) Find.WorldPawns.ForcefullyKeptPawns.Add(survivors[i]);
+			}
+		}
+
+		private void Unpin()
+		{
+			for (int i = 0; i < survivors.Count; i++)
+			{
+				if (survivors[i] != null) Find.WorldPawns.ForcefullyKeptPawns.Remove(survivors[i]);
+			}
+		}
+
+		public override void PostRemove()
+		{
+			base.PostRemove();
+			ClearSurvivors();
+		}
+
 		public void Setup(int routeId, List<int> nodes)
 		{
 			this.routeId = routeId;
@@ -65,6 +107,15 @@ namespace RimMarket.Routes
 				return;
 			}
 			costTotal = costLeft = Caravan_PathFollower.CostToMove(CaravanTicksPerMoveUtility.DefaultTicksPerMove, At(index), At(index + 1));
+		}
+
+		public bool StepForward()
+		{
+			if (index + 2 >= path.Count) return false;
+			index++;
+			Tile = At(index);
+			NextCost();
+			return true;
 		}
 
 		public void JumpToEnd()
@@ -90,10 +141,15 @@ namespace RimMarket.Routes
 		protected override void Tick()
 		{
 			base.Tick();
+			if (pinPending)
+			{
+				pinPending = false;
+				Pin();
+			}
 			int now = Find.TickManager.TicksGame;
 			if (UnderAttack)
 			{
-				if (now >= ambushUntil) TradeRouteUtility.ResolveAmbush(this);
+				if (battle == null && now >= ambushUntil) TradeRouteUtility.ResolveAmbush(this);
 				return;
 			}
 			if (Waiting)
@@ -140,7 +196,7 @@ namespace RimMarket.Routes
 			{
 				if (UnderAttack)
 				{
-					if (attackedMat == null) attackedMat = MaterialPool.MatFrom(def.texture, ShaderDatabase.WorldOverlayTransparentLit, AttackedTint, 3600);
+					if (attackedMat == null) attackedMat = MaterialPool.MatFrom(AttackedTexture, ShaderDatabase.WorldOverlayTransparentLit, Color.white, 3600);
 					return attackedMat;
 				}
 				if (cachedMat == null) cachedMat = MaterialPool.MatFrom(def.texture, ShaderDatabase.WorldOverlayTransparentLit, Color.white, 3600);
@@ -148,7 +204,9 @@ namespace RimMarket.Routes
 			}
 		}
 
-		public override Color ExpandingIconColor => UnderAttack ? AttackedTint : Color.white;
+		public override Color ExpandingIconColor => Color.white;
+
+		public override Texture2D ExpandingIcon => UnderAttack && UI.RimMarketIcons.ConvoyAttacked != null ? UI.RimMarketIcons.ConvoyAttacked : base.ExpandingIcon;
 
 		public override string GetInspectString()
 		{
@@ -156,7 +214,9 @@ namespace RimMarket.Routes
 			TradeRoute route = TradeRouteUtility.RouteOf(this);
 			string home = TradeRouteUtility.HomeOf(this)?.LabelCap ?? "?";
 			string line;
-			if (UnderAttack)
+			if (UnderAttack && battle != null)
+				line = "RimMarket.ConvoyUnderAttackHelped".Translate(attacker?.Name ?? "?").ToString();
+			else if (UnderAttack)
 				line = "RimMarket.ConvoyUnderAttack".Translate(attacker?.Name ?? "?",
 					Mathf.Max(0, ambushUntil - Find.TickManager.TicksGame).ToStringTicksToPeriod()).ToString();
 			else if (Waiting) line = "RimMarket.ConvoyWaiting".Translate(home).ToString();
@@ -167,6 +227,15 @@ namespace RimMarket.Routes
 			if (escort) line += "\n" + "RimMarket.ConvoyEscorted".Translate();
 			if (plunder > 0f) line += "\n" + "RimMarket.ConvoyPlunderedLine".Translate(plunder.ToStringPercent());
 			return text.NullOrEmpty() ? line : text + "\n" + line;
+		}
+
+		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
+		{
+			foreach (FloatMenuOption o in base.GetFloatMenuOptions(caravan)) yield return o;
+			if (!UnderAttack) yield break;
+			foreach (FloatMenuOption o in CaravanArrivalActionUtility.GetFloatMenuOptions(() => ConvoyBattleUtility.CanHelp(this),
+				() => new CaravanArrivalAction_HelpConvoy(this), "RimMarket.HelpConvoy".Translate(), caravan, Tile, this))
+				yield return o;
 		}
 
 		public override void ExposeData()
@@ -184,7 +253,20 @@ namespace RimMarket.Routes
 			Scribe_Values.Look(ref ambushUntil, "ambushUntil", -1);
 			Scribe_Values.Look(ref plunder, "plunder");
 			Scribe_Values.Look(ref ambushedThisTrip, "ambushedThisTrip");
-			if (Scribe.mode == LoadSaveMode.PostLoadInit && path == null) path = new List<int>();
+			if (Scribe.mode == LoadSaveMode.Saving)
+			{
+				survivors.RemoveAll(p => p == null || p.Discarded);
+				if (battle != null && battle.Destroyed) battle = null;
+			}
+			Scribe_References.Look(ref battle, "battle");
+			Scribe_Collections.Look(ref survivors, "survivors", LookMode.Reference);
+			Scribe_Values.Look(ref pinPending, "pinPending");
+			if (Scribe.mode == LoadSaveMode.PostLoadInit)
+			{
+				if (path == null) path = new List<int>();
+				if (survivors == null) survivors = new List<Pawn>();
+				survivors.RemoveAll(p => p == null);
+			}
 		}
 	}
 }

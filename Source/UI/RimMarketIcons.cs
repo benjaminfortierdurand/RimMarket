@@ -30,6 +30,8 @@ namespace RimMarket.UI
 			ContentFinder<Texture2D>.Get("UI/Designators/AreaAllowedExpand", reportFailure: false) ?? Plus;
 		public static readonly Texture2D AreaClear =
 			ContentFinder<Texture2D>.Get("UI/Designators/AreaAllowedClear", reportFailure: false) ?? Minus;
+		public static readonly Texture2D ConvoyAttacked =
+			ContentFinder<Texture2D>.Get("World/WorldObjects/Expanding/RimMarket_TradeConvoyAttacked", reportFailure: false);
 
 		private static Texture2D Load(string name)
 			=> ContentFinder<Texture2D>.Get("UI/Commands/" + name, reportFailure: false)
