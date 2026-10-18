@@ -51,9 +51,12 @@ namespace RimMarket.Jobs
 			for (int i = 0; i < orders.Count; i++)
 			{
 				ThingDef def = orders[i].def;
-				if (def == null || stall.GetSpaceRemainingWithEnroute(def, pawn) <= 0) continue;
-				Thing found = GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(def), PathEndMode.ClosestTouch,
-					TraverseParms.For(pawn), 9999f, x => !x.IsForbidden(pawn) && stall.Accepts(x) && HaulAIUtility.PawnCanAutomaticallyHaulFast(pawn, x, forced));
+				if (def == null) continue;
+				bool art = ColonyStalls.IsArt(def);
+				ThingDef carried = art ? def.minifiedDef : def;
+				if (stall.GetSpaceRemainingWithEnroute(carried, pawn) <= 0 || (art && stall.RoomFor(def) <= 0)) continue;
+				Thing found = GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(carried), PathEndMode.ClosestTouch,
+					TraverseParms.For(pawn), 9999f, x => !x.IsForbidden(pawn) && ColonyStalls.StockDef(x) == def && stall.Accepts(x) && HaulAIUtility.PawnCanAutomaticallyHaulFast(pawn, x, forced));
 				if (found != null) return found;
 			}
 			return null;

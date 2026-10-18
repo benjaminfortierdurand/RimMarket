@@ -179,7 +179,7 @@ namespace RimMarket.Buildings
 			foreach (Thing t in goods)
 			{
 				if (t == null || t is Pawn || t.Destroyed) continue;
-				if (t.def.category != ThingCategory.Item || t.def.graphicData == null) continue;
+				if (t.def.category != ThingCategory.Item || (t.def.graphicData == null && !(t is MinifiedThing))) continue;
 				if (t.def == ThingDefOf.Silver) continue;
 				candidates.Add(t);
 			}
@@ -190,7 +190,7 @@ namespace RimMarket.Buildings
 				bool dup = false;
 				for (int j = 0; j < display.Count; j++)
 				{
-					if (display[j].def == t.def) { dup = true; break; }
+					if (ColonyStalls.StockDef(display[j]) == ColonyStalls.StockDef(t)) { dup = true; break; }
 				}
 				if (!dup) display.Add(t);
 			}

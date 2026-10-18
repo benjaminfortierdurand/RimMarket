@@ -87,11 +87,12 @@ namespace RimMarket.UI
 			{
 				Thing t = things[i];
 				if (!t.Spawned || t.Position.Fogged(map) || t.IsForbidden(Faction.OfPlayer)) continue;
-				if (!ColonyStalls.CanSell(t.def) || !MarketUtility.Tradeable(t)) continue;
-				Count(RowFor(t.def), t, true);
+				ThingDef sold = ColonyStalls.StockDef(t);
+				if (!ColonyStalls.CanSell(sold) || !MarketUtility.Tradeable(t)) continue;
+				Count(RowFor(sold), t, true);
 			}
 			IReadOnlyList<Thing> stock = stall.Stock;
-			for (int i = 0; i < stock.Count; i++) Count(RowFor(stock[i].def), stock[i], false);
+			for (int i = 0; i < stock.Count; i++) Count(RowFor(ColonyStalls.StockDef(stock[i])), stock[i], false);
 			IReadOnlyList<StallOrder> orders = stall.Orders;
 			for (int i = 0; i < orders.Count; i++) RowFor(orders[i].def);
 			foreach (Row r in rows.Values) Recount(r);

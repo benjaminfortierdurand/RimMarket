@@ -64,8 +64,13 @@ namespace RimMarket.Market
 			return k;
 		}
 
+		public static ThingDef StockDef(Thing t) => t is MinifiedThing m && m.InnerThing != null ? m.InnerThing.def : t?.def;
+
+		public static bool IsArt(ThingDef def) => def != null && def.category == ThingCategory.Building && def.Minifiable && def.IsArt;
+
 		public static bool CanSell(ThingDef def)
 		{
+			if (IsArt(def)) return true;
 			if (def == null || def.category != ThingCategory.Item || def == ThingDefOf.Silver) return false;
 			if (def.IsCorpse || def.thingClass == typeof(MinifiedThing)) return false;
 			return def.EverHaulable && def.BaseMarketValue > 0f;
@@ -73,7 +78,7 @@ namespace RimMarket.Market
 
 		private static bool Sellable(Thing t, Building_MarketStall s)
 		{
-			return t != null && !t.Destroyed && t.stackCount > 0 && t.def != ThingDefOf.Silver && MarketUtility.Tradeable(t) && s.OrderFor(t.def) != null;
+			return t != null && !t.Destroyed && t.stackCount > 0 && t.def != ThingDefOf.Silver && MarketUtility.Tradeable(t) && s.OrderFor(StockDef(t)) != null;
 		}
 
 		public static bool HasStock(Building_MarketStall s)
@@ -255,11 +260,11 @@ namespace RimMarket.Market
 			{
 				Thing t = stock[i];
 				if (!Sellable(t, s)) continue;
-				if (UnitPrice(t, s.OrderFor(t.def).priceFactor * keeper) <= silver) affordable.Add(t);
+				if (UnitPrice(t, s.OrderFor(StockDef(t)).priceFactor * keeper) <= silver) affordable.Add(t);
 			}
 			if (affordable.Count == 0) return false;
 			Thing pick = affordable.RandomElement();
-			float baseFactor = s.OrderFor(pick.def).priceFactor;
+			float baseFactor = s.OrderFor(StockDef(pick)).priceFactor;
 			float chance = ChanceFor(baseFactor) + (KeeperAt(s) != null ? KeeperBuyBonus : 0f);
 			if (!Rand.Chance(Mathf.Clamp01(chance))) return false;
 			float unit = UnitPrice(pick, baseFactor * keeper);
@@ -269,7 +274,7 @@ namespace RimMarket.Market
 			int cost = Mathf.Max(1, Mathf.CeilToInt(unit * count));
 			Thing split = s.StockOwner.Take(pick, count);
 			if (split == null) return false;
-			s.Notify_Sold(split.def, split.stackCount);
+			s.Notify_Sold(StockDef(split), split.stackCount);
 			VteBridge.Notify_PlayerSold(split, split.stackCount);
 			price = MarketUtility.TakeAndPlacePayment(new List<Pawn> { buyer }, cost, false, CashCell(s), s.Map);
 			buyer.inventory.TryAddItemNotForSale(split);

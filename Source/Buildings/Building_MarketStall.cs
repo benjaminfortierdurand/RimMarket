@@ -25,7 +25,7 @@ namespace RimMarket.Buildings
 		public override int GetCountCanAccept(Thing item, bool canMergeWithExistingStacks = true)
 		{
 			int count = base.GetCountCanAccept(item, canMergeWithExistingStacks);
-			if (item != null && Owner is Building_MarketStall stall) count = Mathf.Min(count, stall.RoomFor(item.def));
+			if (item != null && Owner is Building_MarketStall stall) count = Mathf.Min(count, stall.RoomFor(ColonyStalls.StockDef(item)));
 			return count;
 		}
 	}
@@ -151,7 +151,7 @@ namespace RimMarket.Buildings
 		public bool Accepts(Thing t)
 		{
 			if (!colonyStall || t == null) return false;
-			StallOrder order = OrderFor(t.def);
+			StallOrder order = OrderFor(ColonyStalls.StockDef(t));
 			if (order == null) return false;
 			if (stock.Contains(t)) return true;
 			return order.Allows(t) && stock.CanAcceptAnyOf(t);
@@ -162,7 +162,7 @@ namespace RimMarket.Buildings
 			int n = 0;
 			for (int i = 0; i < stock.Count; i++)
 			{
-				if (stock[i].def == def) n += stock[i].stackCount;
+				if (ColonyStalls.StockDef(stock[i]) == def) n += stock[i].stackCount;
 			}
 			return n;
 		}
@@ -177,6 +177,15 @@ namespace RimMarket.Buildings
 		public int SpaceRemainingFor(ThingDef stuff)
 		{
 			if (!colonyStall || stuff == null) return 0;
+			if (stuff.thingClass == typeof(MinifiedThing))
+			{
+				int room = 0;
+				for (int i = 0; i < orders.Count; i++)
+				{
+					if (ColonyStalls.IsArt(orders[i].def)) room += RoomFor(orders[i].def);
+				}
+				return room;
+			}
 			return RoomFor(stuff);
 		}
 
@@ -219,10 +228,11 @@ namespace RimMarket.Buildings
 			for (int i = stock.Count - 1; i >= 0; i--)
 			{
 				Thing t = stock[i];
-				kept.TryGetValue(t.def, out int already);
-				StallOrder order = OrderFor(t.def);
+				ThingDef sold = ColonyStalls.StockDef(t);
+				kept.TryGetValue(sold, out int already);
+				StallOrder order = OrderFor(sold);
 				int keep = order != null && order.Allows(t) ? Mathf.Clamp(order.toSell - already, 0, t.stackCount) : 0;
-				kept[t.def] = already + keep;
+				kept[sold] = already + keep;
 				int excess = t.stackCount - keep;
 				if (excess > 0) stock.TryDrop(t, DropCell(), Map, ThingPlaceMode.Near, excess, out _);
 			}
