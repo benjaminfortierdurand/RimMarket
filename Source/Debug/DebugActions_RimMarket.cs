@@ -50,6 +50,79 @@ namespace RimMarket.Debug
 			Messages.Message("[RimMarket] " + group.Count + " " + clicked.Faction.Name + " visitors sent home.", new LookTargets(group), MessageTypeDefOf.NeutralEvent, false);
 		}
 
+		[DebugAction("RimMarket", "Send trade caravan (random)",
+			actionType = DebugActionType.Action,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void SendCaravanRandom()
+		{
+			Map map = Find.CurrentMap;
+			if (map == null) return;
+			Faction faction = ReputationUtility.TraderFactions().RandomElementWithFallback();
+			if (faction == null)
+			{
+				Messages.Message("[RimMarket] no visible friendly faction with caravan traders.", MessageTypeDefOf.RejectInput, false);
+				return;
+			}
+			FireCaravan(map, faction, null);
+		}
+
+		[DebugAction("RimMarket", "Send trade caravan (pick faction and kind)",
+			actionType = DebugActionType.Action,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void SendCaravanPick()
+		{
+			Map map = Find.CurrentMap;
+			if (map == null) return;
+			var options = new List<DebugMenuOption>();
+			foreach (Faction f in ReputationUtility.TraderFactions())
+			{
+				Faction faction = f;
+				if (faction.def.caravanTraderKinds == null) continue;
+				foreach (TraderKindDef k in faction.def.caravanTraderKinds)
+				{
+					TraderKindDef kind = k;
+					options.Add(new DebugMenuOption(faction.Name + " | " + kind.label, DebugMenuOptionMode.Action, () => FireCaravan(map, faction, kind)));
+				}
+			}
+			if (options.Count == 0)
+			{
+				Messages.Message("[RimMarket] no visible friendly faction with caravan traders.", MessageTypeDefOf.RejectInput, false);
+				return;
+			}
+			options.SortBy(o => o.label);
+			Find.WindowStack.Add(new Dialog_DebugOptionListLister(options));
+		}
+
+		[DebugAction("RimMarket", "Send every caravan on map to a stall",
+			actionType = DebugActionType.Action,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void ForceToStall()
+		{
+			Map map = Find.CurrentMap;
+			MarketManager mgr = MarketManager.Instance;
+			if (map == null || mgr == null) return;
+			int n = 0;
+			foreach (Lord lord in map.lordManager.lords.ToList())
+			{
+				if (!(lord.LordJob is LordJob_TradeWithColony) || mgr.VisitFor(lord) != null) continue;
+				if (mgr.TryBeginVisit(lord) == null) continue;
+				n++;
+				lord.CurLordToil?.UpdateAllDuties();
+			}
+			Messages.Message("[RimMarket] " + n + " caravan(s) sent to a stall.", MessageTypeDefOf.NeutralEvent, false);
+		}
+
+		private static void FireCaravan(Map map, Faction faction, TraderKindDef kind)
+		{
+			IncidentDef def = IncidentDefOf.TraderCaravanArrival;
+			IncidentParms parms = StorytellerUtility.DefaultParmsNow(def.category, map);
+			parms.forced = true;
+			parms.faction = faction;
+			parms.traderKind = kind;
+			if (!def.Worker.TryExecute(parms))
+				Messages.Message("[RimMarket] the trade caravan from " + faction.Name + " could not arrive.", MessageTypeDefOf.RejectInput, false);
+		}
+
 		[DebugAction("RimMarket", "Open trade route (free)",
 			actionType = DebugActionType.Action,
 			allowedGameStates = AllowedGameStates.PlayingOnMap)]
