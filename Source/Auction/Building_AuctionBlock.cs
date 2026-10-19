@@ -56,7 +56,7 @@ namespace RimMarket.Auction
 			{
 				defaultLabel = "RimMarket.AuctionBidLabel".Translate(next),
 				defaultDesc = "RimMarket.AuctionBidDesc".Translate(a.lot.LabelShortCap, next),
-				icon = RimMarketIcons.Haggle,
+				icon = RimMarketIcons.Bid,
 				action = () => MarketManager.Instance?.PlayerBid(a),
 			};
 			if (a.leader == SlaveAuction.LeaderPlayer) bid.Disable("RimMarket.AuctionYouLead".Translate());
