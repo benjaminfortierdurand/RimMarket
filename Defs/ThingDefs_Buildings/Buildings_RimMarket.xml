@@ -170,6 +170,7 @@ Select the spot to set the radius, fit it to your walls and fences, or hide it o
 		<comps>
 			<li Class="RimMarket.Buildings.CompProperties_MarketStall">
 				<waresOffset>(0,0,-0.1)</waresOffset>
+				<waresSpacing>0.89</waresSpacing>
 				<verticalWares>1</verticalWares>
 				<verticalWaresOffset>(0,0,-0.08)</verticalWaresOffset>
 				<verticalWaresScale>0.7</verticalWaresScale>

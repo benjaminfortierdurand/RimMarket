@@ -13,6 +13,7 @@ namespace RimMarket.Buildings
 		public bool drawWares = true;
 		public Vector3 waresOffset = Vector3.zero;
 		public float waresScale = 0.62f;
+		public float waresSpacing = 1f;
 		public int verticalWares = 3;
 		public Vector3 verticalWaresOffset = Vector3.zero;
 		public float verticalWaresScale = 0.62f;
@@ -229,14 +230,14 @@ namespace RimMarket.Buildings
 			IntVec3 side = Side;
 			Vector3 offset = vertical ? Props.verticalWaresOffset : Props.waresOffset;
 			float scale = vertical ? Props.verticalWaresScale : Props.waresScale;
+			float spacing = vertical ? 1f : Props.waresSpacing;
 			var size = new Vector3(scale, 1f, scale);
 			int ware = 0;
 			for (int slot = firstSlot; slot < DisplayCount && ware < display.Count; slot++)
 			{
-				IntVec3 cell = Position + side * (slot - 1);
 				Material mat = NextWareMaterial(ref ware);
 				if (mat == null) break;
-				Vector3 pos = cell.ToVector3Shifted() + offset;
+				Vector3 pos = Position.ToVector3Shifted() + side.ToVector3() * ((slot - 1) * spacing) + offset;
 				pos.y = alt;
 				Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(pos, Quaternion.identity, size), mat, 0);
 			}
