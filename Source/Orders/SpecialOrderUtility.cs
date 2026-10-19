@@ -28,6 +28,7 @@ namespace RimMarket.Orders
 		private const int FamilyTries = 60;
 		private const float LostRefund = 0.5f;
 		private const int HandOverTimeout = 6000;
+		private const int DeliveredTimeout = 180000;
 
 		public sealed class OrderFamily
 		{
@@ -236,10 +237,17 @@ namespace RimMarket.Orders
 		{
 			Map map = o.home?.Map;
 			if (map == null || o.arrivedLordId < 0) return false;
+			if (Find.TickManager.TicksGame - o.arrivedTick > DeliveredTimeout) return false;
 			List<Lord> lords = map.lordManager.lords;
 			for (int i = 0; i < lords.Count; i++)
 			{
-				if (lords[i].loadID == o.arrivedLordId) return true;
+				if (lords[i].loadID != o.arrivedLordId) continue;
+				List<Pawn> pawns = lords[i].ownedPawns;
+				for (int k = 0; k < pawns.Count; k++)
+				{
+					if (pawns[k].Spawned && !pawns[k].Dead && !pawns[k].Downed && pawns[k].Map == map) return true;
+				}
+				return false;
 			}
 			return false;
 		}
