@@ -12,6 +12,8 @@ namespace RimMarket.AI
 	{
 		private const int CheckInterval = 250;
 		private const int FeedInterval = 2500;
+		private const int ArrivalFallbackTicks = 5000;
+		private const string ArrivedMemo = "TravelArrived";
 
 		private static readonly List<Pawn> nudged = new List<Pawn>();
 
@@ -157,6 +159,11 @@ namespace RimMarket.AI
 			if (relieved || v.dutiesDirty || DutiesDrifted(v)) UpdateAllDuties();
 			GuardWatch.Nudge(nudged);
 			if (now % FeedInterval == 0) MarketUtility.TopUpFood(lord, full: false);
+			if (!v.arrivalSignalled && (MarketUtility.MerchantAtPost(v) || now - v.startTick > ArrivalFallbackTicks))
+			{
+				v.arrivalSignalled = true;
+				lord.ReceiveMemo(ArrivedMemo);
+			}
 		}
 	}
 }
