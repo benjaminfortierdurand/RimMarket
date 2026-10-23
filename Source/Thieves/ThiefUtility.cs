@@ -301,11 +301,12 @@ namespace RimMarket.Thieves
 			if (loot == null || loot.Destroyed) return false;
 			Pawn carrier = CarrierOf(v);
 			Map map = t.map;
-			Vector3 at = t.thief != null && t.thief.Spawned ? t.thief.DrawPos : (loot.Spawned ? loot.DrawPos : Vector3.zero);
+			Thing anchor = t.thief?.SpawnedParentOrMe;
+			Vector3 at = anchor != null && anchor.Spawned ? anchor.DrawPos : (loot.Spawned ? loot.DrawPos : Vector3.zero);
 			if (carrier == null)
 			{
-				if (!loot.Spawned && loot.holdingOwner != null && t.thief != null && t.thief.Spawned)
-					loot.holdingOwner.TryDrop(loot, t.thief.Position, t.thief.Map, ThingPlaceMode.Near, out Thing _);
+				if (!loot.Spawned && loot.holdingOwner != null && anchor != null && anchor.Spawned)
+					loot.holdingOwner.TryDrop(loot, anchor.Position, anchor.Map, ThingPlaceMode.Near, out Thing _);
 				return false;
 			}
 			if (loot.Spawned)

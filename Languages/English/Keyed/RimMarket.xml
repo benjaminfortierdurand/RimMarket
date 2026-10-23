@@ -229,6 +229,7 @@
 	<RimMarket.MessageSnatched>Thief! {0} grabbed {1} from the {2} stall and is running for it. Right-click the thief with a colonist to tackle them.</RimMarket.MessageSnatched>
 	<RimMarket.MessageThiefDeterred>{0} eyed the stalls, counted the people watching and decided to be honest today.</RimMarket.MessageThiefDeterred>
 	<RimMarket.MessageThiefCaughtBy>{0} tackled the thief {1}. The goods go back to the merchant. Caught red-handed, the thief can go to prison without upsetting their faction, or you can leave them to limp home when they come to.</RimMarket.MessageThiefCaughtBy>
+	<RimMarket.MessageThiefArrested>{0} arrested the thief {1}. The goods go back to the merchant.</RimMarket.MessageThiefArrested>
 	<RimMarket.MessageThiefCaught>The thief {0} is down. The goods go back to the merchant. Caught red-handed, the thief can go to prison without upsetting their faction, or you can leave them to limp home when they come to.</RimMarket.MessageThiefCaught>
 	<RimMarket.MessageCulpritCaptured>{0} was caught red-handed. {1} will not hold the arrest against you, and will not thank you for letting them go either.</RimMarket.MessageCulpritCaptured>
 	<RimMarket.CaughtRedHanded>caught red-handed, no hard feelings</RimMarket.CaughtRedHanded>

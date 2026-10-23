@@ -1316,7 +1316,7 @@ namespace RimMarket.Market
 			ResolveCaught(t, guard);
 		}
 
-		private void ResolveCaught(MarketTheft t, Pawn guard)
+		private void ResolveCaught(MarketTheft t, Pawn guard, bool arrested = false)
 		{
 			thievesCaught++;
 			StallVisit v = VisitById(t.visitId);
@@ -1329,7 +1329,9 @@ namespace RimMarket.Market
 					RimMarketDefOf.RimMarket_ThiefCaught);
 			string thiefName = t.thief?.LabelShortCap ?? "?";
 			LookTargets targets = t.thief != null && t.thief.Spawned ? new LookTargets(t.thief) : null;
-			if (guard != null)
+			if (arrested)
+				Say("RimMarket.MessageThiefArrested", guard.LabelShortCap, thiefName, new LookTargets(guard), MessageTypeDefOf.PositiveEvent);
+			else if (guard != null)
 				Say("RimMarket.MessageThiefCaughtBy", guard.LabelShortCap, thiefName, targets, MessageTypeDefOf.PositiveEvent);
 			else
 				Say("RimMarket.MessageThiefCaught", thiefName, targets, MessageTypeDefOf.PositiveEvent);
@@ -1399,6 +1401,14 @@ namespace RimMarket.Market
 				}
 				if (!th.Spawned)
 				{
+					Pawn carrier = (th.ParentHolder as Pawn_CarryTracker)?.pawn;
+					if (carrier != null && carrier.Faction == Faction.OfPlayer)
+					{
+						thefts.RemoveAt(i);
+						ResolveCaught(t, carrier, arrested: true);
+						continue;
+					}
+					if (th.SpawnedOrAnyParentSpawned) continue;
 					thefts.RemoveAt(i);
 					ResolveEscaped(t);
 					continue;
