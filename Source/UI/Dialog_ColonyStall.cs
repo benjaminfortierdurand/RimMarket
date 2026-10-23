@@ -127,7 +127,7 @@ namespace RimMarket.UI
 			int slot = t.TryGetQuality(out QualityCategory q) ? (int)q : NoQuality;
 			if (onMap) r.onMap[slot] += t.stackCount;
 			r.all[slot] += t.stackCount;
-			r.worth[slot] += t.MarketValue * t.stackCount;
+			r.worth[slot] += ColonyStalls.BaseValue(t) * t.stackCount;
 		}
 
 		private static int OnMap(Row r)
@@ -158,7 +158,7 @@ namespace RimMarket.UI
 			{
 				if (InRange(r, i)) worth += r.worth[i];
 			}
-			r.unitValue = n > 0 && worth > 0f ? worth / n : r.def.BaseMarketValue;
+			r.unitValue = n > 0 && worth > 0f ? worth / n : ColonyStalls.BaseValue(r.def);
 		}
 
 		private void BuildShown()
@@ -247,7 +247,7 @@ namespace RimMarket.UI
 			for (int i = 0; i < orders.Count; i++)
 			{
 				StallOrder o = orders[i];
-				float unit = rows.TryGetValue(o.def, out Row r) ? r.unitValue : o.def.BaseMarketValue;
+				float unit = rows.TryGetValue(o.def, out Row r) ? r.unitValue : ColonyStalls.BaseValue(o.def);
 				worth += ColonyStalls.ShownPrice(unit, o.priceFactor) * o.toSell;
 				units += o.toSell;
 			}

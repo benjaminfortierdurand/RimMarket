@@ -242,7 +242,15 @@ namespace RimMarket.Market
 			return Mathf.RoundToInt(RimMarketMod.Settings.colonyShopperDays / Mathf.Max(0.05f, pull) * GenDate.TicksPerDay);
 		}
 
-		private static float UnitPrice(Thing t, float factor) => Mathf.Max(1f, t.MarketValue * factor);
+		public static float BaseValue(Thing t)
+		{
+			Thing item = t is MinifiedThing m && m.InnerThing != null ? m.InnerThing : t;
+			return t.MarketValue * item.GetStatValue(StatDefOf.SellPriceFactor);
+		}
+
+		public static float BaseValue(ThingDef def) => def.BaseMarketValue * def.GetStatValueAbstract(StatDefOf.SellPriceFactor);
+
+		private static float UnitPrice(Thing t, float factor) => Mathf.Max(1f, BaseValue(t) * factor);
 
 		public static int ShownPrice(float unitValue, float factor) => Mathf.Max(1, Mathf.RoundToInt(unitValue * factor));
 

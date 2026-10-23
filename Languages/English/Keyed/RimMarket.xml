@@ -164,8 +164,8 @@
 	<RimMarket.QualityUpTo>Up to {0}</RimMarket.QualityUpTo>
 	<RimMarket.QualityFromShort>{0}+</RimMarket.QualityFromShort>
 	<RimMarket.StallSetupAdjustTip>How many to sell, out of what the colony has. Type a number in the box, or use the buttons: hold Shift for 10 at a time, Ctrl for 100. All: everything, or nothing if it is already everything.</RimMarket.StallSetupAdjustTip>
-	<RimMarket.StallSetupPriceHeaderTip>The asking price, as a share of what the article is worth. Shift: 25% at a time.</RimMarket.StallSetupPriceHeaderTip>
-	<RimMarket.StallSetupPriceTip>{0} of what it is worth: {1} silver each. At this price a customer who fancies it buys it {2} of the time.</RimMarket.StallSetupPriceTip>
+	<RimMarket.StallSetupPriceHeaderTip>The asking price, as a share of the article's sell value. Like in vanilla, weapons sell for 20% of their worth and furniture for 70%. Shift: 25% at a time.</RimMarket.StallSetupPriceHeaderTip>
+	<RimMarket.StallSetupPriceTip>{0} of its sell value: {1} silver each. At this price a customer who fancies it buys it {2} of the time.</RimMarket.StallSetupPriceTip>
 	<RimMarket.StallSetupSummary>{0} articles to sell across {1} lines, about {2} silver if it all goes.</RimMarket.StallSetupSummary>
 	<RimMarket.StallSetupSummaryNone>Nothing for sale yet.</RimMarket.StallSetupSummaryNone>
 	<RimMarket.StallSetupDrawOff>Shoppers are switched off in the mod settings. Only Hospitality guests buy here.</RimMarket.StallSetupDrawOff>
