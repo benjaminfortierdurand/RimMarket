@@ -7,6 +7,7 @@ using Verse;
 
 namespace RimMarket.Compat
 {
+	[StaticConstructorOnStartup]
 	public static class EgiHologramBridge
 	{
 		public const string PackageId = "vesper.egihologramsandprojectors";
