@@ -150,6 +150,8 @@ namespace RimMarket
 				s.fairCooldownDays = Mathf.RoundToInt(Slider("FairCooldown", s.fairCooldownDays, 5f, 60f, 1f, Days(s.fairCooldownDays), Hint("FairCooldown"), SubIndent));
 			}
 			Check("Reputation", ref s.reputationEffects, Hint("Reputation"));
+			if (s.reputationEffects)
+				s.extraCaravans = Slider("ExtraCaravans", s.extraCaravans, 0f, 2f, 0.1f, s.extraCaravans.ToStringPercent(), Hint("ExtraCaravans"), SubIndent);
 			Check("Messages", ref s.showMessages, Hint("Messages"));
 		}
 

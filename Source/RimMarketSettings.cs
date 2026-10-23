@@ -29,6 +29,7 @@ namespace RimMarket
 		public const bool DefThievesEnabled = true;
 		public const float DefThiefMtbDays = 2.5f;
 		public const bool DefReputationEffects = true;
+		public const float DefExtraCaravans = 1f;
 		public const bool DefAwayStalls = true;
 		public const bool DefSlaveAuctions = true;
 		public const int DefInnPrice = 20;
@@ -63,6 +64,7 @@ namespace RimMarket
 		public bool thievesEnabled = DefThievesEnabled;
 		public float thiefMtbDays = DefThiefMtbDays;
 		public bool reputationEffects = DefReputationEffects;
+		public float extraCaravans = DefExtraCaravans;
 		public bool awayStalls = DefAwayStalls;
 		public bool slaveAuctions = DefSlaveAuctions;
 		public int innPrice = DefInnPrice;
@@ -146,6 +148,7 @@ namespace RimMarket
 			fairCost = DefFairCost;
 			fairCooldownDays = DefFairCooldownDays;
 			reputationEffects = DefReputationEffects;
+			extraCaravans = DefExtraCaravans;
 			showMessages = DefShowMessages;
 		}
 
@@ -181,6 +184,7 @@ namespace RimMarket
 			Scribe_Values.Look(ref thievesEnabled, "thievesEnabled", DefThievesEnabled);
 			Scribe_Values.Look(ref thiefMtbDays, "thiefMtbDays", DefThiefMtbDays);
 			Scribe_Values.Look(ref reputationEffects, "reputationEffects", DefReputationEffects);
+			Scribe_Values.Look(ref extraCaravans, "extraCaravans", DefExtraCaravans);
 			Scribe_Values.Look(ref awayStalls, "awayStalls", DefAwayStalls);
 			Scribe_Values.Look(ref slaveAuctions, "slaveAuctions", DefSlaveAuctions);
 			Scribe_Values.Look(ref innPrice, "innPrice", DefInnPrice);

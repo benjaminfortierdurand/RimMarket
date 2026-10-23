@@ -1504,7 +1504,7 @@ namespace RimMarket.Market
 			for (int i = 0; i < ledgers.Count; i++) ledgers[i].rep?.Decay(now);
 			PurgeStaleWaiting(now);
 			if (!S.reputationEffects) return;
-			float perDay = reputation.ExtraCaravanChancePerDay;
+			float perDay = reputation.ExtraCaravanChancePerDay * Mathf.Max(0f, S.extraCaravans);
 			if (perDay <= 0f) return;
 			List<Map> maps = Find.Maps;
 			for (int i = 0; i < maps.Count; i++)

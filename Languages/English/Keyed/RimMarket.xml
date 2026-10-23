@@ -65,6 +65,8 @@
 	<RimMarket.Settings.GuestsShop>Guests shop at the stalls</RimMarket.Settings.GuestsShop>
 	<RimMarket.Settings.GuestsShopHint>Needs Hospitality or Hotels and Recreation. Guests with silver in their pockets, or budget left for their stay at your hotel, buy wares at the stalls and at your colony stall, and come to watch slave auctions. With the share of takings fee, the market takes its cut of every sale.</RimMarket.Settings.GuestsShopHint>
 	<RimMarket.Settings.Reputation>Reputation</RimMarket.Settings.Reputation>
+	<RimMarket.Settings.ExtraCaravans>Extra caravans from reputation</RimMarket.Settings.ExtraCaravans>
+	<RimMarket.Settings.ExtraCaravansHint>A well liked market draws caravans on top of the ones the storyteller sends, up to one every two days or so. Turn it down for fewer visits, at 0% none come extra. Rarer merchants and better prices still work.</RimMarket.Settings.ExtraCaravansHint>
 	<RimMarket.Settings.ReputationHint>A good reputation brings extra caravans, rarer merchants and better prices. A bad one makes caravans camp outside and prices climb. With this off, the reputation is still kept but changes nothing.</RimMarket.Settings.ReputationHint>
 	<RimMarket.Settings.Thieves>Thieves</RimMarket.Settings.Thieves>
 	<RimMarket.Settings.ThievesHint>Now and then a pickpocket mingles with the crowd, lifts something from a counter and runs for it. The caravan's guards give chase, and your colonists can tackle a fleeing thief with a right click. The more people around a stall, the less a thief dares.</RimMarket.Settings.ThievesHint>
