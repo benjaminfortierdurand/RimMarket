@@ -25,11 +25,11 @@ namespace RimMarket.Buildings
 			public IntVec3 merchant;
 			public IntVec3 customer;
 
-			public Spot(ThingDef def, IntVec3 pos, Rot4 rot)
+			public Spot(ThingDef def, IntVec3 pos, Rot4 rot, bool flipped)
 			{
 				canopy = CanopyRect(def, pos, rot);
 				body = GenAdj.OccupiedRect(pos, rot, def.size);
-				merchant = CompMarketStall.MerchantCellFor(def, pos, rot);
+				merchant = CompMarketStall.MerchantCellFor(def, pos, rot, flipped);
 				customer = CompMarketStall.CustomerCellFor(def, pos, rot);
 			}
 		}
@@ -38,7 +38,7 @@ namespace RimMarket.Buildings
 		{
 			IntVec3 back = CompMarketStall.BackFor(rot);
 			IntVec3 side = CompMarketStall.SideFor(rot);
-			IntVec3 merchant = CompMarketStall.MerchantCellFor(def, center, rot);
+			IntVec3 merchant = CompMarketStall.MerchantCellFor(def, center, rot, CompMarketStall.FlippedOf(thing));
 			BackCells.Clear();
 			BackCells.Add(merchant);
 			if (merchant == center + back)
@@ -74,16 +74,29 @@ namespace RimMarket.Buildings
 		public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null, Thing thing = null)
 		{
 			ThingDef def = checkingDef as ThingDef;
-			IntVec3 merchant = CompMarketStall.MerchantCellFor(def, loc, rot);
+			bool flipped = CompMarketStall.FlippedOf(thing);
+			IntVec3 merchant = CompMarketStall.MerchantCellFor(def, loc, rot, flipped);
 			if (!merchant.InBounds(map) || !merchant.Walkable(map))
 				return "RimMarket.PlaceMerchantCellBlocked".Translate().ToString();
 			if (def == null) return true;
 			IntVec3 customer = CompMarketStall.CustomerCellFor(def, loc, rot);
 			if (!customer.InBounds(map) || !customer.Walkable(map))
 				return "RimMarket.PlaceCustomerCellBlocked".Translate().ToString();
-			string why = Conflict(new Spot(def, loc, rot), map, thingToIgnore, thing);
+			string why = Conflict(new Spot(def, loc, rot, flipped), map, thingToIgnore, thing);
 			if (why != null) return why.Translate().ToString();
 			return true;
+		}
+
+		public static string SwapConflict(CompMarketStall stall)
+		{
+			Thing t = stall.parent;
+			Map map = t.Map;
+			if (map == null) return null;
+			var spot = new Spot(t.def, t.Position, t.Rotation, !stall.flipped);
+			if (!spot.merchant.InBounds(map) || !spot.merchant.Walkable(map))
+				return "RimMarket.PlaceMerchantCellBlocked".Translate().ToString();
+			string why = Conflict(spot, map, t, null);
+			return why?.Translate().ToString();
 		}
 
 		public static Rect CanopyRect(ThingDef def, IntVec3 pos, Rot4 rot)
@@ -150,7 +163,7 @@ namespace RimMarket.Buildings
 				{
 					Thing t = things[i];
 					if (t == ignoreA || t == ignoreB) continue;
-					Others.Add(new Spot(defs[d], t.Position, t.Rotation));
+					Others.Add(new Spot(defs[d], t.Position, t.Rotation, MarketStallDefs.StallOf(t)?.flipped == true));
 				}
 			}
 			CollectPlanned(map.listerThings.ThingsInGroup(ThingRequestGroup.Blueprint), ignoreA, ignoreB);
@@ -164,7 +177,7 @@ namespace RimMarket.Buildings
 				Thing t = planned[i];
 				if (t == ignoreA || t == ignoreB) continue;
 				if (!(t.def.entityDefToBuild is ThingDef built) || !MarketStallDefs.All.Contains(built)) continue;
-				Others.Add(new Spot(built, t.Position, t.Rotation));
+				Others.Add(new Spot(built, t.Position, t.Rotation, CompMarketStall.FlippedOf((t as Blueprint_Install)?.ThingToInstall)));
 			}
 		}
 	}

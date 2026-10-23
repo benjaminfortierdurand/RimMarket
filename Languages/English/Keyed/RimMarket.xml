@@ -127,6 +127,9 @@
 	<RimMarket.StallMarketClosed>The market is closed</RimMarket.StallMarketClosed>
 	<RimMarket.StallBlocked>The merchant's spot is blocked</RimMarket.StallBlocked>
 	<RimMarket.StallUnreachable>Merchants cannot reach the merchant's spot from the map edge</RimMarket.StallUnreachable>
+	<RimMarket.SwapSideLabel>Swap side</RimMarket.SwapSideLabel>
+	<RimMarket.SwapSideDesc>Move the merchant's spot to the other end of the stall.</RimMarket.SwapSideDesc>
+	<RimMarket.SwapSideBusy>A merchant is using this stall</RimMarket.SwapSideBusy>
 	<RimMarket.StallTaken>{0} of {1} ({2})</RimMarket.StallTaken>
 	<RimMarket.StallTimeLeft>Packs up in {0} hours</RimMarket.StallTimeLeft>
 	<RimMarket.StallFeePaid>Stall fee paid: {0} silver</RimMarket.StallFeePaid>

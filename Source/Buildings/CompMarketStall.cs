@@ -52,6 +52,8 @@ namespace RimMarket.Buildings
 		private int reachCheckTick = -99999;
 		private bool reachesEdge;
 
+		public bool flipped;
+
 		private readonly List<Thing> display = new List<Thing>();
 		private bool displayDirty = true;
 		private int lastDisplayTick = -99999;
@@ -78,16 +80,26 @@ namespace RimMarket.Buildings
 
 		public static IntVec3 SideFor(Rot4 rot) => rot.IsHorizontal ? IntVec3.South : IntVec3.East;
 
-		public static IntVec3 MerchantCellFor(ThingDef def, IntVec3 pos, Rot4 rot)
+		public static IntVec3 MerchantCellFor(ThingDef def, IntVec3 pos, Rot4 rot) => MerchantCellFor(def, pos, rot, false);
+
+		public static IntVec3 MerchantCellFor(ThingDef def, IntVec3 pos, Rot4 rot, bool flipped)
 		{
 			CompProperties_MarketStall p = def?.GetCompProperties<CompProperties_MarketStall>();
-			if (p != null && p.merchantAtSide) return pos + SideFor(rot) * (def.size.x / 2 + 1);
+			if (p != null && p.merchantAtSide) return pos + SideFor(rot) * ((flipped ? -1 : 1) * (def.size.x / 2 + 1));
 			return pos + BackFor(rot);
+		}
+
+		public static bool FlippedOf(Thing t)
+		{
+			Thing inner = t is MinifiedThing m ? m.InnerThing : t;
+			return MarketStallDefs.StallOf(inner)?.flipped == true;
 		}
 
 		public IntVec3 Side => SideFor(parent.Rotation);
 
-		public IntVec3 MerchantCell => MerchantCellFor(parent.def, Position, parent.Rotation);
+		public IntVec3 MerchantSide => Side * (flipped ? -1 : 1);
+
+		public IntVec3 MerchantCell => MerchantCellFor(parent.def, Position, parent.Rotation, flipped);
 
 		public static IntVec3 CustomerCellFor(ThingDef def, IntVec3 pos, Rot4 rot)
 		{
@@ -297,6 +309,12 @@ namespace RimMarket.Buildings
 			return null;
 		}
 
+		public override void PostExposeData()
+		{
+			base.PostExposeData();
+			Scribe_Values.Look(ref flipped, "merchantFlipped");
+		}
+
 		public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
 		{
 			base.PostDeSpawn(map, mode);
@@ -352,6 +370,18 @@ namespace RimMarket.Buildings
 			return string.Join("\n", lines);
 		}
 
+		private void SwapSide()
+		{
+			string why = PlaceWorker_MarketStall.SwapConflict(this);
+			if (why != null)
+			{
+				Messages.Message(why, parent, MessageTypeDefOf.RejectInput, false);
+				return;
+			}
+			flipped = !flipped;
+			reachCheckTick = -99999;
+		}
+
 		private bool MerchantReachesEdge()
 		{
 			int now = Find.TickManager.TicksGame;
@@ -367,6 +397,18 @@ namespace RimMarket.Buildings
 		{
 			foreach (Gizmo g in base.CompGetGizmosExtra()) yield return g;
 			StallVisit v = Visit;
+			if (Props.merchantAtSide && parent.Faction == Faction.OfPlayer)
+			{
+				var swap = new Command_Action
+				{
+					defaultLabel = "RimMarket.SwapSideLabel".Translate(),
+					defaultDesc = "RimMarket.SwapSideDesc".Translate(),
+					icon = RimMarketIcons.SwapSide,
+					action = SwapSide,
+				};
+				if (v != null) swap.Disable("RimMarket.SwapSideBusy".Translate());
+				yield return swap;
+			}
 			if (v == null) yield break;
 			yield return new Command_Action
 			{

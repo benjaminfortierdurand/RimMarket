@@ -33,6 +33,11 @@ namespace RimMarket.Buildings
 			Rot4 rot = stall.parent.Rotation;
 			Vector3 offset = rot.IsHorizontal ? stall.Props.bannerOffsetVertical : stall.Props.bannerOffset;
 			if (rot == Rot4.West) offset.x = -offset.x;
+			if (stall.flipped)
+			{
+				if (rot.IsHorizontal) offset.z = -offset.z;
+				else offset.x = -offset.x;
+			}
 			Vector3 top = stall.parent.TrueCenter() + offset + new Vector3(0f, 0f, Size.z / 2f);
 			float wind = stall.Map?.windManager.WindSpeed ?? 0f;
 			float sway = Mathf.Sin(Time.realtimeSinceStartup * 1.3f + stall.parent.thingIDNumber) * (BaseSway + WindSway * Mathf.Clamp01(wind));

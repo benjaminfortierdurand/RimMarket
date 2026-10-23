@@ -191,7 +191,7 @@ namespace RimMarket.AI
 			var cells = new List<IntVec3>();
 			Map map = stall.Map;
 			if (map == null) return cells;
-			IntVec3 right = stall.Side;
+			IntVec3 right = stall.MerchantSide;
 			IntVec3 front = stall.Front;
 			IntVec3 merchant = stall.MerchantCell;
 			int reach = stall.parent.def.size.x / 2 + 1;

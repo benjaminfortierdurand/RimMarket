@@ -20,6 +20,7 @@ namespace RimMarket.UI
 		public static readonly Texture2D WantedNotice = Load("RimMarket_WantedNotice");
 		public static readonly Texture2D Deals = Load("RimMarket_Deals");
 		public static readonly Texture2D AreaBadge = Load("RimMarket_AreaBadge");
+		public static readonly Texture2D SwapSide = Load("RimMarket_SwapSide");
 		public static readonly Texture2D StallSetup =
 			ContentFinder<Texture2D>.Get("UI/Commands/SellableItems", reportFailure: false) ?? Trade;
 		public static readonly Texture2D Plus =
