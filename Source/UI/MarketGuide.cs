@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RimMarket.Buildings;
+using RimMarket.Compat;
 using RimMarket.Inn;
 using RimMarket.Market;
 using RimWorld;
@@ -100,6 +101,16 @@ namespace RimMarket.UI
 			new GuideChapter { key = "Routes", art = Art("Wanted"), advanced = true },
 			new GuideChapter { key = "Diag", diagnostic = true, checks = Diagnose },
 		};
+
+		static MarketGuide()
+		{
+			if (!HegemonyBridge.Installed) return;
+			Chapters.Insert(Chapters.Count - 1, new GuideChapter
+			{
+				key = "Hegemony", advanced = true, checks = HegemonyLines,
+				actions = { new GuideAction { label = "RimMarket.Guide.OpenSettings", act = OpenSettings, enabled = m => true } },
+			});
+		}
 
 		private static Texture2D Art(string name) => ContentFinder<Texture2D>.Get("UI/Guide/RimMarket_Guide" + name, false);
 
@@ -217,6 +228,24 @@ namespace RimMarket.UI
 				new GuideCheck("RimMarket.Guide.FeeHaggle".Translate(haggle), true, GuideLine.Info),
 				new GuideCheck("RimMarket.Guide.FeeDay".Translate("RimMarket.Settings.Days".Translate(s.marketDays.ToString("0.##"))), true, GuideLine.Info),
 			};
+		}
+
+		private static List<GuideCheck> HegemonyLines(Map map)
+		{
+			RimMarketSettings s = RimMarketMod.Settings;
+			return new List<GuideCheck>
+			{
+				OnOff("HegemonyPrices", s.hegemonyPrices),
+				OnOff("HegemonyStock", s.hegemonyStock),
+				OnOff("HegemonyGoodwill", s.hegemonyGoodwill),
+				OnOff("HegemonyTerritory", s.hegemonyTerritory),
+			};
+		}
+
+		private static GuideCheck OnOff(string key, bool on)
+		{
+			string state = (on ? "RimMarket.Guide.On" : "RimMarket.Guide.Off").Translate();
+			return new GuideCheck("RimMarket.Guide.SettingState".Translate(("RimMarket.Settings." + key).Translate(), state), on, GuideLine.Info);
 		}
 
 		private static List<GuideCheck> ColonyChecks(Map map)
