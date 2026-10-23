@@ -141,7 +141,7 @@ namespace RimMarket.Away
 		{
 			if (!stock.TryRandomElementByWeight(t => Mathf.Sqrt(t.MarketValue * t.stackCount), out Thing item)) return;
 			float budget = Rand.Range(MinBudget, MaxBudget) * BudgetFactor(st.Host);
-			float unitPrice = item.MarketValue * factor;
+			float unitPrice = item.MarketValue * factor * HegemonyBridge.ScarcityFactor(st.settlement, item.def);
 			int count;
 			if (unitPrice <= budget) count = Mathf.Min(item.stackCount, Mathf.Max(1, Mathf.FloorToInt(budget / unitPrice)));
 			else if (Rand.Chance(budget / unitPrice)) count = 1;
@@ -153,8 +153,9 @@ namespace RimMarket.Away
 		{
 			Thing sold = item.SplitOff(count);
 			VteBridge.Notify_PlayerSold(sold, count);
-			if (!sold.Destroyed) sold.Destroy();
+			if (!HegemonyBridge.Credit(st.settlement, sold) && !sold.Destroyed) sold.Destroy();
 			float value = unitPrice * count;
+			HegemonyBridge.RecordTrade(st.Host, value);
 			float fee = value * FeeRate(st);
 			st.gross += value;
 			st.fees += fee;
@@ -201,7 +202,7 @@ namespace RimMarket.Away
 			}
 			if (best == null) return;
 			string label = best.LabelNoCount;
-			float price = best.MarketValue * factor * RichPremium;
+			float price = best.MarketValue * factor * RichPremium * HegemonyBridge.ScarcityFactor(st.settlement, best.def);
 			Sell(st, best, 1, price);
 			Say("RimMarket.AwayEventRich".Translate(label, Mathf.RoundToInt(price)), st, MessageTypeDefOf.PositiveEvent);
 		}

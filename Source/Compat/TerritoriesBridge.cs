@@ -51,7 +51,8 @@ namespace RimMarket.Compat
 		public static Faction HostileClaimant(PlanetTile tile, Faction traveller)
 		{
 			Resolve();
-			if (claimants == null || traveller == null || !tile.Valid) return null;
+			if (claimants == null) return HegemonyBridge.HostileClaimant(tile, traveller);
+			if (traveller == null || !tile.Valid) return null;
 			try
 			{
 				ids.Clear();

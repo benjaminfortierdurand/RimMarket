@@ -491,6 +491,7 @@ namespace RimMarket.Market
 				}
 				ReleaseFromBlock(lot);
 				trader?.trader?.GiveSoldThingToPlayer(lot, 1, negotiator);
+				HegemonyBridge.RecordTrade(v.faction, a.price);
 				Say("RimMarket.AuctionSoldToYou", lot.LabelShortCap, a.price, new LookTargets(lot), MessageTypeDefOf.PositiveEvent);
 			}
 			else if (a.leader == SlaveAuction.LeaderBidder && a.Leader != null)

@@ -290,6 +290,7 @@ namespace RimMarket.Market
 			s.takings += price;
 			s.sales++;
 			MarketManager.Instance?.RecordColonySale(price);
+			HegemonyBridge.RecordTrade(buyer.Faction, price);
 			KeeperAt(s)?.skills?.Learn(SkillDefOf.Social, SaleXp);
 			return true;
 		}
