@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Reflection;
 using HarmonyLib;
 using RimWorld;
@@ -21,18 +20,16 @@ namespace RimMarket.Compat
 		private static bool active;
 		private static bool resolved;
 		private static bool failed;
+		private static MethodInfo tryGetState;
+		private static MethodInfo tryGetPrice;
+		private static MethodInfo tryCredit;
+		private static MethodInfo recordTrade;
 		private static PropertyInfo componentCurrent;
-		private static PropertyInfo statesProp;
-		private static FieldInfo stateSettlement;
 		private static PropertyInfo territoryProp;
 		private static MethodInfo tryGetClaim;
 		private static PropertyInfo claimOwner;
 		private static PropertyInfo claimRunnerUp;
 		private static PropertyInfo claimContested;
-		private static MethodInfo priceMethod;
-		private static MethodInfo creditMethod;
-		private static PropertyInfo ledgerCurrent;
-		private static MethodInfo recordTrade;
 
 		public static bool Active
 		{
@@ -53,13 +50,19 @@ namespace RimMarket.Compat
 			resolved = true;
 			try
 			{
-				Type component = AccessTools.TypeByName("FactionTerritories2.Component");
+				Type api = AccessTools.TypeByName("FactionTerritories2.HegemonyApi");
 				Type state = AccessTools.TypeByName("FactionTerritories2.SettlementState");
-				if (component == null || state == null) return;
-				componentCurrent = AccessTools.Property(component, "Current");
-				statesProp = AccessTools.Property(component, "States");
-				stateSettlement = AccessTools.Field(state, "settlement");
-				territoryProp = AccessTools.Property(component, "Territory");
+				if (api != null && state != null)
+				{
+					tryGetState = AccessTools.Method(api, "TryGetSettlementState", new[] { typeof(Settlement), state.MakeByRefType() });
+					tryGetPrice = AccessTools.Method(api, "TryGetPrice", new[] { state, typeof(ThingDef), typeof(double).MakeByRefType() });
+					tryCredit = AccessTools.Method(api, "TryCredit", new[] { state, typeof(Thing), typeof(string).MakeByRefType() });
+					recordTrade = AccessTools.Method(api, "RecordTrade", new[] { typeof(Faction), typeof(Faction), typeof(double) });
+				}
+				else Log.Warning("[RimMarket] Hegemony found without its public API, update Hegemony to beta 0.95 or later for prices, stock and trade goodwill.");
+				Type component = AccessTools.TypeByName("FactionTerritories2.Component");
+				componentCurrent = component == null ? null : AccessTools.Property(component, "Current");
+				territoryProp = component == null ? null : AccessTools.Property(component, "Territory");
 				Type snapshot = territoryProp?.PropertyType;
 				tryGetClaim = snapshot == null ? null : AccessTools.Method(snapshot, "TryGet");
 				Type claim = tryGetClaim?.GetParameters()[1].ParameterType.GetElementType();
@@ -69,17 +72,10 @@ namespace RimMarket.Compat
 					claimRunnerUp = AccessTools.Property(claim, "runnerUp");
 					claimContested = AccessTools.Property(claim, "contested");
 				}
-				Type economy = AccessTools.TypeByName("FactionTerritories2.LivingEconomy");
-				priceMethod = economy == null ? null : AccessTools.Method(economy, "Price", new[] { state, typeof(ThingDef) });
-				Type donations = AccessTools.TypeByName("FactionTerritories2.SupplyDonations");
-				creditMethod = donations == null ? null : AccessTools.Method(donations, "Credit", new[] { state, typeof(Thing) });
-				Type ledger = AccessTools.TypeByName("FactionTerritories2.DiplomacyLedger");
-				ledgerCurrent = ledger == null ? null : AccessTools.Property(ledger, "Current");
-				recordTrade = ledger == null ? null : AccessTools.Method(ledger, "RecordTrade", new[] { typeof(Faction), typeof(Faction), typeof(double) });
 			}
 			catch (Exception e)
 			{
-				Log.Warning("[RimMarket] Hegemony found but its economy could not be read: " + e.Message);
+				Log.Warning("[RimMarket] Hegemony found but its API could not be read: " + e.Message);
 				failed = true;
 			}
 		}
@@ -92,26 +88,23 @@ namespace RimMarket.Compat
 
 		private static object StateOf(Settlement settlement)
 		{
-			if (settlement == null || componentCurrent == null || statesProp == null || stateSettlement == null) return null;
-			object comp = componentCurrent.GetValue(null);
-			if (!(comp != null && statesProp.GetValue(comp) is IEnumerable states)) return null;
-			foreach (object s in states)
-			{
-				if (s != null && stateSettlement.GetValue(s) == settlement) return s;
-			}
-			return null;
+			if (settlement == null || tryGetState == null) return null;
+			object[] args = { settlement, null };
+			return (bool)tryGetState.Invoke(null, args) ? args[1] : null;
 		}
 
 		public static float ScarcityFactor(Settlement settlement, ThingDef def)
 		{
 			if (!Active || def == null || def.BaseMarketValue <= 0f) return 1f;
 			Resolve();
-			if (priceMethod == null) return 1f;
+			if (tryGetPrice == null) return 1f;
 			try
 			{
 				object state = StateOf(settlement);
 				if (state == null) return 1f;
-				double local = (double)priceMethod.Invoke(null, new[] { state, def });
+				object[] args = { state, def, 0d };
+				if (!(bool)tryGetPrice.Invoke(null, args)) return 1f;
+				double local = (double)args[2];
 				if (double.IsNaN(local) || double.IsInfinity(local) || local <= 0d) return 1f;
 				return Mathf.Clamp((float)(local / def.BaseMarketValue), MinScarcity, MaxScarcity);
 			}
@@ -126,13 +119,13 @@ namespace RimMarket.Compat
 		{
 			if (!Active || thing == null || thing.Destroyed) return false;
 			Resolve();
-			if (creditMethod == null) return false;
+			if (tryCredit == null) return false;
 			try
 			{
 				object state = StateOf(settlement);
 				if (state == null) return false;
-				creditMethod.Invoke(null, new[] { state, thing });
-				return thing.Destroyed;
+				object[] args = { state, thing, null };
+				return (bool)tryCredit.Invoke(null, args) && thing.Destroyed;
 			}
 			catch (Exception e)
 			{
@@ -145,11 +138,10 @@ namespace RimMarket.Compat
 		{
 			if (!Active || other == null || other.IsPlayer || value <= 0f) return;
 			Resolve();
-			if (ledgerCurrent == null || recordTrade == null) return;
+			if (recordTrade == null) return;
 			try
 			{
-				object ledger = ledgerCurrent.GetValue(null);
-				if (ledger != null) recordTrade.Invoke(ledger, new object[] { Faction.OfPlayer, other, (double)value });
+				recordTrade.Invoke(null, new object[] { Faction.OfPlayer, other, (double)value });
 			}
 			catch (Exception e)
 			{
