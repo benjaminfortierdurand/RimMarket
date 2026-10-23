@@ -32,8 +32,11 @@ namespace RimMarket.Inn
 				EndJobWith(JobCondition.Incompletable);
 			};
 			pay.defaultCompleteMode = ToilCompleteMode.Instant;
+			pay.FailOn(() => !Bed.OccupiedRect().Contains(pawn.Position));
 			yield return pay;
-			yield return LayDownToil(true);
+			Toil lay = LayDownToil(true);
+			lay.FailOn(() => !Bed.OccupiedRect().Contains(pawn.Position));
+			yield return lay;
 		}
 
 		public override string GetReport()
