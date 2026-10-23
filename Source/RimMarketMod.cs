@@ -167,6 +167,14 @@ namespace RimMarket
 			}
 			Check("SpecialOrders", ref s.specialOrders, Hint("SpecialOrders"));
 			Check("AwayStalls", ref s.awayStalls, Hint("AwayStalls"));
+			if (HegemonyBridge.Installed)
+			{
+				Caption("CaptionHegemony");
+				Check("HegemonyPrices", ref s.hegemonyPrices, Hint("HegemonyPrices"));
+				Check("HegemonyStock", ref s.hegemonyStock, Hint("HegemonyStock"));
+				Check("HegemonyGoodwill", ref s.hegemonyGoodwill, Hint("HegemonyGoodwill"));
+				Check("HegemonyTerritory", ref s.hegemonyTerritory, Hint("HegemonyTerritory"));
+			}
 		}
 
 		private static string Hint(string key) => ("RimMarket.Settings." + key + "Hint").Translate();

@@ -31,6 +31,7 @@ namespace RimMarket
 		public const bool DefReputationEffects = true;
 		public const float DefExtraCaravans = 1f;
 		public const bool DefAwayStalls = true;
+		public const bool DefHegemony = true;
 		public const bool DefSlaveAuctions = true;
 		public const int DefInnPrice = 20;
 		public const bool DefTradeRoutes = true;
@@ -66,6 +67,10 @@ namespace RimMarket
 		public bool reputationEffects = DefReputationEffects;
 		public float extraCaravans = DefExtraCaravans;
 		public bool awayStalls = DefAwayStalls;
+		public bool hegemonyPrices = DefHegemony;
+		public bool hegemonyStock = DefHegemony;
+		public bool hegemonyGoodwill = DefHegemony;
+		public bool hegemonyTerritory = DefHegemony;
 		public bool slaveAuctions = DefSlaveAuctions;
 		public int innPrice = DefInnPrice;
 		public bool tradeRoutes = DefTradeRoutes;
@@ -159,6 +164,10 @@ namespace RimMarket
 			routeTollFactor = DefRouteTollFactor;
 			specialOrders = DefSpecialOrders;
 			awayStalls = DefAwayStalls;
+			hegemonyPrices = DefHegemony;
+			hegemonyStock = DefHegemony;
+			hegemonyGoodwill = DefHegemony;
+			hegemonyTerritory = DefHegemony;
 		}
 
 		public override void ExposeData()
@@ -186,6 +195,10 @@ namespace RimMarket
 			Scribe_Values.Look(ref reputationEffects, "reputationEffects", DefReputationEffects);
 			Scribe_Values.Look(ref extraCaravans, "extraCaravans", DefExtraCaravans);
 			Scribe_Values.Look(ref awayStalls, "awayStalls", DefAwayStalls);
+			Scribe_Values.Look(ref hegemonyPrices, "hegemonyPrices", DefHegemony);
+			Scribe_Values.Look(ref hegemonyStock, "hegemonyStock", DefHegemony);
+			Scribe_Values.Look(ref hegemonyGoodwill, "hegemonyGoodwill", DefHegemony);
+			Scribe_Values.Look(ref hegemonyTerritory, "hegemonyTerritory", DefHegemony);
 			Scribe_Values.Look(ref slaveAuctions, "slaveAuctions", DefSlaveAuctions);
 			Scribe_Values.Look(ref innPrice, "innPrice", DefInnPrice);
 			Scribe_Values.Look(ref tradeRoutes, "tradeRoutes", DefTradeRoutes);

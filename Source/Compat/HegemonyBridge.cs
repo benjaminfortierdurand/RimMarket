@@ -31,7 +31,7 @@ namespace RimMarket.Compat
 		private static PropertyInfo claimRunnerUp;
 		private static PropertyInfo claimContested;
 
-		public static bool Active
+		public static bool Installed
 		{
 			get
 			{
@@ -40,9 +40,13 @@ namespace RimMarket.Compat
 					activeResolved = true;
 					active = ModsConfig.IsActive(PackageId);
 				}
-				return active && !failed;
+				return active;
 			}
 		}
+
+		public static bool Active => Installed && !failed;
+
+		private static RimMarketSettings S => RimMarketMod.Settings;
 
 		private static void Resolve()
 		{
@@ -95,7 +99,7 @@ namespace RimMarket.Compat
 
 		public static float ScarcityFactor(Settlement settlement, ThingDef def)
 		{
-			if (!Active || def == null || def.BaseMarketValue <= 0f) return 1f;
+			if (!Active || !S.hegemonyPrices || def == null || def.BaseMarketValue <= 0f) return 1f;
 			Resolve();
 			if (tryGetPrice == null) return 1f;
 			try
@@ -117,7 +121,7 @@ namespace RimMarket.Compat
 
 		public static bool Credit(Settlement settlement, Thing thing)
 		{
-			if (!Active || thing == null || thing.Destroyed) return false;
+			if (!Active || !S.hegemonyStock || thing == null || thing.Destroyed) return false;
 			Resolve();
 			if (tryCredit == null) return false;
 			try
@@ -136,7 +140,7 @@ namespace RimMarket.Compat
 
 		public static void RecordTrade(Faction other, float value)
 		{
-			if (!Active || other == null || other.IsPlayer || value <= 0f) return;
+			if (!Active || !S.hegemonyGoodwill || other == null || other.IsPlayer || value <= 0f) return;
 			Resolve();
 			if (recordTrade == null) return;
 			try
@@ -151,7 +155,7 @@ namespace RimMarket.Compat
 
 		public static Faction HostileClaimant(PlanetTile tile, Faction traveller)
 		{
-			if (!Active || traveller == null || !tile.Valid) return null;
+			if (!Active || !S.hegemonyTerritory || traveller == null || !tile.Valid) return null;
 			Resolve();
 			if (componentCurrent == null || territoryProp == null || tryGetClaim == null || claimOwner == null) return null;
 			try

@@ -326,6 +326,15 @@
 	<!-- Away stalls -->
 	<RimMarket.Settings.AwayStalls>Stalls in other towns</RimMarket.Settings.AwayStalls>
 	<RimMarket.Settings.AwayStallsHint>Lets a caravan set up a stall at a friendly settlement for one market day and sell its goods to the townsfolk. Allies charge a smaller stall fee. Food and medicine stay with the caravan.</RimMarket.Settings.AwayStallsHint>
+	<RimMarket.Settings.CaptionHegemony>Hegemony</RimMarket.Settings.CaptionHegemony>
+	<RimMarket.Settings.HegemonyPrices>Local prices at away stalls</RimMarket.Settings.HegemonyPrices>
+	<RimMarket.Settings.HegemonyPricesHint>Stalls in other towns sell at that town's Hegemony prices: goods it lacks sell for more, goods it has plenty of for less.</RimMarket.Settings.HegemonyPricesHint>
+	<RimMarket.Settings.HegemonyStock>Sold goods fill the town's stock</RimMarket.Settings.HegemonyStock>
+	<RimMarket.Settings.HegemonyStockHint>Materials and other goods Hegemony accepts go into the town's reserves when your away stall sells them. Off: they simply vanish, like without Hegemony.</RimMarket.Settings.HegemonyStockHint>
+	<RimMarket.Settings.HegemonyGoodwill>Stall sales count as trade</RimMarket.Settings.HegemonyGoodwill>
+	<RimMarket.Settings.HegemonyGoodwillHint>Colony stall sales, away stall sales and auctions count toward Hegemony's trade goodwill, like trading in the vanilla trade window.</RimMarket.Settings.HegemonyGoodwillHint>
+	<RimMarket.Settings.HegemonyTerritory>Ambushes in hostile territory</RimMarket.Settings.HegemonyTerritory>
+	<RimMarket.Settings.HegemonyTerritoryHint>Trade convoys crossing land claimed by a hostile faction risk an ambush from that faction.</RimMarket.Settings.HegemonyTerritoryHint>
 	<RimMarket.AwayOption>Hold a market stall at {0} (one day)</RimMarket.AwayOption>
 	<RimMarket.AwayReport>going to hold a stall at {0}</RimMarket.AwayReport>
 	<RimMarket.AwayAlreadyHolding>already holding a stall</RimMarket.AwayAlreadyHolding>
