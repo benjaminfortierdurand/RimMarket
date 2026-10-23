@@ -98,7 +98,7 @@ namespace RimMarket
 			int mode = s.FeeModeSafe;
 			if (mode == RimMarketSettings.FeeArrival)
 			{
-				s.feePercent = Slider("FeePercent", s.feePercent, 0.01f, 0.15f, 0.01f, s.feePercent.ToStringPercent(), Hint("FeePercent"), SubIndent);
+				s.feePercent = Slider("FeePercent", s.feePercent, 0.01f, 0.15f, 0.005f, s.feePercent.ToStringPercent("0.#"), Hint("FeePercent"), SubIndent);
 				s.feeCap = Mathf.RoundToInt(Slider("FeeCap", s.feeCap, 50f, 1500f, 10f, s.feeCap.ToString(), Hint("FeeCap"), SubIndent));
 			}
 			if (mode == RimMarketSettings.FeeShare)

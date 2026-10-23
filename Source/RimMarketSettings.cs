@@ -10,8 +10,8 @@ namespace RimMarket
 		public const int FeeShare = 2;
 
 		public const int DefFeeMode = FeeArrival;
-		public const float DefFeePercent = 0.04f;
-		public const int DefFeeCap = 400;
+		public const float DefFeePercent = 0.025f;
+		public const int DefFeeCap = 250;
 		public const float DefSharePercent = 0.10f;
 		public const bool DefFeeInGoods = true;
 		public const bool DefTurnAwayIfBroke = false;
