@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace RimMarket.Away
 		public int itemsSold;
 		public int eventKind;
 		public int eventUntil = -1;
+		public List<ThingDef> keep = new List<ThingDef>();
 
 		public Faction Host => settlement?.Faction;
 
@@ -50,6 +52,8 @@ namespace RimMarket.Away
 			Scribe_Values.Look(ref itemsSold, "itemsSold");
 			Scribe_Values.Look(ref eventKind, "eventKind");
 			Scribe_Values.Look(ref eventUntil, "eventUntil", -1);
+			Scribe_Collections.Look(ref keep, "keep", LookMode.Def);
+			if (Scribe.mode == LoadSaveMode.PostLoadInit && keep == null) keep = new List<ThingDef>();
 		}
 	}
 }

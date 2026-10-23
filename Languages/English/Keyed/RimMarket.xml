@@ -336,6 +336,17 @@
 	<RimMarket.AwayCaravanInspect>Holding a stall at {0}: {1} left, {2} items sold for {3} silver.</RimMarket.AwayCaravanInspect>
 	<RimMarket.AwayInspectFestival>Festival day: twice the usual crowd.</RimMarket.AwayInspectFestival>
 	<RimMarket.AwayInspectRival>A rival merchant is taking half the customers.</RimMarket.AwayInspectRival>
+	<RimMarket.AwayGoodsLabel>Stall goods</RimMarket.AwayGoodsLabel>
+	<RimMarket.AwayGoodsDesc>Pick what goes on the counter and what stays in your bags.</RimMarket.AwayGoodsDesc>
+	<RimMarket.AwayGoodsTitle>Your stall at {0}</RimMarket.AwayGoodsTitle>
+	<RimMarket.AwayGoodsIntro>Untick what stays in your bags, the rest goes on the counter. Food and medicine never do. You can change it any time with the Stall goods button on the caravan.</RimMarket.AwayGoodsIntro>
+	<RimMarket.AwayGoodsSellAll>Sell all</RimMarket.AwayGoodsSellAll>
+	<RimMarket.AwayGoodsKeepAll>Keep all</RimMarket.AwayGoodsKeepAll>
+	<RimMarket.AwayGoodsItem>Goods</RimMarket.AwayGoodsItem>
+	<RimMarket.AwayGoodsCount>Count</RimMarket.AwayGoodsCount>
+	<RimMarket.AwayGoodsValue>Value</RimMarket.AwayGoodsValue>
+	<RimMarket.AwayGoodsSell>Sell</RimMarket.AwayGoodsSell>
+	<RimMarket.AwayGoodsSummary>{0} of {1} kinds of goods on the counter, worth about {2} silver.</RimMarket.AwayGoodsSummary>
 	<RimMarket.AwayPackUpLabel>Pack up the stall</RimMarket.AwayPackUpLabel>
 	<RimMarket.AwayPackUpDesc>Close the stall now and get ready to leave. Moving the caravan does the same.</RimMarket.AwayPackUpDesc>
 	<RimMarket.AwayEventRival>A rival merchant has set up across the square at {0}. Half your customers wander over to them.</RimMarket.AwayEventRival>
@@ -347,7 +358,7 @@
 	<RimMarket.AwayEndNormal>{0} packs up its stall at {1} at the end of the market day.</RimMarket.AwayEndNormal>
 	<RimMarket.AwayEndPackedUp>{0} packs up its stall at {1} early.</RimMarket.AwayEndPackedUp>
 	<RimMarket.AwayEndMoved>{0} left {1} and took its stall along.</RimMarket.AwayEndMoved>
-	<RimMarket.AwayEndSoldOut>{0} sold everything the {1} market wanted and packs up.</RimMarket.AwayEndSoldOut>
+	<RimMarket.AwayEndSoldOut>{0} sold everything it put up at the {1} market and packs up.</RimMarket.AwayEndSoldOut>
 	<RimMarket.AwayTakings>Takings: {0} items sold for {1} silver, {2} of it paid to the market.</RimMarket.AwayTakings>
 	<RimMarket.AwayNoSales>Nothing sold.</RimMarket.AwayNoSales>
 

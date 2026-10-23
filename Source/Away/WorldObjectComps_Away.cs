@@ -70,6 +70,13 @@ namespace RimMarket.Away
 			if (st == null) yield break;
 			yield return new Command_Action
 			{
+				defaultLabel = "RimMarket.AwayGoodsLabel".Translate(),
+				defaultDesc = "RimMarket.AwayGoodsDesc".Translate(),
+				icon = RimMarketIcons.StallSetup,
+				action = () => Find.WindowStack.Add(new Dialog_AwayStallGoods(st)),
+			};
+			yield return new Command_Action
+			{
 				defaultLabel = "RimMarket.AwayPackUpLabel".Translate(),
 				defaultDesc = "RimMarket.AwayPackUpDesc".Translate(),
 				icon = RimMarketIcons.CloseMarket,

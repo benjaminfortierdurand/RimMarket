@@ -599,6 +599,7 @@ namespace RimMarket.Market
 			caravan.pather.StopDead();
 			string rate = (AwayStallUtility.FeeRate(st) * 100f).ToString("F0");
 			AwayStallUtility.Say("RimMarket.AwayStarted".Translate(caravan.LabelCap, settlement.LabelCap, rate), st, MessageTypeDefOf.PositiveEvent);
+			Find.WindowStack.Add(new RimMarket.UI.Dialog_AwayStallGoods(st));
 		}
 
 		private void AwayTick()
@@ -629,7 +630,7 @@ namespace RimMarket.Market
 					EndAwayStall(st, AwayStall.EndNormal);
 					continue;
 				}
-				if (AwayStallUtility.SellableItems(c, st.settlement).Count == 0) EndAwayStall(st, AwayStall.EndSoldOut);
+				if (AwayStallUtility.Stock(st).Count == 0) EndAwayStall(st, st.itemsSold > 0 ? AwayStall.EndSoldOut : AwayStall.EndPackedUp);
 			}
 		}
 

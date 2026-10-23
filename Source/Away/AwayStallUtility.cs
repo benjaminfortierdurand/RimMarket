@@ -58,6 +58,13 @@ namespace RimMarket.Away
 			return list;
 		}
 
+		public static List<Thing> Stock(AwayStall st)
+		{
+			List<Thing> list = SellableItems(st.caravan, st.settlement);
+			list.RemoveAll(t => st.keep.Contains(t.def));
+			return list;
+		}
+
 		public static Pawn Seller(Caravan caravan, Settlement s)
 		{
 			if (caravan == null || s == null) return null;
@@ -115,7 +122,7 @@ namespace RimMarket.Away
 
 		public static void RunHour(AwayStall st)
 		{
-			List<Thing> stock = SellableItems(st.caravan, st.settlement);
+			List<Thing> stock = Stock(st);
 			if (stock.Count == 0) return;
 			Pawn seller = Seller(st.caravan, st.settlement);
 			float factor = PriceFactor(seller);
