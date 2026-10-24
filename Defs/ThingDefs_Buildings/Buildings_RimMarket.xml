@@ -204,8 +204,8 @@ Select the spot to set the radius, fit it to your walls and fences, or hide it o
 		<graphicData>
 			<texPath>Things/Building/RimMarket_AuctionPost</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
-			<drawSize>(2,3)</drawSize>
-			<drawOffset>(0,0,0.1)</drawOffset>
+			<drawSize>(2.09,2.09)</drawSize>
+			<drawOffset>(0,0,0.35)</drawOffset>
 			<shaderType>CutoutComplex</shaderType>
 		</graphicData>
 		<uiIconScale>0.6</uiIconScale>

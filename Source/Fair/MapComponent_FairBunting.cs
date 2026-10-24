@@ -18,17 +18,17 @@ namespace RimMarket.Fair
 		private const float SagPerCell = 0.16f;
 		private const float MaxSag = 1.3f;
 		private const float PennantSpacing = 0.55f;
-		private const float PennantDrop = 0.22f;
-		private const float RopeWidth = 0.07f;
-		private static readonly Vector3 PennantSize = new Vector3(0.3f, 1f, 0.45f);
+		private const float PennantDrop = 0.21f;
+		private const float RopeWidth = 0.21f;
+		private static readonly Vector3 PennantSize = new Vector3(0.56f, 1f, 0.56f);
 		private const float BulbSpacing = 0.42f;
-		private const float BulbDrop = 0.15f;
-		private const float WireWidth = 0.05f;
-		private const float GlowSize = 1.2f;
+		private const float BulbDrop = 0.13f;
+		private const float WireWidth = 0.32f;
+		private const float GlowSize = 3.31f;
 		private const float NightStart = 0.35f;
 		private const float NightRamp = 0.4f;
 		private const int GlowSteps = 8;
-		private static readonly Vector3 BulbSize = new Vector3(0.21f, 1f, 0.32f);
+		private static readonly Vector3 BulbSize = new Vector3(0.83f, 1f, 0.83f);
 		private static readonly Color DefaultColor = new Color(0.66f, 0.17f, 0.16f);
 		private static readonly Color Cream = new Color(0.97f, 0.93f, 0.84f);
 		private static readonly Color[] Palette =
@@ -43,29 +43,30 @@ namespace RimMarket.Fair
 		private const float MinRingDepth = 2.5f;
 		private const float HullEpsilon = 0.01f;
 		private const float TightSag = 0.35f;
-		private const float PoleCenterZ = 1.625f;
-		private static readonly Vector3 PoleSize = new Vector3(1f, 1f, 4.25f);
+		private const float PoleCenterZ = 1.61f;
+		private static readonly Vector3 PoleSize = new Vector3(4.14f, 1f, 4.14f);
 		private const float PoleSplitZ = 0.25f;
-		private const float CrownTexCenterZ = 3.05f;
-		private const float FlowersCenterZ = -0.13f;
-		private static readonly Vector3 FlowersSize = new Vector3(1.6f, 1f, 1f);
+		private const float CrownTexCenterZ = 2.95f;
+		private const float FlowersBackZ = -0.15f;
+		private const float FlowersFrontZ = -0.13f;
+		private static readonly Vector3 FlowersSize = new Vector3(1.93f, 1f, 1.93f);
 		private static readonly Vector3 CrownSize = new Vector3(1.75f, 1f, 1.75f);
 		private const float CrownZ = 3.18f;
 		private const float CrownRadiusX = 0.52f;
 		private const float CrownRadiusZ = 0.18f;
 		private const float TowerCenterZ = 1.785f;
-		private static readonly Vector3 TowerSize = new Vector3(2f, 1f, 4.609f);
-		private const float RingZ = 3.55f;
+		private static readonly Vector3 TowerSize = new Vector3(4.62f, 1f, 4.62f);
+		private const float RingZ = 2.55f;
 		private const float RingRadiusX = 0.55f;
 		private const float RingRadiusZ = 0.12f;
-		private const float LampZ = 3.97f;
-		private const float LampGlowSize = 3.4f;
+		private const float LampZ = 2.92f;
+		private const float LampGlowSize = 9.37f;
 		private static readonly Color LampColor = new Color(1f, 0.88f, 0.66f);
 		private const float MastHeight = 4.2f;
 		private const float RibbonRange = 11f;
 		private const int MaxRibbons = 8;
 		private const float MinRibbonAngle = 14f;
-		private const float RibbonWidth = 0.14f;
+		private const float RibbonWidth = 0.53f;
 		private const float TwistLength = 1.3f;
 		private const float RibbonSagPerCell = 0.09f;
 		private const float RibbonMaxSag = 0.9f;
@@ -83,14 +84,20 @@ namespace RimMarket.Fair
 		private static readonly Texture2D BulbMask = ContentFinder<Texture2D>.Get("Things/Fair/RimMarket_Bulb_m");
 		private static readonly Dictionary<Color, Material> bulbMats = new Dictionary<Color, Material>();
 		private static readonly Dictionary<Color, Material> glowMats = new Dictionary<Color, Material>();
-		private static readonly Material RosetteMat = MaterialPool.MatFrom("Things/Fair/RimMarket_Rosette", ShaderDatabase.Cutout);
-		private static readonly Vector3 RosetteSize = new Vector3(0.42f, 1f, 0.63f);
-		private const float RosetteDrop = 0.55f;
+		private static readonly Material RosetteMat = MaterialPool.MatFrom("Things/Fair/RimMarket_Rosette_A", ShaderDatabase.Cutout);
+		private static readonly Vector3 RosetteSize = new Vector3(0.83f, 1f, 0.83f);
+		private const float RosetteDrop = 0.53f;
+		private static readonly Material TrophyMat = MaterialPool.MatFrom("Things/Fair/RimMarket_Rosette_B", ShaderDatabase.Cutout);
+		private static readonly Vector3 TrophySize = new Vector3(0.9f, 1f, 0.9f);
+		private const float TrophyAhead = 0.85f;
+		private const float TrophySide = 1f;
 		private static readonly Dictionary<Color, Material> triangleMats = new Dictionary<Color, Material>();
 		private static readonly Dictionary<Color, Material> forkMats = new Dictionary<Color, Material>();
 		private static readonly Material PoleMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypolePole", ShaderDatabase.Cutout);
 		private static readonly Material CrownMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleCrown", ShaderDatabase.Cutout);
-		private static readonly Material MetalMat = MaterialPool.MatFrom("Things/Fair/RimMarket_LightTower", ShaderDatabase.Cutout);
+		private static readonly Material TowerMat = MaterialPool.MatFrom("Things/Fair/RimMarket_LightTower_B", ShaderDatabase.Cutout);
+		private static readonly Material TowerLitMat = MaterialPool.MatFrom("Things/Fair/RimMarket_LightTower_A", ShaderDatabase.Cutout);
+		private const float TowerLitNight = 0.5f;
 		private static readonly Material FlowersBackMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleFlowersBack", ShaderDatabase.Cutout);
 		private static readonly Material FlowersFrontMat = MaterialPool.MatFrom("Things/Fair/RimMarket_MaypoleFlowersFront", ShaderDatabase.Cutout);
 		private static readonly float PoleSplitV = (PoleSplitZ - PoleCenterZ) / PoleSize.z + 0.5f;
@@ -204,11 +211,11 @@ namespace RimMarket.Fair
 			ribbons.Clear();
 			ribbonAngles.Clear();
 			hasMast = false;
+			metalMast = FairUtility.Modern(all);
 			Building_MarketMarker marker = fair?.marker;
 			if (marker == null || !marker.Spawned || marker.Map != map) return;
 			hasMast = true;
 			mastBase = marker.TrueCenter();
-			metalMast = FairUtility.Modern(all);
 			Vector3 crown = mastBase + new Vector3(0f, 0f, metalMast ? RingZ : CrownZ);
 			float rx = metalMast ? RingRadiusX : CrownRadiusX;
 			float rz = metalMast ? RingRadiusZ : CrownRadiusZ;
@@ -272,14 +279,15 @@ namespace RimMarket.Fair
 			float topAlt = ropeAlt + Altitudes.AltInc * 3f;
 			if (metalMast)
 			{
-				DrawMastPart(MetalMat, TowerCenterZ, TowerSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, TowerFoot);
-				DrawMastPart(MetalMat, TowerCenterZ, TowerSize, AltitudeLayer.PawnState.AltitudeFor(), TowerShaft);
+				Material tower = night > TowerLitNight ? TowerLitMat : TowerMat;
+				DrawMastPart(tower, TowerCenterZ, TowerSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, TowerFoot);
+				DrawMastPart(tower, TowerCenterZ, TowerSize, AltitudeLayer.PawnState.AltitudeFor(), TowerShaft);
 			}
 			else
 			{
-				DrawMastPart(FlowersBackMat, FlowersCenterZ, FlowersSize, AltitudeLayer.Building.AltitudeFor());
+				DrawMastPart(FlowersBackMat, FlowersBackZ, FlowersSize, AltitudeLayer.Building.AltitudeFor());
 				DrawMastPart(PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, PoleFoot);
-				DrawMastPart(FlowersFrontMat, FlowersCenterZ, FlowersSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc * 2f);
+				DrawMastPart(FlowersFrontMat, FlowersFrontZ, FlowersSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc * 2f);
 				DrawMastPart(PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.PawnState.AltitudeFor(), PoleShaft);
 				DrawMastPart(CrownMat, CrownTexCenterZ, CrownSize, topAlt);
 			}
@@ -417,6 +425,13 @@ namespace RimMarket.Fair
 			if (winner == null || !winner.Spawned || winner.Map != map) return;
 			CompMarketStall stall = MarketStallDefs.StallOf(winner);
 			if (stall == null) return;
+			if (metalMast)
+			{
+				Vector3 at = winner.TrueCenter() + stall.Front.ToVector3() * TrophyAhead - stall.MerchantSide.ToVector3() * TrophySide;
+				at.y = AltitudeLayer.ItemImportant.AltitudeFor();
+				Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(at, Quaternion.identity, TrophySize), TrophyMat, 0);
+				return;
+			}
 			Vector3 pos = Front(stall) + new Vector3(0f, 0f, -RosetteDrop);
 			pos.y = alt + Altitudes.AltInc * 2f;
 			Quaternion rot = Quaternion.AngleAxis(Mathf.Sin(time * 1.1f) * 3f, Vector3.up);

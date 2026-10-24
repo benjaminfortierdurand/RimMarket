@@ -9,7 +9,8 @@ namespace RimMarket.Buildings
 	[StaticConstructorOnStartup]
 	public static class StallBanner
 	{
-		private static readonly Vector3 Size = new Vector3(0.5f, 1f, 0.75f);
+		private static readonly Vector3 Size = new Vector3(0.97f, 1f, 0.97f);
+		private const float HangDrop = 0.375f;
 		private static readonly Vector3 IconSize = new Vector3(0.24f, 1f, 0.24f);
 		private const float IconRise = 0.03f;
 		private const float BaseSway = 1.5f;
@@ -38,11 +39,11 @@ namespace RimMarket.Buildings
 				if (rot.IsHorizontal) offset.z = -offset.z;
 				else offset.x = -offset.x;
 			}
-			Vector3 top = stall.parent.TrueCenter() + offset + new Vector3(0f, 0f, Size.z / 2f);
+			Vector3 top = stall.parent.TrueCenter() + offset + new Vector3(0f, 0f, HangDrop);
 			float wind = stall.Map?.windManager.WindSpeed ?? 0f;
 			float sway = Mathf.Sin(Time.realtimeSinceStartup * 1.3f + stall.parent.thingIDNumber) * (BaseSway + WindSway * Mathf.Clamp01(wind));
 			Quaternion q = Quaternion.AngleAxis(sway, Vector3.up);
-			Vector3 pos = top + q * new Vector3(0f, 0f, -Size.z / 2f);
+			Vector3 pos = top + q * new Vector3(0f, 0f, -HangDrop);
 			pos.y = AltitudeLayer.PawnState.AltitudeFor() + Altitudes.AltInc;
 			Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(pos, q, Size), ClothMat(color, stall.Modern), 0);
 			Material icon = IconMat(faction, color);

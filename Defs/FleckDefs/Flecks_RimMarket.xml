@@ -5,6 +5,7 @@
 		<defName>RimMarket_Petal</defName>
 		<graphicData>
 			<texPath>Things/Fair/RimMarket_Petal</texPath>
+			<drawSize>(3.43,3.43)</drawSize>
 			<renderInstanced>true</renderInstanced>
 		</graphicData>
 		<altitudeLayer>MoteOverhead</altitudeLayer>
@@ -42,6 +43,7 @@
 		<defName>RimMarket_FireworkRocket</defName>
 		<graphicData>
 			<texPath>Things/Fair/RimMarket_Spark</texPath>
+			<drawSize>(3.08,3.08)</drawSize>
 			<shaderType>MoteGlow</shaderType>
 		</graphicData>
 		<altitudeLayer>MoteOverhead</altitudeLayer>
@@ -54,6 +56,7 @@
 		<defName>RimMarket_FireworkSpark</defName>
 		<graphicData>
 			<texPath>Things/Fair/RimMarket_Spark</texPath>
+			<drawSize>(3.08,3.08)</drawSize>
 			<shaderType>MoteGlow</shaderType>
 			<renderInstanced>true</renderInstanced>
 		</graphicData>
