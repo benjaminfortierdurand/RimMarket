@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LudeonTK;
+using RimMarket.Buildings;
+using RimMarket.Fair;
 using RimMarket.Market;
 using RimMarket.Reputation;
 using RimMarket.Routes;
@@ -268,6 +270,54 @@ namespace RimMarket.Debug
 				if (shown == 0) sb.Append(" none");
 			}
 			Log.Message(sb.ToString());
+		}
+
+		[DebugAction("RimMarket", "Great Fair: start now",
+			actionType = DebugActionType.Action,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void FairStartNow()
+		{
+			Map map = Find.CurrentMap;
+			MarketManager mgr = MarketManager.Instance;
+			if (map == null || mgr == null) return;
+			int now = Find.TickManager.TicksGame;
+			GreatFair fair = FairUtility.On(map);
+			if (fair == null)
+			{
+				Building_MarketMarker marker = map.listerThings.AllThings.OfType<Building_MarketMarker>().FirstOrDefault(m => m.Spawned && m.Faction == Faction.OfPlayer);
+				if (marker == null) return;
+				fair = new GreatFair { map = map, marker = marker, state = GreatFair.Announced, announcedTick = now };
+				mgr.AddFair(fair);
+			}
+			if (fair.state != GreatFair.Announced) return;
+			fair.startTick = now;
+			fair.endTick = now + (FairUtility.CloseHour - FairUtility.OpenHour) * GenDate.TicksPerHour;
+			FairUtility.Open(mgr, fair);
+		}
+
+		[DebugAction("RimMarket", "Great Fair: crown this stall",
+			actionType = DebugActionType.ToolMap,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void FairCrown()
+		{
+			Map map = Find.CurrentMap;
+			GreatFair fair = FairUtility.On(map);
+			if (fair == null) return;
+			Thing stall = Verse.UI.MouseCell().GetThingList(map).FirstOrDefault(t => MarketStallDefs.StallOf(t) != null);
+			if (stall == null) return;
+			fair.judged = true;
+			fair.winnerStall = stall;
+		}
+
+		[DebugAction("RimMarket", "Great Fair: close now",
+			actionType = DebugActionType.Action,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void FairCloseNow()
+		{
+			MarketManager mgr = MarketManager.Instance;
+			GreatFair fair = FairUtility.On(Find.CurrentMap);
+			if (mgr == null || fair == null || fair.state != GreatFair.Running) return;
+			FairUtility.Close(mgr, fair);
 		}
 	}
 }
