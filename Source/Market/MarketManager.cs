@@ -714,6 +714,7 @@ namespace RimMarket.Market
 		public int TotalColonySales => totalColonySales;
 
 		private List<GreatFair> fairs = new List<GreatFair>();
+		private List<Faction> fairExcluded = new List<Faction>();
 		private int lastFairTick;
 		private bool guideOffered;
 
@@ -733,6 +734,15 @@ namespace RimMarket.Market
 				if (fairs[i].map == map) return fairs[i];
 			}
 			return null;
+		}
+
+		public bool FairInvited(Faction f) => f != null && !fairExcluded.Contains(f);
+
+		public void SetFairInvited(Faction f, bool invited)
+		{
+			if (f == null) return;
+			if (invited) fairExcluded.Remove(f);
+			else if (!fairExcluded.Contains(f)) fairExcluded.Add(f);
 		}
 
 		public void AddFair(GreatFair fair)
@@ -1639,6 +1649,7 @@ namespace RimMarket.Market
 			Scribe_Values.Look(ref nextOrderId, "nextOrderId", 1);
 			Scribe_Deep.Look(ref notice, "wantedNotice");
 			Scribe_Collections.Look(ref fairs, "fairs", LookMode.Deep);
+			Scribe_Collections.Look(ref fairExcluded, "fairExcluded", LookMode.Reference);
 			Scribe_Values.Look(ref lastFairTick, "lastFairTick");
 			Scribe_Values.Look(ref guideOffered, "guideOffered");
 			Scribe_Collections.Look(ref leaving, "leaving", LookMode.Deep);
@@ -1649,6 +1660,8 @@ namespace RimMarket.Market
 				if (leaving == null) leaving = new List<LeavingGroup>();
 				leaving.RemoveAll(g => g == null || g.faction == null);
 				if (fairs == null) fairs = new List<GreatFair>();
+				if (fairExcluded == null) fairExcluded = new List<Faction>();
+				fairExcluded.RemoveAll(f => f == null);
 				fairs.RemoveAll(f => f == null || f.map == null);
 				if (innPaid == null) innPaid = new Dictionary<int, int>();
 				if (routes == null) routes = new List<TradeRoute>();

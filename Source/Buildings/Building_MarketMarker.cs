@@ -120,6 +120,13 @@ namespace RimMarket.Buildings
 		private IEnumerable<Gizmo> FairGizmos()
 		{
 			if (!RimMarketMod.Settings.fairEnabled || !Spawned || Faction != Faction.OfPlayer) yield break;
+			yield return new Command_Action
+			{
+				defaultLabel = "RimMarket.FairGuestsLabel".Translate(),
+				defaultDesc = "RimMarket.FairGuestsDesc".Translate(),
+				icon = RimMarketIcons.FairGuests,
+				action = () => Find.WindowStack.Add(new Dialog_FairGuests()),
+			};
 			GreatFair fair = FairUtility.On(Map);
 			if (fair != null)
 			{

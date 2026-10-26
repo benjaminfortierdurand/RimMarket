@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RimMarket.Buildings;
 using RimMarket.Compat;
+using RimMarket.Fair;
 using RimMarket.Inn;
 using RimWorld;
 using UnityEngine;
@@ -130,9 +131,12 @@ namespace RimMarket.Market
 
 		public static Faction PickFaction(Faction exclude, Map map)
 		{
+			MarketManager mgr = MarketManager.Instance;
+			bool fair = mgr != null && FairUtility.Running(map);
 			return Find.FactionManager.AllFactionsVisible
 				.Where(f => !f.IsPlayer && !f.defeated && !f.Hidden && !f.temporary && f.def.humanlikeFaction
-					&& !f.HostileTo(Faction.OfPlayer) && MarketTruce.Welcome(map, f) && MarketUtility.CivilianKind(f) != null)
+					&& !f.HostileTo(Faction.OfPlayer) && MarketTruce.Welcome(map, f) && MarketUtility.CivilianKind(f) != null
+					&& (!fair || mgr.FairInvited(f)))
 				.OrderBy(f => f == exclude ? 1 : 0)
 				.ThenBy(f => Rand.Value)
 				.FirstOrDefault();

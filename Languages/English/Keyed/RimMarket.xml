@@ -448,6 +448,17 @@
 	<RimMarket.FairAnnounceLabel>Announce a Great Fair</RimMarket.FairAnnounceLabel>
 	<RimMarket.FairAnnounceDesc>Send heralds to every friendly faction: in {1} days your market holds a Great Fair, from dawn to dusk. Up to {2} caravans set up at once, crowds of shoppers walk over with fuller purses, your colonists make a day of it, and pickpockets make a week of it. A good fair does wonders for the market's name.\n\nThe heralds cost {0} silver.</RimMarket.FairAnnounceDesc>
 	<RimMarket.FairAnnounceConfirm>Hold a Great Fair on {0}? The heralds cost {1} silver, paid now.</RimMarket.FairAnnounceConfirm>
+	<RimMarket.FairGuestsLabel>Fair guests</RimMarket.FairGuestsLabel>
+	<RimMarket.FairGuestsDesc>Choose which factions the heralds invite to your Great Fairs.</RimMarket.FairGuestsDesc>
+	<RimMarket.FairGuestsTitle>Great Fair guests</RimMarket.FairGuestsTitle>
+	<RimMarket.FairGuestsIntro>Untick a faction to keep it away from your Great Fairs: no caravans and no crowds from them while a fair is on. Factions at war won't share a market, so leaving one out keeps its enemies at their stalls.</RimMarket.FairGuestsIntro>
+	<RimMarket.FairGuestsInviteAll>Invite all</RimMarket.FairGuestsInviteAll>
+	<RimMarket.FairGuestsInviteNone>Invite none</RimMarket.FairGuestsInviteNone>
+	<RimMarket.FairGuestsFaction>Faction</RimMarket.FairGuestsFaction>
+	<RimMarket.FairGuestsGoodwill>Goodwill</RimMarket.FairGuestsGoodwill>
+	<RimMarket.FairGuestsEnemies>At war with</RimMarket.FairGuestsEnemies>
+	<RimMarket.FairGuestsInvited>Invited</RimMarket.FairGuestsInvited>
+	<RimMarket.FairGuestsSummary>{0} of {1} factions invited.</RimMarket.FairGuestsSummary>
 	<RimMarket.FairCancelLabel>Cancel the Great Fair</RimMarket.FairCancelLabel>
 	<RimMarket.FairCancelDesc>Call the fair off. The heralds keep their silver.</RimMarket.FairCancelDesc>
 	<RimMarket.FairCancelConfirm>Call off the Great Fair? The heralds will not give the silver back, and they will tell everyone why.</RimMarket.FairCancelConfirm>

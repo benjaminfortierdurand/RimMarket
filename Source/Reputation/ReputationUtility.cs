@@ -270,8 +270,8 @@ namespace RimMarket.Reputation
 			if (map == null) return null;
 			MarketManager mgr = MarketManager.Instance;
 			List<Faction> candidates = TraderFactions().Where(f => f.def.caravanTraderKinds.Any(k => TraderKindAllowed(k, f, map))).ToList();
-			if (mgr != null) candidates.RemoveAll(f => mgr.RefusalChance(f) > 0f);
-			candidates.RemoveAll(f => !MarketTruce.Welcome(map, f));
+			if (mgr != null) candidates.RemoveAll(f => mgr.RefusalChance(f) > 0f || !mgr.FairInvited(f));
+			candidates.RemoveAll(f => !MarketTruce.Welcome(map, f) || !Routes.TradeRouteUtility.CaravansCanReach(f, map));
 			if (candidates.Count == 0) return null;
 			List<Faction> fresh = candidates.Where(f => already == null || !already.Contains(f)).ToList();
 			List<Faction> pool = fresh.Count > 0 ? fresh : candidates;
