@@ -897,6 +897,7 @@ namespace RimMarket.Market
 			if (lord.faction == null || lord.faction.IsPlayer || lord.faction.HostileTo(Faction.OfPlayer)) return false;
 			Pawn trader = TraderCaravanUtility.FindTrader(lord);
 			if (trader == null || !trader.Spawned || trader.Downed || trader.Dead) return false;
+			if (trader.TraderKind?.tradeCurrency == TradeCurrency.Favor) return false;
 			if (RouteForLord(lord) == null && ReputationUtility.RefusesMarket(lord, RefusalChance(lord.faction)))
 			{
 				Cooldown(lord, RefusedCooldownTicks);
