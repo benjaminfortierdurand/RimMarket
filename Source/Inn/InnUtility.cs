@@ -66,6 +66,7 @@ namespace RimMarket.Inn
 	public static class InnUtility
 	{
 		public const int PaidSpan = 45000;
+		public const int GoodNightGoodwill = 1;
 		private const float TiredLevel = 0.3f;
 		private const float NightLevel = 0.75f;
 		private const int NightStart = 22;
@@ -318,9 +319,20 @@ namespace RimMarket.Inn
 			}
 			if (!(lord?.LordJob is LordJob_MarketShoppers shoppers) || shoppers.innRated) return;
 			shoppers.innRated = true;
-			if (comfort > 0) mgr.Record(null, p.Faction, MarketReputation.Appeal, 1f, "RimMarket.ReasonInnFine");
+			if (comfort > 0)
+			{
+				mgr.Record(null, p.Faction, MarketReputation.Appeal, 1f, "RimMarket.ReasonInnFine");
+				if (!steep) ThankForBed(p.Faction);
+			}
 			else if (comfort < 0) mgr.Record(null, p.Faction, MarketReputation.Appeal, -1f, "RimMarket.ReasonInnPoor");
 			if (steep) mgr.Record(null, p.Faction, MarketReputation.Fairness, -1f, "RimMarket.ReasonInnSteep");
+		}
+
+		public static void ThankForBed(Faction f)
+		{
+			if (f == null || f.IsPlayer || f.defeated || f.HostileTo(Faction.OfPlayer)) return;
+			f.TryAffectGoodwillWith(Faction.OfPlayer, GoodNightGoodwill, canSendMessage: true, canSendHostilityLetter: false,
+				RimMarketDefOf.RimMarket_InnStay);
 		}
 
 		public static bool AnyLodging(Lord lord)

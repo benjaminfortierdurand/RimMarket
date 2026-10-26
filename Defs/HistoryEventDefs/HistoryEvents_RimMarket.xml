@@ -31,4 +31,9 @@
 		<label>saved their convoy</label>
 	</HistoryEventDef>
 
+	<HistoryEventDef>
+		<defName>RimMarket_InnStay</defName>
+		<label>slept well at your inn</label>
+	</HistoryEventDef>
+
 </Defs>

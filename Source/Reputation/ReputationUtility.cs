@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RimMarket.Buildings;
 using RimMarket.Compat;
+using RimMarket.Inn;
 using RimMarket.Market;
 using RimWorld;
 using UnityEngine;
@@ -116,7 +117,11 @@ namespace RimMarket.Reputation
 			if (v.innNights > 0)
 			{
 				float comfort = v.innComfort / (float)v.innNights;
-				if (comfort >= 0.5f) Record(mgr, v, MarketReputation.Appeal, 2f, "RimMarket.ReasonInnFine");
+				if (comfort >= 0.5f)
+				{
+					Record(mgr, v, MarketReputation.Appeal, 2f, "RimMarket.ReasonInnFine");
+					if (!v.innSteep) InnUtility.ThankForBed(v.faction);
+				}
 				else if (comfort <= -0.5f) Record(mgr, v, MarketReputation.Appeal, -2f, "RimMarket.ReasonInnPoor");
 				if (v.innSteep) Record(mgr, v, MarketReputation.Fairness, -2f, "RimMarket.ReasonInnSteep");
 			}

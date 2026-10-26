@@ -63,6 +63,8 @@ namespace RimMarket
 
 		public static HistoryEventDef RimMarket_FairPrize;
 
+		public static HistoryEventDef RimMarket_InnStay;
+
 		public static JobDef RimMarket_Snatch;
 
 		public static DutyDef RimMarket_GuardStall;
