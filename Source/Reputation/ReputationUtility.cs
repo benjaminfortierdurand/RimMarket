@@ -249,7 +249,7 @@ namespace RimMarket.Reputation
 			MarketManager mgr = MarketManager.Instance;
 			List<Faction> candidates = TraderFactions().Where(f => f.def.caravanTraderKinds.Any(k => TraderKindAllowed(k, f, map))).ToList();
 			if (mgr != null) candidates.RemoveAll(f => mgr.RefusalChance(f) > 0f);
-			candidates.RemoveAll(f => !MarketTruce.Welcome(map, f));
+			candidates.RemoveAll(f => !MarketTruce.Welcome(map, f) || !Routes.TradeRouteUtility.CaravansCanReach(f, map));
 			if (!candidates.TryRandomElementByWeight(f => CaravanWeight(mgr?.OpinionOf(f)), out Faction faction)) return false;
 			float rarityBias = mgr?.OpinionOf(faction).RarityBias ?? 0f;
 			TraderKindDef kind = PickTraderKind(faction, map, rarityBias);

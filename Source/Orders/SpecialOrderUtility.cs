@@ -287,6 +287,11 @@ namespace RimMarket.Orders
 			}
 			int now = Find.TickManager.TicksGame;
 			bool welcome = MarketTruce.Welcome(map, o.faction);
+			if (welcome && !TradeRouteUtility.CaravansCanReach(o.faction, map))
+			{
+				Cancel(o, "RimMarket.OrderNoCaravans", 1f);
+				return false;
+			}
 			if (welcome)
 			{
 				var parms = new IncidentParms

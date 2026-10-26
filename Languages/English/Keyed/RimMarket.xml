@@ -639,6 +639,8 @@
 	<RimMarket.RouteClosedGrudge>{0} closes the trade route from {1}: they no longer trust your market.</RimMarket.RouteClosedGrudge>
 	<RimMarket.RouteClosedStrikes>{0} close the trade route from {1} after too many bad days at your market.</RimMarket.RouteClosedStrikes>
 	<RimMarket.RouteClosedNoRoad>The trade route with {0} is closed: no road reaches your market from {1} any more.</RimMarket.RouteClosedNoRoad>
+	<RimMarket.RouteClosedNoCaravans>The trade route with {0} is closed: {1} has no caravan that can travel to your land.</RimMarket.RouteClosedNoCaravans>
+	<RimMarket.OrderNoCaravans>{0} has no caravan that can travel to your land, so your order from {1} is off. All {2} silver comes back.</RimMarket.OrderNoCaravans>
 	<RimMarket.ConvoyBound>Bound for {0}, arriving in about {1}.</RimMarket.ConvoyBound>
 	<RimMarket.ConvoyWaiting>Waiting to enter {0}.</RimMarket.ConvoyWaiting>
 	<RimMarket.ConvoyCarrying>Merchant: {0}.</RimMarket.ConvoyCarrying>

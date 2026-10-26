@@ -16,6 +16,7 @@ namespace RimMarket.Routes
 		public const int Weekly = 7;
 		public const int Fortnightly = 14;
 		public const int MaxStrikes = 3;
+		private const float CaravanCheckPoints = 1000f;
 		private const int TicksPerDay = 60000;
 		private const int FirstDepartureMin = 20000;
 		private const int FirstDepartureMax = 70000;
@@ -290,10 +291,24 @@ namespace RimMarket.Routes
 			return nodes.Count > 0;
 		}
 
+		public static bool CaravansCanReach(Faction faction, Map map)
+		{
+			if (faction?.def.pawnGroupMakers == null || map == null) return false;
+			var parms = new PawnGroupMakerParms
+			{
+				groupKind = PawnGroupKindDefOf.Trader,
+				faction = faction,
+				tile = map.Tile,
+				points = CaravanCheckPoints,
+			};
+			return PawnGroupMakerUtility.TryGetRandomPawnGroupMaker(parms, out _);
+		}
+
 		public static List<TraderKindDef> KindsFor(Faction faction, Map map, Pawn negotiator)
 		{
 			var kinds = new List<TraderKindDef>();
 			if (faction?.def.caravanTraderKinds == null) return kinds;
+			if (map != null && !CaravansCanReach(faction, map)) return kinds;
 			foreach (TraderKindDef k in faction.def.caravanTraderKinds)
 			{
 				if (!k.requestable || !ReputationUtility.TraderKindAllowed(k, faction, map)) continue;
@@ -439,6 +454,11 @@ namespace RimMarket.Routes
 				r.convoy = null;
 				if (!convoy.Destroyed) convoy.Destroy();
 				Messages.Message("RimMarket.RouteTollUnpaid".Translate(r.SettlementName, toll, r.strikes, MaxStrikes), MessageTypeDefOf.NegativeEvent, historical: true);
+				return false;
+			}
+			if (welcome && !CaravansCanReach(r.faction, map))
+			{
+				Close(r, "RimMarket.RouteClosedNoCaravans");
 				return false;
 			}
 			if (welcome)
