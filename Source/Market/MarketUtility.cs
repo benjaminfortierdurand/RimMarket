@@ -183,6 +183,8 @@ namespace RimMarket.Market
 			return 5 * Mathf.Max(1, Mathf.RoundToInt(raw / 5f));
 		}
 
+		private const float HumanFeedMargin = 0.12f;
+
 		public static void TopUpFood(Lord lord, bool full)
 		{
 			if (lord == null) return;
@@ -193,10 +195,11 @@ namespace RimMarket.Market
 				if (food == null || p.Dead) continue;
 				if (!full)
 				{
-					if (p.RaceProps.Humanlike && CarriesFood(p)) continue;
-					HungerCategory cat = food.CurCategory;
-					bool hungry = p.RaceProps.Animal ? cat >= HungerCategory.Hungry : cat >= HungerCategory.UrgentlyHungry;
-					if (!hungry) continue;
+					if (p.RaceProps.Humanlike)
+					{
+						if (food.CurLevelPercentage > food.PercentageThreshHungry + HumanFeedMargin) continue;
+					}
+					else if (food.CurCategory < HungerCategory.Hungry) continue;
 				}
 				food.CurLevel = food.MaxLevel;
 			}

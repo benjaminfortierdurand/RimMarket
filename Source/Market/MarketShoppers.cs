@@ -14,6 +14,7 @@ namespace RimMarket.Market
 	public class LordJob_MarketShoppers : LordJob
 	{
 		private const int CheckInterval = 250;
+		private const int FeedInterval = 2500;
 		private const int MaxOvernight = 30000;
 
 		public Thing marker;
@@ -28,6 +29,11 @@ namespace RimMarket.Market
 		{
 			this.marker = marker;
 			this.stayTicks = stayTicks;
+		}
+
+		public override void LordJobTick()
+		{
+			if (Find.TickManager.TicksGame % FeedInterval == 0) MarketUtility.TopUpFood(lord, full: false);
 		}
 
 		public override StateGraph CreateGraph()
