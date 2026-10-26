@@ -72,7 +72,7 @@ namespace RimMarket.Market
 		{
 			if (IsArt(def)) return true;
 			if (def == null || def.category != ThingCategory.Item || def == ThingDefOf.Silver) return false;
-			if (def.IsCorpse || def.thingClass == typeof(MinifiedThing)) return false;
+			if (def.IsCorpse || def.thingClass == null || typeof(MinifiedThing).IsAssignableFrom(def.thingClass)) return false;
 			return def.EverHaulable && def.BaseMarketValue > 0f;
 		}
 

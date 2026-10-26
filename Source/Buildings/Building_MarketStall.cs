@@ -360,7 +360,13 @@ namespace RimMarket.Buildings
 			if (settings == null) MakeSettings();
 			else settings.Priority = StoragePriority.Critical;
 			if (orders == null) orders = new List<StallOrder>();
-			orders.RemoveAll(o => o == null || o.def == null || o.toSell <= 0);
+			orders.RemoveAll(o => o == null || o.def == null || o.toSell <= 0 || !ColonyStalls.CanSell(o.def));
+		}
+
+		public override void SpawnSetup(Map map, bool respawningAfterLoad)
+		{
+			base.SpawnSetup(map, respawningAfterLoad);
+			if (respawningAfterLoad) LongEventHandler.ExecuteWhenFinished(TrimStock);
 		}
 	}
 }
