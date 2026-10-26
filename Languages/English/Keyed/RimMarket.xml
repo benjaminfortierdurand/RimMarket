@@ -187,6 +187,10 @@
 	<RimMarket.StallGuestSales>Sold to guests: {0} silver</RimMarket.StallGuestSales>
 	<RimMarket.TradeGizmoLabel>Trade</RimMarket.TradeGizmoLabel>
 	<RimMarket.TradeGizmoDesc>Send a colonist to the counter to trade with {0}.</RimMarket.TradeGizmoDesc>
+	<RimMarket.RoundsLabel>Make the rounds</RimMarket.RoundsLabel>
+	<RimMarket.RoundsDesc>Send one colonist to trade with every merchant at this market, one stall after the other, nearest first. The trade window opens at each counter.</RimMarket.RoundsDesc>
+	<RimMarket.RoundsCount>{0} merchants</RimMarket.RoundsCount>
+	<RimMarket.RoundsNobody>can't trade with anyone here</RimMarket.RoundsNobody>
 	<RimMarket.TraderBusy>the merchant is not trading right now</RimMarket.TraderBusy>
 	<RimMarket.TradeNotNow>{0} can't trade right now: {1}.</RimMarket.TradeNotNow>
 	<RimMarket.TradeWhyGone>gone</RimMarket.TradeWhyGone>

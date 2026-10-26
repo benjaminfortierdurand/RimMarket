@@ -1153,6 +1153,17 @@ namespace RimMarket.Market
 			waitingReason.Remove(lord.loadID);
 		}
 
+		public List<StallVisit> TradersAt(Building_MarketMarker marker)
+		{
+			var list = new List<StallVisit>();
+			for (int i = 0; i < visits.Count; i++)
+			{
+				StallVisit v = visits[i];
+				if (!v.closed && v.trader != null && v.trader.Spawned && BelongsTo(v, marker)) list.Add(v);
+			}
+			return list;
+		}
+
 		public int ActiveVisits(Building_MarketMarker marker)
 		{
 			int n = 0;

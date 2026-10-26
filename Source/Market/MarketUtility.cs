@@ -562,6 +562,55 @@ namespace RimMarket.Market
 			PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.InteractingWithTraders, KnowledgeAmount.Total);
 		}
 
+		public static void OpenRoundsMenu(Building_MarketMarker marker)
+		{
+			List<StallVisit> visits = MarketManager.Instance?.TradersAt(marker);
+			if (visits == null || visits.Count == 0) return;
+			var options = new List<FloatMenuOption>();
+			List<Pawn> colonists = marker.Map.mapPawns.FreeColonistsSpawned;
+			for (int i = 0; i < colonists.Count; i++)
+			{
+				Pawn p = colonists[i];
+				int social = p.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0;
+				int reachable = visits.Count(v => CanNegotiate(p, v.trader, v.stall).Accepted);
+				string label = p.LabelShortCap + " (" + social + ")";
+				if (reachable == 0)
+				{
+					options.Add(new FloatMenuOption(label + ": " + "RimMarket.RoundsNobody".Translate(), null));
+					continue;
+				}
+				Pawn negotiator = p;
+				var option = new FloatMenuOption(label + ": " + "RimMarket.RoundsCount".Translate(reachable), () => MakeRounds(negotiator, visits));
+				option.orderInPriority = social;
+				options.Add(option);
+			}
+			if (options.Count == 0)
+			{
+				Messages.Message("RimMarket.MessageNoNegotiator".Translate(), MessageTypeDefOf.RejectInput, historical: false);
+				return;
+			}
+			Find.WindowStack.Add(new FloatMenu(options.OrderByDescending(o => o.orderInPriority).ToList()));
+		}
+
+		private static void MakeRounds(Pawn colonist, List<StallVisit> visits)
+		{
+			var left = visits.Where(v => CanNegotiate(colonist, v.trader, v.stall).Accepted).ToList();
+			IntVec3 from = colonist.Position;
+			bool first = true;
+			while (left.Count > 0)
+			{
+				StallVisit next = left.MinBy(v => v.stall.CustomerCell.DistanceToSquared(from));
+				left.Remove(next);
+				from = next.stall.CustomerCell;
+				Job job = JobMaker.MakeJob(RimMarketDefOf.RimMarket_TradeAtStall, next.stall.parent, next.trader);
+				job.playerForced = true;
+				if (first) colonist.jobs?.TryTakeOrderedJob(job, JobTag.Misc);
+				else colonist.jobs?.jobQueue.EnqueueLast(job, JobTag.Misc);
+				first = false;
+			}
+			PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.InteractingWithTraders, KnowledgeAmount.Total);
+		}
+
 		public static void OpenTradeMenu(CompMarketStall stall)
 		{
 			StallVisit v = MarketManager.Instance?.VisitFor(stall);

@@ -214,6 +214,16 @@ namespace RimMarket.Buildings
 			foreach (Gizmo g in FairGizmos()) yield return g;
 
 			MarketManager mgr = MarketManager.Instance;
+			if (mgr != null && Spawned && mgr.TradersAt(this).Count > 0)
+			{
+				yield return new Command_Action
+				{
+					defaultLabel = "RimMarket.RoundsLabel".Translate(),
+					defaultDesc = "RimMarket.RoundsDesc".Translate(),
+					icon = RimMarketIcons.Trade,
+					action = () => MarketUtility.OpenRoundsMenu(this),
+				};
+			}
 			if (mgr != null && Spawned && mgr.ActiveVisits(this) > 0)
 			{
 				yield return new Command_Action
