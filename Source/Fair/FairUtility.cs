@@ -62,11 +62,21 @@ namespace RimMarket.Fair
 			return stalls.Count > 0 && lit * 2 >= stalls.Count;
 		}
 
-		public static Building_MarketMarker MastOn(Map map)
+		public static bool HasMast(Building_MarketMarker marker)
 		{
-			if (!Festive(map)) return null;
-			Building_MarketMarker marker = On(map)?.marker;
-			return marker != null && marker.Spawned && marker.Map == map ? marker : null;
+			if (marker == null || !marker.Spawned || marker.Faction != Faction.OfPlayer || !Festive(marker.Map)) return false;
+			return marker == On(marker.Map)?.marker || (marker.Open && StallsAt(marker).Count > 0);
+		}
+
+		public static void MastMarkers(Map map, List<Building_MarketMarker> into)
+		{
+			into.Clear();
+			if (map == null || !Festive(map)) return;
+			List<Thing> markers = map.listerThings.ThingsOfDef(RimMarketDefOf.RimMarket_MarketMarker);
+			for (int i = 0; i < markers.Count; i++)
+			{
+				if (markers[i] is Building_MarketMarker m && HasMast(m)) into.Add(m);
+			}
 		}
 
 		public static int StartTickFor(Map map)
@@ -278,14 +288,16 @@ namespace RimMarket.Fair
 				new LookTargets(best.parent), MessageTypeDefOf.PositiveEvent);
 		}
 
-		public static List<CompMarketStall> StallsOf(GreatFair fair)
+		public static List<CompMarketStall> StallsOf(GreatFair fair) => StallsAt(fair?.marker);
+
+		public static List<CompMarketStall> StallsAt(Building_MarketMarker marker)
 		{
 			var list = new List<CompMarketStall>();
-			if (fair?.marker == null || !fair.marker.Spawned) return list;
-			MarketUtility.CollectStalls(fair.map, stalls);
+			if (marker == null || !marker.Spawned) return list;
+			MarketUtility.CollectStalls(marker.Map, stalls);
 			for (int i = 0; i < stalls.Count; i++)
 			{
-				if (stalls[i].Spawned && MarketUtility.MarkerFor(stalls[i]) == fair.marker) list.Add(stalls[i]);
+				if (stalls[i].Spawned && MarketUtility.MarkerFor(stalls[i]) == marker) list.Add(stalls[i]);
 			}
 			return list;
 		}

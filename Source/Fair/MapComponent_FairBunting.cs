@@ -118,14 +118,20 @@ namespace RimMarket.Fair
 			public bool tight;
 		}
 
+		private class Mast
+		{
+			public Vector3 at;
+			public bool metal;
+			public readonly List<Span> ribbons = new List<Span>();
+			public readonly List<float> angles = new List<float>();
+		}
+
 		private readonly List<Span> spans = new List<Span>();
-		private readonly List<Span> ribbons = new List<Span>();
-		private readonly List<float> ribbonAngles = new List<float>();
+		private readonly List<Mast> masts = new List<Mast>();
 		private int builtTick = -99999;
-		private bool hasMast;
-		private bool metalMast;
-		private Vector3 mastBase;
-		private Building_MarketMarker maskedMarker;
+		private bool modernFair;
+		private readonly HashSet<Building_MarketMarker> maskedMarkers = new HashSet<Building_MarketMarker>();
+		private readonly List<Building_MarketMarker> markerBuffer = new List<Building_MarketMarker>();
 
 		public MapComponent_FairBunting(Map map) : base(map)
 		{
@@ -134,12 +140,10 @@ namespace RimMarket.Fair
 		public override void MapComponentUpdate()
 		{
 			if (Find.CurrentMap != map || WorldRendererUtility.WorldRendered) return;
-			SyncMarker();
 			if (!FairUtility.Festive(map))
 			{
 				if (spans.Count > 0) spans.Clear();
-				ribbons.Clear();
-				hasMast = false;
+				masts.Clear();
 				return;
 			}
 			int now = Find.TickManager.TicksGame;
@@ -156,7 +160,7 @@ namespace RimMarket.Fair
 				if (spans[i].lights) DrawLights(spans[i], ropeAlt, night, time, i);
 				else DrawSpan(spans[i], ropeAlt, wind, time, i);
 			}
-			DrawMast(ropeAlt, wind, night, time, view);
+			for (int i = 0; i < masts.Count; i++) DrawMast(masts[i], ropeAlt, wind, night, time, view);
 		}
 
 		public override void MapComponentTick()
@@ -167,11 +171,17 @@ namespace RimMarket.Fair
 
 		private void SyncMarker()
 		{
-			Building_MarketMarker up = FairUtility.MastOn(map);
-			if (up == maskedMarker) return;
-			Remesh(maskedMarker);
-			Remesh(up);
-			maskedMarker = up;
+			FairUtility.MastMarkers(map, markerBuffer);
+			foreach (Building_MarketMarker m in maskedMarkers)
+			{
+				if (!markerBuffer.Contains(m)) Remesh(m);
+			}
+			for (int i = 0; i < markerBuffer.Count; i++)
+			{
+				if (!maskedMarkers.Contains(markerBuffer[i])) Remesh(markerBuffer[i]);
+			}
+			maskedMarkers.Clear();
+			for (int i = 0; i < markerBuffer.Count; i++) maskedMarkers.Add(markerBuffer[i]);
 		}
 
 		private void Remesh(Building_MarketMarker marker)
@@ -183,66 +193,65 @@ namespace RimMarket.Fair
 		{
 			builtTick = now;
 			spans.Clear();
-			GreatFair fair = FairUtility.On(map);
-			List<CompMarketStall> all = FairUtility.StallsOf(fair);
-			for (int i = 0; i < all.Count; i++)
+			masts.Clear();
+			modernFair = FairUtility.Modern(FairUtility.StallsOf(FairUtility.On(map)));
+			SyncMarker();
+			for (int m = 0; m < markerBuffer.Count; m++)
 			{
-				if (!Corners(all[i], out Vector3 left, out Vector3 right)) continue;
-				spans.Add(new Span
+				List<CompMarketStall> all = FairUtility.StallsAt(markerBuffer[m]);
+				for (int i = 0; i < all.Count; i++)
 				{
-					a = left,
-					b = right,
-					color = ColorOf(all[i]) ?? DefaultColor,
-					lights = all[i].Modern,
-					tight = true,
-				});
+					if (!Corners(all[i], out Vector3 left, out Vector3 right)) continue;
+					spans.Add(new Span
+					{
+						a = left,
+						b = right,
+						color = ColorOf(all[i]) ?? DefaultColor,
+						lights = all[i].Modern,
+						tight = true,
+					});
+				}
+				var remaining = new List<CompMarketStall>(all);
+				while (remaining.Count >= 2)
+				{
+					List<CompMarketStall> ring = PeelRing(remaining, out bool loop);
+					AddChain(ring, loop);
+				}
+				BuildMast(markerBuffer[m], all);
 			}
-			var remaining = new List<CompMarketStall>(all);
-			while (remaining.Count >= 2)
-			{
-				List<CompMarketStall> ring = PeelRing(remaining, out bool loop);
-				AddChain(ring, loop);
-			}
-			BuildMast(fair, all);
 		}
 
-		private void BuildMast(GreatFair fair, List<CompMarketStall> all)
+		private void BuildMast(Building_MarketMarker marker, List<CompMarketStall> all)
 		{
-			ribbons.Clear();
-			ribbonAngles.Clear();
-			hasMast = false;
-			metalMast = FairUtility.Modern(all);
-			Building_MarketMarker marker = fair?.marker;
-			if (marker == null || !marker.Spawned || marker.Map != map) return;
-			hasMast = true;
-			mastBase = marker.TrueCenter();
-			Vector3 crown = mastBase + new Vector3(0f, 0f, metalMast ? RingZ : CrownZ);
-			float rx = metalMast ? RingRadiusX : CrownRadiusX;
-			float rz = metalMast ? RingRadiusZ : CrownRadiusZ;
+			var mast = new Mast { at = marker.TrueCenter(), metal = FairUtility.Modern(all) };
+			masts.Add(mast);
+			Vector3 crown = mast.at + new Vector3(0f, 0f, mast.metal ? RingZ : CrownZ);
+			float rx = mast.metal ? RingRadiusX : CrownRadiusX;
+			float rz = mast.metal ? RingRadiusZ : CrownRadiusZ;
 			var near = new List<CompMarketStall>(all);
-			near.SortBy(s => (At(s) - mastBase).MagnitudeHorizontalSquared());
-			for (int i = 0; i < near.Count && ribbons.Count < MaxRibbons; i++)
+			near.SortBy(s => (At(s) - mast.at).MagnitudeHorizontalSquared());
+			for (int i = 0; i < near.Count && mast.ribbons.Count < MaxRibbons; i++)
 			{
 				CompMarketStall stall = near[i];
-				if ((At(stall) - mastBase).MagnitudeHorizontal() > RibbonRange) break;
+				if ((At(stall) - mast.at).MagnitudeHorizontal() > RibbonRange) break;
 				Vector3 end = Front(stall);
 				float angle = Mathf.Atan2(end.z - crown.z, end.x - crown.x) * Mathf.Rad2Deg;
-				if (Crowded(angle)) continue;
-				ribbonAngles.Add(angle);
-				ribbons.Add(RibbonTo(crown, rx, rz, end, ColorOf(stall) ?? Cream));
+				if (Crowded(mast, angle)) continue;
+				mast.angles.Add(angle);
+				mast.ribbons.Add(RibbonTo(crown, rx, rz, end, ColorOf(stall) ?? Cream, mast.metal));
 			}
 		}
 
-		private bool Crowded(float angle)
+		private static bool Crowded(Mast mast, float angle)
 		{
-			for (int i = 0; i < ribbonAngles.Count; i++)
+			for (int i = 0; i < mast.angles.Count; i++)
 			{
-				if (Mathf.Abs(Mathf.DeltaAngle(angle, ribbonAngles[i])) < MinRibbonAngle) return true;
+				if (Mathf.Abs(Mathf.DeltaAngle(angle, mast.angles[i])) < MinRibbonAngle) return true;
 			}
 			return false;
 		}
 
-		private Span RibbonTo(Vector3 crown, float rx, float rz, Vector3 end, Color color)
+		private static Span RibbonTo(Vector3 crown, float rx, float rz, Vector3 end, Color color, bool metal)
 		{
 			float th = Mathf.Atan2(end.z - crown.z, (end.x - crown.x) * rz / rx);
 			float c = Mathf.Cos(th);
@@ -260,44 +269,44 @@ namespace RimMarket.Fair
 				a = crown + new Vector3(rx * c, 0f, rz * s),
 				b = end,
 				color = color,
-				lights = metalMast,
+				lights = metal,
 				bow = bow,
 			};
 		}
 
-		private void DrawMast(float ropeAlt, float wind, float night, float time, CellRect view)
+		private static void DrawMast(Mast mast, float ropeAlt, float wind, float night, float time, CellRect view)
 		{
-			if (!hasMast) return;
-			for (int i = 0; i < ribbons.Count; i++)
+			for (int i = 0; i < mast.ribbons.Count; i++)
 			{
-				if (!InView(ribbons[i], view)) continue;
-				if (metalMast) DrawLights(ribbons[i], ropeAlt, night, time, i + 31);
-				else DrawRibbon(ribbons[i], ropeAlt, wind, time, i);
+				if (!InView(mast.ribbons[i], view)) continue;
+				if (mast.metal) DrawLights(mast.ribbons[i], ropeAlt, night, time, i + 31);
+				else DrawRibbon(mast.ribbons[i], ropeAlt, wind, time, i);
 			}
-			if (mastBase.x < view.minX - 1 || mastBase.x > view.maxX + 2) return;
-			if (mastBase.z + MastHeight < view.minZ || mastBase.z - 1f > view.maxZ + 1) return;
+			Vector3 at = mast.at;
+			if (at.x < view.minX - 1 || at.x > view.maxX + 2) return;
+			if (at.z + MastHeight < view.minZ || at.z - 1f > view.maxZ + 1) return;
 			float topAlt = ropeAlt + Altitudes.AltInc * 3f;
-			if (metalMast)
+			if (mast.metal)
 			{
 				Material tower = night > TowerLitNight ? TowerLitMat : TowerMat;
-				DrawMastPart(tower, TowerCenterZ, TowerSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, TowerFoot);
-				DrawMastPart(tower, TowerCenterZ, TowerSize, AltitudeLayer.PawnState.AltitudeFor(), TowerShaft);
+				DrawMastPart(at, tower, TowerCenterZ, TowerSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, TowerFoot);
+				DrawMastPart(at, tower, TowerCenterZ, TowerSize, AltitudeLayer.PawnState.AltitudeFor(), TowerShaft);
 			}
 			else
 			{
-				DrawMastPart(FlowersBackMat, FlowersBackZ, FlowersSize, AltitudeLayer.Building.AltitudeFor());
-				DrawMastPart(PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, PoleFoot);
-				DrawMastPart(FlowersFrontMat, FlowersFrontZ, FlowersSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc * 2f);
-				DrawMastPart(PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.PawnState.AltitudeFor(), PoleShaft);
-				DrawMastPart(CrownMat, CrownTexCenterZ, CrownSize, topAlt);
+				DrawMastPart(at, FlowersBackMat, FlowersBackZ, FlowersSize, AltitudeLayer.Building.AltitudeFor());
+				DrawMastPart(at, PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc, PoleFoot);
+				DrawMastPart(at, FlowersFrontMat, FlowersFrontZ, FlowersSize, AltitudeLayer.Building.AltitudeFor() + Altitudes.AltInc * 2f);
+				DrawMastPart(at, PoleMat, PoleCenterZ, PoleSize, AltitudeLayer.PawnState.AltitudeFor(), PoleShaft);
+				DrawMastPart(at, CrownMat, CrownTexCenterZ, CrownSize, topAlt);
 			}
-			if (metalMast && night > 0f)
-				DrawMastPart(GlowMat(LampColor, night), LampZ, new Vector3(LampGlowSize, 1f, LampGlowSize), ropeAlt - Altitudes.AltInc);
+			if (mast.metal && night > 0f)
+				DrawMastPart(at, GlowMat(LampColor, night), LampZ, new Vector3(LampGlowSize, 1f, LampGlowSize), ropeAlt - Altitudes.AltInc);
 		}
 
-		private void DrawMastPart(Material mat, float z, Vector3 size, float alt, Mesh mesh = null)
+		private static void DrawMastPart(Vector3 at, Material mat, float z, Vector3 size, float alt, Mesh mesh = null)
 		{
-			Vector3 pos = mastBase + new Vector3(0f, 0f, z);
+			Vector3 pos = at + new Vector3(0f, 0f, z);
 			pos.y = alt;
 			Graphics.DrawMesh(mesh ?? MeshPool.plane10, Matrix4x4.TRS(pos, Quaternion.identity, size), mat, 0);
 		}
@@ -425,7 +434,7 @@ namespace RimMarket.Fair
 			if (winner == null || !winner.Spawned || winner.Map != map) return;
 			CompMarketStall stall = MarketStallDefs.StallOf(winner);
 			if (stall == null) return;
-			if (metalMast)
+			if (modernFair)
 			{
 				Vector3 at = winner.TrueCenter() + stall.Front.ToVector3() * TrophyAhead - stall.MerchantSide.ToVector3() * TrophySide;
 				at.y = AltitudeLayer.ItemImportant.AltitudeFor();

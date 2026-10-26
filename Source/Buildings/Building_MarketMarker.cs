@@ -52,7 +52,7 @@ namespace RimMarket.Buildings
 
 		public override void Print(SectionLayer layer)
 		{
-			if (markerHidden || FairUtility.MastOn(Map) == this) return;
+			if (markerHidden || FairUtility.HasMast(this)) return;
 			base.Print(layer);
 		}
 
