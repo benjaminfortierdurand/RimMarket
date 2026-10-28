@@ -90,6 +90,8 @@ namespace RimMarket.Buildings
 			if (mgr != null) lines.Add("RimMarket.MarkerCollected".Translate(mgr.TotalFees));
 			if (mgr != null && (HospitalityBridge.Active || HotelsBridge.Active)) lines.Add("RimMarket.MarkerGuestSales".Translate(mgr.TotalGuestSales));
 			if (mgr != null && mgr.TotalColonySales > 0) lines.Add("RimMarket.MarkerColonySales".Translate(mgr.TotalColonySales));
+			if (mgr != null && RimMarketMod.Settings.thievesEnabled && mgr.WealthThiefFactor >= 1.1f)
+				lines.Add("RimMarket.MarkerWealthThieves".Translate(mgr.WealthThiefFactor.ToString("0.0")));
 			if (mgr != null && mgr.ThievesCaught + mgr.ThievesEscaped + mgr.ThievesDeterred > 0)
 				lines.Add("RimMarket.MarkerSecurity".Translate(mgr.ThievesCaught, mgr.ThievesEscaped, mgr.ThievesDeterred));
 			if (Spawned)

@@ -352,7 +352,7 @@ namespace RimMarket.UI
 			px += 52f;
 			if (Widgets.ButtonText(new Rect(px, mid, ButtonSize, ButtonSize), "+")) SetPrice(row, row.price + ColonyStalls.PriceStep * PriceSteps());
 			px += ButtonSize + 10f;
-			int each = ColonyStalls.ShownPrice(row.unitValue, row.price * MarketDemand.PriceFactor(row.def));
+			int each = ColonyStalls.ShownPrice(row.unitValue, row.price * ColonyStalls.SaleFactor(row.def));
 			Widgets.ThingIcon(new Rect(px, rect.y + (rect.height - SilverIcon) / 2f, SilverIcon, SilverIcon), ThingDefOf.Silver);
 			px += SilverIcon + 4f;
 			Text.Anchor = TextAnchor.MiddleLeft;

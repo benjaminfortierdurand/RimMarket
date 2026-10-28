@@ -38,7 +38,8 @@ namespace RimMarket.Market
 			if (!On || def == null) return 1f;
 			DemandEntry e = MarketManager.Instance?.DemandFor(def, create: false);
 			if (e == null) return 1f;
-			return Mathf.Max(MinDemand, 1f / (1f + Pressure(e, Find.TickManager.TicksGame) / HalfDemandAt));
+			float half = HalfDemandAt * MarketDifficulty.DemandSpreadFactor;
+			return Mathf.Max(MinDemand, 1f / (1f + Pressure(e, Find.TickManager.TicksGame) / half));
 		}
 
 		public static float PriceFactor(ThingDef def)

@@ -94,6 +94,7 @@ namespace RimMarket
 
 		private void MarketTab(RimMarketSettings s)
 		{
+			DifficultyRow(s);
 			FeeModeRow(s);
 			int mode = s.FeeModeSafe;
 			if (mode == RimMarketSettings.FeeArrival)
@@ -229,6 +230,26 @@ namespace RimMarket
 			Text.Anchor = TextAnchor.UpperLeft;
 			float v = Widgets.HorizontalSlider(bar, value, min, max, middleAlignment: true);
 			return Mathf.Clamp(Mathf.Round(v / step) * step, min, max);
+		}
+
+		private void DifficultyRow(RimMarketSettings s)
+		{
+			Rect r = NextRow(0f);
+			Hover(r, Hint("Difficulty"));
+			float buttonWidth = Mathf.Round(width * SliderShare) + ValueWidth + 6f;
+			var label = new Rect(r.x, r.y, r.width - buttonWidth - 12f, r.height);
+			var button = new Rect(r.xMax - buttonWidth, r.y + 2f, buttonWidth, r.height - 4f);
+			Text.Anchor = TextAnchor.MiddleLeft;
+			Widgets.Label(label, "RimMarket.Settings.Difficulty".Translate());
+			Text.Anchor = TextAnchor.UpperLeft;
+			if (!Widgets.ButtonText(button, Market.MarketDifficulty.Label(s.marketDifficulty).CapitalizeFirst())) return;
+			var options = new List<FloatMenuOption>();
+			for (int level = Market.MarketDifficulty.Relaxed; level <= Market.MarketDifficulty.Tough; level++)
+			{
+				int pick = level;
+				options.Add(new FloatMenuOption(Market.MarketDifficulty.Label(pick).CapitalizeFirst(), () => s.marketDifficulty = pick));
+			}
+			Find.WindowStack.Add(new FloatMenu(options));
 		}
 
 		private void FeeModeRow(RimMarketSettings s)

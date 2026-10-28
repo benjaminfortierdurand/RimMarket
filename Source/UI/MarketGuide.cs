@@ -224,6 +224,7 @@ namespace RimMarket.UI
 			string haggle = (s.haggleEnabled ? "RimMarket.Guide.On" : "RimMarket.Guide.Off").Translate();
 			return new List<GuideCheck>
 			{
+				new GuideCheck("RimMarket.Guide.FeeDifficulty".Translate(MarketDifficulty.Label(MarketDifficulty.Level)), true, GuideLine.Info),
 				new GuideCheck("RimMarket.Guide.FeeMode".Translate(fee), true, GuideLine.Info),
 				new GuideCheck("RimMarket.Guide.FeeHaggle".Translate(haggle), true, GuideLine.Info),
 				new GuideCheck("RimMarket.Guide.FeeDay".Translate("RimMarket.Settings.Days".Translate(s.marketDays.ToString("0.##"))), true, GuideLine.Info),

@@ -804,7 +804,26 @@ namespace RimMarket.Market
 		public void RecordColonySale(int price)
 		{
 			totalColonySales += Mathf.Max(0, price);
+			AddTakings(price);
 		}
+
+		private const float TakingsPerExtraThief = 1500f;
+		private const float TakingsMemoryTicks = 180000f;
+		private const float MaxExtraThieves = 2f;
+		private const float BoldPerExtraThief = 0.2f;
+		private float recentTakings;
+		private int recentTakingsTick;
+
+		public float RecentTakings => recentTakings * Mathf.Exp(-(Find.TickManager.TicksGame - recentTakingsTick) / TakingsMemoryTicks);
+
+		public void AddTakings(float silver)
+		{
+			if (silver <= 0f) return;
+			recentTakings = RecentTakings + silver;
+			recentTakingsTick = Find.TickManager.TicksGame;
+		}
+
+		public float WealthThiefFactor => 1f + Mathf.Min(MaxExtraThieves, RecentTakings / TakingsPerExtraThief) * MarketDifficulty.WealthPullFactor;
 
 		public void RecordGuestSale(StallVisit v, int price)
 		{
@@ -820,6 +839,7 @@ namespace RimMarket.Market
 		public void AddFees(int value)
 		{
 			totalFees += Mathf.Max(0, value);
+			AddTakings(value);
 		}
 
 		public IReadOnlyList<StallVisit> Visits => visits;
@@ -1265,6 +1285,7 @@ namespace RimMarket.Market
 			}
 			v.feeCollected += value;
 			totalFees += value;
+			AddTakings(value);
 			if (value <= 0)
 			{
 				if (v.feeMode != RimMarketSettings.FeeShare)
@@ -1487,9 +1508,11 @@ namespace RimMarket.Market
 				Map map = maps[i];
 				if (ActiveVisits(map) == 0) continue;
 				float mtb = FairUtility.Running(map) ? S.thiefMtbDays / FairUtility.ThiefFactor : S.thiefMtbDays;
+				float wealth = WealthThiefFactor;
+				mtb /= MarketDifficulty.ThiefFactor * wealth;
 				if (!Rand.MTBEventOccurs(mtb, 60000f, PatrolInterval)) continue;
 				if (ThiefUtility.AnyThiefOnMap(map)) continue;
-				ThiefUtility.TrySendThief(map, Rand.RangeInclusive(1500, 4000));
+				ThiefUtility.TrySendThief(map, Rand.RangeInclusive(1500, 4000), Rand.Chance((wealth - 1f) * BoldPerExtraThief));
 			}
 		}
 
@@ -1676,6 +1699,8 @@ namespace RimMarket.Market
 			Scribe_Values.Look(ref totalFees, "totalFees");
 			Scribe_Values.Look(ref totalGuestSales, "totalGuestSales");
 			Scribe_Values.Look(ref totalColonySales, "totalColonySales");
+			Scribe_Values.Look(ref recentTakings, "recentTakings");
+			Scribe_Values.Look(ref recentTakingsTick, "recentTakingsTick");
 			Scribe_Collections.Look(ref thefts, "thefts", LookMode.Deep);
 			Scribe_Values.Look(ref thievesCaught, "thievesCaught");
 			Scribe_Values.Look(ref thievesEscaped, "thievesEscaped");

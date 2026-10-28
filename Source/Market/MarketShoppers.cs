@@ -179,7 +179,7 @@ namespace RimMarket.Market
 				Pawn p = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, faction, PawnGenerationContext.NonPlayer, forceGenerateNewPawn: true));
 				GenSpawn.Spawn(p, CellFinder.RandomClosewalkCellNear(entry, map, 3), map);
 				Thing silver = ThingMaker.MakeThing(ThingDefOf.Silver);
-				silver.stackCount = Mathf.RoundToInt(Rand.RangeInclusive(MinSilver, MaxSilver) * purse);
+				silver.stackCount = Mathf.RoundToInt(Rand.RangeInclusive(MinSilver, MaxSilver) * purse * MarketDifficulty.PurseFactor);
 				p.inventory.innerContainer.TryAdd(silver);
 				group.Add(p);
 			}

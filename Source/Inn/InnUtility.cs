@@ -357,6 +357,7 @@ namespace RimMarket.Inn
 				}
 				if (got > 0)
 				{
+					mgr.AddTakings(got);
 					RimMarketDefOf.Silver_Drop?.PlayOneShot(new TargetInfo(p.Position, bed.Map));
 					MoteMaker.ThrowText(bed.DrawPos, bed.Map, "+" + got, 3.9f);
 				}

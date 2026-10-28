@@ -491,6 +491,12 @@
 	<RimMarket.Settings.ColonyShopperDaysHint>How often a group of shoppers walks over for the colony stalls when no merchant is in town, counting only daytime market hours, with prices at 110% of value. Cheaper or dearer stalls change this, as set below.</RimMarket.Settings.ColonyShopperDaysHint>
 	<RimMarket.Settings.BargainEffect>Price sway</RimMarket.Settings.BargainEffect>
 	<RimMarket.Settings.BargainEffectHint>100%: shoppers come twice as often to a stall selling at 85% of value or less, and about a third as often at double the value. 0%: prices change nothing about how often they come, only whether they buy. 200%: bargains are the talk of the region.</RimMarket.Settings.BargainEffectHint>
+	<RimMarket.Settings.Difficulty>Market difficulty</RimMarket.Settings.Difficulty>
+	<RimMarket.Settings.DifficultyHint>How hard your market has to work for its silver.\n\nRelaxed: your stalls sell a bit dearer, demand drops slowly, shoppers carry more silver and thieves come less often.\nStandard: the market as intended.\nTough: your stalls sell a bit cheaper, demand drops fast, shoppers carry less and thieves come more often, drawn harder by your takings.</RimMarket.Settings.DifficultyHint>
+	<RimMarket.DifficultyRelaxed>relaxed</RimMarket.DifficultyRelaxed>
+	<RimMarket.DifficultyStandard>standard</RimMarket.DifficultyStandard>
+	<RimMarket.DifficultyTough>tough</RimMarket.DifficultyTough>
+	<RimMarket.MarkerWealthThieves>Word of your takings draws thieves: x{0}</RimMarket.MarkerWealthThieves>
 	<RimMarket.Settings.MarketSaturation>Demand drops when you flood the market</RimMarket.Settings.MarketSaturation>
 	<RimMarket.Settings.MarketSaturationHint>Selling a lot of the same thing at your colony stalls lowers demand for it: it sells less often and for less, then demand comes back over a few days. Vary what you sell. With Vanilla Trading Expanded only the selling chance drops, VTE already lowers the price.</RimMarket.Settings.MarketSaturationHint>
 	<RimMarket.StallSetupDemandTip>Demand: {0}. Every sale of this lowers it, it comes back over a few days. Low demand means fewer and cheaper sales.</RimMarket.StallSetupDemandTip>
@@ -748,6 +754,7 @@
 	<RimMarket.Guide.FeesTitle>Fees and haggling</RimMarket.Guide.FeesTitle>
 	<RimMarket.Guide.FeesBody>Merchants pay a stall fee on arrival, counted out on the counter, then stay a market day. Trade with them from the stall or by talking to the merchant, with the usual trade window.\n\nOnce per visit you can haggle from the trade window: it uses your negotiator's Social skill, and a failure costs as much as a success would have gained. The fee, haggling and the length of a market day are in the mod settings, and a marker can set its own fee.</RimMarket.Guide.FeesBody>
 	<RimMarket.Guide.FeeMode>Stall fee: {0}</RimMarket.Guide.FeeMode>
+	<RimMarket.Guide.FeeDifficulty>Market difficulty: {0}</RimMarket.Guide.FeeDifficulty>
 	<RimMarket.Guide.FeeHaggle>Haggling: {0}</RimMarket.Guide.FeeHaggle>
 	<RimMarket.Guide.FeeDay>Market day: {0}</RimMarket.Guide.FeeDay>
 	<RimMarket.Guide.ColonyStallTitle>Your colony stall</RimMarket.Guide.ColonyStallTitle>
