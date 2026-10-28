@@ -41,14 +41,17 @@
 	<RimMarket.ShoppersForColonyStall>Shoppers from {0} have come to see what the colony has on its stalls.</RimMarket.ShoppersForColonyStall>
 	<RimMarket.ShoppersForBargains>Shoppers from {0} heard the colony sells cheap and have come for a bargain.</RimMarket.ShoppersForBargains>
 	<RimMarket.Settings.InnPrice>Market inn, silver per night</RimMarket.Settings.InnPrice>
-	<RimMarket.Settings.InnPriceHint>What each lodger pays for a night in a bed set to Market inn. The merchant pays for the caravan's guards, shoppers pay for themselves. A miserable room at a stiff price is remembered. Zero keeps the inn free.</RimMarket.Settings.InnPriceHint>
+	<RimMarket.Settings.InnPriceHint>What a lodger pays for a night in a plain room. A poor room costs half, a fine private room twice as much. The merchant pays for the caravan's guards, shoppers pay for themselves. Zero keeps the inn free.</RimMarket.Settings.InnPriceHint>
 	<RimMarket.CommandInnBed>Market inn</RimMarket.CommandInnBed>
 	<RimMarket.CommandInnBedDesc>Rent this bed out to the people who come for the market: merchants, off-duty guards and passing shoppers. They pay by the night (price in the mod settings) and leave the silver by the bed. Colonists, prisoners and slaves will not use it. A nice private room pleases them, a bedroll in a shed does not.</RimMarket.CommandInnBedDesc>
 	<RimMarket.InnBedPrisonCell>A prison cell makes a poor inn.</RimMarket.InnBedPrisonCell>
 	<RimMarket.InnBedHotelGuest>This is a hotel guest bed. Take it off the hotel first.</RimMarket.InnBedHotelGuest>
 	<RimMarket.InnBedLocked>This bed is rented out as a market inn. Turn off Market inn first.</RimMarket.InnBedLocked>
-	<RimMarket.InnBedInspect>Market inn: {0} silver a night.</RimMarket.InnBedInspect>
-	<RimMarket.InnBedInspectFree>Market inn: free of charge.</RimMarket.InnBedInspectFree>
+	<RimMarket.InnBedInspect>Market inn, {1}: {0} silver a night.</RimMarket.InnBedInspect>
+	<RimMarket.InnBedInspectFree>Market inn, {0}: free of charge.</RimMarket.InnBedInspectFree>
+	<RimMarket.InnRoomPoor>poor room</RimMarket.InnRoomPoor>
+	<RimMarket.InnRoomPlain>plain room</RimMarket.InnRoomPlain>
+	<RimMarket.InnRoomFine>fine room</RimMarket.InnRoomFine>
 	<RimMarket.InnBedLabel>Inn ({0})</RimMarket.InnBedLabel>
 	<RimMarket.InnBedLabelFree>Inn (free)</RimMarket.InnBedLabelFree>
 	<RimMarket.ReportGoingToInn>heading for a bed at the inn.</RimMarket.ReportGoingToInn>
@@ -707,7 +710,7 @@
 	<RimMarket.Guide.ColonyStallBuilt>A colony stall</RimMarket.Guide.ColonyStallBuilt>
 	<RimMarket.Guide.ColonyStallStocked>Goods on its sales table</RimMarket.Guide.ColonyStallStocked>
 	<RimMarket.Guide.InnTitle>The inn</RimMarket.Guide.InnTitle>
-	<RimMarket.Guide.InnBody>Any bed can become an inn bed: select it and press the market inn button. It can be anywhere on the map, it doesn't need to be inside the market. Merchants, their guards and shoppers pay by the night, and a caravan pays out of its packs. Merchants and their guards get the beds first.\n\nA fine private room makes your market more appealing, a poor room or a steep price does the opposite. Guests who slept well at a fair price also leave on slightly better terms with you.</RimMarket.Guide.InnBody>
+	<RimMarket.Guide.InnBody>Any bed can become an inn bed: select it and press the market inn button. It can be anywhere on the map, it doesn't need to be inside the market. Merchants, their guards and shoppers pay by the night, and a caravan pays out of its packs. A poor room costs half the inn price, a fine private room twice as much. Merchants and their guards get the beds first, and the merchant takes the best room.\n\nA fine private room makes your market more appealing, a poor room or a steep price does the opposite. Guests who slept well at a fair price also leave on slightly better terms with you.</RimMarket.Guide.InnBody>
 	<RimMarket.Guide.InnBed>At least one inn bed</RimMarket.Guide.InnBed>
 	<RimMarket.Guide.FairTitle>The Great Fair</RimMarket.Guide.FairTitle>
 	<RimMarket.Guide.FairBody>With three stalls or more, the marker can announce a Great Fair three days ahead. On the day, up to six caravans set up at once, crowds of shoppers come with fuller purses, and your colonists come to enjoy it.\n\nAt six in the evening the judges pick the best stall. The fair closes at ten with sky lanterns, or fireworks if most stalls are built from metal.</RimMarket.Guide.FairBody>

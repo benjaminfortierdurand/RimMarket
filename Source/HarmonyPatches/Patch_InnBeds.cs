@@ -25,7 +25,7 @@ namespace RimMarket.HarmonyPatches
 		{
 			if (!InnBeds.Any || !InnBeds.IsInn(__instance) || __instance.OwnersForReading.Count > 0) return true;
 			if (Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
-				GenMapUI.DrawThingLabel(__instance, InnUtility.BedLabel, GenMapUI.DefaultThingLabelColor);
+				GenMapUI.DrawThingLabel(__instance, InnUtility.BedLabel(__instance), GenMapUI.DefaultThingLabelColor);
 			return false;
 		}
 	}

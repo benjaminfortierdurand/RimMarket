@@ -76,18 +76,30 @@ namespace RimMarket.Inn
 		private const int RankMerchant = 0;
 		private const int RankGuard = 1;
 		private const int RankShopper = 2;
+		private const float PoorPriceFactor = 0.5f;
+		private const float FinePriceFactor = 2f;
+		private const float ComfortWeight = 1000000f;
 
 		public static readonly Color SheetColor = new Color32(150, 60, 95, 255);
 
 		public static int Price => Mathf.Max(0, RimMarketMod.Settings.innPrice);
 
-		public static string BedLabel
+		public static int PriceFor(Building_Bed bed)
 		{
-			get
-			{
-				int price = Price;
-				return price > 0 ? "RimMarket.InnBedLabel".Translate(price).ToString() : "RimMarket.InnBedLabelFree".Translate().ToString();
-			}
+			int comfort = Comfort(bed);
+			float factor = comfort < 0 ? PoorPriceFactor : comfort > 0 ? FinePriceFactor : 1f;
+			return Mathf.RoundToInt(Price * factor);
+		}
+
+		public static string BedLabel(Building_Bed bed)
+		{
+			int price = PriceFor(bed);
+			return price > 0 ? "RimMarket.InnBedLabel".Translate(price).ToString() : "RimMarket.InnBedLabelFree".Translate().ToString();
+		}
+
+		public static string ComfortLabel(int comfort)
+		{
+			return (comfort < 0 ? "RimMarket.InnRoomPoor" : comfort > 0 ? "RimMarket.InnRoomFine" : "RimMarket.InnRoomPlain").Translate();
 		}
 
 		public static bool MayLodge(Pawn p)
@@ -143,9 +155,11 @@ namespace RimMarket.Inn
 
 		public static bool CanAfford(Pawn p)
 		{
-			int price = Price;
-			return price <= 0 || Paid(p) || Free(p) || SilverAmong(Payers(p)) >= price;
+			int cheapest = Mathf.RoundToInt(Price * PoorPriceFactor);
+			return cheapest <= 0 || Paid(p) || Free(p) || SilverAmong(Payers(p)) >= cheapest;
 		}
+
+		private static int Purse(Pawn p) => Paid(p) || Free(p) ? int.MaxValue : SilverAmong(Payers(p));
 
 		public static bool Free(Pawn p)
 		{
@@ -170,21 +184,56 @@ namespace RimMarket.Inn
 			if (owned != null && CanUse(owned, p)) return owned;
 			List<Building_Bed> beds = InnBeds.On(p.Map);
 			int rank = Rank(p);
+			int purse = Purse(p);
 			Building_Bed best = null;
-			float bestDist = float.MaxValue;
+			float bestScore = float.MinValue;
 			int free = 0;
 			for (int i = 0; i < beds.Count; i++)
 			{
 				Building_Bed bed = beds[i];
-				if (bed == owned || !CanUse(bed, p)) continue;
+				if (bed == owned || !CanUse(bed, p) || PriceFor(bed) > purse) continue;
 				free++;
-				float d = bed.Position.DistanceToSquared(p.Position);
-				if (d >= bestDist) continue;
+				float score = Score(bed, p, rank);
+				if (score <= bestScore) continue;
 				best = bed;
-				bestDist = d;
+				bestScore = score;
+			}
+			if (rank == RankMerchant)
+			{
+				Building_Bed better = BetterBumpable(p, beds, purse, best == null ? int.MinValue : Comfort(best));
+				if (better != null)
+				{
+					EvictAll(better);
+					if (CanUse(better, p)) return better;
+				}
 			}
 			if (best != null && free > Unhoused(p.Map, rank)) return best;
-			return Bump(p, rank, beds);
+			return Bump(p, rank, beds, purse);
+		}
+
+		private static float Score(Building_Bed bed, Pawn p, int rank)
+		{
+			float dist = bed.Position.DistanceToSquared(p.Position);
+			if (rank == RankMerchant) return Comfort(bed) * ComfortWeight - dist;
+			if (rank == RankGuard) return -Comfort(bed) * ComfortWeight - dist;
+			return -dist;
+		}
+
+		private static Building_Bed BetterBumpable(Pawn p, List<Building_Bed> beds, int purse, int than)
+		{
+			Building_Bed best = null;
+			float bestScore = float.MinValue;
+			for (int i = 0; i < beds.Count; i++)
+			{
+				Building_Bed bed = beds[i];
+				int comfort = Comfort(bed);
+				if (comfort <= than || PriceFor(bed) > purse || !Bumpable(bed, p, RankMerchant)) continue;
+				float score = Score(bed, p, RankMerchant);
+				if (score <= bestScore) continue;
+				best = bed;
+				bestScore = score;
+			}
+			return best;
 		}
 
 		private static int Rank(Pawn p)
@@ -220,7 +269,7 @@ namespace RimMarket.Inn
 			return n;
 		}
 
-		private static Building_Bed Bump(Pawn p, int rank, List<Building_Bed> beds)
+		private static Building_Bed Bump(Pawn p, int rank, List<Building_Bed> beds, int purse)
 		{
 			if (rank == RankShopper) return null;
 			Building_Bed best = null;
@@ -229,7 +278,7 @@ namespace RimMarket.Inn
 			{
 				Building_Bed bed = beds[i];
 				float d = bed.Position.DistanceToSquared(p.Position);
-				if (d >= bestDist || !Bumpable(bed, p, rank)) continue;
+				if (d >= bestDist || PriceFor(bed) > purse || !Bumpable(bed, p, rank)) continue;
 				best = bed;
 				bestDist = d;
 			}
@@ -258,7 +307,7 @@ namespace RimMarket.Inn
 			if (mgr == null || p == null || bed == null || !bed.Spawned) return false;
 			int now = Find.TickManager.TicksGame;
 			if (mgr.InnPaidUntil(p) > now) return true;
-			int price = Free(p) ? 0 : Price;
+			int price = Free(p) ? 0 : PriceFor(bed);
 			int got = 0;
 			if (price > 0)
 			{
@@ -299,7 +348,7 @@ namespace RimMarket.Inn
 		{
 			if (comfort < 0) return price >= 20;
 			if (comfort == 0) return price >= 45;
-			return false;
+			return price >= 100;
 		}
 
 		private static void Rate(Pawn p, Building_Bed bed, int silver, int price)

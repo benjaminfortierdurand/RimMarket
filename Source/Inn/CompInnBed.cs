@@ -83,8 +83,10 @@ namespace RimMarket.Inn
 		public override string CompInspectStringExtra()
 		{
 			if (!inn) return null;
-			int price = InnUtility.Price;
-			return price > 0 ? "RimMarket.InnBedInspect".Translate(price).ToString() : "RimMarket.InnBedInspectFree".Translate().ToString();
+			Building_Bed bed = Bed;
+			int price = InnUtility.PriceFor(bed);
+			string room = InnUtility.ComfortLabel(InnUtility.Comfort(bed));
+			return price > 0 ? "RimMarket.InnBedInspect".Translate(price, room).ToString() : "RimMarket.InnBedInspectFree".Translate(room).ToString();
 		}
 
 		public override void PostExposeData()
