@@ -39,6 +39,7 @@ namespace RimMarket
 		public const float DefRouteOpenFactor = 1f;
 		public const float DefRouteTollFactor = 1f;
 		public const bool DefShopkeepers = false;
+		public const bool DefMarketSaturation = true;
 		public const float DefColonyShopperDays = 1.2f;
 		public const bool DefFairEnabled = true;
 		public const int DefFairCost = 1500;
@@ -78,6 +79,7 @@ namespace RimMarket
 		public float routeOpenFactor = DefRouteOpenFactor;
 		public float routeTollFactor = DefRouteTollFactor;
 		public bool shopkeepers = DefShopkeepers;
+		public bool marketSaturation = DefMarketSaturation;
 		public float colonyShopperDays = DefColonyShopperDays;
 		public bool fairEnabled = DefFairEnabled;
 		public int fairCost = DefFairCost;
@@ -141,6 +143,7 @@ namespace RimMarket
 			colonyShopperDays = DefColonyShopperDays;
 			bargainEffect = DefBargainEffect;
 			shopkeepers = DefShopkeepers;
+			marketSaturation = DefMarketSaturation;
 			innPrice = DefInnPrice;
 		}
 
@@ -206,6 +209,7 @@ namespace RimMarket
 			Scribe_Values.Look(ref routeOpenFactor, "routeOpenFactor", DefRouteOpenFactor);
 			Scribe_Values.Look(ref routeTollFactor, "routeTollFactor", DefRouteTollFactor);
 			Scribe_Values.Look(ref shopkeepers, "shopkeepers", DefShopkeepers);
+			Scribe_Values.Look(ref marketSaturation, "marketSaturation", DefMarketSaturation);
 			Scribe_Values.Look(ref colonyShopperDays, "colonyShopperDays", DefColonyShopperDays);
 			Scribe_Values.Look(ref fairEnabled, "fairEnabled", DefFairEnabled);
 			Scribe_Values.Look(ref fairCost, "fairCost", DefFairCost);

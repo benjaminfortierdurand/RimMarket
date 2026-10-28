@@ -137,6 +137,19 @@ namespace RimMarket.Market
 		private const int GuestBookSize = 40;
 		private List<int> innPrices = new List<int> { -1, -1, -1 };
 		private List<InnReview> guestBook = new List<InnReview>();
+		private List<DemandEntry> demand = new List<DemandEntry>();
+
+		public DemandEntry DemandFor(ThingDef def, bool create)
+		{
+			for (int i = 0; i < demand.Count; i++)
+			{
+				if (demand[i].def == def) return demand[i];
+			}
+			if (!create) return null;
+			var e = new DemandEntry { def = def, tick = Find.TickManager.TicksGame };
+			demand.Add(e);
+			return e;
+		}
 
 		public IReadOnlyList<InnReview> GuestBook => guestBook;
 
@@ -1676,6 +1689,8 @@ namespace RimMarket.Market
 			Scribe_Collections.Look(ref innPaid, "innPaid", LookMode.Value, LookMode.Value);
 			Scribe_Collections.Look(ref innPrices, "innPrices", LookMode.Value);
 			Scribe_Collections.Look(ref guestBook, "guestBook", LookMode.Deep);
+			if (Scribe.mode == LoadSaveMode.Saving) MarketDemand.Forget(demand);
+			Scribe_Collections.Look(ref demand, "demand", LookMode.Deep);
 			Scribe_Collections.Look(ref routes, "routes", LookMode.Deep);
 			Scribe_Values.Look(ref nextRouteId, "nextRouteId", 1);
 			Scribe_Collections.Look(ref orders, "orders", LookMode.Deep);
@@ -1700,6 +1715,8 @@ namespace RimMarket.Market
 				if (innPrices == null || innPrices.Count != InnUtility.TierCount) innPrices = new List<int> { -1, -1, -1 };
 				if (guestBook == null) guestBook = new List<InnReview>();
 				guestBook.RemoveAll(r => r == null);
+				if (demand == null) demand = new List<DemandEntry>();
+				demand.RemoveAll(e => e == null || e.def == null);
 				if (routes == null) routes = new List<TradeRoute>();
 				routes.RemoveAll(r => r == null || r.faction == null || r.kind == null);
 				if (orders == null) orders = new List<RimMarket.Orders.SpecialOrder>();

@@ -491,6 +491,10 @@
 	<RimMarket.Settings.ColonyShopperDaysHint>How often a group of shoppers walks over for the colony stalls when no merchant is in town, counting only daytime market hours, with prices at 110% of value. Cheaper or dearer stalls change this, as set below.</RimMarket.Settings.ColonyShopperDaysHint>
 	<RimMarket.Settings.BargainEffect>Price sway</RimMarket.Settings.BargainEffect>
 	<RimMarket.Settings.BargainEffectHint>100%: shoppers come twice as often to a stall selling at 85% of value or less, and about a third as often at double the value. 0%: prices change nothing about how often they come, only whether they buy. 200%: bargains are the talk of the region.</RimMarket.Settings.BargainEffectHint>
+	<RimMarket.Settings.MarketSaturation>Demand drops when you flood the market</RimMarket.Settings.MarketSaturation>
+	<RimMarket.Settings.MarketSaturationHint>Selling a lot of the same thing at your colony stalls lowers demand for it: it sells less often and for less, then demand comes back over a few days. Vary what you sell. With Vanilla Trading Expanded only the selling chance drops, VTE already lowers the price.</RimMarket.Settings.MarketSaturationHint>
+	<RimMarket.StallSetupDemandTip>Demand: {0}. Every sale of this lowers it, it comes back over a few days. Low demand means fewer and cheaper sales.</RimMarket.StallSetupDemandTip>
+	<RimMarket.StallSetupDemandVte>With Vanilla Trading Expanded, demand only changes how often it sells. The price follows VTE's market.</RimMarket.StallSetupDemandVte>
 	<RimMarket.Settings.Shopkeepers>Colony stalls need a shopkeeper</RimMarket.Settings.Shopkeepers>
 	<RimMarket.Settings.ShopkeepersHint>Off: colony stalls sell on their own, on trust. On: a colonist with the Shopkeep work type has to stand at the counter while customers are in town. Their Social skill raises prices, customers buy a little more readily, and every sale teaches them something. The Shopkeep column appears in the Work tab after a restart.</RimMarket.Settings.ShopkeepersHint>
 	<RimMarket.FairAnnounceLabel>Announce a Great Fair</RimMarket.FairAnnounceLabel>
@@ -747,7 +751,7 @@
 	<RimMarket.Guide.FeeHaggle>Haggling: {0}</RimMarket.Guide.FeeHaggle>
 	<RimMarket.Guide.FeeDay>Market day: {0}</RimMarket.Guide.FeeDay>
 	<RimMarket.Guide.ColonyStallTitle>Your colony stall</RimMarket.Guide.ColonyStallTitle>
-	<RimMarket.Guide.ColonyStallBody>Any stall can sell your own goods: select it and make it a colony stall. Its sales table lists what you own. Pick what to sell, how many and at what price, and your haulers bring the goods over.\n\nShoppers from friendly factions and your guests pay at the counter. Cheaper prices bring shoppers by more often.</RimMarket.Guide.ColonyStallBody>
+	<RimMarket.Guide.ColonyStallBody>Any stall can sell your own goods: select it and make it a colony stall. Its sales table lists what you own. Pick what to sell, how many and at what price, and your haulers bring the goods over.\n\nShoppers from friendly factions and your guests pay at the counter. Cheaper prices bring shoppers by more often. Selling a lot of the same thing lowers demand for it for a few days, the bar under each name in the sales table shows it, so vary your goods.</RimMarket.Guide.ColonyStallBody>
 	<RimMarket.Guide.ColonyStallBuilt>A colony stall</RimMarket.Guide.ColonyStallBuilt>
 	<RimMarket.Guide.ColonyStallStocked>Goods on its sales table</RimMarket.Guide.ColonyStallStocked>
 	<RimMarket.Guide.InnTitle>The inn</RimMarket.Guide.InnTitle>

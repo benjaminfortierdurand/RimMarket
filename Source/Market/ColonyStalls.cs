@@ -268,14 +268,14 @@ namespace RimMarket.Market
 			{
 				Thing t = stock[i];
 				if (!Sellable(t, s)) continue;
-				if (UnitPrice(t, s.OrderFor(StockDef(t)).priceFactor * keeper) <= silver) affordable.Add(t);
+				if (UnitPrice(t, s.OrderFor(StockDef(t)).priceFactor * keeper * MarketDemand.PriceFactor(StockDef(t))) <= silver) affordable.Add(t);
 			}
 			if (affordable.Count == 0) return false;
 			Thing pick = affordable.RandomElement();
 			float baseFactor = s.OrderFor(StockDef(pick)).priceFactor;
-			float chance = ChanceFor(baseFactor) + (KeeperAt(s) != null ? KeeperBuyBonus : 0f);
+			float chance = (ChanceFor(baseFactor) + (KeeperAt(s) != null ? KeeperBuyBonus : 0f)) * MarketDemand.Demand(StockDef(pick));
 			if (!Rand.Chance(Mathf.Clamp01(chance))) return false;
-			float unit = UnitPrice(pick, baseFactor * keeper);
+			float unit = UnitPrice(pick, baseFactor * keeper * MarketDemand.PriceFactor(StockDef(pick)));
 			int max = Mathf.Min(pick.stackCount, Mathf.FloorToInt(silver / unit), MarketUtility.MaxUnitsPerPurchase);
 			if (max < 1) return false;
 			int count = Rand.RangeInclusive(1, max);
@@ -283,6 +283,7 @@ namespace RimMarket.Market
 			Thing split = s.StockOwner.Take(pick, count);
 			if (split == null) return false;
 			s.Notify_Sold(StockDef(split), split.stackCount);
+			MarketDemand.Record(StockDef(split), cost);
 			VteBridge.Notify_PlayerSold(split, split.stackCount);
 			price = MarketUtility.TakeAndPlacePayment(new List<Pawn> { buyer }, cost, false, CashCell(s), s.Map);
 			buyer.inventory.TryAddItemNotForSale(split);

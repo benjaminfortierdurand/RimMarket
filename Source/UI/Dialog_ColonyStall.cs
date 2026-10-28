@@ -310,6 +310,7 @@ namespace RimMarket.UI
 			if (order == null) GUI.color = new Color(0.85f, 0.85f, 0.85f);
 			Widgets.Label(new Rect(x + 62f, rect.y, ColItem - 66f, rect.height), row.def.LabelCap.ToString().Truncate(ColItem - 66f));
 			GUI.color = Color.white;
+			if (RimMarketMod.Settings.marketSaturation) DrawDemand(new Rect(x + 62f, rect.yMax - 5f, ColItem - 72f, 3f), row.def);
 			x += ColItem;
 
 			Text.Anchor = TextAnchor.MiddleCenter;
@@ -351,7 +352,7 @@ namespace RimMarket.UI
 			px += 52f;
 			if (Widgets.ButtonText(new Rect(px, mid, ButtonSize, ButtonSize), "+")) SetPrice(row, row.price + ColonyStalls.PriceStep * PriceSteps());
 			px += ButtonSize + 10f;
-			int each = ColonyStalls.ShownPrice(row.unitValue, row.price);
+			int each = ColonyStalls.ShownPrice(row.unitValue, row.price * MarketDemand.PriceFactor(row.def));
 			Widgets.ThingIcon(new Rect(px, rect.y + (rect.height - SilverIcon) / 2f, SilverIcon, SilverIcon), ThingDefOf.Silver);
 			px += SilverIcon + 4f;
 			Text.Anchor = TextAnchor.MiddleLeft;
@@ -359,11 +360,23 @@ namespace RimMarket.UI
 			Widgets.Label(new Rect(px, rect.y, rect.xMax - px, rect.height), each.ToString());
 			Text.WordWrap = true;
 			TooltipHandler.TipRegion(new Rect(x, rect.y, rect.xMax - x, rect.height),
-				"RimMarket.StallSetupPriceTip".Translate(row.price.ToStringPercent(), each, ColonyStalls.ChanceFor(row.price).ToStringPercent()));
+				"RimMarket.StallSetupPriceTip".Translate(row.price.ToStringPercent(), each, (ColonyStalls.ChanceFor(row.price) * MarketDemand.Demand(row.def)).ToStringPercent()));
 			Text.Anchor = TextAnchor.UpperLeft;
 		}
 
 		private static int PriceSteps() => Event.current.shift ? 5 : 1;
+
+		private static void DrawDemand(Rect bar, ThingDef def)
+		{
+			float demand = MarketDemand.Demand(def);
+			Widgets.DrawBoxSolid(bar, new Color(1f, 1f, 1f, 0.08f));
+			Color fill = demand > 0.75f ? new Color(0.35f, 0.7f, 0.35f) : demand > 0.45f ? new Color(0.85f, 0.7f, 0.25f) : new Color(0.8f, 0.3f, 0.25f);
+			Widgets.DrawBoxSolid(new Rect(bar.x, bar.y, bar.width * demand, bar.height), fill);
+			var tipRect = new Rect(bar.x, bar.y - 22f, bar.width, 25f);
+			string tip = "RimMarket.StallSetupDemandTip".Translate(demand.ToStringPercent());
+			if (MarketDemand.PriceFollowsVte) tip += "\n\n" + "RimMarket.StallSetupDemandVte".Translate();
+			TooltipHandler.TipRegion(tipRect, tip);
+		}
 
 		private static string FieldName(Row row) => "RimMarketToSell" + row.def.defName;
 
