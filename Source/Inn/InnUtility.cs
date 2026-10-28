@@ -67,6 +67,8 @@ namespace RimMarket.Inn
 	{
 		public const int PaidSpan = 45000;
 		public const int GoodNightGoodwill = 1;
+		public const int GoodNightExtraTicks = 30000;
+		public const float RestedTackleBonus = 0.15f;
 		private const float TiredLevel = 0.3f;
 		private const float NightLevel = 0.75f;
 		private const int NightStart = 22;
@@ -76,20 +78,57 @@ namespace RimMarket.Inn
 		private const int RankMerchant = 0;
 		private const int RankGuard = 1;
 		private const int RankShopper = 2;
-		private const float PoorPriceFactor = 0.5f;
-		private const float FinePriceFactor = 2f;
 		private const float ComfortWeight = 1000000f;
+		public const int TierDorm = 0;
+		public const int TierRoom = 1;
+		public const int TierSuite = 2;
+		public const int TierCount = 3;
+		public const int MaxTierPrice = 500;
+		private static readonly float[] TierFactors = { 0.5f, 1f, 2f };
+		private static readonly int[] SteepAt = { 20, 45, 100 };
+		private static readonly string[] TierKeys = { "RimMarket.InnTierDorm", "RimMarket.InnTierRoom", "RimMarket.InnTierSuite" };
 
 		public static readonly Color SheetColor = new Color32(150, 60, 95, 255);
 
 		public static int Price => Mathf.Max(0, RimMarketMod.Settings.innPrice);
 
-		public static int PriceFor(Building_Bed bed)
+		public static int DefaultTierPrice(int tier) => Mathf.RoundToInt(Price * TierFactors[Mathf.Clamp(tier, 0, TierCount - 1)]);
+
+		public static int TierPrice(int tier)
 		{
-			int comfort = Comfort(bed);
-			float factor = comfort < 0 ? PoorPriceFactor : comfort > 0 ? FinePriceFactor : 1f;
-			return Mathf.RoundToInt(Price * factor);
+			int set = MarketManager.Instance?.InnPrice(tier) ?? -1;
+			return set >= 0 ? set : DefaultTierPrice(tier);
 		}
+
+		public static int PriceFor(Building_Bed bed) => TierPrice(Tier(bed));
+
+		public static int Tier(Building_Bed bed)
+		{
+			Room room = bed?.GetRoom();
+			if (room == null || room.PsychologicallyOutdoors) return TierDorm;
+			float impressiveness = room.GetStat(RoomStatDefOf.Impressiveness);
+			if (impressiveness < PoorImpressiveness || BedsIn(room) > 1) return TierDorm;
+			if (impressiveness >= FineImpressiveness && bed.SleepingSlotsCount >= 2 && HasFurniture(bed)) return TierSuite;
+			return TierRoom;
+		}
+
+		private static int BedsIn(Room room)
+		{
+			int beds = 0;
+			foreach (Building_Bed b in room.ContainedBeds)
+			{
+				if (!b.Medical) beds++;
+			}
+			return beds;
+		}
+
+		private static bool HasFurniture(Building_Bed bed)
+		{
+			List<Thing> linked = bed.GetComp<CompAffectedByFacilities>()?.LinkedFacilitiesListForReading;
+			return linked != null && linked.Count > 0;
+		}
+
+		public static string TierLabel(int tier) => TierKeys[Mathf.Clamp(tier, 0, TierCount - 1)].Translate();
 
 		public static string BedLabel(Building_Bed bed)
 		{
@@ -97,10 +136,6 @@ namespace RimMarket.Inn
 			return price > 0 ? "RimMarket.InnBedLabel".Translate(price).ToString() : "RimMarket.InnBedLabelFree".Translate().ToString();
 		}
 
-		public static string ComfortLabel(int comfort)
-		{
-			return (comfort < 0 ? "RimMarket.InnRoomPoor" : comfort > 0 ? "RimMarket.InnRoomFine" : "RimMarket.InnRoomPlain").Translate();
-		}
 
 		public static bool MayLodge(Pawn p)
 		{
@@ -155,7 +190,7 @@ namespace RimMarket.Inn
 
 		public static bool CanAfford(Pawn p)
 		{
-			int cheapest = Mathf.RoundToInt(Price * PoorPriceFactor);
+			int cheapest = Mathf.Min(TierPrice(TierDorm), Mathf.Min(TierPrice(TierRoom), TierPrice(TierSuite)));
 			return cheapest <= 0 || Paid(p) || Free(p) || SilverAmong(Payers(p)) >= cheapest;
 		}
 
@@ -200,7 +235,7 @@ namespace RimMarket.Inn
 			}
 			if (rank == RankMerchant)
 			{
-				Building_Bed better = BetterBumpable(p, beds, purse, best == null ? int.MinValue : Comfort(best));
+				Building_Bed better = BetterBumpable(p, beds, purse, best == null ? int.MinValue : Quality(best));
 				if (better != null)
 				{
 					EvictAll(better);
@@ -214,10 +249,12 @@ namespace RimMarket.Inn
 		private static float Score(Building_Bed bed, Pawn p, int rank)
 		{
 			float dist = bed.Position.DistanceToSquared(p.Position);
-			if (rank == RankMerchant) return Comfort(bed) * ComfortWeight - dist;
-			if (rank == RankGuard) return -Comfort(bed) * ComfortWeight - dist;
+			if (rank == RankMerchant) return Quality(bed) * ComfortWeight - dist;
+			if (rank == RankGuard) return -Quality(bed) * ComfortWeight - dist;
 			return -dist;
 		}
+
+		private static int Quality(Building_Bed bed) => Tier(bed) * 3 + Comfort(bed);
 
 		private static Building_Bed BetterBumpable(Pawn p, List<Building_Bed> beds, int purse, int than)
 		{
@@ -226,8 +263,7 @@ namespace RimMarket.Inn
 			for (int i = 0; i < beds.Count; i++)
 			{
 				Building_Bed bed = beds[i];
-				int comfort = Comfort(bed);
-				if (comfort <= than || PriceFor(bed) > purse || !Bumpable(bed, p, RankMerchant)) continue;
+				if (Quality(bed) <= than || PriceFor(bed) > purse || !Bumpable(bed, p, RankMerchant)) continue;
 				float score = Score(bed, p, RankMerchant);
 				if (score <= bestScore) continue;
 				best = bed;
@@ -344,18 +380,15 @@ namespace RimMarket.Inn
 			return beds <= 1 && impressiveness >= FineImpressiveness ? 1 : 0;
 		}
 
-		public static bool Steep(int comfort, int price)
-		{
-			if (comfort < 0) return price >= 20;
-			if (comfort == 0) return price >= 45;
-			return price >= 100;
-		}
+		public static bool Steep(int tier, int price) => price >= SteepAt[Mathf.Clamp(tier, 0, TierCount - 1)];
 
 		private static void Rate(Pawn p, Building_Bed bed, int silver, int price)
 		{
 			MarketManager mgr = MarketManager.Instance;
 			int comfort = Comfort(bed);
-			bool steep = Steep(comfort, price);
+			int tier = Tier(bed);
+			bool steep = Steep(tier, price);
+			RecordStay(p, bed, tier, comfort, steep, price, silver);
 			Lord lord = p.GetLord();
 			StallVisit v = mgr.VisitFor(lord);
 			if (v != null)
@@ -364,6 +397,13 @@ namespace RimMarket.Inn
 				v.innNights++;
 				v.innComfort += comfort;
 				if (steep) v.innSteep = true;
+				if (p == v.trader && comfort > 0 && !steep && !v.innExtended && !v.closed)
+				{
+					v.innExtended = true;
+					v.endTick += GoodNightExtraTicks;
+					if (RimMarketMod.Settings.showMessages)
+						Messages.Message("RimMarket.InnStayLonger".Translate(p.LabelShortCap), new LookTargets(p), MessageTypeDefOf.PositiveEvent, historical: false);
+				}
 				return;
 			}
 			if (!(lord?.LordJob is LordJob_MarketShoppers shoppers) || shoppers.innRated) return;
@@ -375,6 +415,65 @@ namespace RimMarket.Inn
 			}
 			else if (comfort < 0) mgr.Record(null, p.Faction, MarketReputation.Appeal, -1f, "RimMarket.ReasonInnPoor");
 			if (steep) mgr.Record(null, p.Faction, MarketReputation.Fairness, -1f, "RimMarket.ReasonInnSteep");
+		}
+
+		private static void RecordStay(Pawn p, Building_Bed bed, int tier, int comfort, bool steep, int price, int silver)
+		{
+			CompInnBed comp = InnBeds.CompOf(bed);
+			if (comp != null)
+			{
+				comp.nights++;
+				comp.earned += silver;
+			}
+			var review = new InnReview
+			{
+				tick = Find.TickManager.TicksGame,
+				guest = p.LabelShortCap,
+				role = RoleKeys[Rank(p)],
+				faction = p.Faction?.Name ?? "?",
+				tier = tier,
+				price = price,
+			};
+			int stars = 3;
+			Room room = bed.GetRoom();
+			if (room == null || room.PsychologicallyOutdoors)
+			{
+				stars -= 1;
+				review.notes.Add("RimMarket.ReviewOutdoors");
+			}
+			else if (tier == TierSuite)
+			{
+				stars += 2;
+				review.notes.Add("RimMarket.ReviewSuite");
+			}
+			else if (comfort > 0)
+			{
+				stars += 1;
+				review.notes.Add("RimMarket.ReviewFine");
+			}
+			else if (comfort < 0)
+			{
+				stars -= 1;
+				review.notes.Add("RimMarket.ReviewPoor");
+			}
+			else review.notes.Add(tier == TierDorm ? "RimMarket.ReviewDorm" : "RimMarket.ReviewRoom");
+			if (price <= 0) review.notes.Add("RimMarket.ReviewFree");
+			else if (steep)
+			{
+				stars -= 1;
+				review.notes.Add("RimMarket.ReviewPricey");
+			}
+			else review.notes.Add("RimMarket.ReviewFair");
+			review.stars = Mathf.Clamp(stars, 1, 5);
+			MarketManager.Instance?.AddReview(review);
+		}
+
+		private static readonly string[] RoleKeys = { "RimMarket.InnRoleMerchant", "RimMarket.InnRoleGuard", "RimMarket.InnRoleShopper" };
+
+		public static bool Rested(Pawn p)
+		{
+			MarketManager mgr = MarketManager.Instance;
+			return mgr != null && p != null && mgr.InnPaidUntil(p) > Find.TickManager.TicksGame;
 		}
 
 		public static void ThankForBed(Faction f)

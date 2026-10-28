@@ -211,7 +211,29 @@ namespace RimMarket.Buildings
 				action = Window_MarketReputation.Open,
 			};
 
+			if (Faction == Faction.OfPlayer)
+			{
+				yield return new Command_Action
+				{
+					defaultLabel = "RimMarket.BuildMenuLabel".Translate(),
+					defaultDesc = "RimMarket.BuildMenuDesc".Translate(),
+					icon = RimMarketIcons.BuildMarket,
+					action = MarketUtility.OpenBuildMenu,
+				};
+			}
+
 			foreach (Gizmo g in FairGizmos()) yield return g;
+
+			if (Spawned && Faction == Faction.OfPlayer && Inn.InnBeds.On(Map).Count > 0)
+			{
+				yield return new Command_Action
+				{
+					defaultLabel = "RimMarket.InnRegisterLabel".Translate(),
+					defaultDesc = "RimMarket.InnRegisterDesc".Translate(),
+					icon = RimMarketIcons.InnRegister,
+					action = Dialog_InnRegister.Open,
+				};
+			}
 
 			MarketManager mgr = MarketManager.Instance;
 			if (mgr != null && Spawned && mgr.TradersAt(this).Count > 0)

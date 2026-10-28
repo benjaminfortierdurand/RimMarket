@@ -562,6 +562,25 @@ namespace RimMarket.Market
 			PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.InteractingWithTraders, KnowledgeAmount.Total);
 		}
 
+		public static void OpenBuildMenu()
+		{
+			var defs = new List<ThingDef>(MarketStallDefs.All)
+			{
+				RimMarketDefOf.RimMarket_CaravanCamp,
+				RimMarketDefOf.RimMarket_GuardRestSpot,
+				RimMarketDefOf.RimMarket_AuctionBlock,
+			};
+			var options = new List<FloatMenuOption>();
+			foreach (ThingDef def in defs.Where(d => d != null).Distinct())
+			{
+				Designator_Build des = BuildCopyCommandUtility.FindAllowedDesignator(def);
+				options.Add(des != null
+					? new FloatMenuOption(def.LabelCap, () => Find.DesignatorManager.Select(des), def)
+					: new FloatMenuOption(def.LabelCap + " (" + "RimMarket.BuildMenuLocked".Translate() + ")", null, def));
+			}
+			Find.WindowStack.Add(new FloatMenu(options));
+		}
+
 		public static void OpenRoundsMenu(Building_MarketMarker marker)
 		{
 			List<StallVisit> visits = MarketManager.Instance?.TradersAt(marker);

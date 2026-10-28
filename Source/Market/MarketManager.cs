@@ -134,6 +134,25 @@ namespace RimMarket.Market
 		}
 
 		private Dictionary<int, int> innPaid = new Dictionary<int, int>();
+		private const int GuestBookSize = 40;
+		private List<int> innPrices = new List<int> { -1, -1, -1 };
+		private List<InnReview> guestBook = new List<InnReview>();
+
+		public IReadOnlyList<InnReview> GuestBook => guestBook;
+
+		public int InnPrice(int tier) => tier >= 0 && tier < innPrices.Count ? innPrices[tier] : -1;
+
+		public void SetInnPrice(int tier, int price)
+		{
+			if (tier >= 0 && tier < innPrices.Count) innPrices[tier] = price;
+		}
+
+		public void AddReview(InnReview review)
+		{
+			if (review == null) return;
+			guestBook.Insert(0, review);
+			if (guestBook.Count > GuestBookSize) guestBook.RemoveRange(GuestBookSize, guestBook.Count - GuestBookSize);
+		}
 
 		public int InnPaidUntil(Pawn p)
 		{
@@ -1655,6 +1674,8 @@ namespace RimMarket.Market
 			Scribe_Collections.Look(ref auctions, "auctions", LookMode.Deep);
 			Scribe_Collections.Look(ref awayCooldowns, "awayCooldowns", LookMode.Value, LookMode.Value);
 			Scribe_Collections.Look(ref innPaid, "innPaid", LookMode.Value, LookMode.Value);
+			Scribe_Collections.Look(ref innPrices, "innPrices", LookMode.Value);
+			Scribe_Collections.Look(ref guestBook, "guestBook", LookMode.Deep);
 			Scribe_Collections.Look(ref routes, "routes", LookMode.Deep);
 			Scribe_Values.Look(ref nextRouteId, "nextRouteId", 1);
 			Scribe_Collections.Look(ref orders, "orders", LookMode.Deep);
@@ -1676,6 +1697,9 @@ namespace RimMarket.Market
 				fairExcluded.RemoveAll(f => f == null);
 				fairs.RemoveAll(f => f == null || f.map == null);
 				if (innPaid == null) innPaid = new Dictionary<int, int>();
+				if (innPrices == null || innPrices.Count != InnUtility.TierCount) innPrices = new List<int> { -1, -1, -1 };
+				if (guestBook == null) guestBook = new List<InnReview>();
+				guestBook.RemoveAll(r => r == null);
 				if (routes == null) routes = new List<TradeRoute>();
 				routes.RemoveAll(r => r == null || r.faction == null || r.kind == null);
 				if (orders == null) orders = new List<RimMarket.Orders.SpecialOrder>();

@@ -57,6 +57,7 @@ namespace RimMarket.Market
 		public bool innSteep;
 		public bool feud;
 		public bool arrivalSignalled;
+		public bool innExtended;
 		public string feudWith;
 		public int routeId;
 		public int orderId;
@@ -148,6 +149,7 @@ namespace RimMarket.Market
 			Scribe_Values.Look(ref innSteep, "innSteep");
 			Scribe_Values.Look(ref feud, "feud");
 			Scribe_Values.Look(ref arrivalSignalled, "arrivalSignalled");
+			Scribe_Values.Look(ref innExtended, "innExtended");
 			Scribe_Values.Look(ref feudWith, "feudWith");
 			Scribe_Values.Look(ref routeId, "routeId");
 			Scribe_Values.Look(ref orderId, "orderId");

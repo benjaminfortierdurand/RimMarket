@@ -265,12 +265,13 @@ namespace RimMarket.Thieves
 			if (guard == null || thief == null || !IsFleeingThief(thief)) return;
 			int guardMelee = guard.skills?.GetSkill(SkillDefOf.Melee)?.Level ?? 0;
 			int thiefMelee = thief.skills?.GetSkill(SkillDefOf.Melee)?.Level ?? 0;
-			float chance = Mathf.Clamp(0.55f + 0.05f * (guardMelee - thiefMelee), 0.2f, 0.95f);
+			float rested = Inn.InnUtility.Rested(guard) ? Inn.InnUtility.RestedTackleBonus : 0f;
+			float chance = Mathf.Clamp(0.55f + 0.05f * (guardMelee - thiefMelee) + rested, 0.2f, 0.95f);
 			guard.skills?.Learn(SkillDefOf.Melee, 150f);
 			Map map = thief.Map;
 			if (Rand.Chance(chance))
 			{
-				MoteMaker.ThrowText(thief.DrawPos, map, "RimMarket.MoteGotYou".Translate(), 3.5f);
+				MoteMaker.ThrowText(thief.DrawPos, map, (rested > 0f ? "RimMarket.MoteGotYouRested" : "RimMarket.MoteGotYou").Translate(), 3.5f);
 				thief.health.AddHediff(RimMarketDefOf.RimMarket_Subdued);
 				MarketManager.Instance?.Notify_ThiefCaught(thief, guard);
 				return;

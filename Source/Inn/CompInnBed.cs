@@ -19,6 +19,8 @@ namespace RimMarket.Inn
 		private static readonly Texture2D Icon = ContentFinder<Texture2D>.Get("UI/Commands/RimMarket_AsInn");
 
 		public bool inn;
+		public int nights;
+		public int earned;
 
 		public Building_Bed Bed => parent as Building_Bed;
 
@@ -66,7 +68,7 @@ namespace RimMarket.Inn
 		public override IEnumerable<Gizmo> CompGetGizmosExtra()
 		{
 			if (!Supported || parent.Faction != Faction.OfPlayer) yield break;
-			var toggle = new Command_Toggle
+			var toggle = new Command_InnToggle
 			{
 				defaultLabel = "RimMarket.CommandInnBed".Translate(),
 				defaultDesc = "RimMarket.CommandInnBedDesc".Translate(),
@@ -78,6 +80,14 @@ namespace RimMarket.Inn
 			if (!inn && room != null && room.IsPrisonCell) toggle.Disable("RimMarket.InnBedPrisonCell".Translate());
 			else if (!inn && Compat.HotelsBridge.IsGuestBed(Bed)) toggle.Disable("RimMarket.InnBedHotelGuest".Translate());
 			yield return toggle;
+			if (!inn) yield break;
+			yield return new Command_Action
+			{
+				defaultLabel = "RimMarket.InnRegisterLabel".Translate(),
+				defaultDesc = "RimMarket.InnRegisterDesc".Translate(),
+				icon = UI.RimMarketIcons.InnRegister,
+				action = UI.Dialog_InnRegister.Open,
+			};
 		}
 
 		public override string CompInspectStringExtra()
@@ -85,7 +95,7 @@ namespace RimMarket.Inn
 			if (!inn) return null;
 			Building_Bed bed = Bed;
 			int price = InnUtility.PriceFor(bed);
-			string room = InnUtility.ComfortLabel(InnUtility.Comfort(bed));
+			string room = InnUtility.TierLabel(InnUtility.Tier(bed));
 			return price > 0 ? "RimMarket.InnBedInspect".Translate(price, room).ToString() : "RimMarket.InnBedInspectFree".Translate(room).ToString();
 		}
 
@@ -93,6 +103,8 @@ namespace RimMarket.Inn
 		{
 			base.PostExposeData();
 			Scribe_Values.Look(ref inn, "rimMarketInn");
+			Scribe_Values.Look(ref nights, "rimMarketInnNights");
+			Scribe_Values.Look(ref earned, "rimMarketInnEarned");
 		}
 	}
 
