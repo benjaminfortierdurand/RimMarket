@@ -393,7 +393,7 @@ namespace RimMarket.AI
 				if (q != null && !q.InQuarter(c)) continue;
 				Building b = c.GetEdifice(map);
 				bool sittable = b != null && b.def.building != null && b.def.building.isSittable;
-				if (!sittable && (!c.Standable(map) || b != null)) continue;
+				if (!sittable && (!c.Standable(map) || b != null || stand.IsValid)) continue;
 				if (!pawn.CanReserveSittableOrSpot(c) || !pawn.CanReach(c, PathEndMode.OnCell, Danger.Some)) continue;
 				if (sittable)
 				{
