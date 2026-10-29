@@ -270,6 +270,7 @@
 	<RimMarket.HaggleFailed>Haggle failed: {0}% worse</RimMarket.HaggleFailed>
 	<RimMarket.MoteDeal>Deal!</RimMarket.MoteDeal>
 	<RimMarket.MoteRefused>No.</RimMarket.MoteRefused>
+	<RimMarket.CaravanWaitsDanger>The {0} caravan is shut in behind your walls. They saw the danger out there and will wait for it to pass rather than break out.</RimMarket.CaravanWaitsDanger>
 	<RimMarket.MoteLotOpen>Lot {0}!</RimMarket.MoteLotOpen>
 	<RimMarket.MoteGone>Gone!</RimMarket.MoteGone>
 	<RimMarket.MoteNoTakers>No takers.</RimMarket.MoteNoTakers>

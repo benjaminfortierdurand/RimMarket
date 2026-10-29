@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RimMarket.AI;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -93,6 +94,7 @@ namespace RimMarket.Market
 					}
 					if (age < StuckTicks || !Leaving(lord.CurLordToil)) continue;
 				}
+				if (Trigger_MarketTrapped.DangerOnMap(p.Map, g.faction)) continue;
 				if (!byMap.TryGetValue(p.Map, out List<Pawn> list))
 				{
 					list = new List<Pawn>();

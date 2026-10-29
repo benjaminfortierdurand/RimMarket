@@ -9,8 +9,18 @@ namespace RimMarket.AI
 	{
 		private const int Interval = 197;
 		private const int StrikesNeeded = 3;
+		private const int CalmTicks = 2500;
 
 		private int strikes;
+		private int calmFrom = -1;
+		private bool toldWaiting;
+
+		public static bool DangerOnMap(Map map, Faction faction)
+		{
+			if (map == null) return false;
+			if (GenHostility.AnyHostileActiveThreatToPlayer(map)) return true;
+			return faction != null && GenHostility.AnyHostileActiveThreatTo(map, faction);
+		}
 
 		public override bool ActivateOn(Lord lord, TriggerSignal signal)
 		{
@@ -21,6 +31,19 @@ namespace RimMarket.AI
 				strikes = 0;
 				return false;
 			}
+			int now = Find.TickManager.TicksGame;
+			if (DangerOnMap(stuck.Map, lord.faction))
+			{
+				strikes = 0;
+				calmFrom = now;
+				if (!toldWaiting)
+				{
+					toldWaiting = true;
+					Messages.Message("RimMarket.CaravanWaitsDanger".Translate(lord.faction?.Name ?? "?"), new LookTargets(stuck), MessageTypeDefOf.NeutralEvent, historical: false);
+				}
+				return false;
+			}
+			if (calmFrom >= 0 && now - calmFrom < CalmTicks) return false;
 			strikes++;
 			if (strikes < StrikesNeeded) return false;
 			strikes = 0;
