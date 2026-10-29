@@ -424,6 +424,48 @@ namespace RimMarket.Market
 			KeepOnBlock(a);
 			NpcBids(a, now);
 			if (now >= a.lotEndTick) ResolveLot(a, v);
+			else Chant(a, v, now);
+		}
+
+		private const int ChantInterval = 1250;
+		private const int GoingOnceTicks = 500;
+		private const int GoingTwiceTicks = 250;
+		private const float ChantSeconds = 5f;
+
+		private static void Chant(SlaveAuction a, StallVisit v, int now)
+		{
+			if (a.lastCallTick == now) return;
+			int left = a.lotEndTick - now;
+			if (a.leader != SlaveAuction.LeaderNone)
+			{
+				if (left <= GoingTwiceTicks && a.chantStage < 2)
+				{
+					a.chantStage = 2;
+					CallOut(v, a, AuctionChant.GoingTwice(a.price));
+					return;
+				}
+				if (left <= GoingOnceTicks && a.chantStage < 1)
+				{
+					a.chantStage = 1;
+					CallOut(v, a, AuctionChant.GoingOnce(a.price));
+					return;
+				}
+			}
+			else if (left <= GoingOnceTicks && a.chantStage < 1)
+			{
+				a.chantStage = 1;
+				CallOut(v, a, AuctionChant.LastCall(a.price));
+				return;
+			}
+			if (now < a.nextChantTick) return;
+			a.nextChantTick = now + ChantInterval;
+			if (!a.pitched)
+			{
+				a.pitched = true;
+				CallOut(v, a, AuctionChant.Pitch(a.lot));
+				return;
+			}
+			if (a.leader == SlaveAuction.LeaderNone) CallOut(v, a, AuctionChant.Nudge(a.price));
 		}
 
 		private void StartLot(SlaveAuction a, StallVisit v)
@@ -451,14 +493,18 @@ namespace RimMarket.Market
 				AuctionUtility.GiveMoods(v.map);
 			}
 			Say("RimMarket.AuctionLotOpen", a.lotNumber, lot.LabelShortCap, a.price, new LookTargets(a.block), MessageTypeDefOf.NeutralEvent);
-			CallOut(v, a, "RimMarket.MoteLotOpen".Translate(a.lotNumber));
+			a.chantStage = 0;
+			a.pitched = false;
+			a.nextChantTick = Find.TickManager.TicksGame + ChantInterval;
+			CallOut(v, a, AuctionChant.Opening(lot, a.lotNumber));
 		}
 
 		private static void CallOut(StallVisit v, SlaveAuction a, string text)
 		{
 			Pawn t = v?.trader;
 			if (t == null || !t.Spawned || a.block == null || t.Map != a.block.Map || !t.Position.InHorDistOf(a.block.Position, 3f)) return;
-			MoteMaker.ThrowText(t.DrawPos, t.Map, text, 3.5f);
+			a.lastCallTick = Find.TickManager.TicksGame;
+			MoteMaker.ThrowText(t.DrawPos, t.Map, text, ChantSeconds);
 		}
 
 		private void KeepOnBlock(SlaveAuction a)
@@ -493,6 +539,8 @@ namespace RimMarket.Market
 			AuctionBidder bidder = a.bidders[index];
 			Thing shout = bidder.pawn != null && bidder.pawn.Spawned ? (Thing)bidder.pawn : a.block;
 			MoteMaker.ThrowText(shout.DrawPos, shout.Map, next.ToString(), 3.5f);
+			a.chantStage = 0;
+			CallOut(VisitById(a.visitId), a, AuctionChant.Bid(next, AuctionUtility.NextBid(a)));
 			if (outbidPlayer)
 				Say("RimMarket.AuctionOutbid", bidder.name, next, new LookTargets(a.block), MessageTypeDefOf.CautionInput);
 		}
@@ -513,13 +561,15 @@ namespace RimMarket.Market
 			if (a.lotEndTick - now < AuctionUtility.SoftCloseTicks) a.lotEndTick = now + AuctionUtility.SoftCloseTicks;
 			MoteMaker.ThrowText(a.block.DrawPos, a.block.Map, next.ToString(), 3.5f);
 			RimMarketDefOf.Silver_Drop?.PlayOneShot(new TargetInfo(a.block.Position, a.block.Map));
+			a.chantStage = 0;
+			CallOut(VisitById(a.visitId), a, AuctionChant.Bid(next, AuctionUtility.NextBid(a)));
 		}
 
 		private void ResolveLot(SlaveAuction a, StallVisit v)
 		{
 			Pawn lot = a.lot;
 			LookTargets targets = new LookTargets(a.block);
-			CallOut(v, a, (a.leader == SlaveAuction.LeaderNone ? "RimMarket.MoteNoTakers" : "RimMarket.MoteGone").Translate());
+			CallOut(v, a, a.leader == SlaveAuction.LeaderNone ? AuctionChant.Nobody() : AuctionChant.Sold(a.price));
 			if (a.leader == SlaveAuction.LeaderPlayer)
 			{
 				Pawn negotiator = AuctionUtility.BestNegotiator(v.map);

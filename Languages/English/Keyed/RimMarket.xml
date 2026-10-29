@@ -271,9 +271,34 @@
 	<RimMarket.MoteDeal>Deal!</RimMarket.MoteDeal>
 	<RimMarket.MoteRefused>No.</RimMarket.MoteRefused>
 	<RimMarket.CaravanWaitsDanger>The {0} caravan is shut in behind your walls. They saw the danger out there and will wait for it to pass rather than break out.</RimMarket.CaravanWaitsDanger>
-	<RimMarket.MoteLotOpen>Lot {0}!</RimMarket.MoteLotOpen>
-	<RimMarket.MoteGone>Gone!</RimMarket.MoteGone>
-	<RimMarket.MoteNoTakers>No takers.</RimMarket.MoteNoTakers>
+	<RimMarket.ChantOpen1>Lot {0}! {1}, {2} {3}, who starts me off?</RimMarket.ChantOpen1>
+	<RimMarket.ChantOpen2>Lot {0}, folks! {1}, {2} {3}, fine stock!</RimMarket.ChantOpen2>
+	<RimMarket.ChantOpen3>Lot {0}! {1}, {2} {3}, works like a mule!</RimMarket.ChantOpen3>
+	<RimMarket.ChantOpen4>Lot {0}! {1}, best {2} you'll see all year!</RimMarket.ChantOpen4>
+	<RimMarket.ChantOpenPassion>Lot {0}! {1}, {2} {3}, and loves the work!</RimMarket.ChantOpenPassion>
+	<RimMarket.ChantOpenPlain>Lot {0}! {1}, strong back, all their teeth!</RimMarket.ChantOpenPlain>
+	<RimMarket.ChantMore1>{0} does {1} too, level {2}!</RimMarket.ChantMore1>
+	<RimMarket.ChantMore2>Handy at {1} as well, folks!</RimMarket.ChantMore2>
+	<RimMarket.ChantMore3>And {1} {2} on top, what a deal!</RimMarket.ChantMore3>
+	<RimMarket.ChantMorePlain>Healthy, eats little, never complains!</RimMarket.ChantMorePlain>
+	<RimMarket.ChantWeak1>Hopeless at {1}, mind you!</RimMarket.ChantWeak1>
+	<RimMarket.ChantWeak2>Don't ask {0} to do {1}, trust me.</RimMarket.ChantWeak2>
+	<RimMarket.ChantWeak3>{1}? Not so much. Everything else though!</RimMarket.ChantWeak3>
+	<RimMarket.ChantNudge1>Come on, {0} to start!</RimMarket.ChantNudge1>
+	<RimMarket.ChantNudge2>{0} silver, anybody? It's a steal!</RimMarket.ChantNudge2>
+	<RimMarket.ChantNudge3>Don't be shy now, {0}!</RimMarket.ChantNudge3>
+	<RimMarket.ChantBid1>{0}! Do I hear {1}?</RimMarket.ChantBid1>
+	<RimMarket.ChantBid2>I got {0}, who'll make it {1}?</RimMarket.ChantBid2>
+	<RimMarket.ChantBid3>{0}, {0}, now {1}, {1}!</RimMarket.ChantBid3>
+	<RimMarket.ChantBid4>{0} on the floor! {1} anyone?</RimMarket.ChantBid4>
+	<RimMarket.ChantGoingOnce>{0}, going once...</RimMarket.ChantGoingOnce>
+	<RimMarket.ChantGoingTwice>{0}, going twice...</RimMarket.ChantGoingTwice>
+	<RimMarket.ChantLastCall>Last call, {0} silver!</RimMarket.ChantLastCall>
+	<RimMarket.ChantSold1>Sold! {0} silver!</RimMarket.ChantSold1>
+	<RimMarket.ChantSold2>Gone for {0}!</RimMarket.ChantSold2>
+	<RimMarket.ChantSold3>Sold, {0}, pleasure doing business!</RimMarket.ChantSold3>
+	<RimMarket.ChantNoTakers1>No takers? Shame.</RimMarket.ChantNoTakers1>
+	<RimMarket.ChantNoTakers2>Nobody? Moving on, folks.</RimMarket.ChantNoTakers2>
 	<RimMarket.MoteBought>{0}: {1} silver</RimMarket.MoteBought>
 	<RimMarket.MoteThief>Thief!</RimMarket.MoteThief>
 	<RimMarket.MoteNotToday>Not today.</RimMarket.MoteNotToday>

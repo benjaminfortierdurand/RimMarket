@@ -39,6 +39,10 @@ namespace RimMarket.Auction
 		public bool moodGiven;
 		public List<AuctionBidder> bidders = new List<AuctionBidder>();
 		public List<Pawn> done = new List<Pawn>();
+		public int chantStage;
+		public int nextChantTick;
+		public bool pitched;
+		public int lastCallTick = -1;
 
 		public bool LotRunning => state == StateLot && lot != null;
 
