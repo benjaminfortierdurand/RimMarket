@@ -160,8 +160,14 @@ namespace RimMarket.Inn
 			if (toil != null && (!toil.AllowSatisfyLongNeeds || !toil.AllowRestingInBed)) return false;
 			if (rest.CurLevel < TiredLevel) return true;
 			if (p.mindState.duty?.def == RimMarketDefOf.RimMarket_GuardPost) return false;
-			int hour = GenLocalDate.HourOfDay(p);
-			return (hour >= NightStart || hour < NightEnd) && rest.CurLevel < NightLevel;
+			return Night(p.Map) && rest.CurLevel < NightLevel;
+		}
+
+		public static bool Night(Map map)
+		{
+			if (map == null) return false;
+			int hour = GenLocalDate.HourOfDay(map);
+			return hour >= NightStart || hour < NightEnd;
 		}
 
 		public static List<Pawn> Payers(Pawn p)

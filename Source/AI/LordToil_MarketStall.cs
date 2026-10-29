@@ -22,7 +22,7 @@ namespace RimMarket.AI
 
 		public override bool AllowSatisfyLongNeeds => true;
 
-		public override float? CustomWakeThreshold => 0.5f;
+		public override float? CustomWakeThreshold => Inn.InnUtility.Night(lord?.Map) ? (float?)null : 0.5f;
 
 		public override IntVec3 FlagLoc
 		{
