@@ -12,6 +12,7 @@ namespace RimMarket.Auction
 	{
 		public const string MemoDone = "RimMarketAuctionDone";
 		private const int TimeoutTicks = 40000;
+		private const int FeedInterval = 2500;
 
 		public Building_AuctionBlock block;
 
@@ -25,6 +26,11 @@ namespace RimMarket.Auction
 		}
 
 		public override bool AddFleeToil => false;
+
+		public override void LordJobTick()
+		{
+			if (Find.TickManager.TicksGame % FeedInterval == 0) RimMarket.Market.MarketUtility.TopUpFood(lord, full: false);
+		}
 
 		public override StateGraph CreateGraph()
 		{
@@ -175,7 +181,8 @@ namespace RimMarket.Auction
 				Thing silver = ThingMaker.MakeThing(ThingDefOf.Silver);
 				silver.stackCount = Mathf.Max(100, Mathf.RoundToInt(lotsValue * Rand.Range(MinPurseFactor, MaxPurseFactor)));
 				group[0].inventory.innerContainer.TryAdd(silver);
-				LordMaker.MakeNewLord(faction, new LordJob_AuctionBuyers(block), map, group);
+				Lord lord = LordMaker.MakeNewLord(faction, new LordJob_AuctionBuyers(block), map, group);
+				RimMarket.Market.MarketUtility.TopUpFood(lord, full: true);
 				sent.Add(faction.Name);
 			}
 			return sent;
