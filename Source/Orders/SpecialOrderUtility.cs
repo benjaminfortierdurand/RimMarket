@@ -317,7 +317,7 @@ namespace RimMarket.Orders
 					if (trader != null && WantedUtility.SettleBarter(o, map, trader)) Deliver(o, trader);
 					if (!convoy.Destroyed) convoy.Destroy();
 					Find.LetterStack.ReceiveLetter("RimMarket.OrderArrivedLabel".Translate(),
-						"RimMarket.OrderArrivedText".Translate(o.faction.Name, o.SettlementName, What(o)),
+						(o.Specific ? "RimMarket.OrderArrivedPaidText" : "RimMarket.OrderArrivedFamilyText").Translate(o.faction.Name, o.SettlementName, What(o)),
 						LetterDefOf.PositiveEvent, new LookTargets(trader));
 					if (lord == null) Mgr?.RemoveOrder(o);
 					return true;
@@ -473,17 +473,19 @@ namespace RimMarket.Orders
 			ThingOwner bag = o.courier?.inventory?.innerContainer;
 			if (bag == null) return;
 			var given = new List<ThingDefCountClass>();
+			var placed = new List<Thing>();
 			for (int i = 0; i < o.parcel.Count; i++)
 			{
 				Thing t = o.parcel[i];
 				if (t == null || t.Destroyed || !bag.Contains(t)) continue;
 				given.Add(new ThingDefCountClass(t.def, t.stackCount));
-				bag.TryDrop(t, cell, map, ThingPlaceMode.Near, out _);
+				if (bag.TryDrop(t, cell, map, ThingPlaceMode.Near, out Thing dropped) && dropped != null && !placed.Contains(dropped)) placed.Add(dropped);
 			}
 			o.parcel.Clear();
 			if (given.Count > 0)
-				Messages.Message("RimMarket.WantedHandedOver".Translate(o.faction?.Name ?? "?", WantedUtility.ListOf(given)),
-					new LookTargets(cell, map), MessageTypeDefOf.PositiveEvent, historical: true);
+				Find.LetterStack.ReceiveLetter("RimMarket.WantedHandedOverLabel".Translate(),
+					"RimMarket.WantedHandedOverText".Translate(o.faction?.Name ?? "?", WantedUtility.ListOf(given)),
+					LetterDefOf.PositiveEvent, placed.Count > 0 ? new LookTargets(placed) : new LookTargets(cell, map));
 		}
 
 		public static void Notify_ConvoyLost(TradeConvoy convoy)

@@ -585,7 +585,16 @@
 	<RimMarket.OrderStatusPacking>They are still gathering the goods, leaving in about {0}.</RimMarket.OrderStatusPacking>
 	<RimMarket.OrderLeft>Your order left {0}. About {1} on the road.</RimMarket.OrderLeft>
 	<RimMarket.OrderArrivedLabel>Special order arrived</RimMarket.OrderArrivedLabel>
-	<RimMarket.OrderArrivedText>The {0} caravan from {1} has arrived with your order: {2}.\n\nThey will take a stall without paying the fee, the trip being already paid for. Family orders are sold at their usual prices, nobody said anything about discounts. Goods from a wanted notice are already paid for and will be handed over.</RimMarket.OrderArrivedText>
+	<RimMarket.OrderArrivedFamilyText>The {0} caravan from {1} has arrived with your order: {2}.
+
+The goods ride on their pack animals and are for sale at their usual prices, nobody said anything about discounts. Trade with them at their stall to buy what you want: whatever you leave goes home with them.
+
+The trip is paid for, so they take a stall without paying the fee.</RimMarket.OrderArrivedFamilyText>
+	<RimMarket.OrderArrivedPaidText>The {0} caravan from {1} has arrived with your order: {2}.
+
+Your side of the deal is settled. They hand the goods over next to their stall as soon as they set up, or after a few hours at most, and a letter tells you where.
+
+The trip is paid for, so they take a stall without paying the fee.</RimMarket.OrderArrivedPaidText>
 	<RimMarket.OrderTurnedBack>The caravan from {1} waited at the edge of your land and gave up. {2} silver of your order comes back.</RimMarket.OrderTurnedBack>
 	<RimMarket.OrderCancelledGone>{0} can no longer fill your order from {1}. {2} silver comes back.</RimMarket.OrderCancelledGone>
 	<RimMarket.OrderCancelledHostile>{0} turned on you, and your order from {1} with it. {2} silver comes back, which is more than most enemies would do.</RimMarket.OrderCancelledHostile>
@@ -637,7 +646,10 @@
 	<RimMarket.WantedBarterSilver>The barter goods were gone, so {0} took {1} silver instead.</RimMarket.WantedBarterSilver>
 	<RimMarket.WantedBarterFailedLabel>Barter fell through</RimMarket.WantedBarterFailedLabel>
 	<RimMarket.WantedBarterFailedText>{0} came for {1}, or {2} silver, and found neither. They keep your goods and remember the trip.</RimMarket.WantedBarterFailedText>
-	<RimMarket.WantedHandedOver>{0} handed over your goods: {1}.</RimMarket.WantedHandedOver>
+	<RimMarket.WantedHandedOverLabel>Order handed over</RimMarket.WantedHandedOverLabel>
+	<RimMarket.WantedHandedOverText>{0} handed over your goods next to their stall: {1}.
+
+They are yours now. Your haulers will put them away, or you can jump to them from this letter.</RimMarket.WantedHandedOverText>
 	<RimMarket.AlertWantedOffers>Offers on your notice: {0}</RimMarket.AlertWantedOffers>
 	<RimMarket.AlertWantedOffersDesc>Towns answered your wanted notice. Click to see their offers.</RimMarket.AlertWantedOffersDesc>
 	<RimMarket.OrderTooManyLines>One order holds {0} different goods at most.</RimMarket.OrderTooManyLines>
