@@ -7,6 +7,7 @@ using RimMarket.Fair;
 using RimMarket.Market;
 using RimMarket.Reputation;
 using RimMarket.Routes;
+using RimMarket.Thieves;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
@@ -114,15 +115,63 @@ namespace RimMarket.Debug
 			Messages.Message("[RimMarket] " + n + " caravan(s) sent to a stall.", MessageTypeDefOf.NeutralEvent, false);
 		}
 
-		private static void FireCaravan(Map map, Faction faction, TraderKindDef kind)
+		private static bool FireCaravan(Map map, Faction faction, TraderKindDef kind)
 		{
 			IncidentDef def = IncidentDefOf.TraderCaravanArrival;
 			IncidentParms parms = StorytellerUtility.DefaultParmsNow(def.category, map);
 			parms.forced = true;
 			parms.faction = faction;
 			parms.traderKind = kind;
-			if (!def.Worker.TryExecute(parms))
-				Messages.Message("[RimMarket] the trade caravan from " + faction.Name + " could not arrive.", MessageTypeDefOf.RejectInput, false);
+			if (def.Worker.TryExecute(parms)) return true;
+			Messages.Message("[RimMarket] the trade caravan from " + faction.Name + " could not arrive.", MessageTypeDefOf.RejectInput, false);
+			return false;
+		}
+
+		private const int DebugSlaves = 3;
+
+		[DebugAction("RimMarket", "Send slaver caravan (with slaves)",
+			actionType = DebugActionType.Action,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void SendSlaver()
+		{
+			Map map = Find.CurrentMap;
+			if (map == null) return;
+			var options = new List<DebugMenuOption>();
+			foreach (Faction f in ReputationUtility.TraderFactions())
+			{
+				Faction faction = f;
+				if (faction.def.caravanTraderKinds == null) continue;
+				foreach (TraderKindDef k in faction.def.caravanTraderKinds)
+				{
+					if (k.stockGenerators == null || !k.stockGenerators.Any(g => g is StockGenerator_Slaves)) continue;
+					TraderKindDef kind = k;
+					options.Add(new DebugMenuOption(faction.Name + " | " + kind.label, DebugMenuOptionMode.Action, () => FireSlaver(map, faction, kind)));
+				}
+			}
+			if (options.Count == 0)
+			{
+				Messages.Message("[RimMarket] no visible friendly faction sends slavers.", MessageTypeDefOf.RejectInput, false);
+				return;
+			}
+			options.SortBy(o => o.label);
+			Find.WindowStack.Add(new Dialog_DebugOptionListLister(options));
+		}
+
+		private static void FireSlaver(Map map, Faction faction, TraderKindDef kind)
+		{
+			if (!FireCaravan(map, faction, kind)) return;
+			Lord lord = TradeRouteUtility.NewestTraderLord(map, faction);
+			Pawn trader = lord == null ? null : TraderCaravanUtility.FindTrader(lord);
+			if (trader == null) return;
+			int have = lord.ownedPawns.Count(p => p.RaceProps.Humanlike && p.GetTraderCaravanRole() == TraderCaravanRole.Chattel);
+			for (int i = have; i < DebugSlaves; i++)
+			{
+				Pawn slave = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.Slave, faction, PawnGenerationContext.NonPlayer, forceGenerateNewPawn: true));
+				GenSpawn.Spawn(slave, CellFinder.RandomClosewalkCellNear(trader.Position, map, 4), map);
+				lord.AddPawn(slave);
+			}
+			if (have < DebugSlaves)
+				Messages.Message("[RimMarket] " + (DebugSlaves - have) + " slaves added to the " + faction.Name + " caravan.", new LookTargets(trader), MessageTypeDefOf.NeutralEvent, false);
 		}
 
 		[DebugAction("RimMarket", "Open trade route (free)",
@@ -209,6 +258,29 @@ namespace RimMarket.Debug
 			}
 			while (Find.WorldObjects.AnyMapParentAt(convoy.Tile) && convoy.StepForward()) { }
 			TradeRouteUtility.StartAmbush(convoy, enemy);
+		}
+
+		[DebugAction("RimMarket", "Send a thief",
+			actionType = DebugActionType.Action,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void SendThief() => SendThiefNow(false);
+
+		[DebugAction("RimMarket", "Send a bold thief (ignores guards)",
+			actionType = DebugActionType.Action,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void SendBoldThief() => SendThiefNow(true);
+
+		private static void SendThiefNow(bool bold)
+		{
+			Map map = Find.CurrentMap;
+			if (map == null) return;
+			if (!ThiefUtility.AnyTargetOnMap(map))
+			{
+				Messages.Message("[RimMarket] no merchant at a stall to rob.", MessageTypeDefOf.RejectInput, false);
+				return;
+			}
+			if (!ThiefUtility.TrySendThief(map, 600, bold))
+				Messages.Message("[RimMarket] could not find a thief faction or an entry cell.", MessageTypeDefOf.RejectInput, false);
 		}
 
 		[DebugAction("RimMarket", "Log market state",
