@@ -105,6 +105,21 @@ namespace RimMarket.Buildings
 			return string.Join("\n", lines);
 		}
 
+		private const float AnnounceCheckSeconds = 1f;
+		private AcceptanceReport announceCheck;
+		private float announceCheckedAt = -99f;
+
+		private AcceptanceReport AnnounceCheck()
+		{
+			float now = UnityEngine.Time.realtimeSinceStartup;
+			if (now - announceCheckedAt >= AnnounceCheckSeconds)
+			{
+				announceCheck = FairUtility.CanAnnounce(this);
+				announceCheckedAt = now;
+			}
+			return announceCheck;
+		}
+
 		private IEnumerable<Gizmo> FairGizmos()
 		{
 			if (!RimMarketMod.Settings.fairEnabled || !Spawned || Faction != Faction.OfPlayer) yield break;
@@ -141,7 +156,7 @@ namespace RimMarket.Buildings
 					"RimMarket.FairAnnounceConfirm".Translate(FairUtility.DateOf(FairUtility.StartTickFor(Map), Map), cost),
 					() => FairUtility.Announce(this))),
 			};
-			AcceptanceReport can = FairUtility.CanAnnounce(this);
+			AcceptanceReport can = AnnounceCheck();
 			if (!can.Accepted) announce.Disable(can.Reason);
 			yield return announce;
 		}

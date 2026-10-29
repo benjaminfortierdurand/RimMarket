@@ -94,7 +94,7 @@ namespace RimMarket.UI
 			y += 32f;
 
 			var outRect = new Rect(0f, y, inRect.width, inRect.height - y - CloseButSize.y - 12f);
-			DrawJournal(outRect, FilteredJournal(mgr.Journal));
+			DrawJournal(outRect, mgr.Journal);
 		}
 
 		private void DrawPicker(Rect rect, MarketManager mgr)
@@ -129,15 +129,39 @@ namespace RimMarket.UI
 			return note;
 		}
 
-		private List<MarketLogEntry> FilteredJournal(IReadOnlyList<MarketLogEntry> journal)
+		private const float JournalRefreshSeconds = 1f;
+		private readonly List<string> journalLines = new List<string>();
+		private readonly List<float> journalHeights = new List<float>();
+		private readonly List<int> journalVerdicts = new List<int>();
+		private float journalTotal;
+		private float journalWidth = -1f;
+		private float journalBuiltAt = -99f;
+		private int journalCount = -1;
+		private Faction journalFaction;
+
+		private void BuildJournal(IReadOnlyList<MarketLogEntry> journal, float width)
 		{
-			var list = new List<MarketLogEntry>();
+			float now = Time.realtimeSinceStartup;
+			if (width == journalWidth && selected == journalFaction && journal.Count == journalCount && now - journalBuiltAt < JournalRefreshSeconds) return;
+			journalWidth = width;
+			journalFaction = selected;
+			journalCount = journal.Count;
+			journalBuiltAt = now;
+			journalLines.Clear();
+			journalHeights.Clear();
+			journalVerdicts.Clear();
+			journalTotal = 0f;
 			for (int i = 0; i < journal.Count; i++)
 			{
 				MarketLogEntry e = journal[i];
-				if (selected == null || e.faction == selected || (e.faction == null && e.factionName == selected.Name)) list.Add(e);
+				if (selected != null && e.faction != selected && (e.faction != null || e.factionName != selected.Name)) continue;
+				string line = JournalLine(e);
+				float h = Text.CalcHeight(line, width);
+				journalLines.Add(line);
+				journalHeights.Add(h);
+				journalVerdicts.Add(e.verdict);
+				journalTotal += h + JournalRowGap;
 			}
-			return list;
 		}
 
 		private static void DrawAxis(Rect rect, MarketReputation rep, int axis)
@@ -217,31 +241,27 @@ namespace RimMarket.UI
 
 		private void DrawJournal(Rect outRect, IReadOnlyList<MarketLogEntry> journal)
 		{
-			if (journal.Count == 0)
+			float width = outRect.width - 16f;
+			BuildJournal(journal, width);
+			if (journalLines.Count == 0)
 			{
 				GUI.color = DimColor;
 				Widgets.Label(outRect, "RimMarket.RepJournalEmpty".Translate());
 				GUI.color = Color.white;
 				return;
 			}
-			float width = outRect.width - 16f;
-			var lines = new List<string>();
-			float total = 0f;
-			for (int i = 0; i < journal.Count; i++)
-			{
-				string line = JournalLine(journal[i]);
-				lines.Add(line);
-				total += Text.CalcHeight(line, width) + JournalRowGap;
-			}
-			var viewRect = new Rect(0f, 0f, width, total);
+			var viewRect = new Rect(0f, 0f, width, journalTotal);
 			Widgets.BeginScrollView(outRect, ref scroll, viewRect);
 			float y = 0f;
-			for (int i = 0; i < lines.Count; i++)
+			for (int i = 0; i < journalLines.Count; i++)
 			{
-				float h = Text.CalcHeight(lines[i], width);
-				int verdict = journal[i].verdict;
-				GUI.color = verdict > 0 ? GoodColor : (verdict < 0 ? BadColor : Color.white);
-				Widgets.Label(new Rect(0f, y, width, h), lines[i]);
+				float h = journalHeights[i];
+				if (y + h >= scroll.y && y <= scroll.y + outRect.height)
+				{
+					int verdict = journalVerdicts[i];
+					GUI.color = verdict > 0 ? GoodColor : (verdict < 0 ? BadColor : Color.white);
+					Widgets.Label(new Rect(0f, y, width, h), journalLines[i]);
+				}
 				y += h + JournalRowGap;
 			}
 			GUI.color = Color.white;

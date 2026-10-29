@@ -7,12 +7,24 @@ namespace RimMarket.Inn
 {
 	public class JobGiver_SleepAtInn : ThinkNode_JobGiver
 	{
+		private const int NoBedRetryTicks = 500;
+		private const int MaxRemembered = 200;
+		private static readonly Dictionary<int, int> noBedUntil = new Dictionary<int, int>();
+
 		protected override Job TryGiveJob(Pawn pawn)
 		{
 			if (!InnBeds.Any || pawn?.Map == null) return null;
+			int now = Find.TickManager.TicksGame;
+			if (noBedUntil.TryGetValue(pawn.thingIDNumber, out int until) && now < until && until - now <= NoBedRetryTicks) return null;
 			if (!InnUtility.WantsSleep(pawn) || !InnUtility.MayLodge(pawn) || !InnUtility.CanAfford(pawn)) return null;
 			Building_Bed bed = InnUtility.FindBed(pawn);
-			if (bed == null) return null;
+			if (bed == null)
+			{
+				if (noBedUntil.Count >= MaxRemembered) noBedUntil.Clear();
+				noBedUntil[pawn.thingIDNumber] = now + NoBedRetryTicks;
+				return null;
+			}
+			noBedUntil.Remove(pawn.thingIDNumber);
 			return JobMaker.MakeJob(RimMarketDefOf.RimMarket_SleepAtInn, bed);
 		}
 	}

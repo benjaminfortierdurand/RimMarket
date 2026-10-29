@@ -242,6 +242,7 @@ namespace RimMarket.UI
 			{
 				InnReview r = book[i];
 				float y = i * entry;
+				if (y + entry < bookScroll.y || y > bookScroll.y + outRect.height) continue;
 				if (i % 2 == 1) Widgets.DrawLightHighlight(new Rect(0f, y, viewRect.width, entry - 2f));
 				string who = "RimMarket.InnReviewWho".Translate(r.guest, r.role.Translate(), r.faction);
 				string stay = "RimMarket.InnReviewStay".Translate(InnUtility.TierLabel(r.tier), r.price, r.stars, (now - r.tick).ToStringTicksToPeriod(allowSeconds: false));

@@ -16,6 +16,7 @@ namespace RimMarket.UI
 		private const float ColInvite = 70f;
 
 		private readonly List<Faction> factions;
+		private readonly Dictionary<Faction, string> enemiesOf = new Dictionary<Faction, string>();
 		private Vector2 scroll;
 
 		public override Vector2 InitialSize => new Vector2(720f, 560f);
@@ -29,6 +30,12 @@ namespace RimMarket.UI
 			factions = Find.FactionManager.AllFactionsVisibleInViewOrder
 				.Where(f => !f.IsPlayer && !f.defeated && !f.temporary && f.def.humanlikeFaction && !f.HostileTo(Faction.OfPlayer))
 				.ToList();
+			for (int i = 0; i < factions.Count; i++)
+			{
+				Faction f = factions[i];
+				string enemies = string.Join(", ", factions.Where(o => o != f && o.HostileTo(f)).Select(o => o.Name));
+				enemiesOf[f] = enemies.NullOrEmpty() ? "-" : enemies;
+			}
 		}
 
 		public override void DoWindowContents(Rect inRect)
@@ -115,8 +122,7 @@ namespace RimMarket.UI
 			Widgets.Label(new Rect(x, rect.y, ColGoodwill, rect.height), faction.PlayerGoodwill.ToStringWithSign());
 			GUI.color = invited ? Color.white : new Color(0.65f, 0.65f, 0.65f);
 			x += ColGoodwill;
-			string enemies = string.Join(", ", factions.Where(o => o != faction && o.HostileTo(faction)).Select(o => o.Name));
-			if (enemies.NullOrEmpty()) enemies = "-";
+			string enemies = enemiesOf[faction];
 			var enemyRect = new Rect(x + 6f, rect.y, ColEnemies - 6f, rect.height);
 			Text.Anchor = TextAnchor.MiddleLeft;
 			Widgets.Label(enemyRect, enemies.Truncate(enemyRect.width));

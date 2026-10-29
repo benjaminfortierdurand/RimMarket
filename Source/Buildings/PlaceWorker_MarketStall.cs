@@ -158,25 +158,28 @@ namespace RimMarket.Buildings
 			List<ThingDef> defs = MarketStallDefs.All;
 			for (int d = 0; d < defs.Count; d++)
 			{
-				List<Thing> things = map.listerThings.ThingsOfDef(defs[d]);
+				ThingDef def = defs[d];
+				List<Thing> things = map.listerThings.ThingsOfDef(def);
 				for (int i = 0; i < things.Count; i++)
 				{
 					Thing t = things[i];
 					if (t == ignoreA || t == ignoreB) continue;
-					Others.Add(new Spot(defs[d], t.Position, t.Rotation, MarketStallDefs.StallOf(t)?.flipped == true));
+					Others.Add(new Spot(def, t.Position, t.Rotation, MarketStallDefs.StallOf(t)?.flipped == true));
 				}
+				CollectPlanned(map, def.blueprintDef, def, ignoreA, ignoreB);
+				CollectPlanned(map, def.installBlueprintDef, def, ignoreA, ignoreB);
+				CollectPlanned(map, def.frameDef, def, ignoreA, ignoreB);
 			}
-			CollectPlanned(map.listerThings.ThingsInGroup(ThingRequestGroup.Blueprint), ignoreA, ignoreB);
-			CollectPlanned(map.listerThings.ThingsInGroup(ThingRequestGroup.BuildingFrame), ignoreA, ignoreB);
 		}
 
-		private static void CollectPlanned(List<Thing> planned, Thing ignoreA, Thing ignoreB)
+		private static void CollectPlanned(Map map, ThingDef plannedDef, ThingDef built, Thing ignoreA, Thing ignoreB)
 		{
+			if (plannedDef == null) return;
+			List<Thing> planned = map.listerThings.ThingsOfDef(plannedDef);
 			for (int i = 0; i < planned.Count; i++)
 			{
 				Thing t = planned[i];
 				if (t == ignoreA || t == ignoreB) continue;
-				if (!(t.def.entityDefToBuild is ThingDef built) || !MarketStallDefs.All.Contains(built)) continue;
 				Others.Add(new Spot(built, t.Position, t.Rotation, CompMarketStall.FlippedOf((t as Blueprint_Install)?.ThingToInstall)));
 			}
 		}
