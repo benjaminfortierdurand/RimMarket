@@ -26,6 +26,8 @@ namespace RimMarket.Orders
 
 		public FloatMenuOption CommFloatMenuOption(Building_CommsConsole console, Pawn negotiator)
 		{
+			if (Market.MarketManager.Instance?.Notice != null)
+				return new FloatMenuOption("RimMarket.WantedCallBoard".Translate(), () => Find.WindowStack.Add(new Dialog_WantedBoard()));
 			string label = GetCallLabel();
 			string why = WantedUtility.CannotPost(negotiator?.Map);
 			if (why != null) return new FloatMenuOption(label + " (" + why + ")", null);

@@ -603,6 +603,7 @@ The trip is paid for, so they take a stall without paying the fee.</RimMarket.Or
 	<RimMarket.OrderCancelledLost>Your order from {1} never made it. {2} silver comes back, the rest is somebody else's loot now.</RimMarket.OrderCancelledLost>
 	<RimMarket.OrderWindowValue>Value of the goods: {0}</RimMarket.OrderWindowValue>
 	<RimMarket.WantedCallLabel>Post a wanted notice</RimMarket.WantedCallLabel>
+	<RimMarket.WantedCallBoard>See your wanted notice</RimMarket.WantedCallBoard>
 	<RimMarket.WantedCallInfo>Ask every friendly town for something specific and see who answers.</RimMarket.WantedCallInfo>
 	<RimMarket.WantedDisabled>special orders are turned off in the settings</RimMarket.WantedDisabled>
 	<RimMarket.WantedAlreadyOut>a notice is already out</RimMarket.WantedAlreadyOut>
