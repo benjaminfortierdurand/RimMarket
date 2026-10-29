@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RimMarket.Auction;
 using RimMarket.Buildings;
 using RimMarket.Market;
 using RimWorld;
@@ -63,10 +64,7 @@ namespace RimMarket.AI
 				switch (p.GetTraderCaravanRole())
 				{
 					case TraderCaravanRole.Trader:
-						p.mindState.duty = new PawnDuty(RimMarketDefOf.RimMarket_TendStall, stall.MerchantCell, stall.MerchantLook)
-						{
-							locomotion = LocomotionUrgency.Walk,
-						};
+						p.mindState.duty = TraderDuty(v);
 						break;
 					case TraderCaravanRole.Carrier:
 					case TraderCaravanRole.Chattel:
@@ -90,6 +88,13 @@ namespace RimMarket.AI
 			}
 		}
 
+		private static PawnDuty TraderDuty(StallVisit v)
+		{
+			if (AuctionUtility.AuctioneerSpot(v, out IntVec3 cell, out Thing block))
+				return new PawnDuty(RimMarketDefOf.RimMarket_CallAuctionDuty, cell, block) { locomotion = LocomotionUrgency.Walk };
+			return new PawnDuty(RimMarketDefOf.RimMarket_TendStall, v.stall.MerchantCell, v.stall.MerchantLook) { locomotion = LocomotionUrgency.Walk };
+		}
+
 		private bool DutiesDrifted(StallVisit v)
 		{
 			if (!v.StallOk) return false;
@@ -104,9 +109,10 @@ namespace RimMarket.AI
 				if (p?.mindState == null || !p.Spawned) continue;
 				PawnDuty d = p.mindState.duty;
 				if (d == null) return true;
-				if (d.def == RimMarketDefOf.RimMarket_TendStall)
+				if (d.def == RimMarketDefOf.RimMarket_TendStall || d.def == RimMarketDefOf.RimMarket_CallAuctionDuty)
 				{
-					if (d.focus.Cell != v.stall.MerchantCell || d.focusSecond.Cell != v.stall.MerchantLook) return true;
+					PawnDuty want = TraderDuty(v);
+					if (d.def != want.def || d.focus.Cell != want.focus.Cell || d.focusSecond.Cell != want.focusSecond.Cell) return true;
 					continue;
 				}
 				bool watch = GuardWatch.OnWatch(v, p);

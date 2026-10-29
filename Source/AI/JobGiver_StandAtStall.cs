@@ -9,6 +9,8 @@ namespace RimMarket.AI
 		private const int StandTicks = 1500;
 		private const int WaitTicks = 400;
 
+		protected virtual JobDef StandDef => RimMarketDefOf.RimMarket_StandAtStall;
+
 		protected override Job TryGiveJob(Pawn pawn)
 		{
 			PawnDuty duty = pawn.mindState?.duty;
@@ -24,7 +26,7 @@ namespace RimMarket.AI
 				if (pawn.RaceProps.Humanlike)
 				{
 					LocalTargetInfo face = duty.focusSecond.IsValid ? duty.focusSecond : (LocalTargetInfo)cell;
-					Job stand = JobMaker.MakeJob(RimMarketDefOf.RimMarket_StandAtStall, cell, face);
+					Job stand = JobMaker.MakeJob(StandDef, cell, face);
 					stand.expiryInterval = cell == duty.focus.Cell ? StandTicks : WaitTicks;
 					return stand;
 				}

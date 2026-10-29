@@ -12,6 +12,7 @@ namespace RimMarket
 		public static ThingDef RimMarket_Stall;
 
 		public static DutyDef RimMarket_TendStall;
+		public static DutyDef RimMarket_CallAuctionDuty;
 
 		public static DutyDef RimMarket_ParkAtStall;
 
@@ -44,6 +45,7 @@ namespace RimMarket
 		public static HistoryEventDef RimMarket_TradeRoute;
 
 		public static JobDef RimMarket_StandAtStall;
+		public static JobDef RimMarket_CallAuction;
 
 		public static JobDef RimMarket_PayStallFee;
 

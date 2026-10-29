@@ -18,6 +18,15 @@
 	</JobDef>
 
 	<JobDef>
+		<defName>RimMarket_CallAuction</defName>
+		<driverClass>RimMarket.Jobs.JobDriver_StandAtStall</driverClass>
+		<reportString>calling the auction.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
 		<defName>RimMarket_StandOnBlock</defName>
 		<driverClass>RimMarket.Auction.JobDriver_StandOnBlock</driverClass>
 		<reportString>chained to the auction post.</reportString>

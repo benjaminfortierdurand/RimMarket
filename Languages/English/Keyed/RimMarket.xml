@@ -270,6 +270,9 @@
 	<RimMarket.HaggleFailed>Haggle failed: {0}% worse</RimMarket.HaggleFailed>
 	<RimMarket.MoteDeal>Deal!</RimMarket.MoteDeal>
 	<RimMarket.MoteRefused>No.</RimMarket.MoteRefused>
+	<RimMarket.MoteLotOpen>Lot {0}!</RimMarket.MoteLotOpen>
+	<RimMarket.MoteGone>Gone!</RimMarket.MoteGone>
+	<RimMarket.MoteNoTakers>No takers.</RimMarket.MoteNoTakers>
 	<RimMarket.MoteBought>{0}: {1} silver</RimMarket.MoteBought>
 	<RimMarket.MoteThief>Thief!</RimMarket.MoteThief>
 	<RimMarket.MoteNotToday>Not today.</RimMarket.MoteNotToday>

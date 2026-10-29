@@ -20,7 +20,10 @@ namespace RimMarket.Jobs
 			this.FailOnDespawnedOrNull(TargetIndex.B);
 			this.FailOn(() => Trader == null || Trader.mindState.traderDismissed);
 			CompMarketStall target = Stall;
-			yield return Toils_Goto.GotoCell(target != null ? target.CustomerCell : pawn.Position, PathEndMode.OnCell);
+			bool calling = Trader?.mindState?.duty?.def == RimMarketDefOf.RimMarket_CallAuctionDuty;
+			yield return calling
+				? Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.Touch)
+				: Toils_Goto.GotoCell(target != null ? target.CustomerCell : pawn.Position, PathEndMode.OnCell);
 			Toil trade = ToilMaker.MakeToil("TradeAtStall");
 			trade.defaultCompleteMode = ToilCompleteMode.Instant;
 			trade.initAction = delegate
@@ -34,7 +37,8 @@ namespace RimMarket.Jobs
 						new LookTargets(trader), MessageTypeDefOf.RejectInput, historical: false);
 					return;
 				}
-				if (stall != null) actor.rotationTracker.FaceCell(stall.Position);
+				if (calling) actor.rotationTracker.FaceCell(trader.Position);
+				else if (stall != null) actor.rotationTracker.FaceCell(stall.Position);
 				Find.WindowStack.Add(new Dialog_Trade(actor, trader));
 				stall?.MarkDisplayDirty();
 				PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.InteractingWithTraders, KnowledgeAmount.Total);

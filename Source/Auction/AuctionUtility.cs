@@ -9,6 +9,7 @@ using RimMarket.Reputation;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 using Verse.AI.Group;
 
 namespace RimMarket.Auction
@@ -175,6 +176,33 @@ namespace RimMarket.Auction
 				}
 			}
 			return list;
+		}
+
+		private static readonly IntVec3[] CallerSides =
+		{
+			IntVec3.East, IntVec3.West, IntVec3.South, IntVec3.North,
+			new IntVec3(1, 0, -1), new IntVec3(-1, 0, -1), new IntVec3(1, 0, 1), new IntVec3(-1, 0, 1),
+		};
+
+		public static bool AuctioneerSpot(StallVisit v, out IntVec3 cell, out Thing block)
+		{
+			cell = IntVec3.Invalid;
+			block = null;
+			MarketManager mgr = MarketManager.Instance;
+			if (mgr == null || v == null || v.closed || !v.arrivalSignalled || !v.TraderOk) return false;
+			SlaveAuction a = mgr.AuctionOf(v);
+			if (a?.block == null || !a.block.Spawned || a.block.Map != v.map) return false;
+			Map map = v.map;
+			for (int i = 0; i < CallerSides.Length; i++)
+			{
+				IntVec3 c = a.block.Position + CallerSides[i];
+				if (!c.InBounds(map) || !c.Standable(map) || c.GetEdifice(map) != null) continue;
+				if (!v.trader.CanReach(c, PathEndMode.OnCell, Danger.Some)) continue;
+				cell = c;
+				block = a.block;
+				return true;
+			}
+			return false;
 		}
 
 		public static bool BidderStillIn(AuctionBidder b)

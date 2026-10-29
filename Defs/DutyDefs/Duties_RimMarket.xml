@@ -25,6 +25,23 @@
 	</DutyDef>
 
 	<DutyDef>
+		<defName>RimMarket_CallAuctionDuty</defName>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="RimMarket.AI.JobGiver_PayStallFee" />
+				<li Class="ThinkNode_Subtree">
+					<treeDef>SatisfyBasicNeeds</treeDef>
+				</li>
+				<li Class="RimMarket.AI.JobGiver_CallAuction" />
+				<li Class="JobGiver_WanderNearDutyLocation">
+					<wanderRadius>2</wanderRadius>
+				</li>
+				<li Class="JobGiver_Idle" />
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
 		<defName>RimMarket_GuardStall</defName>
 		<alwaysShowWeapon>true</alwaysShowWeapon>
 		<thinkNode Class="ThinkNode_Priority">

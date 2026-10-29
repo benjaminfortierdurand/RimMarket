@@ -276,6 +276,8 @@ namespace RimMarket.Market
 			return false;
 		}
 
+		public SlaveAuction AuctionOf(StallVisit v) => v == null ? null : AuctionFor(v.id);
+
 		private SlaveAuction AuctionFor(int visitId)
 		{
 			for (int i = 0; i < auctions.Count; i++)
@@ -449,6 +451,14 @@ namespace RimMarket.Market
 				AuctionUtility.GiveMoods(v.map);
 			}
 			Say("RimMarket.AuctionLotOpen", a.lotNumber, lot.LabelShortCap, a.price, new LookTargets(a.block), MessageTypeDefOf.NeutralEvent);
+			CallOut(v, a, "RimMarket.MoteLotOpen".Translate(a.lotNumber));
+		}
+
+		private static void CallOut(StallVisit v, SlaveAuction a, string text)
+		{
+			Pawn t = v?.trader;
+			if (t == null || !t.Spawned || a.block == null || t.Map != a.block.Map || !t.Position.InHorDistOf(a.block.Position, 3f)) return;
+			MoteMaker.ThrowText(t.DrawPos, t.Map, text, 3.5f);
 		}
 
 		private void KeepOnBlock(SlaveAuction a)
@@ -509,6 +519,7 @@ namespace RimMarket.Market
 		{
 			Pawn lot = a.lot;
 			LookTargets targets = new LookTargets(a.block);
+			CallOut(v, a, (a.leader == SlaveAuction.LeaderNone ? "RimMarket.MoteNoTakers" : "RimMarket.MoteGone").Translate());
 			if (a.leader == SlaveAuction.LeaderPlayer)
 			{
 				Pawn negotiator = AuctionUtility.BestNegotiator(v.map);
