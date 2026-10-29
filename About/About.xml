@@ -9,7 +9,7 @@
 		<li>1.6</li>
 		<li>1.7</li>
 	</supportedVersions>
-	<modVersion>1.0.10</modVersion>
+	<modVersion>1.0.11</modVersion>
 	<modIconPath>UI/RimMarketIcon</modIconPath>
 	<description>Trade caravans set up shop in your colony. Place a market marker, build stalls around it, and a caravan that finds a free stall walks over: the merchant stands behind the counter with the wares laid out, a guard stands post beside it, the pack animals wait at the caravan camp and the other guards at the guard rest spot. Trading uses the usual trade window, theres nothing new to learn.
 
