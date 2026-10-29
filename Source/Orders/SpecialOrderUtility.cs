@@ -314,11 +314,13 @@ namespace RimMarket.Orders
 					o.convoy = null;
 					Pawn trader = lord == null ? null : TraderCaravanUtility.FindTrader(lord);
 					if (convoy.plunder > 0f) TradeRouteUtility.Plunder(lord, convoy.plunder);
-					if (trader != null && WantedUtility.SettleBarter(o, map, trader)) Deliver(o, trader);
+					bool settled = trader != null && WantedUtility.SettleBarter(o, map, trader);
+					if (settled) Deliver(o, trader);
 					if (!convoy.Destroyed) convoy.Destroy();
-					Find.LetterStack.ReceiveLetter("RimMarket.OrderArrivedLabel".Translate(),
-						(o.Specific ? "RimMarket.OrderArrivedPaidText" : "RimMarket.OrderArrivedFamilyText").Translate(o.faction.Name, o.SettlementName, What(o)),
-						LetterDefOf.PositiveEvent, new LookTargets(trader));
+					if (settled || !o.Specific)
+						Find.LetterStack.ReceiveLetter("RimMarket.OrderArrivedLabel".Translate(),
+							(o.Specific ? "RimMarket.OrderArrivedPaidText" : "RimMarket.OrderArrivedFamilyText").Translate(o.faction.Name, o.SettlementName, What(o)),
+							LetterDefOf.PositiveEvent, new LookTargets(trader));
 					if (lord == null) Mgr?.RemoveOrder(o);
 					return true;
 				}

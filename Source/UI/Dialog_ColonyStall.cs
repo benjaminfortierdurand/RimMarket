@@ -358,7 +358,7 @@ namespace RimMarket.UI
 				Apply(row, Mathf.Min(cap, toSell + step));
 			bx += ButtonSize + 4f;
 			if (Widgets.ButtonText(new Rect(bx, mid, 44f, ButtonSize), "RimMarket.StallSetupAll".Translate()))
-				Apply(row, toSell >= max ? 0 : max);
+				Apply(row, toSell == max ? 0 : max);
 			x += ColToSell;
 
 			var refillRect = new Rect(x, rect.y, ColRefill, rect.height);

@@ -503,11 +503,12 @@ namespace RimMarket.Routes
 			if (convoy.orderId > 0)
 			{
 				Orders.SpecialOrder o = Orders.SpecialOrderUtility.OrderOf(convoy);
-				if (o != null)
+				if (o != null && !o.delivered)
 				{
 					Orders.SpecialOrderUtility.Cancel(o, "RimMarket.OrderTurnedBack", 1f);
 					return;
 				}
+				if (o != null) o.convoy = null;
 			}
 			else
 			{
