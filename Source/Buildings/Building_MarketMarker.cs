@@ -105,20 +105,6 @@ namespace RimMarket.Buildings
 			return string.Join("\n", lines);
 		}
 
-		private IEnumerable<Gizmo> NoticeGizmos()
-		{
-			if (!Spawned || Faction != Faction.OfPlayer) yield break;
-			Orders.WantedNotice notice = MarketManager.Instance?.Notice;
-			if (notice == null || notice.home != Map.Parent) yield break;
-			yield return new Command_Action
-			{
-				defaultLabel = "RimMarket.WantedGizmo".Translate(notice.offers.Count),
-				defaultDesc = "RimMarket.WantedGizmoDesc".Translate(),
-				icon = RimMarketIcons.WantedNotice,
-				action = () => Find.WindowStack.Add(new Orders.Dialog_WantedBoard()),
-			};
-		}
-
 		private IEnumerable<Gizmo> FairGizmos()
 		{
 			if (!RimMarketMod.Settings.fairEnabled || !Spawned || Faction != Faction.OfPlayer) yield break;

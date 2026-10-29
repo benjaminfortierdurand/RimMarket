@@ -261,6 +261,7 @@ namespace RimMarket.Orders
 			MarketManager mgr = Mgr;
 			if (mgr == null || map == null || o == null) return "?";
 			if (!Answers(o.faction)) return "RimMarket.RouteHostile".Translate();
+			if (o.settlement == null || !o.settlement.Spawned) return "RimMarket.WantedTownGone".Translate();
 			if (SpecialOrderUtility.OrderFrom(mgr, o.faction) != null) return "RimMarket.OrderPending".Translate(o.faction.Name);
 			if (mgr.Orders.Count >= SpecialOrderUtility.MaxOrders) return "RimMarket.OrderLimit".Translate(SpecialOrderUtility.MaxOrders);
 			if (!o.Barter && AuctionUtility.ColonySilver(map) < o.price) return "RimMarket.RouteNoSilver".Translate(o.price);

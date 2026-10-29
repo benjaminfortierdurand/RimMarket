@@ -50,6 +50,16 @@ namespace RimMarket.Jobs
 			Toil run = Toils_Goto.GotoCell(TargetIndex.C, PathEndMode.OnCell);
 			run.AddPreInitAction(() => job.locomotionUrgency = LocomotionUrgency.Jog);
 			yield return run;
+
+			Toil away = ToilMaker.MakeToil("SlipAway");
+			away.defaultCompleteMode = ToilCompleteMode.Instant;
+			away.initAction = delegate
+			{
+				Map map = pawn.Map;
+				if (map != null && (pawn.Position.OnEdge(map) || map.exitMapGrid.IsExitCell(pawn.Position)))
+					pawn.ExitMap(true, CellRect.WholeMap(map).GetClosestEdge(pawn.Position));
+			};
+			yield return away;
 		}
 
 		public override void ExposeData()

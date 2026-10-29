@@ -448,6 +448,7 @@
 	<RimMarket.AuctionSoldToYou>Sold to your colony: {0}, for {1} silver.</RimMarket.AuctionSoldToYou>
 	<RimMarket.AuctionSoldTo>{0} sold to {1} for {2} silver.</RimMarket.AuctionSoldTo>
 	<RimMarket.AuctionNoTakers>No takers for {0}. The slaver keeps them.</RimMarket.AuctionNoTakers>
+	<RimMarket.AuctionBuyerGone>The winning bid on {0} fell through: the buyer is gone or can't pay. The slaver keeps the lot.</RimMarket.AuctionBuyerGone>
 	<RimMarket.AuctionNoSlaves>The {0} slaver has no one to sell this time, so there is no auction.</RimMarket.AuctionNoSlaves>
 	<RimMarket.AuctionNoSlavesIdeo>The {0} slaver has no one to sell: their ideology does not approve of slavery, whatever the sign on the wagon says. No auction today.</RimMarket.AuctionNoSlavesIdeo>
 	<RimMarket.AuctionNoBlock>The {0} slaver brought slaves to sell ({1}), but no auction post stands in this market square.</RimMarket.AuctionNoBlock>
@@ -597,8 +598,6 @@
 	<RimMarket.WantedSilverWord>{0} silver</RimMarket.WantedSilverWord>
 	<RimMarket.WantedBarterWord>a barter</RimMarket.WantedBarterWord>
 	<RimMarket.WantedClosed>Your wanted notice has run its course.</RimMarket.WantedClosed>
-	<RimMarket.WantedGizmo>Wanted notice ({0})</RimMarket.WantedGizmo>
-	<RimMarket.WantedGizmoDesc>See the offers that came in for your wanted notice, accept one, or take the notice down.</RimMarket.WantedGizmoDesc>
 	<RimMarket.WantedBoardTitle>Offers on your wanted notice</RimMarket.WantedBoardTitle>
 	<RimMarket.WantedBoardHead>You asked for: {0}.</RimMarket.WantedBoardHead>
 	<RimMarket.WantedBoardWaiting>More answers may still come.</RimMarket.WantedBoardWaiting>
@@ -692,6 +691,7 @@
 	<RimMarket.RouteNoSilver>{0} silver needed</RimMarket.RouteNoSilver>
 	<RimMarket.RouteOpened>Agreed. The first {1} convoy leaves {0} within a day or so. You will see it on the world map.</RimMarket.RouteOpened>
 	<RimMarket.RouteHostile>they are hostile</RimMarket.RouteHostile>
+	<RimMarket.WantedTownGone>Their town is gone.</RimMarket.WantedTownGone>
 	<RimMarket.RouteNeedsMarket>no open market in this colony</RimMarket.RouteNeedsMarket>
 	<RimMarket.RouteUnknownHelp>{0} have never traded at your market or hosted your stall. Trade with them there first, then come back.</RimMarket.RouteUnknownHelp>
 	<RimMarket.RouteUnknown>they don't know your market yet</RimMarket.RouteUnknown>
@@ -709,6 +709,7 @@
 	<RimMarket.RouteClosedStrikes>{0} close the trade route from {1} after too many bad days at your market.</RimMarket.RouteClosedStrikes>
 	<RimMarket.RouteClosedNoRoad>The trade route with {0} is closed: no road reaches your market from {1} any more.</RimMarket.RouteClosedNoRoad>
 	<RimMarket.RouteClosedNoCaravans>The trade route with {0} is closed: {1} has no caravan that can travel to your land.</RimMarket.RouteClosedNoCaravans>
+	<RimMarket.OrderParcelRefunded>{0}'s courier left before handing over your order. {1} silver comes back.</RimMarket.OrderParcelRefunded>
 	<RimMarket.OrderNoCaravans>{0} has no caravan that can travel to your land, so your order from {1} is off. All {2} silver comes back.</RimMarket.OrderNoCaravans>
 	<RimMarket.ConvoyBound>Bound for {0}, arriving in about {1}.</RimMarket.ConvoyBound>
 	<RimMarket.ConvoyWaiting>Waiting to enter {0}.</RimMarket.ConvoyWaiting>

@@ -35,7 +35,7 @@ namespace RimMarket.Auction
 			if (p == null || p.Dead || p.Downed || !p.Spawned || !p.RaceProps.Humanlike) return false;
 			if (p.GetTraderCaravanRole() != TraderCaravanRole.Chattel) return false;
 			if (p.GetLord() != v.lord) return false;
-			if (SoldPrisonersField?.GetValue(v.trader?.trader) is List<Pawn> sold && sold.Contains(p)) return false;
+			if (v.trader?.trader != null && SoldPrisonersField?.GetValue(v.trader.trader) is List<Pawn> sold && sold.Contains(p)) return false;
 			return true;
 		}
 
@@ -179,7 +179,7 @@ namespace RimMarket.Auction
 
 		public static bool BidderStillIn(AuctionBidder b)
 		{
-			if (b.pawn == null) return true;
+			if (b.pawn == null) return false;
 			return b.pawn.Spawned && !b.pawn.Dead && !b.pawn.Downed;
 		}
 

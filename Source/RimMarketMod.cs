@@ -17,7 +17,18 @@ namespace RimMarket
 		{
 			Settings = GetSettings<RimMarketSettings>();
 			var harmony = new Harmony(HarmonyId);
-			harmony.PatchAll();
+			foreach (System.Type type in AccessTools.GetTypesFromAssembly(typeof(RimMarketMod).Assembly))
+			{
+				if (!type.IsDefined(typeof(HarmonyAttribute), true)) continue;
+				try
+				{
+					harmony.CreateClassProcessor(type).Patch();
+				}
+				catch (System.Exception e)
+				{
+					Log.Error("[RimMarket] could not apply " + type.Name + ", that part of the mod is off: " + e);
+				}
+			}
 			Log.Message("[RimMarket] loaded, the stalls are open.");
 		}
 

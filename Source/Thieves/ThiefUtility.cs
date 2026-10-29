@@ -57,6 +57,7 @@ namespace RimMarket.Thieves
 			if (!RCellFinder.TryFindRandomPawnEntryCell(out IntVec3 cell, map, CellFinder.EdgeRoadChance_Neutral)) return false;
 			Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, faction, forceGenerateNewPawn: true));
 			pawn.equipment?.DestroyAllEquipment();
+			pawn.inventory?.DestroyAll();
 			GenSpawn.Spawn(pawn, cell, map);
 			LordMaker.MakeNewLord(faction, new LordJob_MarketThief(loiterTicks, bold), map, new List<Pawn> { pawn });
 			return true;
@@ -227,6 +228,7 @@ namespace RimMarket.Thieves
 				owner.TryAdd(taken);
 				return false;
 			}
+			taken.SetForbidden(true, warnOnFail: false);
 			mgr.Notify_Snatched(thief, taken, v);
 			return true;
 		}
@@ -272,8 +274,8 @@ namespace RimMarket.Thieves
 			if (Rand.Chance(chance))
 			{
 				MoteMaker.ThrowText(thief.DrawPos, map, (rested > 0f ? "RimMarket.MoteGotYouRested" : "RimMarket.MoteGotYou").Translate(), 3.5f);
-				thief.health.AddHediff(RimMarketDefOf.RimMarket_Subdued);
 				MarketManager.Instance?.Notify_ThiefCaught(thief, guard);
+				thief.health.AddHediff(RimMarketDefOf.RimMarket_Subdued);
 				return;
 			}
 			MoteMaker.ThrowText(thief.DrawPos, map, "RimMarket.MoteSlipped".Translate(), 3.5f);
@@ -325,6 +327,7 @@ namespace RimMarket.Thieves
 			{
 				return false;
 			}
+			if (!loot.Destroyed && !loot.Spawned) loot.SetForbidden(false, warnOnFail: false);
 			if (map != null && at != Vector3.zero) MoteMaker.ThrowText(at, map, "RimMarket.MoteReturned".Translate(), 3.5f);
 			v?.stall?.MarkDisplayDirty();
 			return true;

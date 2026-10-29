@@ -4,7 +4,7 @@
 	<ThingDef ParentName="BuildingBase">
 		<defName>RimMarket_MarketMarker</defName>
 		<label>market marker</label>
-		<description>A spot painted on the ground that marks the centre of your market square. Build stalls around it: any stall inside the marker's radius belongs to this market. Select the marker to set the radius by hand or let the auto button fit it to your walls and fences, choose how the stall fee is collected, open or close the market, and hide the spot once the square looks the way you want. During a Great Fair the maypole goes up right on it.\n\nTrade caravans that find a free stall here set up shop in it instead of idling outside your walls.</description>
+		<description>A spot painted on the ground that marks the centre of your market square. Build stalls around it: any stall inside the market area belongs to this market. Select the marker to paint the area like a stockpile zone, choose how the stall fee is collected, open or close the market, and hide the spot once the square looks the way you want. During a Great Fair the maypole goes up right on it.\n\nTrade caravans that find a free stall here set up shop in it instead of idling outside your walls.</description>
 		<thingClass>RimMarket.Buildings.Building_MarketMarker</thingClass>
 		<graphicData>
 			<texPath>Things/Building/RimMarket_MarketSpot</texPath>
@@ -44,7 +44,7 @@
 		<thingClass>RimMarket.Buildings.Building_MarketSpot</thingClass>
 		<description>A spot marked on the ground that tells visiting caravans where to leave their pack animals while the merchant works the market. The wares in the saddlebags still count for trading, however far the animals are from the counter, and what you buy is handed over at the counter.
 
-Select the spot to set the radius, fit it to your walls and fences, or hide it once you know where it is. Wall the camp in and the animals stay put: they do not open doors. Off-duty guards wait at the guard rest spot, or just outside the camp if you have none. Without a camp, the animals wait just outside the market, out of the shoppers' way.</description>
+Select the spot to paint its area like a stockpile zone, or hide it once you know where it is. Wall the camp in and the animals stay put: they do not open doors. Off-duty guards wait at the guard rest spot, or just outside the camp if you have none. Without a camp, the animals wait just outside the market, out of the shoppers' way.</description>
 		<drawerType>MapMeshAndRealTime</drawerType>
 		<graphicData>
 			<texPath>Things/Building/RimMarket_CaravanCampSpot</texPath>
@@ -80,7 +80,7 @@ Select the spot to set the radius, fit it to your walls and fences, or hide it o
 		<defName>RimMarket_GuardRestSpot</defName>
 		<label>guard rest spot</label>
 		<thingClass>RimMarket.Buildings.Building_MarketSpot</thingClass>
-		<description>Designates where the guards of visiting caravans spend their time off while one of them stands post at the stall. They sit on any chair, stool or bench inside the spot's radius, or stand if there is none, trade gossip, eat from their packs and sleep on the ground when night comes. Select the spot to set the radius, fit it to your walls, or hide it.\n\nWithout a rest spot, off-duty guards hang around just outside the caravan camp, keeping an eye on the animals, or wait with the animals outside the market if there is no camp either.</description>
+		<description>Designates where the guards of visiting caravans spend their time off while one of them stands post at the stall. They sit on any chair, stool or bench inside the spot's area, or stand if there is none, trade gossip, eat from their packs and sleep on the ground when night comes. Select the spot to paint its area like a stockpile zone, or hide it.\n\nWithout a rest spot, off-duty guards hang around just outside the caravan camp, keeping an eye on the animals, or wait with the animals outside the market if there is no camp either.</description>
 		<drawerType>MapMeshAndRealTime</drawerType>
 		<graphicData>
 			<texPath>Things/Building/RimMarket_GuardRestSpot</texPath>

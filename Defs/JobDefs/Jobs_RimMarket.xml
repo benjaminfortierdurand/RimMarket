@@ -102,6 +102,7 @@
 		<defName>RimMarket_Snatch</defName>
 		<driverClass>RimMarket.Jobs.JobDriver_MarketSnatch</driverClass>
 		<reportString>browsing the market stall.</reportString>
+		<carryThingAfterJob>true</carryThingAfterJob>
 		<casualInterruptible>false</casualInterruptible>
 		<suspendable>false</suspendable>
 		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>

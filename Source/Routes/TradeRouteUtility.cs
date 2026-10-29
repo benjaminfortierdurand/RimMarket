@@ -497,6 +497,26 @@ namespace RimMarket.Routes
 			return false;
 		}
 
+		public static void GiveUp(TradeConvoy convoy)
+		{
+			if (convoy == null) return;
+			if (convoy.orderId > 0)
+			{
+				Orders.SpecialOrder o = Orders.SpecialOrderUtility.OrderOf(convoy);
+				if (o != null)
+				{
+					Orders.SpecialOrderUtility.Cancel(o, "RimMarket.OrderTurnedBack", 1f);
+					return;
+				}
+			}
+			else
+			{
+				TradeRoute r = RouteOf(convoy);
+				if (r != null) r.convoy = null;
+			}
+			if (!convoy.Destroyed) convoy.Destroy();
+		}
+
 		public static Lord NewestTraderLord(Map map, Faction faction)
 		{
 			List<Lord> lords = map.lordManager.lords;

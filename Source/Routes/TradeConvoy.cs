@@ -138,6 +138,21 @@ namespace RimMarket.Routes
 			}
 		}
 
+		private const int ArriveErrorKey = 0x524D4B31;
+
+		private void SafeArrive()
+		{
+			try
+			{
+				TradeRouteUtility.TryArrive(this);
+			}
+			catch (System.Exception e)
+			{
+				Log.ErrorOnce("[RimMarket] a trade convoy could not enter the map and turns back: " + e, ArriveErrorKey);
+				TradeRouteUtility.GiveUp(this);
+			}
+		}
+
 		protected override void Tick()
 		{
 			base.Tick();
@@ -154,13 +169,13 @@ namespace RimMarket.Routes
 			}
 			if (Waiting)
 			{
-				if ((now - waitingSince) % RetryTicks == 0) TradeRouteUtility.TryArrive(this);
+				if ((now - waitingSince) % RetryTicks == 0) SafeArrive();
 				return;
 			}
 			if (AtEnd)
 			{
 				waitingSince = now;
-				TradeRouteUtility.TryArrive(this);
+				SafeArrive();
 				return;
 			}
 			costLeft -= 1f;
@@ -170,7 +185,7 @@ namespace RimMarket.Routes
 			if (AtEnd)
 			{
 				waitingSince = now;
-				TradeRouteUtility.TryArrive(this);
+				SafeArrive();
 				return;
 			}
 			NextCost();

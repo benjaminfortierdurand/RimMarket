@@ -227,6 +227,7 @@ namespace RimMarket.Market
 
 		public float RefusalChance(Faction faction)
 		{
+			if (!S.reputationEffects) return 0f;
 			float chance = OpinionOf(faction).RefusalChance;
 			MarketReputation own = LedgerFor(faction);
 			if (own != null && own.Headline == MarketReputation.HeadlineNotorious) chance = Mathf.Max(chance, GrudgeRefusal);
@@ -355,10 +356,14 @@ namespace RimMarket.Market
 					v.shoppersDueTick = now + ShopperRetryTicks;
 					continue;
 				}
-				v.shoppersSent = true;
 				string from = MarketShoppers.Send(v);
-				if (from != null)
-					Say("RimMarket.ShoppersArrived", from, new LookTargets(v.stall.parent), MessageTypeDefOf.NeutralEvent);
+				if (from == null)
+				{
+					v.shoppersDueTick = now + ShopperRetryTicks;
+					continue;
+				}
+				v.shoppersSent = true;
+				Say("RimMarket.ShoppersArrived", from, new LookTargets(v.stall.parent), MessageTypeDefOf.NeutralEvent);
 			}
 		}
 
@@ -529,15 +534,18 @@ namespace RimMarket.Market
 			else if (a.leader == SlaveAuction.LeaderBidder && a.Leader != null)
 			{
 				AuctionBidder winner = a.Leader;
-				if (winner.pawn != null)
-				{
-					ThingOwner purse = ThiefUtility.CarrierOf(v)?.inventory?.innerContainer ?? v.trader?.inventory?.innerContainer;
-					MarketUtility.TransferSilver(winner.pawn, purse, a.price);
-				}
-				RecordGuestSale(v, a.price);
 				a.done.Add(lot);
+				if (winner.pawn == null || !AuctionUtility.BidderStillIn(winner) || MarketUtility.SilverOf(winner.pawn) < a.price)
+				{
+					Say("RimMarket.AuctionBuyerGone", lot.LabelShortCap, targets, MessageTypeDefOf.NeutralEvent);
+					FinishLot(a);
+					return;
+				}
+				ThingOwner purse = ThiefUtility.CarrierOf(v)?.inventory?.innerContainer ?? v.trader?.inventory?.innerContainer;
+				int paid = MarketUtility.TransferSilver(winner.pawn, purse, a.price);
+				RecordGuestSale(v, paid);
 				AuctionBuyers.HandOver(lot, winner.pawn);
-				Say("RimMarket.AuctionSoldTo", lot.LabelShortCap, winner.name, a.price, targets, MessageTypeDefOf.NeutralEvent);
+				Say("RimMarket.AuctionSoldTo", lot.LabelShortCap, winner.name, paid, targets, MessageTypeDefOf.NeutralEvent);
 			}
 			else
 			{
@@ -1325,7 +1333,7 @@ namespace RimMarket.Market
 				v.haggleWon = false;
 				v.haggleBuyFactor = 1f + bonus;
 				v.haggleSellFactor = 1f - bonus;
-				v.endTick = Mathf.Max(Find.TickManager.TicksGame + 2500, v.endTick - 15000);
+				v.endTick = Mathf.Min(v.endTick, Mathf.Max(Find.TickManager.TicksGame + 2500, v.endTick - 15000));
 				ReputationUtility.Record(this, v, MarketReputation.Fairness, ReputationUtility.HaggleLost, "RimMarket.ReasonInsulted");
 				if (map != null) MoteMaker.ThrowText(pos, map, "RimMarket.MoteRefused".Translate(), 3.5f);
 				Say("RimMarket.MessageHaggleLost", negotiator.LabelShortCap, v.trader?.LabelShortCap ?? "?",
@@ -1445,7 +1453,7 @@ namespace RimMarket.Market
 			if (f != null && !f.IsPlayer && !f.defeated && !f.HostileTo(Faction.OfPlayer))
 				f.TryAffectGoodwillWith(Faction.OfPlayer, RobbedGoodwill, canSendMessage: true, canSendHostilityLetter: false,
 					RimMarketDefOf.RimMarket_StallRobbed);
-			if (v != null) v.endTick = Mathf.Max(Find.TickManager.TicksGame + 2500, v.endTick - 15000);
+			if (v != null) v.endTick = Mathf.Min(v.endTick, Mathf.Max(Find.TickManager.TicksGame + 2500, v.endTick - 15000));
 			LookTargets targets = v != null && v.StallOk ? new LookTargets(v.stall.parent) : null;
 			Say("RimMarket.MessageThiefEscaped", t.lootLabel ?? "?", f?.Name ?? "?", targets, MessageTypeDefOf.NegativeEvent);
 		}
@@ -1464,6 +1472,7 @@ namespace RimMarket.Market
 			{
 				MarketTheft t = thefts[i];
 				Pawn th = t.thief;
+				bool late = now - t.startTick > TheftTimeoutTicks;
 				if (th == null)
 				{
 					thefts.RemoveAt(i);
@@ -1484,7 +1493,7 @@ namespace RimMarket.Market
 						ResolveCaught(t, carrier, arrested: true);
 						continue;
 					}
-					if (th.SpawnedOrAnyParentSpawned) continue;
+					if (th.SpawnedOrAnyParentSpawned && !late) continue;
 					thefts.RemoveAt(i);
 					ResolveEscaped(t);
 					continue;
@@ -1495,7 +1504,9 @@ namespace RimMarket.Market
 					ResolveDropped(t);
 					continue;
 				}
-				if (now - t.startTick > TheftTimeoutTicks) thefts.RemoveAt(i);
+				if (!late) continue;
+				thefts.RemoveAt(i);
+				ResolveEscaped(t);
 			}
 		}
 
@@ -1564,7 +1575,7 @@ namespace RimMarket.Market
 				if (other != null)
 				{
 					other.feud = true;
-					StallVisit leaver = other.startTick >= v.startTick ? other : v;
+					StallVisit leaver = other.startTick > v.startTick || (other.startTick == v.startTick && other.id > v.id) ? other : v;
 					PackUpForFeud(leaver, leaver == v ? other.faction : v.faction);
 					continue;
 				}

@@ -34,6 +34,11 @@ namespace RimMarket.UI
 
 		public override void DoWindowContents(Rect inRect)
 		{
+			if (stall == null || !stall.Spawned)
+			{
+				Close();
+				return;
+			}
 			Text.Font = GameFont.Medium;
 			Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 36f), "RimMarket.AwningTitle".Translate());
 			Text.Font = GameFont.Small;

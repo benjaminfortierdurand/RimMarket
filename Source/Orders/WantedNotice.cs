@@ -88,7 +88,7 @@ namespace RimMarket.Orders
 				pendingTicks.RemoveAt(i);
 			}
 			if (offers == null) offers = new List<WantedOffer>();
-			offers.RemoveAll(o => o == null || o.faction == null || o.goods.Count == 0);
+			offers.RemoveAll(o => o == null || o.faction == null || o.settlement == null || o.goods.Count == 0);
 		}
 	}
 }

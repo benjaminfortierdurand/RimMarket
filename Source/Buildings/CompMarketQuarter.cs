@@ -21,6 +21,7 @@ namespace RimMarket.Buildings
 		private float radius = DefRadius;
 		private List<IntVec3> regionCells;
 		private HashSet<IntVec3> regionSet;
+		private IntVec3 regionAnchor = IntVec3.Invalid;
 
 		public float Radius => radius;
 
@@ -72,6 +73,7 @@ namespace RimMarket.Buildings
 			foreach (IntVec3 c in parent.OccupiedRect().Cells) set.Add(c);
 			regionCells = new List<IntVec3>(set);
 			regionSet = null;
+			regionAnchor = parent.Position;
 			float maxDist = 0f;
 			for (int i = 0; i < regionCells.Count; i++) maxDist = Mathf.Max(maxDist, regionCells[i].DistanceTo(parent.Position));
 			radius = Mathf.Clamp(Mathf.Ceil(maxDist), MinRadius, MaxRadius);
@@ -88,11 +90,34 @@ namespace RimMarket.Buildings
 			return set;
 		}
 
+		public override void PostSpawnSetup(bool respawningAfterLoad)
+		{
+			base.PostSpawnSetup(respawningAfterLoad);
+			if (!HasRegion) return;
+			if (!regionAnchor.IsValid)
+			{
+				regionAnchor = parent.Position;
+				return;
+			}
+			if (regionAnchor == parent.Position) return;
+			IntVec3 shift = parent.Position - regionAnchor;
+			var moved = new List<IntVec3>(regionCells.Count);
+			for (int i = 0; i < regionCells.Count; i++)
+			{
+				IntVec3 c = regionCells[i] + shift;
+				if (c.InBounds(parent.Map)) moved.Add(c);
+			}
+			regionCells = moved;
+			regionSet = null;
+			regionAnchor = parent.Position;
+		}
+
 		public override void PostExposeData()
 		{
 			base.PostExposeData();
 			Scribe_Values.Look(ref radius, "radius", DefRadius);
 			Scribe_Collections.Look(ref regionCells, "regionCells", LookMode.Value);
+			Scribe_Values.Look(ref regionAnchor, "regionAnchor", IntVec3.Invalid);
 			if (Scribe.mode == LoadSaveMode.PostLoadInit) regionSet = null;
 		}
 

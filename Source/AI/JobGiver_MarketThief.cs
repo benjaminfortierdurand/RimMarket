@@ -13,7 +13,14 @@ namespace RimMarket.AI
 		{
 			Lord lord = pawn.GetLord();
 			if (!(lord?.LordJob is LordJob_MarketThief thiefJob)) return null;
-			if (pawn.carryTracker?.CarriedThing != null) return null;
+			if (pawn.carryTracker?.CarriedThing != null)
+			{
+				if (!RCellFinder.TryFindBestExitSpot(pawn, out IntVec3 escape)) return null;
+				Job flee = JobMaker.MakeJob(JobDefOf.Goto, escape);
+				flee.exitMapOnArrival = true;
+				flee.locomotionUrgency = LocomotionUrgency.Jog;
+				return flee;
+			}
 			if (lord.ticksInToil < thiefJob.LoiterTicks) return null;
 			StallVisit v = ThiefUtility.PickTarget(pawn);
 			if (v == null) return null;

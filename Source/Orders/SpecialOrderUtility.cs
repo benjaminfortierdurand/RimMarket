@@ -214,7 +214,11 @@ namespace RimMarket.Orders
 				{
 					if (!o.handedOver && o.courier != null && o.courier.Spawned && now - o.arrivedTick >= HandOverTimeout)
 						HandOver(o, o.courier.Position, o.courier.Map);
-					if (!LordAlive(o)) mgr.RemoveOrder(o);
+					if (!LordAlive(o))
+					{
+						SaveParcel(o);
+						mgr.RemoveOrder(o);
+					}
 					continue;
 				}
 				string broken = BrokenReason(o);
@@ -309,8 +313,8 @@ namespace RimMarket.Orders
 					o.delivered = true;
 					o.convoy = null;
 					Pawn trader = lord == null ? null : TraderCaravanUtility.FindTrader(lord);
-					if (trader != null && WantedUtility.SettleBarter(o, map, trader)) Deliver(o, trader);
 					if (convoy.plunder > 0f) TradeRouteUtility.Plunder(lord, convoy.plunder);
+					if (trader != null && WantedUtility.SettleBarter(o, map, trader)) Deliver(o, trader);
 					if (!convoy.Destroyed) convoy.Destroy();
 					Find.LetterStack.ReceiveLetter("RimMarket.OrderArrivedLabel".Translate(),
 						"RimMarket.OrderArrivedText".Translate(o.faction.Name, o.SettlementName, What(o)),
@@ -445,6 +449,23 @@ namespace RimMarket.Orders
 			return made;
 		}
 
+		private static void SaveParcel(SpecialOrder o)
+		{
+			if (o.handedOver || o.parcel.Count == 0) return;
+			Map map = o.home?.Map;
+			if (o.courier != null && o.courier.Spawned && !o.courier.Dead && o.courier.Map == map)
+			{
+				HandOver(o, o.courier.Position, map);
+				return;
+			}
+			bool dropped = o.parcel.Any(t => t != null && t.Spawned && t.Map == map);
+			o.handedOver = true;
+			o.parcel.Clear();
+			if (dropped || map == null || o.paid <= 0) return;
+			Refund(map, o.paid);
+			Messages.Message("RimMarket.OrderParcelRefunded".Translate(o.faction?.Name ?? "?", o.paid), MessageTypeDefOf.NeutralEvent, historical: true);
+		}
+
 		public static void HandOver(SpecialOrder o, IntVec3 cell, Map map)
 		{
 			if (o == null || o.handedOver || map == null) return;
@@ -480,9 +501,9 @@ namespace RimMarket.Orders
 			mgr.RemoveOrder(o);
 			if (o.convoy != null && !o.convoy.Destroyed) o.convoy.Destroy();
 			o.convoy = null;
-			int refund = Mathf.RoundToInt(o.paid * refundFraction);
 			Map map = o.home?.Map;
-			if (refund > 0 && map != null) Refund(map, refund);
+			int refund = map == null ? 0 : Mathf.RoundToInt(o.paid * refundFraction);
+			if (refund > 0) Refund(map, refund);
 			Messages.Message(key.Translate(o.faction?.Name ?? "?", o.SettlementName, refund), MessageTypeDefOf.NegativeEvent, historical: true);
 		}
 

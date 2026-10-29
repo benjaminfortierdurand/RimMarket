@@ -87,7 +87,7 @@ namespace RimMarket.Reputation
 				else Record(mgr, v, MarketReputation.Fees, -1f, null);
 				return;
 			}
-			if (v.feeAmount <= 0)
+			if (v.feeAmount <= 0 || !v.feePaid)
 			{
 				if (!v.feeShort) Record(mgr, v, MarketReputation.Fees, 1f, "RimMarket.ReasonNoFee");
 				return;
