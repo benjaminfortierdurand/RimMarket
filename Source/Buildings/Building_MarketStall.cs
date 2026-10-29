@@ -25,7 +25,11 @@ namespace RimMarket.Buildings
 		public override int GetCountCanAccept(Thing item, bool canMergeWithExistingStacks = true)
 		{
 			int count = base.GetCountCanAccept(item, canMergeWithExistingStacks);
-			if (item != null && Owner is Building_MarketStall stall) count = Mathf.Min(count, stall.RoomFor(ColonyStalls.StockDef(item)));
+			if (item != null && Owner is Building_MarketStall stall)
+			{
+				ThingDef def = ColonyStalls.StockDef(item);
+				count = Mathf.Min(count, Mathf.Min(stall.RoomFor(def), stall.SpareFor(def, item)));
+			}
 			return count;
 		}
 	}
@@ -37,6 +41,8 @@ namespace RimMarket.Buildings
 		public float priceFactor = ColonyStalls.DefaultPriceFactor;
 		public int sold;
 		public QualityRange quality = QualityRange.All;
+		public bool refill;
+		public int reserve;
 
 		public bool Allows(Thing t)
 		{
@@ -50,6 +56,8 @@ namespace RimMarket.Buildings
 			Scribe_Values.Look(ref priceFactor, "priceFactor", ColonyStalls.DefaultPriceFactor);
 			Scribe_Values.Look(ref sold, "sold");
 			Scribe_Values.Look(ref quality, "quality", QualityRange.All);
+			Scribe_Values.Look(ref refill, "refill");
+			Scribe_Values.Look(ref reserve, "reserve");
 		}
 	}
 
@@ -174,6 +182,15 @@ namespace RimMarket.Buildings
 			return Mathf.Max(0, order.toSell - HeldOf(def));
 		}
 
+		public int SpareFor(ThingDef def, Thing coming)
+		{
+			StallOrder order = OrderFor(def);
+			if (order == null || order.reserve <= 0 || !Spawned) return int.MaxValue;
+			int home = ColonyStalls.HomeCount(Map, def);
+			if (coming != null && !coming.Spawned) home += coming.stackCount;
+			return Mathf.Max(0, home - order.reserve);
+		}
+
 		public int SpaceRemainingFor(ThingDef stuff)
 		{
 			if (!colonyStall || stuff == null) return 0;
@@ -189,7 +206,7 @@ namespace RimMarket.Buildings
 			return RoomFor(stuff);
 		}
 
-		public void SetOrder(ThingDef def, int toSell, float priceFactor, QualityRange quality)
+		public void SetOrder(ThingDef def, int toSell, float priceFactor, QualityRange quality, bool refill, int reserve)
 		{
 			if (def == null) return;
 			StallOrder order = OrderFor(def);
@@ -207,6 +224,8 @@ namespace RimMarket.Buildings
 				order.toSell = toSell;
 				order.priceFactor = priceFactor;
 				order.quality = quality;
+				order.refill = refill;
+				order.reserve = reserve;
 			}
 			TrimStock();
 			if (Spawned) MapHeld.listerHaulables.Notify_HaulSourceChanged(this);
@@ -216,8 +235,9 @@ namespace RimMarket.Buildings
 		{
 			StallOrder order = OrderFor(def);
 			if (order == null) return;
-			order.toSell -= count;
 			order.sold += count;
+			if (order.refill) return;
+			order.toSell -= count;
 			if (order.toSell <= 0) orders.Remove(order);
 		}
 

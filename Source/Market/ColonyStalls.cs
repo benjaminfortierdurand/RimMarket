@@ -66,6 +66,19 @@ namespace RimMarket.Market
 
 		public static ThingDef StockDef(Thing t) => t is MinifiedThing m && m.InnerThing != null ? m.InnerThing.def : t?.def;
 
+		public static int HomeCount(Map map, ThingDef def)
+		{
+			if (map == null || def == null) return 0;
+			List<Thing> things = map.listerThings.ThingsOfDef(def);
+			int n = 0;
+			for (int i = 0; i < things.Count; i++)
+			{
+				Thing t = things[i];
+				if (t.Spawned && !t.IsForbidden(Faction.OfPlayer) && !t.Position.Fogged(map)) n += t.stackCount;
+			}
+			return n;
+		}
+
 		public static bool IsArt(ThingDef def) => def != null && def.category == ThingCategory.Building && def.Minifiable && def.IsArt;
 
 		public static bool CanSell(ThingDef def)
@@ -314,7 +327,7 @@ namespace RimMarket.Market
 			for (int i = 0; i < orders.Count && i < InspectOrders; i++)
 			{
 				StallOrder o = orders[i];
-				lines.Add("RimMarket.ColonyStallOrderLine".Translate(o.def.LabelCap, o.toSell, s.HeldOf(o.def), o.priceFactor.ToStringPercent()));
+				lines.Add((o.refill ? "RimMarket.ColonyStallRefillLine" : "RimMarket.ColonyStallOrderLine").Translate(o.def.LabelCap, o.toSell, s.HeldOf(o.def), o.priceFactor.ToStringPercent()));
 			}
 			if (orders.Count > InspectOrders) lines.Add("RimMarket.ColonyStallMoreOrders".Translate(orders.Count - InspectOrders));
 			if (s.Spawned)

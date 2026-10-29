@@ -190,14 +190,15 @@
 	<RimMarket.ColonyStallSetupDesc>Open the sales table: what this stall sells, how many and at what price.</RimMarket.ColonyStallSetupDesc>
 	<RimMarket.ColonyStallEmpty>Colony stall: nothing for sale yet. Use Set up the stall.</RimMarket.ColonyStallEmpty>
 	<RimMarket.ColonyStallForSale>Colony stall, for sale:</RimMarket.ColonyStallForSale>
+	<RimMarket.ColonyStallRefillLine>  {0}: kept at {1}, {2} on the counter, {3} of value</RimMarket.ColonyStallRefillLine>
 	<RimMarket.ColonyStallOrderLine>  {0}: {1} to sell, {2} on the counter, {3} of value</RimMarket.ColonyStallOrderLine>
 	<RimMarket.ColonyStallMoreOrders>  and {0} more</RimMarket.ColonyStallMoreOrders>
 	<RimMarket.StallSetupTitle>{0}: sales table</RimMarket.StallSetupTitle>
-	<RimMarket.StallSetupIntro>Choose what goes on the counter, how many and at what price. Your haulers bring the goods over by themselves and the stall stops once the count is sold. Customers pay with their own silver; the dearer the article, the more of them walk on.</RimMarket.StallSetupIntro>
+	<RimMarket.StallSetupIntro>Choose what goes on the counter, how many and at what price. Your haulers bring the goods over by themselves. A line stops once its count is sold, unless you tick Refill: then the stall keeps that many on the counter for good. Customers pay with their own silver; the dearer the article, the more of them walk on.</RimMarket.StallSetupIntro>
 	<RimMarket.StallSetupOnlyForSale>Only what is for sale</RimMarket.StallSetupOnlyForSale>
 	<RimMarket.StallSetupItem>Article</RimMarket.StallSetupItem>
-	<RimMarket.StallSetupAvailable>In the colony</RimMarket.StallSetupAvailable>
-	<RimMarket.StallSetupOnCounter>On the counter</RimMarket.StallSetupOnCounter>
+	<RimMarket.StallSetupAvailable>In colony</RimMarket.StallSetupAvailable>
+	<RimMarket.StallSetupOnCounter>On counter</RimMarket.StallSetupOnCounter>
 	<RimMarket.StallSetupToSell>To sell</RimMarket.StallSetupToSell>
 	<RimMarket.StallSetupPrice>Price</RimMarket.StallSetupPrice>
 	<RimMarket.StallSetupAll>All</RimMarket.StallSetupAll>
@@ -211,7 +212,11 @@
 	<RimMarket.QualityOrBetter>{0} or better</RimMarket.QualityOrBetter>
 	<RimMarket.QualityUpTo>Up to {0}</RimMarket.QualityUpTo>
 	<RimMarket.QualityFromShort>{0}+</RimMarket.QualityFromShort>
-	<RimMarket.StallSetupAdjustTip>How many to sell, out of what the colony has. Type a number in the box, or use the buttons: hold Shift for 10 at a time, Ctrl for 100. All: everything, or nothing if it is already everything.</RimMarket.StallSetupAdjustTip>
+	<RimMarket.StallSetupRefill>Refill</RimMarket.StallSetupRefill>
+	<RimMarket.StallSetupRefillTip>Ticked: the stall keeps this many on the counter and your haulers bring more after every sale. The line never runs out.\nUnticked: it sells this many, then the line is done.</RimMarket.StallSetupRefillTip>
+	<RimMarket.StallSetupReserve>Keep home</RimMarket.StallSetupReserve>
+	<RimMarket.StallSetupReserveTip>Your haulers stop bringing this to the stall once the colony is down to this many, so you never sell your last medicine. What is already on the counter stays for sale.\n\nHold Shift for 10 at a time, Ctrl for 100.</RimMarket.StallSetupReserveTip>
+	<RimMarket.StallSetupAdjustTip>How many to sell, out of what the colony has. With Refill ticked, how many to keep on the counter. Type a number in the box, or use the buttons: hold Shift for 10 at a time, Ctrl for 100. All: everything, or nothing if it is already everything.</RimMarket.StallSetupAdjustTip>
 	<RimMarket.StallSetupPriceHeaderTip>The asking price, as a share of the article's sell value. Like in vanilla, weapons sell for 20% of their worth and furniture for 70%. Shift: 25% at a time.</RimMarket.StallSetupPriceHeaderTip>
 	<RimMarket.StallSetupPriceTip>{0} of its sell value: {1} silver each. At this price a customer who fancies it buys it {2} of the time.</RimMarket.StallSetupPriceTip>
 	<RimMarket.StallSetupSummary>{0} articles to sell across {1} lines, about {2} silver if it all goes.</RimMarket.StallSetupSummary>

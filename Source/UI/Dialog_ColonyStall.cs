@@ -14,13 +14,17 @@ namespace RimMarket.UI
 		private const float HeaderHeight = 26f;
 		private const float ButtonSize = 24f;
 		private const int RefreshFrames = 120;
-		private const float ColItem = 250f;
+		private const float ColItem = 230f;
 		private const float ColQuality = 120f;
 		private const int Slots = 8;
 		private const int NoQuality = 7;
-		private const float ColAvailable = 95f;
-		private const float ColCounter = 95f;
+		private const float ColAvailable = 80f;
+		private const float ColCounter = 80f;
 		private const float ColToSell = 160f;
+		private const float ColRefill = 60f;
+		private const float ColReserve = 110f;
+		private const int RefillMax = 9999;
+		private const int ReserveMax = 99999;
 		private const float SilverIcon = 20f;
 		private const int CountMaxDigits = 6;
 
@@ -50,6 +54,8 @@ namespace RimMarket.UI
 			public float price = ColonyStalls.DefaultPriceFactor;
 			public string buffer;
 			public QualityRange quality = QualityRange.All;
+			public bool refill;
+			public int reserve;
 			public bool hasQuality;
 			public int[] onMap = new int[Slots];
 			public int[] all = new int[Slots];
@@ -65,7 +71,7 @@ namespace RimMarket.UI
 		private int refreshFrame = -9999;
 		private bool onlyForSale;
 
-		public override Vector2 InitialSize => new Vector2(1000f, 680f);
+		public override Vector2 InitialSize => new Vector2(Mathf.Min(1130f, Verse.UI.screenWidth - 32f), 680f);
 
 		public Dialog_ColonyStall(Building_MarketStall stall)
 		{
@@ -107,6 +113,8 @@ namespace RimMarket.UI
 			{
 				row.price = order.priceFactor;
 				row.quality = order.quality;
+				row.refill = order.refill;
+				row.reserve = order.reserve;
 			}
 			rows[def] = row;
 			return row;
@@ -285,6 +293,14 @@ namespace RimMarket.UI
 			Widgets.Label(sellRect, "RimMarket.StallSetupToSell".Translate());
 			TooltipHandler.TipRegion(sellRect, "RimMarket.StallSetupAdjustTip".Translate());
 			x += ColToSell;
+			var refillRect = new Rect(x, rect.y, ColRefill, rect.height);
+			Widgets.Label(refillRect, "RimMarket.StallSetupRefill".Translate());
+			TooltipHandler.TipRegion(refillRect, "RimMarket.StallSetupRefillTip".Translate());
+			x += ColRefill;
+			var reserveRect = new Rect(x, rect.y, ColReserve, rect.height);
+			Widgets.Label(reserveRect, "RimMarket.StallSetupReserve".Translate());
+			TooltipHandler.TipRegion(reserveRect, "RimMarket.StallSetupReserveTip".Translate());
+			x += ColReserve;
 			var priceRect = new Rect(x, rect.y, rect.xMax - x, rect.height);
 			Widgets.Label(priceRect, "RimMarket.StallSetupPrice".Translate());
 			TooltipHandler.TipRegion(priceRect, "RimMarket.StallSetupPriceHeaderTip".Translate());
@@ -300,6 +316,7 @@ namespace RimMarket.UI
 			StallOrder order = stall.OrderFor(row.def);
 			int held = stall.HeldOf(row.def);
 			int max = row.available + held;
+			int cap = Cap(row, held);
 			int toSell = order?.toSell ?? 0;
 
 			float x = rect.x;
@@ -337,12 +354,22 @@ namespace RimMarket.UI
 			bx += ButtonSize;
 			DrawCount(new Rect(bx + 3f, mid, 46f, ButtonSize), row, toSell);
 			bx += 52f;
-			if (Widgets.ButtonText(new Rect(bx, mid, ButtonSize, ButtonSize), "+") && toSell < max)
-				Apply(row, Mathf.Min(max, toSell + step));
+			if (Widgets.ButtonText(new Rect(bx, mid, ButtonSize, ButtonSize), "+") && toSell < cap)
+				Apply(row, Mathf.Min(cap, toSell + step));
 			bx += ButtonSize + 4f;
 			if (Widgets.ButtonText(new Rect(bx, mid, 44f, ButtonSize), "RimMarket.StallSetupAll".Translate()))
 				Apply(row, toSell >= max ? 0 : max);
 			x += ColToSell;
+
+			var refillRect = new Rect(x, rect.y, ColRefill, rect.height);
+			TooltipHandler.TipRegion(refillRect, "RimMarket.StallSetupRefillTip".Translate());
+			bool refill = row.refill;
+			Widgets.Checkbox(new Vector2(x + (ColRefill - ButtonSize) / 2f, mid), ref refill);
+			if (refill != row.refill) SetRefill(row, refill);
+			x += ColRefill;
+
+			DrawReserve(new Rect(x, rect.y, ColReserve, rect.height), row, mid, step);
+			x += ColReserve;
 
 			float px = x + 4f;
 			if (Widgets.ButtonText(new Rect(px, mid, ButtonSize, ButtonSize), "-")) SetPrice(row, row.price - ColonyStalls.PriceStep * PriceSteps());
@@ -365,6 +392,44 @@ namespace RimMarket.UI
 		}
 
 		private static int PriceSteps() => Event.current.shift ? 5 : 1;
+
+		private static int Cap(Row row, int held) => row.refill ? Mathf.Max(RefillMax, row.available + held) : row.available + held;
+
+		private void DrawReserve(Rect rect, Row row, float mid, int step)
+		{
+			if (ColonyStalls.IsArt(row.def))
+			{
+				GUI.color = Color.gray;
+				Widgets.Label(rect, "-");
+				GUI.color = Color.white;
+				return;
+			}
+			TooltipHandler.TipRegion(rect, "RimMarket.StallSetupReserveTip".Translate());
+			float bx = rect.x + 4f;
+			if (Widgets.ButtonText(new Rect(bx, mid, ButtonSize, ButtonSize), "-") && row.reserve > 0)
+				SetReserve(row, row.reserve - step);
+			bx += ButtonSize;
+			if (row.reserve <= 0) GUI.color = Color.gray;
+			Widgets.Label(new Rect(bx, rect.y, 52f, rect.height), row.reserve > 0 ? row.reserve.ToString() : "-");
+			GUI.color = Color.white;
+			bx += 52f;
+			if (Widgets.ButtonText(new Rect(bx, mid, ButtonSize, ButtonSize), "+") && row.reserve < ReserveMax)
+				SetReserve(row, row.reserve + step);
+		}
+
+		private void SetRefill(Row row, bool refill)
+		{
+			row.refill = refill;
+			StallOrder order = stall.OrderFor(row.def);
+			if (order != null) order.refill = refill;
+		}
+
+		private void SetReserve(Row row, int reserve)
+		{
+			row.reserve = Mathf.Clamp(reserve, 0, ReserveMax);
+			StallOrder order = stall.OrderFor(row.def);
+			if (order != null) order.reserve = row.reserve;
+		}
 
 		private static void DrawDemand(Rect bar, ThingDef def)
 		{
@@ -401,7 +466,7 @@ namespace RimMarket.UI
 			editing = null;
 			if (row == null || stall == null || !stall.Spawned || !stall.ColonyStall) return;
 			int typed = row.buffer.NullOrEmpty() ? 0 : int.Parse(row.buffer);
-			typed = Mathf.Clamp(typed, 0, row.available + stall.HeldOf(row.def));
+			typed = Mathf.Clamp(typed, 0, Cap(row, stall.HeldOf(row.def)));
 			if (typed != (stall.OrderFor(row.def)?.toSell ?? 0)) Apply(row, typed);
 		}
 
@@ -429,7 +494,7 @@ namespace RimMarket.UI
 				editing = null;
 				Verse.UI.UnfocusCurrentControl();
 			}
-			stall.SetOrder(row.def, toSell, row.price, row.quality);
+			stall.SetOrder(row.def, toSell, row.price, row.quality, row.refill, row.reserve);
 		}
 
 		private void DrawQuality(Rect rect, Row row)
@@ -454,7 +519,7 @@ namespace RimMarket.UI
 			row.quality = range;
 			Recount(row);
 			StallOrder order = stall.OrderFor(row.def);
-			if (order != null) stall.SetOrder(row.def, order.toSell, row.price, range);
+			if (order != null) stall.SetOrder(row.def, order.toSell, row.price, range, row.refill, row.reserve);
 		}
 
 		private static bool IsAll(QualityRange r) => r.min == QualityCategory.Awful && r.max == QualityCategory.Legendary;
