@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<RimMarket_Concept_Guide.label>集市指南</RimMarket_Concept_Guide.label>
+	<RimMarket_Concept_Guide.helpText>你的集市标记上有一个“指南”按钮。它会一步步显示你的集市在这张地图上还缺什么，每一项都有放置按钮，还有一个页面解释为什么至今没有商队前来。</RimMarket_Concept_Guide.helpText>
+
+	<RimMarket_Concept_Stall.label>集市摊位</RimMarket_Concept_Stall.label>
+	<RimMarket_Concept_Stall.helpText>摊位需要让其柜台末端的商人位置保持空闲，还要有从地图边缘进来的通路。可以在这里给遮阳篷上色，或把它设为殖民地摊位来出售自己的货物。</RimMarket_Concept_Stall.helpText>
+
+	<RimMarket_Concept_Spots.label>集市地点</RimMarket_Concept_Spots.label>
+	<RimMarket_Concept_Spots.helpText>驮运动物在商队营地等候，下班的护卫在护卫休息点。用墙把营地围起来，动物就会待着不走。一旦你知道某个地点的位置，就可以把它隐藏起来。</RimMarket_Concept_Spots.helpText>
+
+</LanguageData>

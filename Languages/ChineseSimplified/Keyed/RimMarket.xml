@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- 设置 -->
+	<RimMarket.Settings.FeeMode>摊位费</RimMarket.Settings.FeeMode>
+	<RimMarket.Settings.TabMarket>集市</RimMarket.Settings.TabMarket>
+	<RimMarket.Settings.TabVisitors>访客</RimMarket.Settings.TabVisitors>
+	<RimMarket.Settings.TabEvents>事件</RimMarket.Settings.TabEvents>
+	<RimMarket.Settings.TabTrade>贸易</RimMarket.Settings.TabTrade>
+	<RimMarket.Settings.ResetTab>重置此页</RimMarket.Settings.ResetTab>
+	<RimMarket.Settings.CaptionCaravans>商队</RimMarket.Settings.CaptionCaravans>
+	<RimMarket.Settings.CaptionColony>殖民地摊位与旅店</RimMarket.Settings.CaptionColony>
+	<RimMarket.Settings.Days>{0} 天</RimMarket.Settings.Days>
+	<RimMarket.Settings.FeeModeHint>商队如何支付摊位费：到场时支付、按客人消费分成（需访客模组或酒店与娱乐），或免费。每个集市标记可以单独设置。</RimMarket.Settings.FeeModeHint>
+	<RimMarket.Settings.FeePercentHint>到场费为商队所载货物价值的一定比例。</RimMarket.Settings.FeePercentHint>
+	<RimMarket.Settings.FeeCapHint>到场费最高不超过此值（银）。</RimMarket.Settings.FeeCapHint>
+	<RimMarket.Settings.SharePercentHint>集市从客人在摊位消费中抽取的分成，留存在柜台上。你自己购买的部分不收分成。</RimMarket.Settings.SharePercentHint>
+	<RimMarket.Settings.MarketDaysHint>商队在摊位停留多久后收拾离开。</RimMarket.Settings.MarketDaysHint>
+	<RimMarket.Settings.MaxMerchantsHint>同一时间可在你的集市交易的商队数量。</RimMarket.Settings.MaxMerchantsHint>
+	<RimMarket.Settings.HaggleBonusHint>砍价成功能压低多少价格，失败则加价多少。</RimMarket.Settings.HaggleBonusHint>
+	<RimMarket.Settings.ThiefMtbHint>两次窃贼事件之间的平均集市天数。</RimMarket.Settings.ThiefMtbHint>
+	<RimMarket.Settings.MessagesHint>在屏幕角落显示集市上发生事情的消息。</RimMarket.Settings.MessagesHint>
+	<RimMarket.Settings.FairCostHint>传令人宣布大集市的收费（银）。</RimMarket.Settings.FairCostHint>
+	<RimMarket.Settings.FairCooldownHint>两次大集市之间最少间隔的天数。</RimMarket.Settings.FairCooldownHint>
+	<RimMarket.Settings.RouteOpenCostHint>开辟路线的价格系数：距离 20 格的城镇约需 {0} 银。</RimMarket.Settings.RouteOpenCostHint>
+	<RimMarket.Settings.RouteTollHint>每支商队过路费的系数：距离 20 格约 {0} 银。0% 时商队可免费前来。</RimMarket.Settings.RouteTollHint>
+	<RimMarket.Settings.FeePercent>按其货物的比例</RimMarket.Settings.FeePercent>
+	<RimMarket.Settings.FeeCap>最多</RimMarket.Settings.FeeCap>
+	<RimMarket.Settings.SharePercent>客人消费的分成</RimMarket.Settings.SharePercent>
+	<RimMarket.Settings.FeeInGoods>银不够时以货物抵付</RimMarket.Settings.FeeInGoods>
+	<RimMarket.Settings.FeeInGoodsHint>商人用商队里的货物补足差额，放在摊位上。</RimMarket.Settings.FeeInGoodsHint>
+	<RimMarket.Settings.TurnAwayIfBroke>拒绝付不起的人</RimMarket.Settings.TurnAwayIfBroke>
+	<RimMarket.Settings.TurnAwayIfBrokeHint>关闭：他们支付现有的一切并照常摆摊。开启：他们跳过集市，像原版商队一样在墙外闲逛。</RimMarket.Settings.TurnAwayIfBrokeHint>
+	<RimMarket.Settings.WaiveAfterToll>经过 RimToll 收费站后免费</RimMarket.Settings.WaiveAfterToll>
+	<RimMarket.Settings.WaiveAfterTollHint>仅在加载 RimToll 时有效。不到一天前已向你收费站付过费的派系，不会在摊位再次被收费。</RimMarket.Settings.WaiveAfterTollHint>
+	<RimMarket.Settings.MarketDays>集市天数</RimMarket.Settings.MarketDays>
+	<RimMarket.Settings.MaxMerchants>同时商人数</RimMarket.Settings.MaxMerchants>
+	<RimMarket.Settings.ShoppersVisit>路过的顾客</RimMarket.Settings.ShoppersVisit>
+	<RimMarket.Settings.ShoppersVisitHint>商人摆摊一两小时后，友好派系的几个人会带着银走过来，浏览摊位，买得起什么就买什么，大约五小时后回家；若在旅店睡了一晚则次日早晨再走。没有商人进城时，也会有客人成群来逛殖民地的摊位，频率见下方设置。无需访客模组。\n\n关闭：完全没有顾客。访客模组的客人仍会购买。</RimMarket.Settings.ShoppersVisitHint>
+	<RimMarket.ShoppersArrived>来自 {0} 的顾客听说这里有集市，正走过来。</RimMarket.ShoppersArrived>
+	<RimMarket.ShoppersForColonyStall>来自 {0} 的顾客来看看殖民地摊位上有什么。</RimMarket.ShoppersForColonyStall>
+	<RimMarket.ShoppersForBargains>来自 {0} 的顾客听说殖民地卖得便宜，前来捡漏。</RimMarket.ShoppersForBargains>
+	<RimMarket.Settings.InnPrice>集市旅店，每晚银价</RimMarket.Settings.InnPrice>
+	<RimMarket.Settings.InnPriceHint>一间房一晚的默认价格。通铺半价，套房双倍。每个殖民地可在旅店登记簿中自定价格。商人支付商队护卫的房费，顾客自付。设为 0 则旅店免费。</RimMarket.Settings.InnPriceHint>
+	<RimMarket.CommandInnBed>集市旅店</RimMarket.CommandInnBed>
+	<RimMarket.CommandInnBedDesc>把这张床出租给因集市而来的人：商人、休息中的护卫和路过的顾客。他们按夜付费（价格见模组设置），把银留在床边。殖民者、囚犯和奴隶不会使用。漂亮的单人间令他们满意，棚屋里的睡袋则不然。</RimMarket.CommandInnBedDesc>
+	<RimMarket.InnBedPrisonCell>牢房可当不好旅店。</RimMarket.InnBedPrisonCell>
+	<RimMarket.InnBedHotelGuest>这是酒店客人的床。请先在酒店设置中移除。</RimMarket.InnBedHotelGuest>
+	<RimMarket.InnBedLocked>这张床已作为集市旅店出租。请先关闭“集市旅店”。</RimMarket.InnBedLocked>
+	<RimMarket.InnBedInspect>集市旅店，{1}：每晚 {0} 银。</RimMarket.InnBedInspect>
+	<RimMarket.InnBedInspectFree>集市旅店，{0}：免费。</RimMarket.InnBedInspectFree>
+	<RimMarket.InnTierDorm>通铺</RimMarket.InnTierDorm>
+	<RimMarket.InnTierRoom>单间</RimMarket.InnTierRoom>
+	<RimMarket.InnTierSuite>套房</RimMarket.InnTierSuite>
+	<RimMarket.InnTierDormDesc>多人共住、破旧的房间，或露天的床。</RimMarket.InnTierDormDesc>
+	<RimMarket.InnTierRoomDesc>不破旧的独立房间。</RimMarket.InnTierRoomDesc>
+	<RimMarket.InnTierSuiteDesc>带双人床及旁边家具（如床头柜或梳妆台）的漂亮单间。</RimMarket.InnTierSuiteDesc>
+	<RimMarket.InnBedUnsupported>这张床无法接待住客</RimMarket.InnBedUnsupported>
+	<RimMarket.BuildMenuLabel>建造</RimMarket.BuildMenuLabel>
+	<RimMarket.BuildMenuDesc>无需翻找建筑菜单即可放置集市建筑：摊位、商队营地、护卫休息点和拍卖柱。</RimMarket.BuildMenuDesc>
+	<RimMarket.BuildMenuLocked>尚未可用</RimMarket.BuildMenuLocked>
+	<RimMarket.InnStayLonger>{0} 在你的旅店睡得像个国王，摊位多开了半天。</RimMarket.InnStayLonger>
+	<RimMarket.InnRegisterLabel>旅店登记簿</RimMarket.InnRegisterLabel>
+	<RimMarket.InnRegisterDesc>一眼看清你的旅店：今晚谁睡哪里、每张床赚了多少、各类房间的价格，以及客人在留言簿上写了什么。</RimMarket.InnRegisterDesc>
+	<RimMarket.InnRegisterTitle>旅店登记簿</RimMarket.InnRegisterTitle>
+	<RimMarket.InnRegisterSummary>今晚：{1} 张床中有 {0} 张被占用。截至目前，旅店在 {3} 晚里赚了 {2} 银。</RimMarket.InnRegisterSummary>
+	<RimMarket.InnRegisterPrices>每晚价格</RimMarket.InnRegisterPrices>
+	<RimMarket.InnRegisterReset>恢复默认</RimMarket.InnRegisterReset>
+	<RimMarket.InnRegisterDefault>来自设置的默认值：{0} 银。按住 Shift：每次 25。</RimMarket.InnRegisterDefault>
+	<RimMarket.InnRegisterFree>免费</RimMarket.InnRegisterFree>
+	<RimMarket.InnRegisterBeds>床位</RimMarket.InnRegisterBeds>
+	<RimMarket.InnRegisterColRoom>类型</RimMarket.InnRegisterColRoom>
+	<RimMarket.InnRegisterColPrice>价格</RimMarket.InnRegisterColPrice>
+	<RimMarket.InnRegisterColTonight>今晚</RimMarket.InnRegisterColTonight>
+	<RimMarket.InnRegisterColNights>夜数</RimMarket.InnRegisterColNights>
+	<RimMarket.InnRegisterColEarned>收入</RimMarket.InnRegisterColEarned>
+	<RimMarket.InnRegisterJump>点击前往这张床。</RimMarket.InnRegisterJump>
+	<RimMarket.InnRegisterBook>留言簿</RimMarket.InnRegisterBook>
+	<RimMarket.InnRegisterBookEmpty>还没有人在这里睡过。</RimMarket.InnRegisterBookEmpty>
+	<RimMarket.InnRegisterAverage>最近 {1} 晚平均 {0}/5</RimMarket.InnRegisterAverage>
+	<RimMarket.InnReviewWho>{0}（{1}，来自 {2}）</RimMarket.InnReviewWho>
+	<RimMarket.InnReviewStay>{3}前：{0}，{1} 银，{2}/5</RimMarket.InnReviewStay>
+	<RimMarket.InnRoleMerchant>商人</RimMarket.InnRoleMerchant>
+	<RimMarket.InnRoleGuard>商队护卫</RimMarket.InnRoleGuard>
+	<RimMarket.InnRoleShopper>顾客</RimMarket.InnRoleShopper>
+	<RimMarket.ReviewSuite>真是间套房</RimMarket.ReviewSuite>
+	<RimMarket.ReviewFine>房间很漂亮</RimMarket.ReviewFine>
+	<RimMarket.ReviewRoom>还算干净</RimMarket.ReviewRoom>
+	<RimMarket.ReviewDorm>有点拥挤</RimMarket.ReviewDorm>
+	<RimMarket.ReviewPoor>破地方</RimMarket.ReviewPoor>
+	<RimMarket.ReviewOutdoors>睡在露天</RimMarket.ReviewOutdoors>
+	<RimMarket.ReviewPricey>太贵了</RimMarket.ReviewPricey>
+	<RimMarket.ReviewFair>价格公道</RimMarket.ReviewFair>
+	<RimMarket.ReviewFree>而且还是免费的</RimMarket.ReviewFree>
+	<RimMarket.InnBedLabel>旅店（{0}）</RimMarket.InnBedLabel>
+	<RimMarket.InnBedLabelFree>旅店（免费）</RimMarket.InnBedLabelFree>
+	<RimMarket.ReportGoingToInn>正前往旅店找张床。</RimMarket.ReportGoingToInn>
+	<RimMarket.Settings.GuardsAtStall>每摊位护卫数</RimMarket.Settings.GuardsAtStall>
+	<RimMarket.Settings.GuardsAtStallHint>他们守在柜台旁抓小偷。其余护卫在你的护卫休息点等候，驮畜在商队营地。没有这些时，两者都在集市外等候。</RimMarket.Settings.GuardsAtStallHint>
+	<RimMarket.Settings.MaxGuards>每支商队护卫上限</RimMarket.Settings.MaxGuards>
+	<RimMarket.Settings.MaxGuardsHint>前往有集市的商队最多带这么多护卫，只带最强的。其余留在家中。始终比每摊位护卫数至少多一人，以便有人轮换。</RimMarket.Settings.MaxGuardsHint>
+	<RimMarket.Settings.NoLimit>不限制</RimMarket.Settings.NoLimit>
+	<RimMarket.Settings.Haggle>砍价</RimMarket.Settings.Haggle>
+	<RimMarket.Settings.HaggleHint>每次来访可尝试一次。社交技能与好感对抗商人的耐心。失败会在相反方向损失同样的幅度，而且商人会更早离开。</RimMarket.Settings.HaggleHint>
+	<RimMarket.Settings.HaggleBonus>幅度</RimMarket.Settings.HaggleBonus>
+	<RimMarket.Settings.ColonistsBrowse>殖民者浏览摊位</RimMarket.Settings.ColonistsBrowse>
+	<RimMarket.Settings.ColonistsBrowseHint>空闲的殖民者会走过来看看货物，与商人闲聊。他们不会自行动用殖民地的银。</RimMarket.Settings.ColonistsBrowseHint>
+	<RimMarket.Settings.GuestsShop>客人在摊位购物</RimMarket.Settings.GuestsShop>
+	<RimMarket.Settings.GuestsShopHint>需要访客模组或酒店与娱乐。口袋里有银、或还有酒店住宿预算的客人，会在摊位和殖民地摊位购买货物，也会来看奴隶拍卖。若采用消费分成收费，集市会从每笔交易中抽成。</RimMarket.Settings.GuestsShopHint>
+	<RimMarket.Settings.Reputation>声望</RimMarket.Settings.Reputation>
+	<RimMarket.Settings.ExtraCaravans>声望带来的额外商队</RimMarket.Settings.ExtraCaravans>
+	<RimMarket.Settings.ExtraCaravansHint>受欢迎的集市会在叙事者派来的商队之外吸引更多商队，大约两天一支。调低可减少来访，0% 则没有额外商队。稀有商人和更优价格仍然生效。</RimMarket.Settings.ExtraCaravansHint>
+	<RimMarket.Settings.ReputationHint>好名声带来额外商队、更稀有的商人和更好的价格。坏名声会让商队在墙外扎营，价格也上涨。关闭此项后，声望仍会记录，但不产生任何影响。</RimMarket.Settings.ReputationHint>
+	<RimMarket.Settings.Thieves>窃贼</RimMarket.Settings.Thieves>
+	<RimMarket.Settings.ThievesHint>偶尔会有扒手混入人群，从柜台偷走东西后逃跑。商队的护卫会追赶，你的殖民者可右键制服逃跑的窃贼。摊位周围人越多，窃贼越不敢下手。</RimMarket.Settings.ThievesHint>
+	<RimMarket.Settings.ThiefMtb>每隔</RimMarket.Settings.ThiefMtb>
+	<RimMarket.Settings.ThiefReaction>窃贼出现时</RimMarket.Settings.ThiefReaction>
+	<RimMarket.Settings.ThiefReactionHint>窃贼抢了东西就跑时该怎么办：保持当前速度、强制恢复正常速度，或立刻暂停游戏。暂停仅在窃贼真的得手时触发。</RimMarket.Settings.ThiefReactionHint>
+	<RimMarket.Settings.ThiefKeepSpeed>保持当前速度</RimMarket.Settings.ThiefKeepSpeed>
+	<RimMarket.Settings.ThiefNormalSpeed>恢复正常速度</RimMarket.Settings.ThiefNormalSpeed>
+	<RimMarket.Settings.ThiefPause>暂停游戏</RimMarket.Settings.ThiefPause>
+
+	<RimMarket.Settings.Messages>集市消息</RimMarket.Settings.Messages>
+
+	<!-- 收费模式 -->
+	<RimMarket.FeeModeNone>不收费</RimMarket.FeeModeNone>
+	<RimMarket.FeeModeArrival>到场支付</RimMarket.FeeModeArrival>
+	<RimMarket.FeeModeShare>销售分成</RimMarket.FeeModeShare>
+	<RimMarket.FeeModeGlobal>{0}，按模组设置</RimMarket.FeeModeGlobal>
+	<RimMarket.FeeModeGlobalShort>{0}（模组）</RimMarket.FeeModeGlobalShort>
+
+	<!-- 标记操作与检视 -->
+	<RimMarket.ShowMarkerLabel>显示标记</RimMarket.ShowMarkerLabel>
+	<RimMarket.ShowMarkerDesc>显示或隐藏地面上的标记。无论是否显示，集市照常运作；大集市期间五月柱仍会立在这里。</RimMarket.ShowMarkerDesc>
+	<RimMarket.ShowSpotLabel>显示点</RimMarket.ShowSpotLabel>
+	<RimMarket.ShowSpotDesc>显示或隐藏地面上的点。无论是否显示，它都照常运作，你仍可点击其格子选中。</RimMarket.ShowSpotDesc>
+	<RimMarket.OpenMarketLabel>集市开放</RimMarket.OpenMarketLabel>
+	<RimMarket.OpenMarketDesc>开放期间，抵达的贸易商队可在此标记范围内的空摊位免费摆摊。关闭后，新商队照常在墙外等待；已在摊位上的商人会留到离开为止。</RimMarket.OpenMarketDesc>
+	<RimMarket.FeeModeLabel>收费：{0}</RimMarket.FeeModeLabel>
+	<RimMarket.FeeModeDesc>商人在本集市如何支付摊位费。到场付费：摆摊前在柜台上点清银币。不收费：摊位免费。或遵循模组设置。</RimMarket.FeeModeDesc>
+	<RimMarket.FeeModeDescShare>销售分成：从你的客人（访客模组或酒店与娱乐）在摊位消费中抽取的分成，在来访期间留在柜台上。你自己购买的部分不收分成。</RimMarket.FeeModeDescShare>
+	<RimMarket.CloseMarketLabel>立即关闭集市</RimMarket.CloseMarketLabel>
+	<RimMarket.CloseMarketDesc>立刻让本集市摊位上的所有商人收拾回家。他们收拾好后沿常走的路线离开。地图上的其他集市不受影响，这也不会对未来的商队关闭集市。</RimMarket.CloseMarketDesc>
+	<RimMarket.CloseMarketConfirm>立即赶走 {0} 位商人？</RimMarket.CloseMarketConfirm>
+	<RimMarket.AreaPaintMarket>涂刷集市区</RimMarket.AreaPaintMarket>
+	<RimMarket.AreaPaintDescMarket>拖动以向集市广场添加格子，如同储存区。涂刷后，你的形状将替代圆形。</RimMarket.AreaPaintDescMarket>
+	<RimMarket.AreaEraseMarket>擦除集市区</RimMarket.AreaEraseMarket>
+	<RimMarket.AreaEraseDescMarket>拖动以从集市广场移除格子。标记始终留在区域内。</RimMarket.AreaEraseDescMarket>
+	<RimMarket.AreaKeepMarket>标记必须留在集市内。</RimMarket.AreaKeepMarket>
+	<RimMarket.AreaPaintCamp>涂刷营地区</RimMarket.AreaPaintCamp>
+	<RimMarket.AreaPaintDescCamp>拖动以添加驮畜等候的格子，如同储存区。涂刷后，你的形状将替代圆形。</RimMarket.AreaPaintDescCamp>
+	<RimMarket.AreaEraseCamp>擦除营地区</RimMarket.AreaEraseCamp>
+	<RimMarket.AreaEraseDescCamp>拖动以从营地移除格子。点始终留在区域内。</RimMarket.AreaEraseDescCamp>
+	<RimMarket.AreaKeepCamp>营地点必须留在其区域内。</RimMarket.AreaKeepCamp>
+	<RimMarket.AreaPaintGuard>涂刷护卫区</RimMarket.AreaPaintGuard>
+	<RimMarket.AreaPaintDescGuard>拖动以添加休息中的护卫坐下、聊天和吃饭的格子，如同储存区。涂刷后，你的形状将替代圆形。</RimMarket.AreaPaintDescGuard>
+	<RimMarket.AreaEraseGuard>擦除护卫区</RimMarket.AreaEraseGuard>
+	<RimMarket.AreaEraseDescGuard>拖动以从护卫区移除格子。点始终留在区域内。</RimMarket.AreaEraseDescGuard>
+	<RimMarket.AreaKeepGuard>休息点必须留在其区域内。</RimMarket.AreaKeepGuard>
+	<RimMarket.AreaTooFar>太远了，此区域距其点最远 {0} 格。</RimMarket.AreaTooFar>
+	<RimMarket.MarketOpen>集市开放</RimMarket.MarketOpen>
+	<RimMarket.MarketClosed>集市对新商队关闭</RimMarket.MarketClosed>
+	<RimMarket.MarkerStalls>摊位：{0}（{1} 空闲，{2} 占用）</RimMarket.MarkerStalls>
+	<RimMarket.MarkerFee>摊位费：{0}</RimMarket.MarkerFee>
+	<RimMarket.MarkerCollected>已收取费用：{0} 银</RimMarket.MarkerCollected>
+	<RimMarket.MarkerGuestSales>客人在摊位消费了 {0} 银</RimMarket.MarkerGuestSales>
+	<RimMarket.MarkerColonySales>殖民地摊位收入 {0} 银</RimMarket.MarkerColonySales>
+	<RimMarket.MarkerSecurity>窃贼：抓获 {0}，逃脱 {1}，吓退 {2}。</RimMarket.MarkerSecurity>
+	<RimMarket.MarkerHidden>标记已隐藏</RimMarket.MarkerHidden>
+	<RimMarket.SpotHidden>点已隐藏</RimMarket.SpotHidden>
+	<RimMarket.TradingControlNote>本地图有贸易控制点：商队会在那里等待有空闲摊位。</RimMarket.TradingControlNote>
+
+	<!-- 摊位检视与操作 -->
+	<RimMarket.StallFree>空闲</RimMarket.StallFree>
+	<RimMarket.StallNoMarker>没有集市标记覆盖此摊位</RimMarket.StallNoMarker>
+	<RimMarket.StallMarketClosed>集市已关闭</RimMarket.StallMarketClosed>
+	<RimMarket.StallBlocked>商人的位置被阻挡</RimMarket.StallBlocked>
+	<RimMarket.StallUnreachable>商人无法从地图边缘到达商人位置</RimMarket.StallUnreachable>
+	<RimMarket.SwapSideLabel>换边</RimMarket.SwapSideLabel>
+	<RimMarket.SwapSideDesc>把商人的位置移到摊位的另一端。</RimMarket.SwapSideDesc>
+	<RimMarket.SwapSideBusy>有商人正在使用此摊位</RimMarket.SwapSideBusy>
+	<RimMarket.StallTaken>{1} 中的 {0}（{2}）</RimMarket.StallTaken>
+	<RimMarket.StallTimeLeft>{0} 小时后收拾离开</RimMarket.StallTimeLeft>
+	<RimMarket.StallFeePaid>已付摊位费：{0} 银</RimMarket.StallFeePaid>
+	<RimMarket.StallFeeDue>应付摊位费：{0} 银</RimMarket.StallFeeDue>
+	<RimMarket.StallFeeUnpaid>摊位费：他们没有任何东西可付</RimMarket.StallFeeUnpaid>
+	<RimMarket.StallFeeWaived>摊位费已免除</RimMarket.StallFeeWaived>
+	<RimMarket.StallShare>已收取分成：{0} 银（欠 {1}）</RimMarket.StallShare>
+	<RimMarket.StallHaggleOpen>砍价：尚未尝试</RimMarket.StallHaggleOpen>
+	<RimMarket.StallHaggleWon>砍价：价格更优</RimMarket.StallHaggleWon>
+	<RimMarket.StallHaggleLost>砍价：商人被惹恼了</RimMarket.StallHaggleLost>
+	<RimMarket.ColonyStallToggle>殖民地摊位</RimMarket.ColonyStallToggle>
+	<RimMarket.ColonyStallToggleDesc>保留此摊位出售殖民地自己的货物。来访商人会另寻他处。在销售表中设定卖什么、卖多少、什么价格；你的搬运工会把货物送来，顾客和客人在柜台付款，银会留在柜台末端等人收走。\n\n切换回来会清空销售表，并把柜台上剩下的东西放在摊位前。</RimMarket.ColonyStallToggleDesc>
+	<RimMarket.ColonyStallBusy>{0} 正在此摊位交易</RimMarket.ColonyStallBusy>
+	<RimMarket.ColonyStallSetup>布置摊位</RimMarket.ColonyStallSetup>
+	<RimMarket.ColonyStallSetupDesc>打开销售表：此摊位卖什么、卖多少、什么价格。</RimMarket.ColonyStallSetupDesc>
+	<RimMarket.ColonyStallEmpty>殖民地摊位：还没有可卖的东西。使用“布置摊位”。</RimMarket.ColonyStallEmpty>
+	<RimMarket.ColonyStallForSale>殖民地摊位，出售中：</RimMarket.ColonyStallForSale>
+	<RimMarket.ColonyStallRefillLine>  {0}：保持 {1}，柜台上有 {2}，价值 {3}</RimMarket.ColonyStallRefillLine>
+	<RimMarket.ColonyStallOrderLine>  {0}：出售 {1}，柜台上有 {2}，价值 {3}</RimMarket.ColonyStallOrderLine>
+	<RimMarket.ColonyStallMoreOrders>  还有 {0} 项</RimMarket.ColonyStallMoreOrders>
+	<RimMarket.StallSetupTitle>{0}：销售表</RimMarket.StallSetupTitle>
+	<RimMarket.StallSetupIntro>选择柜台上放什么、放多少、卖什么价。你的搬运工会自行送来货物。某一行卖完设定的数量后就停止，除非勾选“补货”：那样摊位会一直保留这么多在柜台上。顾客用自己的银付款；东西越贵，越多的人会走开。</RimMarket.StallSetupIntro>
+	<RimMarket.StallSetupOnlyForSale>仅显示出售中</RimMarket.StallSetupOnlyForSale>
+	<RimMarket.StallSetupItem>物品</RimMarket.StallSetupItem>
+	<RimMarket.StallSetupAvailable>殖民地库存</RimMarket.StallSetupAvailable>
+	<RimMarket.StallSetupOnCounter>柜台上</RimMarket.StallSetupOnCounter>
+	<RimMarket.StallSetupToSell>待售数量</RimMarket.StallSetupToSell>
+	<RimMarket.StallSetupPrice>价格</RimMarket.StallSetupPrice>
+	<RimMarket.StallSetupAll>全部</RimMarket.StallSetupAll>
+	<RimMarket.StallSetupQuality>品质</RimMarket.StallSetupQuality>
+	<RimMarket.StallSetupQualityTip>只有此品质范围内的货物才会上柜台。选择范围可清掉劣质品，或只卖好货。</RimMarket.StallSetupQualityTip>
+	<RimMarket.StallSetupNoneAround>地图上目前没有。</RimMarket.StallSetupNoneAround>
+	<RimMarket.QualityAny>任意品质</RimMarket.QualityAny>
+	<RimMarket.QualityAnyShort>任意</RimMarket.QualityAnyShort>
+	<RimMarket.QualityOnly>仅 {0}</RimMarket.QualityOnly>
+	<RimMarket.QualityOrWorse>{0}及以下</RimMarket.QualityOrWorse>
+	<RimMarket.QualityOrBetter>{0}及以上</RimMarket.QualityOrBetter>
+	<RimMarket.QualityUpTo>最高 {0}</RimMarket.QualityUpTo>
+	<RimMarket.QualityFromShort>{0}+</RimMarket.QualityFromShort>
+	<RimMarket.StallSetupRefill>补货</RimMarket.StallSetupRefill>
+	<RimMarket.StallSetupRefillTip>勾选：摊位保留这么多在柜台上，每次卖出后搬运工会补货。该行永不售罄。\n未勾选：卖出这么多后，该行结束。</RimMarket.StallSetupRefillTip>
+	<RimMarket.StallSetupReserve>留在家中</RimMarket.StallSetupReserve>
+	<RimMarket.StallSetupReserveTip>当殖民地只剩这么多时，搬运工就不再往摊位送，这样你永远不会卖掉最后的药。已在柜台上的仍会出售。\n\n按住 Shift 每次 10，Ctrl 每次 100。</RimMarket.StallSetupReserveTip>
+	<RimMarket.StallSetupAdjustTip>要从殖民地库存中卖多少。勾选“补货”时，为柜台上保留多少。可在框中输入数字，或用按钮：按住 Shift 每次 10，Ctrl 每次 100。全部：全卖，若已全卖则不卖。</RimMarket.StallSetupAdjustTip>
+	<RimMarket.StallSetupPriceHeaderTip>要价，为物品售价的一定比例。与原版一样，武器按其价值的 20% 出售，家具 70%。Shift：每次 25%。</RimMarket.StallSetupPriceHeaderTip>
+	<RimMarket.StallSetupPriceTip>其售价的 {0}：每件 {1} 银。此价格下，看上它的顾客有 {2} 的概率买下。</RimMarket.StallSetupPriceTip>
+	<RimMarket.StallSetupSummary>共 {1} 行、{0} 件商品，全部卖出约 {2} 银。</RimMarket.StallSetupSummary>
+	<RimMarket.StallSetupSummaryNone>还没有可卖的东西。</RimMarket.StallSetupSummaryNone>
+	<RimMarket.StallSetupDrawOff>模组设置中已关闭顾客。这里只有访客模组的客人购买。</RimMarket.StallSetupDrawOff>
+	<RimMarket.StallSetupDraw>按此价格，集市白天开放时，大约每 {0} 会来一群顾客。</RimMarket.StallSetupDraw>
+	<RimMarket.StallSetupDrawBargain>便宜货的名声传开了：集市白天开放时，大约每 {0} 会来一群顾客。</RimMarket.StallSetupDrawBargain>
+	<RimMarket.StallSetupDrawDear>这个价格传得很慢：集市白天开放时，大约每 {0} 会来一群顾客。</RimMarket.StallSetupDrawDear>
+	<RimMarket.StallSetupNothing>殖民地中没有符合的物品。</RimMarket.StallSetupNothing>
+	<RimMarket.ColonyStallKeeper>店主：{0}</RimMarket.ColonyStallKeeper>
+	<RimMarket.ColonyStallNoKeeper>柜台无人看店，什么也卖不出去</RimMarket.ColonyStallNoKeeper>
+	<RimMarket.ColonyStallTakings>已售出：{1} 笔交易共 {0} 银</RimMarket.ColonyStallTakings>
+	<RimMarket.ColonyStallNothingToSell>摊位没有可卖的东西</RimMarket.ColonyStallNothingToSell>
+	<RimMarket.StallWatch>值守中：{0}</RimMarket.StallWatch>
+	<RimMarket.StallRelief>换岗：{0} 来接替 {1}</RimMarket.StallRelief>
+	<RimMarket.StallGuestSales>卖给客人：{0} 银</RimMarket.StallGuestSales>
+	<RimMarket.TradeGizmoLabel>交易</RimMarket.TradeGizmoLabel>
+	<RimMarket.TradeGizmoDesc>派一名殖民者到柜台与 {0} 交易。</RimMarket.TradeGizmoDesc>
+	<RimMarket.RoundsLabel>巡视一圈</RimMarket.RoundsLabel>
+	<RimMarket.RoundsDesc>派一名殖民者依次与集市的每位商人交易，从最近的开始。每到一处柜台都会打开交易窗口。</RimMarket.RoundsDesc>
+	<RimMarket.RoundsCount>{0} 位商人</RimMarket.RoundsCount>
+	<RimMarket.RoundsNobody>无法与这里的任何人交易</RimMarket.RoundsNobody>
+	<RimMarket.TraderBusy>商人目前不在交易</RimMarket.TraderBusy>
+	<RimMarket.TradeNotNow>{0} 目前无法交易：{1}。</RimMarket.TradeNotNow>
+	<RimMarket.TradeWhyGone>已离开</RimMarket.TradeWhyGone>
+	<RimMarket.TradeWhyAsleep>睡着了，醒来再来</RimMarket.TradeWhyAsleep>
+	<RimMarket.TradeWhyUnwell>状态不佳</RimMarket.TradeWhyUnwell>
+	<RimMarket.TradeWhyLeaving>正在收拾离开</RimMarket.TradeWhyLeaving>
+	<RimMarket.TradeWhyBusy>正忙别的事，稍后再试</RimMarket.TradeWhyBusy>
+	<RimMarket.MessageNoNegotiator>目前没人能在此摊位交易。</RimMarket.MessageNoNegotiator>
+	<RimMarket.PlaceMerchantCellBlocked>商人的位置（白色轮廓）必须空着。</RimMarket.PlaceMerchantCellBlocked>
+	<RimMarket.PaintAwning>涂刷遮阳篷</RimMarket.PaintAwning>
+	<RimMarket.PaintAwningDesc>为此摊位的遮阳篷选择边缘、图案和两种颜色。商人对条纹有看法。他们大多藏在心里。</RimMarket.PaintAwningDesc>
+	<RimMarket.AwningTitle>涂刷遮阳篷</RimMarket.AwningTitle>
+	<RimMarket.AwningEdge>边缘</RimMarket.AwningEdge>
+	<RimMarket.AwningPattern>图案</RimMarket.AwningPattern>
+	<RimMarket.AwningCanvas>帆布颜色</RimMarket.AwningCanvas>
+	<RimMarket.AwningStripe>图案颜色</RimMarket.AwningStripe>
+	<RimMarket.AwningRandom>随机</RimMarket.AwningRandom>
+	<RimMarket.AwningApplyAll>应用到所有摊位</RimMarket.AwningApplyAll>
+	<RimMarket.AwningAppliedAll>另外 {0} 个摊位已重刷为相同样式。</RimMarket.AwningAppliedAll>
+	<RimMarket.PlaceCanopyOverlap>离另一个摊位太近：遮阳篷会重叠。</RimMarket.PlaceCanopyOverlap>
+	<RimMarket.PlaceCustomerCellBlocked>顾客的位置（青色轮廓）必须空着。</RimMarket.PlaceCustomerCellBlocked>
+	<RimMarket.PlaceTakesNeighbourSpot>会占用隔壁摊位的商人或顾客位置。邻居的记性可好着呢。</RimMarket.PlaceTakesNeighbourSpot>
+	<RimMarket.PlaceSpotUnderStall>商人或顾客的位置会落在另一个摊位里。</RimMarket.PlaceSpotUnderStall>
+
+	<!-- 交易窗口 -->
+	<RimMarket.HaggleButton>砍价</RimMarket.HaggleButton>
+	<RimMarket.HaggleTip>{0} 试图把价格谈下来。每次来访一次机会。成功：双向价格优惠 {1}%。失败：价格差 {1}%，而且商人会更早收拾离开。</RimMarket.HaggleTip>
+	<RimMarket.HaggleDone>砍价成功：优惠 {0}%</RimMarket.HaggleDone>
+	<RimMarket.HaggleFailed>砍价失败：价格差 {0}%</RimMarket.HaggleFailed>
+	<RimMarket.MoteDeal>成交！</RimMarket.MoteDeal>
+	<RimMarket.MoteRefused>不。</RimMarket.MoteRefused>
+	<RimMarket.CaravanWaitsDanger>{0} 商队被困在你的墙内。他们看见了外面的危险，宁愿等它过去也不硬闯。</RimMarket.CaravanWaitsDanger>
+	<RimMarket.ChantOpen1>第 {0} 号！{1}，{3} {2} 级，谁来开头？</RimMarket.ChantOpen1>
+	<RimMarket.ChantOpen2>第 {0} 号，各位！{1}，{3} {2} 级，好货！</RimMarket.ChantOpen2>
+	<RimMarket.ChantOpen3>第 {0} 号！{1}，{3} {2} 级，干活像头骡子！</RimMarket.ChantOpen3>
+	<RimMarket.ChantOpen4>第 {0} 号！{1}，你全年能见到的最好的{2}！</RimMarket.ChantOpen4>
+	<RimMarket.ChantOpenPassion>第 {0} 号！{1}，{3} {2} 级，而且热爱这行！</RimMarket.ChantOpenPassion>
+	<RimMarket.ChantOpenPlain>第 {0} 号！{1}，背膀结实，牙口齐全！</RimMarket.ChantOpenPlain>
+	<RimMarket.ChantMore1>{0} 还会 {1}，{2} 级！</RimMarket.ChantMore1>
+	<RimMarket.ChantMore2>也擅长 {1}，各位！</RimMarket.ChantMore2>
+	<RimMarket.ChantMore3>外加 {1} {2}，多划算！</RimMarket.ChantMore3>
+	<RimMarket.ChantMorePlain>健康、吃得少、从不抱怨！</RimMarket.ChantMorePlain>
+	<RimMarket.ChantWeak1>不过 {1} 是没救了！</RimMarket.ChantWeak1>
+	<RimMarket.ChantWeak2>别指望{0}会{1}，相信我。</RimMarket.ChantWeak2>
+	<RimMarket.ChantWeak3>{1}？不太行。不过别的都在行！</RimMarket.ChantWeak3>
+	<RimMarket.ChantNudge1>来吧，{0} 起拍！</RimMarket.ChantNudge1>
+	<RimMarket.ChantNudge2>{0} 银，有人要吗？简直是白捡！</RimMarket.ChantNudge2>
+	<RimMarket.ChantNudge3>别害羞，{0}！</RimMarket.ChantNudge3>
+	<RimMarket.ChantBid1>{0}！有没有 {1}？</RimMarket.ChantBid1>
+	<RimMarket.ChantBid2>有 {0} 了，谁加到 {1}？</RimMarket.ChantBid2>
+	<RimMarket.ChantBid3>{0}，{0}，现在 {1}，{1}！</RimMarket.ChantBid3>
+	<RimMarket.ChantBid4>{0} 起拍！{1} 有人吗？</RimMarket.ChantBid4>
+	<RimMarket.ChantGoingOnce>{0}，第一次……</RimMarket.ChantGoingOnce>
+	<RimMarket.ChantGoingTwice>{0}，第二次……</RimMarket.ChantGoingTwice>
+	<RimMarket.ChantLastCall>最后一次，{0} 银！</RimMarket.ChantLastCall>
+	<RimMarket.ChantSold1>成交！{0} 银！</RimMarket.ChantSold1>
+	<RimMarket.ChantSold2>{0} 卖了！</RimMarket.ChantSold2>
+	<RimMarket.ChantSold3>成交，{0}，合作愉快！</RimMarket.ChantSold3>
+	<RimMarket.ChantNoTakers1>没人要？可惜。</RimMarket.ChantNoTakers1>
+	<RimMarket.ChantNoTakers2>没人？继续下一件，各位。</RimMarket.ChantNoTakers2>
+	<RimMarket.MoteBought>{0}：{1} 银</RimMarket.MoteBought>
+	<RimMarket.MoteThief>小偷！</RimMarket.MoteThief>
+	<RimMarket.MoteNotToday>今天不行。</RimMarket.MoteNotToday>
+	<RimMarket.MoteGotYou>抓住你了！</RimMarket.MoteGotYou>
+	<RimMarket.MoteGotYouRested>抓住你了！睡得好，看见没？</RimMarket.MoteGotYouRested>
+	<RimMarket.MoteSlipped>溜掉了！</RimMarket.MoteSlipped>
+	<RimMarket.MoteReturned>已归还</RimMarket.MoteReturned>
+	<RimMarket.ReportFleeing>带着赃物逃跑。</RimMarket.ReportFleeing>
+
+	<!-- 窃贼 -->
+	<RimMarket.TackleThief>制服 {0}</RimMarket.TackleThief>
+	<RimMarket.TackleIncapable>{0} 无法使用暴力</RimMarket.TackleIncapable>
+	<RimMarket.MessageSnatched>小偷！{0} 从 {2} 摊位抢走了 {1}，正在逃跑。用殖民者右键点击小偷将其制服。</RimMarket.MessageSnatched>
+	<RimMarket.MessageThiefDeterred>{0} 盯着摊位，数了数围观的人，决定今天做个诚实人。</RimMarket.MessageThiefDeterred>
+	<RimMarket.MessageThiefCaughtBy>{0} 制服了小偷 {1}。货物归还商人。人赃并获，小偷可送入监狱而不会惹怒其派系；或者任其醒来后一瘸一拐地回家。</RimMarket.MessageThiefCaughtBy>
+	<RimMarket.MessageThiefArrested>{0} 逮捕了小偷 {1}。货物归还商人。</RimMarket.MessageThiefArrested>
+	<RimMarket.MessageThiefCaught>小偷 {0} 倒下了。货物归还商人。人赃并获，小偷可送入监狱而不会惹怒其派系；或者任其醒来后一瘸一拐地回家。</RimMarket.MessageThiefCaught>
+	<RimMarket.MessageCulpritCaptured>{0} 被当场抓获。{1} 不会因此记恨你，也不会感谢你放他们走。</RimMarket.MessageCulpritCaptured>
+	<RimMarket.CaughtRedHanded>人赃并获，既往不咎</RimMarket.CaughtRedHanded>
+	<RimMarket.MessageThiefEscaped>小偷带着 {0} 逃走了。{1} 商人责怪你的集市，会提前收拾离开。</RimMarket.MessageThiefEscaped>
+
+	<!-- 消息 -->
+	<RimMarket.MessageTakingStall>{0} 商队正前往集市。{1} 占用一个摊位。</RimMarket.MessageTakingStall>
+	<RimMarket.MessageMarketFull>集市已满：{0} 商队在墙外等待，直到有商人离开。</RimMarket.MessageMarketFull>
+	<RimMarket.MessageNoFreeStall>所有摊位都被占用：{0} 商队在墙外等待，直到有空位。</RimMarket.MessageNoFreeStall>
+	<RimMarket.MessageNoReachableStall>{0} 商队无法到达任何空闲摊位。选中一个摊位以查看阻碍。</RimMarket.MessageNoReachableStall>
+	<RimMarket.MessageCannotAfford>{0} 商队付不起 {1} 银的摊位费，留在集市外。</RimMarket.MessageCannotAfford>
+	<RimMarket.MessageFeePaid>{0} 支付了摊位费：柜台上 {1} 银。</RimMarket.MessageFeePaid>
+	<RimMarket.MessageFeeUnpaid>{0} 商人没有任何东西可付摊位费。摊位仍归他们。</RimMarket.MessageFeeUnpaid>
+	<RimMarket.MessageSharePaid>{0} 把集市的分成留在柜台上：{1} 银。</RimMarket.MessageSharePaid>
+	<RimMarket.MessagePackingUp>{0} 商人收拾离开集市。</RimMarket.MessagePackingUp>
+	<RimMarket.MessageMarketClosedLeaving>集市正在关闭：{0} 商人收拾离开。</RimMarket.MessageMarketClosedLeaving>
+	<RimMarket.MessageStallGone>摊位已不在：{0} 商人收拾离开。</RimMarket.MessageStallGone>
+	<RimMarket.MessageLeavingEarly>{0} 商人提前离开集市。</RimMarket.MessageLeavingEarly>
+	<RimMarket.MessageFeudLeaving>{0} 商人不愿与如今成为敌人的 {1} 相邻交易，在有人拔刀前收拾离开。</RimMarket.MessageFeudLeaving>
+	<RimMarket.MessageMovingStall>{0} 商人搬到另一个摊位。</RimMarket.MessageMovingStall>
+	<RimMarket.MessageMarketClosed>集市已关闭：{0} 位商人被赶走。</RimMarket.MessageMarketClosed>
+	<RimMarket.MessageHaggleWon>{0} 砍价成功：价格优惠 {1}%。</RimMarket.MessageHaggleWon>
+	<RimMarket.MessageHaggleLost>{0} 逼得太紧。{1} 被冒犯：价格变差，摊位也会提前关闭。</RimMarket.MessageHaggleLost>
+
+	<!-- 声望 -->
+	<RimMarket.ReputationLabel>声望</RimMarket.ReputationLabel>
+	<RimMarket.ReputationDesc>看看商人如何评价你的集市，以及它带来了什么变化。</RimMarket.ReputationDesc>
+	<RimMarket.MarkerReputation>声望：{0}</RimMarket.MarkerReputation>
+	<RimMarket.StallRepBetter>你的集市声望：价格优惠 {0}%</RimMarket.StallRepBetter>
+	<RimMarket.StallRepWorse>你的集市声望：价格变差 {0}%</RimMarket.StallRepWorse>
+
+	<RimMarket.AxisSafety>安全</RimMarket.AxisSafety>
+	<RimMarket.AxisFairness>公平交易</RimMarket.AxisFairness>
+	<RimMarket.AxisFees>收费</RimMarket.AxisFees>
+	<RimMarket.AxisAppeal>吸引力</RimMarket.AxisAppeal>
+	<RimMarket.RepSafe>安全</RimMarket.RepSafe>
+	<RimMarket.RepCutthroat>宰客</RimMarket.RepCutthroat>
+	<RimMarket.RepHonest>诚实</RimMarket.RepHonest>
+	<RimMarket.RepGrasping>贪婪</RimMarket.RepGrasping>
+	<RimMarket.RepLowTax>低税收</RimMarket.RepLowTax>
+	<RimMarket.RepRacket>敲诈</RimMarket.RepRacket>
+	<RimMarket.RepLively>热闹</RimMarket.RepLively>
+	<RimMarket.RepShabby>破败</RimMarket.RepShabby>
+
+	<RimMarket.RepUnknown>未知</RimMarket.RepUnknown>
+	<RimMarket.RepNotorious>臭名昭著</RimMarket.RepNotorious>
+	<RimMarket.RepDubious>可疑</RimMarket.RepDubious>
+	<RimMarket.RepUnremarkable>平平无奇</RimMarket.RepUnremarkable>
+	<RimMarket.RepRespectable>体面</RimMarket.RepRespectable>
+	<RimMarket.RepRenowned>名声显赫</RimMarket.RepRenowned>
+
+	<RimMarket.RepWindowTitle>集市声望：{0}</RimMarket.RepWindowTitle>
+	<RimMarket.RepNotEstablished>集市日还太少，没人形成看法。多办几次集市吧。</RimMarket.RepNotEstablished>
+	<RimMarket.RepEffectsHeader>它改变了：</RimMarket.RepEffectsHeader>
+	<RimMarket.RepEffectCaravans>口碑传开：大约每 {0} 天会有一支额外商队为集市而来。</RimMarket.RepEffectCaravans>
+	<RimMarket.RepEffectRare>稀有商人更愿意跑这一趟。</RimMarket.RepEffectRare>
+	<RimMarket.RepEffectRefusal>约 {0}% 的商队拒绝在你的集市摆摊。</RimMarket.RepEffectRefusal>
+	<RimMarket.RepEffectPricesBetter>商人在你的摊位给出优惠 {0}% 的价格。</RimMarket.RepEffectPricesBetter>
+	<RimMarket.RepEffectPricesWorse>商人在你的摊位加价 {0}%。</RimMarket.RepEffectPricesWorse>
+	<RimMarket.RepEffectNone>暂时没有。你的集市既不出名，也不臭名远扬。</RimMarket.RepEffectNone>
+	<RimMarket.RepEffectsOff>模组设置中已关闭声望效果。</RimMarket.RepEffectsOff>
+	<RimMarket.RepJournal>最近的集市日</RimMarket.RepJournal>
+	<RimMarket.RepJournalEmpty>还没有集市日。</RimMarket.RepJournalEmpty>
+	<RimMarket.RepJournalLine>{0}前：{1}/{2} 家商人收拾离开，{3}。</RimMarket.RepJournalLine>
+	<RimMarket.RepJournalLineReasons>{0}前：{1}/{2} 家商人收拾离开，{3}（{4}）。</RimMarket.RepJournalLineReasons>
+	<RimMarket.RepGlobal>整个集市（所有派系）</RimMarket.RepGlobal>
+	<RimMarket.RepFactionTitle>在 {0} 眼中：{1}</RimMarket.RepFactionTitle>
+	<RimMarket.RepFactionNote>条形图显示他们对自己来访的记忆。他们的看法将此记忆（{0}%）与大家对集市的评价混合。</RimMarket.RepFactionNote>
+	<RimMarket.RepFactionUnknown>来自 {0} 的来访太少，他们还无法相信自己的记忆。</RimMarket.RepFactionUnknown>
+	<RimMarket.RepEffectsHeaderFaction>对其商队的影响：</RimMarket.RepEffectsHeaderFaction>
+	<RimMarket.RepEffectRefusalFaction>他们的商队约有 {0}% 的概率拒绝摆摊。</RimMarket.RepEffectRefusalFaction>
+	<RimMarket.VerdictPleased>面带微笑</RimMarket.VerdictPleased>
+	<RimMarket.VerdictGrumbling>嘟囔着</RimMarket.VerdictGrumbling>
+	<RimMarket.VerdictNeutral>一言不发</RimMarket.VerdictNeutral>
+
+	<RimMarket.MessageVerdictPleased>{0} 商人面带微笑收拾离开：{1}。</RimMarket.MessageVerdictPleased>
+	<RimMarket.MessageVerdictGrumbling>{0} 商人嘟囔着 {1} 收拾离开。</RimMarket.MessageVerdictGrumbling>
+	<RimMarket.MessageRefuseUnsafe>{0} 商队听说你的集市是贼窝，在墙外扎营。</RimMarket.MessageRefuseUnsafe>
+	<RimMarket.MessageRefuseUnfair>{0} 商队听说商人在你的集市吃亏，在墙外扎营。</RimMarket.MessageRefuseUnfair>
+	<RimMarket.MessageRefuseRacket>{0} 商队不愿付你的敲诈费，在墙外扎营。</RimMarket.MessageRefuseRacket>
+	<RimMarket.MessageRefuseShabby>{0} 商队听说你的集市不值得绕路，在墙外扎营。</RimMarket.MessageRefuseShabby>
+	<RimMarket.MessageRefuseGrudge>{0} 商队记得上次在这里的集市日，在墙外扎营。</RimMarket.MessageRefuseGrudge>
+	<RimMarket.TakingsLine>收入：{0}。</RimMarket.TakingsLine>
+	<RimMarket.TakingsNone>没有做成生意。</RimMarket.TakingsNone>
+	<RimMarket.TakingsBought>你买了价值 {0} 银的货物</RimMarket.TakingsBought>
+	<RimMarket.TakingsSold>你卖出了价值 {0} 银</RimMarket.TakingsSold>
+	<RimMarket.TakingsGuests>客人消费 {0}</RimMarket.TakingsGuests>
+	<RimMarket.TakingsFees>集市收取费用 {0}</RimMarket.TakingsFees>
+	<RimMarket.TakingsInn>旅店赚了 {0}</RimMarket.TakingsInn>
+
+	<!-- 外地摊位 -->
+	<RimMarket.Settings.AwayStalls>其他城镇的摊位</RimMarket.Settings.AwayStalls>
+	<RimMarket.Settings.AwayStallsHint>允许商队在友好定居点摆一天摊位，向镇民出售货物。盟友收取更低的摊位费。食物和药品留在商队里。</RimMarket.Settings.AwayStallsHint>
+	<RimMarket.Settings.CaptionHegemony>霸权</RimMarket.Settings.CaptionHegemony>
+	<RimMarket.Settings.HegemonyPrices>外地摊位的本地价格</RimMarket.Settings.HegemonyPrices>
+	<RimMarket.Settings.HegemonyPricesHint>其他城镇的摊位按该镇的霸权价格出售：它短缺的货物卖得更贵，充足的货物更便宜。</RimMarket.Settings.HegemonyPricesHint>
+	<RimMarket.Settings.HegemonyStock>售出的货物补充城镇库存</RimMarket.Settings.HegemonyStock>
+	<RimMarket.Settings.HegemonyStockHint>霸权接受的材料和其他货物，在你的外地摊位售出后会进入城镇储备。关闭：它们直接消失，如同没有霸权时一样。</RimMarket.Settings.HegemonyStockHint>
+	<RimMarket.Settings.HegemonyGoodwill>摊位销售计入贸易好感</RimMarket.Settings.HegemonyGoodwill>
+	<RimMarket.Settings.HegemonyGoodwillHint>殖民地摊位、外地摊位和拍卖的销售计入霸权的贸易好感，如同在原版交易窗口中交易。</RimMarket.Settings.HegemonyGoodwillHint>
+	<RimMarket.Settings.HegemonyTerritory>敌对领土中的伏击</RimMarket.Settings.HegemonyTerritory>
+	<RimMarket.Settings.HegemonyTerritoryHint>穿越敌对派系宣称领土的贸易商队，有被该派系伏击的风险。</RimMarket.Settings.HegemonyTerritoryHint>
+	<RimMarket.AwayOption>在 {0} 摆一天集市摊位</RimMarket.AwayOption>
+	<RimMarket.AwayReport>前往 {0} 摆摊</RimMarket.AwayReport>
+	<RimMarket.AwayAlreadyHolding>已经在摆摊</RimMarket.AwayAlreadyHolding>
+	<RimMarket.AwayStallTaken>你的另一支商队已在此摆摊</RimMarket.AwayStallTaken>
+	<RimMarket.AwayCooldown>他们的集市最近见过你的摊位，{0} 后再来</RimMarket.AwayCooldown>
+	<RimMarket.AwayNoSeller>没有人能交易</RimMarket.AwayNoSeller>
+	<RimMarket.AwayNothingToSell>没有他们想买的东西</RimMarket.AwayNothingToSell>
+	<RimMarket.AwayCannotStart>{0}：无法摆摊（{1}）。</RimMarket.AwayCannotStart>
+	<RimMarket.AwayStarted>{0} 在 {1} 集市摆起摊位，为期一个集市日。摊位费为销售额的 {2}%。</RimMarket.AwayStarted>
+	<RimMarket.AwayTownHolding>你的商队 {0} 在此处的集市摆摊。</RimMarket.AwayTownHolding>
+	<RimMarket.AwayTownCooldown>你的摊位最近来过这里。他们的集市会在 {0} 后欢迎你再来。</RimMarket.AwayTownCooldown>
+	<RimMarket.AwayCaravanInspect>在 {0} 摆摊：还剩 {1}，已售 {2} 件，得 {3} 银。</RimMarket.AwayCaravanInspect>
+	<RimMarket.AwayInspectFestival>节日：人潮翻倍。</RimMarket.AwayInspectFestival>
+	<RimMarket.AwayInspectRival>竞争对手商人抢走了一半顾客。</RimMarket.AwayInspectRival>
+	<RimMarket.AwayGoodsLabel>摊位货物</RimMarket.AwayGoodsLabel>
+	<RimMarket.AwayGoodsDesc>选择哪些上柜台，哪些留在包里。</RimMarket.AwayGoodsDesc>
+	<RimMarket.AwayGoodsTitle>你在 {0} 的摊位</RimMarket.AwayGoodsTitle>
+	<RimMarket.AwayGoodsIntro>取消勾选要留在包里的东西，其余都会上柜台。食物和药品绝不会上柜台。你随时可用商队上的“摊位货物”按钮更改。</RimMarket.AwayGoodsIntro>
+	<RimMarket.AwayGoodsSellAll>全部出售</RimMarket.AwayGoodsSellAll>
+	<RimMarket.AwayGoodsKeepAll>全部保留</RimMarket.AwayGoodsKeepAll>
+	<RimMarket.AwayGoodsItem>货物</RimMarket.AwayGoodsItem>
+	<RimMarket.AwayGoodsCount>数量</RimMarket.AwayGoodsCount>
+	<RimMarket.AwayGoodsValue>价值</RimMarket.AwayGoodsValue>
+	<RimMarket.AwayGoodsSell>出售</RimMarket.AwayGoodsSell>
+	<RimMarket.AwayGoodsSummary>{1} 类货物中有 {0} 类上柜台，价值约 {2} 银。</RimMarket.AwayGoodsSummary>
+	<RimMarket.AwayPackUpLabel>收摊</RimMarket.AwayPackUpLabel>
+	<RimMarket.AwayPackUpDesc>立即关闭摊位并准备离开。移动商队也会如此。</RimMarket.AwayPackUpDesc>
+	<RimMarket.AwayEventRival>一位竞争对手商人在 {0} 广场对面摆摊。你一半的顾客溜达到他们那里。</RimMarket.AwayEventRival>
+	<RimMarket.AwayEventFestival>{0} 今天是节日。人潮翻倍，而且人人都有零花钱。</RimMarket.AwayEventFestival>
+	<RimMarket.AwayEventRich>一位富有的顾客没砍价就花 {1} 银买下了 {0}，说起来也有点无礼。</RimMarket.AwayEventRich>
+	<RimMarket.AwayEventPickpocketCaught>{0} 在东西离开摊位前抓住了扒手的手腕。</RimMarket.AwayEventPickpocketCaught>
+	<RimMarket.AwayEventPickpocket>一个扒手顺走了 {0} {1}。没人看见，一如既往。</RimMarket.AwayEventPickpocket>
+	<RimMarket.AwayLost>你在 {0} 的摊位没了：商队或集市已不在。</RimMarket.AwayLost>
+	<RimMarket.AwayEndNormal>{0} 在集市日结束时收起在 {1} 的摊位。</RimMarket.AwayEndNormal>
+	<RimMarket.AwayEndPackedUp>{0} 提前收起在 {1} 的摊位。</RimMarket.AwayEndPackedUp>
+	<RimMarket.AwayEndMoved>{0} 离开 {1}，带走了摊位。</RimMarket.AwayEndMoved>
+	<RimMarket.AwayEndSoldOut>{0} 在 {1} 集市卖光了摆出的所有东西，收拾离开。</RimMarket.AwayEndSoldOut>
+	<RimMarket.AwayTakings>收入：售出 {0} 件货物得 {1} 银，其中 {2} 支付给集市。</RimMarket.AwayTakings>
+	<RimMarket.AwayNoSales>什么也没卖出。</RimMarket.AwayNoSales>
+
+	<!-- 奴隶拍卖 -->
+	<RimMarket.Settings.SlaveAuctions>奴隶拍卖</RimMarket.Settings.SlaveAuctions>
+	<RimMarket.Settings.SlaveAuctionsHint>当一支带奴隶出售的商队在你的集市驻扎，且广场上立有一座拍卖柱时，奴隶贩子会在这里把他们逐一拍卖。其他派系的买家前来竞价，你的客人也会参与，你同样可以出价。</RimMarket.Settings.SlaveAuctionsHint>
+	<RimMarket.AuctionBuyerNamed>{0}（{1}）</RimMarket.AuctionBuyerNamed>
+	<RimMarket.AuctionBuyersComing>拍卖买家正在赶来：{0}。他们在拍卖柱前就座，用自己的银出价，拍得什么就带走什么。</RimMarket.AuctionBuyersComing>
+	<RimMarket.AuctionIdle>当前没有进行中的拍卖。</RimMarket.AuctionIdle>
+	<RimMarket.AuctionNextLot>拍卖进行中：下一件在 {0} 后开始。</RimMarket.AuctionNextLot>
+	<RimMarket.AuctionLotLine>第 {0} 号：{1}，约值 {2} 银。</RimMarket.AuctionLotLine>
+	<RimMarket.AuctionBidLine>当前出价：{0} 银，出价者 {1}。{2} 后落槌。</RimMarket.AuctionBidLine>
+	<RimMarket.AuctionColonySilver>你的殖民地有 {0} 银可用于出价。</RimMarket.AuctionColonySilver>
+	<RimMarket.AuctionLeaderYou>你的殖民地</RimMarket.AuctionLeaderYou>
+	<RimMarket.AuctionLeaderNone>尚无人出价</RimMarket.AuctionLeaderNone>
+	<RimMarket.AuctionBidLabel>出价 {0}</RimMarket.AuctionBidLabel>
+	<RimMarket.AuctionBidDesc>为 {0} 出价 {1} 银。若落槌前无人高过你，银将从你的库存中扣除，{0} 归你所有，如同从奴隶贩子处购得。</RimMarket.AuctionBidDesc>
+	<RimMarket.AuctionYouLead>你的殖民地出价最高</RimMarket.AuctionYouLead>
+	<RimMarket.AuctionNotEnoughSilver>你的库存中没有足够的银出价 {0}</RimMarket.AuctionNotEnoughSilver>
+	<RimMarket.AuctionAnnounced>{0}奴隶贩子将在两小时后在你的拍卖柱上拍卖他们带来的奴隶（共 {1} 件）。带上银。</RimMarket.AuctionAnnounced>
+	<RimMarket.AuctionLotOpen>拍卖柱上的第 {0} 号：{1}。起拍价 {2} 银。</RimMarket.AuctionLotOpen>
+	<RimMarket.AuctionLotWithdrawn>{0} 已被撤下拍卖柱。</RimMarket.AuctionLotWithdrawn>
+	<RimMarket.AuctionOver>{0}奴隶贩子结束了拍卖。</RimMarket.AuctionOver>
+	<RimMarket.AuctionOutbid>{0} 以 {1} 银压过你的殖民地。</RimMarket.AuctionOutbid>
+	<RimMarket.AuctionCannotPay>落槌时你的殖民地无力支付 {0}。奴隶贩子收回了他们。</RimMarket.AuctionCannotPay>
+	<RimMarket.AuctionSoldToYou>售予你的殖民地：{0}，{1} 银。</RimMarket.AuctionSoldToYou>
+	<RimMarket.AuctionSoldTo>{0} 以 {2} 银售予 {1}。</RimMarket.AuctionSoldTo>
+	<RimMarket.AuctionNoTakers>{0} 无人问津。奴隶贩子收回了他们。</RimMarket.AuctionNoTakers>
+	<RimMarket.AuctionBuyerGone>{0} 的成交落空：买家已离去或无力支付。奴隶贩子收回了这一件。</RimMarket.AuctionBuyerGone>
+	<RimMarket.AuctionNoSlaves>{0}奴隶贩子这次无人可卖，因此没有拍卖。</RimMarket.AuctionNoSlaves>
+	<RimMarket.AuctionNoSlavesIdeo>{0}奴隶贩子无人可卖：他们的意识形态不认可奴隶制，无论货车上的招牌怎么写。今日无拍卖。</RimMarket.AuctionNoSlavesIdeo>
+	<RimMarket.AuctionNoBlock>{0}奴隶贩子带来了待售奴隶（{1}），但这个集市广场上没有拍卖柱。</RimMarket.AuctionNoBlock>
+
+	<!-- 警报 -->
+	<RimMarket.AlertNoStall>商队需要摊位</RimMarket.AlertNoStall>
+	<RimMarket.AlertNoStallDesc>这些商队想在你的集市驻扎，却无法做到：\n\n{0}\n\n再建一个摊位，或清理通往空摊位的路。空摊位一出现他们就会驻扎，在此之前会在外面安营。</RimMarket.AlertNoStallDesc>
+	<RimMarket.WaitNoFreeStall>所有摊位都已被占用</RimMarket.WaitNoFreeStall>
+	<RimMarket.WaitUnreachable>空摊位他们够不着</RimMarket.WaitUnreachable>
+	<RimMarket.WaitMarketFull>集市已达到商人数上限（模组设置）</RimMarket.WaitMarketFull>
+	<RimMarket.AlertThief>窃贼在逃</RimMarket.AlertThief>
+	<RimMarket.AlertThiefDesc>正带着商人的货物逃跑：\n\n{0}\n\n用殖民者右键点击窃贼将其扑倒，务必赶在他们抵达地图边缘之前。</RimMarket.AlertThiefDesc>
+	<RimMarket.MessageWordSpread>你的集市声名远播：一支来自 {0}（{1}）的商队正为集市日而来。</RimMarket.MessageWordSpread>
+
+	<RimMarket.ReasonMerchantHurt>商人受了伤</RimMarket.ReasonMerchantHurt>
+	<RimMarket.ReasonCaravanHurt>商队有人折损</RimMarket.ReasonCaravanHurt>
+	<RimMarket.ReasonSafe>安静安全的广场</RimMarket.ReasonSafe>
+	<RimMarket.ReasonFullDay>完整的集市日</RimMarket.ReasonFullDay>
+	<RimMarket.ReasonClosedEarly>被提前赶走</RimMarket.ReasonClosedEarly>
+	<RimMarket.ReasonStallGone>失去摊位</RimMarket.ReasonStallGone>
+	<RimMarket.ReasonNoFee>免费摊位</RimMarket.ReasonNoFee>
+	<RimMarket.ReasonGentleFee>低廉的费用</RimMarket.ReasonGentleFee>
+	<RimMarket.ReasonSteepFee>高昂的费用</RimMarket.ReasonSteepFee>
+	<RimMarket.ReasonRacket>形同勒索的费用</RimMarket.ReasonRacket>
+	<RimMarket.ReasonTaxedTwice>一天内被收两次费</RimMarket.ReasonTaxedTwice>
+	<RimMarket.ReasonHandsome>漂亮的广场</RimMarket.ReasonHandsome>
+	<RimMarket.ReasonShabby>破败的广场</RimMarket.ReasonShabby>
+	<RimMarket.ReasonBigMarket>摊位充足的像样集市</RimMarket.ReasonBigMarket>
+	<RimMarket.ReasonGoodSales>与你的客人交易顺利</RimMarket.ReasonGoodSales>
+	<RimMarket.ReasonBusy>浏览者众多</RimMarket.ReasonBusy>
+	<RimMarket.ReasonInnFine>在你的旅店度过了愉快的一夜</RimMarket.ReasonInnFine>
+	<RimMarket.ReasonInnPoor>在你的旅店睡了一夜跳蚤窝</RimMarket.ReasonInnPoor>
+	<RimMarket.ReasonInnSteep>为一夜床位花了大价钱</RimMarket.ReasonInnSteep>
+	<RimMarket.ReasonThiefCaught>抓获窃贼</RimMarket.ReasonThiefCaught>
+	<RimMarket.ReasonThiefDeterred>吓退窃贼</RimMarket.ReasonThiefDeterred>
+	<RimMarket.ReasonRobbed>窃贼逃脱</RimMarket.ReasonRobbed>
+	<RimMarket.ReasonHaggledHard>激烈的砍价</RimMarket.ReasonHaggledHard>
+	<RimMarket.ReasonInsulted>受辱式的砍价</RimMarket.ReasonInsulted>
+
+	<RimMarket.Settings.ColonyShopperDays>殖民地摊位顾客，每几组出现一次</RimMarket.Settings.ColonyShopperDays>
+	<RimMarket.Settings.ColonyShopperDaysHint>商人不在城中时，一群顾客前来殖民地摊位的频率，只计白天的集市时间，价格按价值的 110% 计算。更便宜或更贵的摊位会改变这一点，如下所示。</RimMarket.Settings.ColonyShopperDaysHint>
+	<RimMarket.Settings.BargainEffect>价格影响</RimMarket.Settings.BargainEffect>
+	<RimMarket.Settings.BargainEffectHint>100%：按价值 85% 或更低出售的摊位，顾客光顾频率翻倍；按双倍价值出售则约为三分之一。0%：价格不影响光顾频率，只影响是否购买。200%：便宜货会成为整个地区的谈资。</RimMarket.Settings.BargainEffectHint>
+	<RimMarket.Settings.Difficulty>集市难度</RimMarket.Settings.Difficulty>
+	<RimMarket.Settings.DifficultyHint>你的集市为赚取银两要付出多大的努力。\n\n轻松：摊位卖得贵一些，需求下降缓慢，顾客带的银更多，窃贼出现更少。\n标准：集市按设计运行。\n艰难：摊位卖得便宜一些，需求下降很快，顾客带的银更少，窃贼出现更频繁，也更受你的收入吸引。</RimMarket.Settings.DifficultyHint>
+	<RimMarket.DifficultyRelaxed>轻松</RimMarket.DifficultyRelaxed>
+	<RimMarket.DifficultyStandard>标准</RimMarket.DifficultyStandard>
+	<RimMarket.DifficultyTough>艰难</RimMarket.DifficultyTough>
+	<RimMarket.MarkerWealthThieves>你的收入引来窃贼：x{0}</RimMarket.MarkerWealthThieves>
+	<RimMarket.Settings.MarketSaturation>冲击市场会降低需求</RimMarket.Settings.MarketSaturation>
+	<RimMarket.Settings.MarketSaturationHint>在殖民地摊位大量出售同一种东西会降低其需求：卖得更少也更便宜，需求几天后才会恢复。请丰富你的货品种类。装有 Vanilla Trading Expanded 时只有出售概率下降，VTE 本身就会压低价格。</RimMarket.Settings.MarketSaturationHint>
+	<RimMarket.StallSetupDemandTip>需求：{0}。每售出一件都会降低，几天后恢复。需求低意味着成交更少、更便宜。</RimMarket.StallSetupDemandTip>
+	<RimMarket.StallSetupDemandVte>装有 Vanilla Trading Expanded 时，需求只影响出售频率，价格跟随 VTE 的市场。</RimMarket.StallSetupDemandVte>
+	<RimMarket.Settings.Shopkeepers>殖民地摊位需要店主</RimMarket.Settings.Shopkeepers>
+	<RimMarket.Settings.ShopkeepersHint>关闭：殖民地摊位凭信任自行经营。开启：一名拥有"看店"工作类型的殖民者必须在柜台前值守，助力顾客在城市期间。其社交技能会提高价格，顾客更愿意购买，每次成交也能让他学到东西。重启后工作标签页会出现"看店"栏。</RimMarket.Settings.ShopkeepersHint>
+	<RimMarket.FairAnnounceLabel>宣布大集市</RimMarket.FairAnnounceLabel>
+	<RimMarket.FairAnnounceDesc>向所有友好派系派出传令人：{1} 天后你的集市将举办大集市，从清晨到黄昏。最多同时有 {2} 支商队驻扎，成群顾客带着更鼓的钱包前来，你的殖民者会尽情享受这一天，扒手也会忙上一周。一场成功的集市对集市名声大有裨益。\n\n传令人需花费 {0} 银。</RimMarket.FairAnnounceDesc>
+	<RimMarket.FairAnnounceConfirm>于 {0} 举办大集市？传令人需要 {1} 银，现在支付。</RimMarket.FairAnnounceConfirm>
+	<RimMarket.FairGuestsLabel>集市来宾</RimMarket.FairGuestsLabel>
+	<RimMarket.FairGuestsDesc>选择传令人要在你的大集市上邀请哪些派系。</RimMarket.FairGuestsDesc>
+	<RimMarket.FairGuestsTitle>大集市来宾</RimMarket.FairGuestsTitle>
+	<RimMarket.FairGuestsIntro>取消勾选某个派系可将其排除在你的大集市之外：集市期间不会有他们的商队，也不会有他们的顾客。交战的派系无法共处一个集市，所以排除一方可以让其敌人安心摆摊。</RimMarket.FairGuestsIntro>
+	<RimMarket.FairGuestsInviteAll>全部邀请</RimMarket.FairGuestsInviteAll>
+	<RimMarket.FairGuestsInviteNone>全部不邀</RimMarket.FairGuestsInviteNone>
+	<RimMarket.FairGuestsFaction>派系</RimMarket.FairGuestsFaction>
+	<RimMarket.FairGuestsGoodwill>好感</RimMarket.FairGuestsGoodwill>
+	<RimMarket.FairGuestsEnemies>交战中</RimMarket.FairGuestsEnemies>
+	<RimMarket.FairGuestsInvited>已邀请</RimMarket.FairGuestsInvited>
+	<RimMarket.FairGuestsSummary>已邀请 {1} 个派系中的 {0} 个。</RimMarket.FairGuestsSummary>
+	<RimMarket.FairCancelLabel>取消大集市</RimMarket.FairCancelLabel>
+	<RimMarket.FairCancelDesc>叫停集市。传令人不会退还银两。</RimMarket.FairCancelDesc>
+	<RimMarket.FairCancelConfirm>取消大集市？传令人不会退银，而且会告诉所有人原因。</RimMarket.FairCancelConfirm>
+	<RimMarket.FairCancelled>大集市已取消。</RimMarket.FairCancelled>
+	<RimMarket.FairCancelledMarker>集市标记已不存在，大集市也随之作罢。</RimMarket.FairCancelledMarker>
+	<RimMarket.FairAlreadyPlanned>已计划了一场大集市</RimMarket.FairAlreadyPlanned>
+	<RimMarket.FairTooSoon>上回集市仍是路上的谈资。请等待 {0}。</RimMarket.FairTooSoon>
+	<RimMarket.FairNeedStalls>标记周围至少需要 {0} 个集市摊位</RimMarket.FairNeedStalls>
+	<RimMarket.FairNoSilver>需要 {0} 银来请传令人</RimMarket.FairNoSilver>
+	<RimMarket.FairAnnouncedLabel>大集市已宣布</RimMarket.FairAnnouncedLabel>
+	<RimMarket.FairAnnouncedText>传令人已上路。你的集市将于 {0} 举办大集市，从 {1} 时到 {2} 时。\n\n当天，来自各友好派系的商队会同时尝试驻扎，成群顾客会随之而来。请保持摊位空闲，确保广场安全。</RimMarket.FairAnnouncedText>
+	<RimMarket.FairOpens>大集市已开始。商队正在赶来。</RimMarket.FairOpens>
+	<RimMarket.FairCrowd>一群来自 {0} 的人已抵达集市。</RimMarket.FairCrowd>
+	<RimMarket.FairOverLabel>大集市已结束</RimMarket.FairOverLabel>
+	<RimMarket.FairOverText>大集市落幕，广场上满是踩踏过的草地气味。\n\n商队：{0}（{1}）。\n顾客人群：{2}。\n收取摊位费：{3} 银。\n殖民地摊位售出：{4} 银。\n访客向商人消费：{5} 银。\n抓获窃贼：{6}。逃脱窃贼：{7}。\n\n集市的消息正传播开来，集市的名声也随之远扬。商队将于明早收拾离开。</RimMarket.FairOverText>
+	<RimMarket.FairOverEmpty>没有人来大集市。传令人发誓他们通知了所有人。集市名声并未改善。</RimMarket.FairOverEmpty>
+	<RimMarket.FairPrizeMote>集市最佳摊位！</RimMarket.FairPrizeMote>
+	<RimMarket.FairPrizeMerchant>评委已裁定：{1} 的 {0} 经营着大集市的最佳摊位，自清晨起已收入 {2} 银。{1} 深感荣幸（+{3} 好感）。</RimMarket.FairPrizeMerchant>
+	<RimMarket.FairPrizeColony>评委已裁定：大集市的最佳摊位属于殖民地自己，自清晨起已收入 {0} 银。你的殖民者会念叨个没完。</RimMarket.FairPrizeColony>
+	<RimMarket.FairOverWinner>最佳摊位：{1} 的 {0}，收入 {2} 银。</RimMarket.FairOverWinner>
+	<RimMarket.FairOverWinnerColony>最佳摊位：殖民地自己的摊位，收入 {0} 银。</RimMarket.FairOverWinnerColony>
+	<RimMarket.FairInspectAnnounced>大集市已定于 {0}，从 {1} 时开始</RimMarket.FairInspectAnnounced>
+	<RimMarket.FairInspectRunning>今日大集市：{0} 支商队，{1} 群顾客，持续至 {2} 时</RimMarket.FairInspectRunning>
+	<RimMarket.AlertFairSoon>大集市还有 {0}</RimMarket.AlertFairSoon>
+	<RimMarket.AlertFairSoonDesc>大集市将于 {0} 的 {1} 时开始。请保持集市摊位空闲、集市开放：商队会同时试图驻扎，顾客会随之而来。</RimMarket.AlertFairSoonDesc>
+	<RimMarket.AlertFairToday>今日大集市</RimMarket.AlertFairToday>
+	<RimMarket.AlertFairTodayDesc>大集市持续至 {0} 时。准备好迎接商队、顾客、开心的殖民者和忙碌的扒手。</RimMarket.AlertFairTodayDesc>
+	<RimMarket.Settings.Fair>大集市</RimMarket.Settings.Fair>
+	<RimMarket.Settings.FairHint>集市标记上有一个按钮，可提前几天宣布大集市：一天之内商队、顾客与彩旗齐聚。关闭：没有集市。</RimMarket.Settings.FairHint>
+	<RimMarket.Settings.FairCost>传令人费用</RimMarket.Settings.FairCost>
+	<RimMarket.Settings.FairCooldown>两次集市间隔</RimMarket.Settings.FairCooldown>
+	<RimMarket.Settings.TradeRoutes>贸易路线</RimMarket.Settings.TradeRoutes>
+	<RimMarket.Settings.TradeRoutesHint>当你通过通讯台与派系交谈时（装有 Medieval Overhaul 时为鸟邮），会多出一个"贸易路线"选项。支付一笔银，他们的某座城镇会每一到两周派出商队前往你的集市，你可以在世界地图上看着他们行进。靠近敌对城镇的路线（装有 Faction Territories 与 Vassalage 时还包括穿越敌对领土）会让商队遭遇伏击；雇佣护卫更贵但更有帮助。关闭：不会开辟新路线，也不会有商队出发，但已有路线保留。</RimMarket.Settings.TradeRoutesHint>
+	<RimMarket.Settings.RouteOpenCost>开辟价格</RimMarket.Settings.RouteOpenCost>
+	<RimMarket.Settings.RouteToll>每支商队费用</RimMarket.Settings.RouteToll>
+	<RimMarket.Settings.SpecialOrders>特殊订单</RimMarket.Settings.SpecialOrders>
+	<RimMarket.Settings.SpecialOrdersHint>从通讯台（装有 Medieval Overhaul 时为信使桌），付钱给某个派系，让他们带来一支满载你所要求货物的商队。他们会在摊位驻扎并免除摊位费，因为你已经付钱请他们来了。</RimMarket.Settings.SpecialOrdersHint>
+	<RimMarket.OrderOption>特殊订单</RimMarket.OrderOption>
+	<RimMarket.OrderPending>已有订单正在途中</RimMarket.OrderPending>
+	<RimMarket.OrderLimit>已达订单上限（{0}）</RimMarket.OrderLimit>
+	<RimMarket.OrderPickSettlement>应让 {0} 的哪座城镇来备货？距离越远，等待越久，账单越大。</RimMarket.OrderPickSettlement>
+	<RimMarket.OrderPickWhat>{0} 应该带来什么？\n\n选择一类货物：他们会在常规库存之外装载一队这类货物。订单只支付行程费用。货物抵达时你仍需按其价格购买，并且他们免交摊位费。\n\n想要具体某样东西？那就改从通讯台张贴悬赏通告，让每座友好城镇来报价。\n\n殖民地白银：{1}。</RimMarket.OrderPickWhat>
+	<RimMarket.OrderFamilySmall>{0}，一车货（{1} 银）</RimMarket.OrderFamilySmall>
+	<RimMarket.OrderFamilyLarge>{0}，整支商队（{1} 银）</RimMarket.OrderFamilyLarge>
+	<RimMarket.OrderFamilyNothing>没有这类东西可卖</RimMarket.OrderFamilyNothing>
+	<RimMarket.OrderFamily_Provisions>食物与药物</RimMarket.OrderFamily_Provisions>
+	<RimMarket.OrderFamily_Materials>布料与材料</RimMarket.OrderFamily_Materials>
+	<RimMarket.OrderFamily_Arms>武器与护甲</RimMarket.OrderFamily_Arms>
+	<RimMarket.OrderFamily_Luxuries>奢侈品</RimMarket.OrderFamily_Luxuries>
+	<RimMarket.OrderWhatSmall>一车 {0}</RimMarket.OrderWhatSmall>
+	<RimMarket.OrderWhatLarge>一整队 {0}</RimMarket.OrderWhatLarge>
+	<RimMarket.OrderPlaced>订单已发往 {0}：{1}，{2} 银。他们需要一点时间备货后出发。</RimMarket.OrderPlaced>
+	<RimMarket.OrderPendingNode>来自 {0} 你的订单：{1}。已付：{2} 银。\n\n{3}</RimMarket.OrderPendingNode>
+	<RimMarket.OrderStatusPacking>他们仍在备货，约 {0} 后出发。</RimMarket.OrderStatusPacking>
+	<RimMarket.OrderLeft>你的订单已离开 {0}。约 {1} 后抵达。</RimMarket.OrderLeft>
+	<RimMarket.OrderArrivedLabel>特殊订单已抵达</RimMarket.OrderArrivedLabel>
+	<RimMarket.OrderArrivedFamilyText>来自 {1} 的 {0} 商队已抵达，带来了你的订单：{2}。\n\n货物由他们的驮运动物承载，按常规价格出售，没人提过折扣。在他们的摊位交易以购买所需：你留下的都会随他们回家。\n\n行程已付清，所以他们免交摊位费。</RimMarket.OrderArrivedFamilyText>
+	<RimMarket.OrderArrivedPaidText>来自 {1} 的 {0} 商队已抵达，带来了你的订单：{2}。\n\n你这边的手续已结清。他们一驻扎就会在摊位旁交货，最多几小时后，会有信件告知地点。\n\n行程已付清，所以他们免交摊位费。</RimMarket.OrderArrivedPaidText>
+	<RimMarket.OrderTurnedBack>来自 {1} 的商队在你的领地边缘等候后放弃了。你的订单退回 {2} 银。</RimMarket.OrderTurnedBack>
+	<RimMarket.OrderCancelledGone>{0} 已无法完成你在 {1} 的订单。退还 {2} 银。</RimMarket.OrderCancelledGone>
+	<RimMarket.OrderCancelledHostile>{0} 与你反目，你在 {1} 的订单也随之作废。退还 {2} 银，多数敌人可做不到。</RimMarket.OrderCancelledHostile>
+	<RimMarket.OrderCancelledHome>你在 {1} 的订单无处可去。退还 {2} 银。</RimMarket.OrderCancelledHome>
+	<RimMarket.OrderCancelledNoRoad>来自 {1} 的商队找不到通往你的道路。退还 {2} 银。</RimMarket.OrderCancelledNoRoad>
+	<RimMarket.OrderCancelledLost>你在 {1} 的订单从未送达。退还 {2} 银，其余已成了别人的战利品。</RimMarket.OrderCancelledLost>
+	<RimMarket.OrderWindowValue>货物价值：{0}</RimMarket.OrderWindowValue>
+	<RimMarket.WantedCallLabel>张贴悬赏通告</RimMarket.WantedCallLabel>
+	<RimMarket.WantedCallBoard>查看你的悬赏通告</RimMarket.WantedCallBoard>
+	<RimMarket.WantedCallInfo>向每座友好城镇求购具体物品，看看谁回应。</RimMarket.WantedCallInfo>
+	<RimMarket.WantedDisabled>特殊订单已在设置中关闭</RimMarket.WantedDisabled>
+	<RimMarket.WantedAlreadyOut>已有通告在外</RimMarket.WantedAlreadyOut>
+	<RimMarket.WantedWindowTitle>悬赏通告</RimMarket.WantedWindowTitle>
+	<RimMarket.WantedWindowIntro>精确写出你想要的东西，最多 {0} 种货物。通告会送往所有未与你交战的城镇。接下来几天，其中一些会回以报价：一个价格、一个期限，有时只有部分货物，偶尔还会以物易物代替白银。\n\n报价通常是行程费加上货物价值的相当一部分，若他们喜欢你则更少。报价已包含货物：商队抵达时，货物归你。</RimMarket.WantedWindowIntro>
+	<RimMarket.WantedPost>张贴通告</RimMarket.WantedPost>
+	<RimMarket.WantedCountTip>输入数量，然后按回车或点击别处。按住 Shift（每次 10）或 Ctrl（每次 100）可让按钮更快。</RimMarket.WantedCountTip>
+	<RimMarket.WantedPosted>你的悬赏通告已贴出。接下来几天应会陆续收到报价。</RimMarket.WantedPosted>
+	<RimMarket.WantedNobody>似乎没人对你的通告感兴趣。换些货物，或先交些朋友。</RimMarket.WantedNobody>
+	<RimMarket.WantedOfferIn>{0} 回应了你的悬赏通告：{1}。</RimMarket.WantedOfferIn>
+	<RimMarket.WantedSilverWord>{0} 银</RimMarket.WantedSilverWord>
+	<RimMarket.WantedBarterWord>以物易物</RimMarket.WantedBarterWord>
+	<RimMarket.WantedClosed>你的悬赏通告已到期。</RimMarket.WantedClosed>
+	<RimMarket.WantedBoardTitle>悬赏通告上的报价</RimMarket.WantedBoardTitle>
+	<RimMarket.WantedBoardHead>你求购：{0}。</RimMarket.WantedBoardHead>
+	<RimMarket.WantedBoardWaiting>可能还会有更多回应。</RimMarket.WantedBoardWaiting>
+	<RimMarket.WantedBoardNone>还没有报价。城镇需要一点时间。</RimMarket.WantedBoardNone>
+	<RimMarket.WantedOfferTitle>{1} 的报价：{0}。约 {2} 后送达。{3}</RimMarket.WantedOfferTitle>
+	<RimMarket.WantedPartial>（只满足你要求的一部分）</RimMarket.WantedPartial>
+	<RimMarket.WantedPaySilver>价格：{0} 银，现在支付。</RimMarket.WantedPaySilver>
+	<RimMarket.WantedPayBarter>以物易物：他们想要 {0}，抵达时收取。若那时已不存在，则改收 {1} 银。</RimMarket.WantedPayBarter>
+	<RimMarket.WantedBarterMissing>你现在的仓储中没有这件东西。</RimMarket.WantedBarterMissing>
+	<RimMarket.WantedExpires>报价有效期 {0}。</RimMarket.WantedExpires>
+	<RimMarket.WantedAccept>接受</RimMarket.WantedAccept>
+	<RimMarket.WantedHaggle>讨价还价</RimMarket.WantedHaggle>
+	<RimMarket.WantedHaggleDesc>{0}，你最好的谈判者，会就这笔报价讨价还价。每笔报价只能试一次。要得太少他们或许拒绝，要得太多他们或许直接收回报价。</RimMarket.WantedHaggleDesc>
+	<RimMarket.WantedHaggleMenu>{0} 要求降价</RimMarket.WantedHaggleMenu>
+	<RimMarket.WantedHaggleAsk>降 {0}（成功几率 {1}）</RimMarket.WantedHaggleAsk>
+	<RimMarket.WantedHaggleAskRisky>降 {0}（成功几率 {1}，失败他们可能转身就走）</RimMarket.WantedHaggleAskRisky>
+	<RimMarket.WantedHaggleAskSure>降 {0}（成功几率 {1}，失败他们一定转身就走）</RimMarket.WantedHaggleAskSure>
+	<RimMarket.WantedHaggleDone>这笔报价已经砍过价了。</RimMarket.WantedHaggleDone>
+	<RimMarket.WantedHaggleNoOne>你这里的殖民者没人会谈判。</RimMarket.WantedHaggleNoOne>
+	<RimMarket.WantedHaggleWon>{0} 把 {1} 的价格谈了下来。报价现为 {2} 银。</RimMarket.WantedHaggleWon>
+	<RimMarket.WantedHaggleWonBarter>{0} 把 {1} 谈了下来。他们要求的换货物更少了。</RimMarket.WantedHaggleWonBarter>
+	<RimMarket.WantedHaggleRefused>{0} 寸步不让。报价维持原样。</RimMarket.WantedHaggleRefused>
+	<RimMarket.WantedHaggleWalked>{0} 觉得受了冒犯，撤回了报价。</RimMarket.WantedHaggleWalked>
+	<RimMarket.WantedAccepted>你接受了 {0} 的报价。货物很快将从 {1} 出发。</RimMarket.WantedAccepted>
+	<RimMarket.WantedWithdraw>撤下通告</RimMarket.WantedWithdraw>
+	<RimMarket.WantedWithdrawConfirm>撤下通告？其上的所有报价都会作废。</RimMarket.WantedWithdrawConfirm>
+	<RimMarket.WantedBarterTaken>{0} 收走了换货物：{1}。</RimMarket.WantedBarterTaken>
+	<RimMarket.WantedBarterSilver>换货物已不在，于是 {0} 改收了 {1} 银。</RimMarket.WantedBarterSilver>
+	<RimMarket.WantedBarterFailedLabel>以物易物告吹</RimMarket.WantedBarterFailedLabel>
+	<RimMarket.WantedBarterFailedText>{0} 来取 {1}，或 {2} 银，却两样都没找到。他们扣下了你的货物，并记住了这趟买卖。</RimMarket.WantedBarterFailedText>
+	<RimMarket.WantedHandedOverLabel>订单已交付</RimMarket.WantedHandedOverLabel>
+	<RimMarket.WantedHandedOverText>{0} 在他们的摊位旁交出了你的货物：{1}。\n\n现在它们归你了。你的搬运工会把它们收好，你也可以从这封信直接跳过去。</RimMarket.WantedHandedOverText>
+	<RimMarket.AlertWantedOffers>你的通告上有报价：{0}</RimMarket.AlertWantedOffers>
+	<RimMarket.AlertWantedOffersDesc>城镇回应了你的悬赏通告。点击查看他们的报价。</RimMarket.AlertWantedOffersDesc>
+	<RimMarket.OrderTooManyLines>一张订单最多可包含 {0} 种货物。</RimMarket.OrderTooManyLines>
+	<RimMarket.OrderTooBig>单笔订单价值最多 {0}。再好的商队也有极限。</RimMarket.OrderTooBig>
+	<RimMarket.ConvoyCarryingOrder>携带着你的订单：{0}</RimMarket.ConvoyCarryingOrder>
+	<RimMarket.StallOrderLine>这里是你特殊订单的摊位：免摊位费。</RimMarket.StallOrderLine>
+	<RimMarket.RoutesOption>贸易路线（{0}/{1}）</RimMarket.RoutesOption>
+	<RimMarket.RoutesNode>与 {0} 的贸易路线：他们的某座城镇会按固定节奏向你的集市派出商队。开辟路线需一次性付费，之后每支商队抵达时支付商队费。你的集市声望允许总共维持 {1} 条路线。</RimMarket.RoutesNode>
+	<RimMarket.RouteLine>{0}：{1}，每 {2} 天一次。{3}</RimMarket.RouteLine>
+	<RimMarket.RouteStatusOnRoad>一支商队正在路上，约 {0} 后抵达。</RimMarket.RouteStatusOnRoad>
+	<RimMarket.RouteStatusWaiting>一支商队正在你的领地边缘等候。</RimMarket.RouteStatusWaiting>
+	<RimMarket.RouteStatusNext>下一支商队约 {0} 后出发。</RimMarket.RouteStatusNext>
+	<RimMarket.RouteOpen>开辟贸易路线</RimMarket.RouteOpen>
+	<RimMarket.RouteClose>关闭来自 {0} 的路线</RimMarket.RouteClose>
+	<RimMarket.RouteCloseConfirm>关闭来自 {0} 的贸易路线？其商队将不再前来，路上那支会折返，费用不退。</RimMarket.RouteCloseConfirm>
+	<RimMarket.RouteCloseYes>关闭</RimMarket.RouteCloseYes>
+	<RimMarket.RoutePickSettlement>应由 {0} 的哪座城镇派出商队？距离越远，路途越长，费用越高。</RimMarket.RoutePickSettlement>
+	<RimMarket.RouteSettlementOption>{0}（{1} 格，路上约 {2}，{3}）</RimMarket.RouteSettlementOption>
+	<RimMarket.RouteRiskSafe>安全的道路</RimMarket.RouteRiskSafe>
+	<RimMarket.RouteRisk>{0} 的伏击几率，多来自 {1}</RimMarket.RouteRisk>
+	<RimMarket.RouteEscortNote>这条路上约 {0} 的商队会遇上麻烦，多来自 {1}。雇佣护卫可将其降至约 {2}，而且受袭的护卫商队通常能闯过去。</RimMarket.RouteEscortNote>
+	<RimMarket.RouteWeeklyEscort>每周一次，带护卫：开辟 {0} 银，之后每支商队 {1} 银</RimMarket.RouteWeeklyEscort>
+	<RimMarket.RouteFortnightlyEscort>每两周一次，带护卫：开辟 {0} 银，之后每支商队 {1} 银</RimMarket.RouteFortnightlyEscort>
+	<RimMarket.RouteStatusAttacked>商队正遭受 {0} 的攻击！</RimMarket.RouteStatusAttacked>
+	<RimMarket.RouteStatusEscort>有护卫。</RimMarket.RouteStatusEscort>
+	<RimMarket.RouteStatusAmbushes>遭伏击 {0} 次，损失 {1} 支商队。</RimMarket.RouteStatusAmbushes>
+	<RimMarket.ConvoyAmbushed>来自 {0} 的贸易商队遭到了 {1} 的伏击！</RimMarket.ConvoyAmbushed>
+	<RimMarket.ConvoyRepelled>来自 {0} 的贸易商队击退了 {1}，晚了几小时重返道路。</RimMarket.ConvoyRepelled>
+	<RimMarket.ConvoyPlundered>来自 {0} 的贸易商队从 {1} 手中逃脱，但损失了约 {2} 的货物。它带着剩下的继续前行。</RimMarket.ConvoyPlundered>
+	<RimMarket.ConvoyLost>来自 {0} 的贸易商队被 {1} 击溃。下一支将按计划出发。</RimMarket.ConvoyLost>
+	<RimMarket.ConvoyUnderAttack>正遭受 {0} 的攻击！他们大约能撑 {1}。</RimMarket.ConvoyUnderAttack>
+	<RimMarket.ConvoyUnderAttackHelped>正遭受 {0} 的攻击！你的人正在与他们并肩作战。</RimMarket.ConvoyUnderAttackHelped>
+	<RimMarket.ConvoyEscorted>有护卫随行。</RimMarket.ConvoyEscorted>
+	<RimMarket.ConvoyPlunderedLine>途中损失了约 {0} 的货物。</RimMarket.ConvoyPlunderedLine>
+	<RimMarket.ConvoyAmbushedLabel>商队遭伏击</RimMarket.ConvoyAmbushedLabel>
+	<RimMarket.ConvoyAmbushedHelp>来自 {0} 的贸易商队遭到了 {1} 的伏击！\n\n他们围成一圈，大约能撑 {2}。想帮忙就派一支商队过去，否则就让他们自己解决。</RimMarket.ConvoyAmbushedHelp>
+	<RimMarket.HelpConvoy>援助商队</RimMarket.HelpConvoy>
+	<RimMarket.HelpingConvoy>前往援助来自 {0} 的商队</RimMarket.HelpingConvoy>
+	<RimMarket.HelpNotAtWar>你并未与 {0} 交战</RimMarket.HelpNotAtWar>
+	<RimMarket.HelpNoRoom>那里已经有别的事情在发生</RimMarket.HelpNoRoom>
+	<RimMarket.HelpFailed>无法设置商队战斗，他们只能自己应付了。</RimMarket.HelpFailed>
+	<RimMarket.ConvoyBattleLabel>商队遭袭</RimMarket.ConvoyBattleLabel>
+	<RimMarket.ConvoyBattleText>{0} 发现来自 {1} 的商队围成一圈，正遭受 {2} 的攻击。\n\n保住 {3} 的性命并击退袭击者。若商人身亡或被拖走，商队便告覆灭。</RimMarket.ConvoyBattleText>
+	<RimMarket.ConvoySavedLabel>商队获救</RimMarket.ConvoySavedLabel>
+	<RimMarket.ConvoySavedText>袭击者已退。来自 {0} 的商人们安置好伤员，重新上路。\n\n{1} 不会忘记：+{2} 好感。</RimMarket.ConvoySavedText>
+	<RimMarket.ConvoySavedFee>他们抵达时摊位费全免。</RimMarket.ConvoySavedFee>
+	<RimMarket.ConvoyFellLabel>商队覆灭</RimMarket.ConvoyFellLabel>
+	<RimMarket.ConvoyFellText>来自 {0} 的商人已死，商队也随之覆灭。他们携带的东西散落一地，谁想要都可以拿。</RimMarket.ConvoyFellText>
+	<RimMarket.RouteNoTowns>他们没有可派出商队的城镇。</RimMarket.RouteNoTowns>
+	<RimMarket.RouteNoRoad>没有通往你集市的道路</RimMarket.RouteNoRoad>
+	<RimMarket.RouteExists>已有一条路线开通</RimMarket.RouteExists>
+	<RimMarket.RoutePickKind>来自 {0} 的商队应带来什么？</RimMarket.RoutePickKind>
+	<RimMarket.RouteNoKinds>没有商人愿意前来</RimMarket.RouteNoKinds>
+	<RimMarket.RoutePickCadence>{0} 的商队应多久离开 {1} 一次？开辟路线需一次性付费，之后每支商队抵达时从你的仓库与活动区支付商队费（你现在有 {2}）。若无人付得起，商队将折返，城镇会计这笔账。</RimMarket.RoutePickCadence>
+	<RimMarket.RouteWeekly>每周一次：开辟 {0} 银，之后每支商队 {1} 银</RimMarket.RouteWeekly>
+	<RimMarket.RouteFortnightly>每两周一次：开辟 {0} 银，之后每支商队 {1} 银</RimMarket.RouteFortnightly>
+	<RimMarket.RouteTollPaid>来自 {0} 的商队已抵达。已支付 {1} 银行程费。</RimMarket.RouteTollPaid>
+	<RimMarket.RouteTollUnpaid>来自 {0} 的商队折返了：没人付得出 {1} 银的商队费。这条路线记 {3} 次中的 {2} 次。</RimMarket.RouteTollUnpaid>
+	<RimMarket.RouteStatusToll>商队费：{0} 银。</RimMarket.RouteStatusToll>
+	<RimMarket.RouteNoSilver>需要 {0} 银</RimMarket.RouteNoSilver>
+	<RimMarket.RouteOpened>成交。第一支 {1} 商队将在大约一天内离开 {0}。你会在世界地图上看到它。</RimMarket.RouteOpened>
+	<RimMarket.RouteHostile>他们处于敌对状态</RimMarket.RouteHostile>
+	<RimMarket.WantedTownGone>他们的城镇已不存在。</RimMarket.WantedTownGone>
+	<RimMarket.RouteNeedsMarket>这个殖民地没有开放的集市</RimMarket.RouteNeedsMarket>
+	<RimMarket.RouteUnknownHelp>{0} 从未在你的集市交易过，也未曾接待你的摊位。先去他们那里做买卖，再回来谈。</RimMarket.RouteUnknownHelp>
+	<RimMarket.RouteUnknown>他们还不了解你的集市</RimMarket.RouteUnknown>
+	<RimMarket.RouteGrudge>他们对你的集市心存芥蒂</RimMarket.RouteGrudge>
+	<RimMarket.RouteLimit>已达路线上限</RimMarket.RouteLimit>
+	<RimMarket.RouteConvoyLeft>一支载着 {1} 的贸易商队已离开 {0} 前往你的集市。约 {2} 后抵达。</RimMarket.RouteConvoyLeft>
+	<RimMarket.RouteConvoyWaiting>来自 {0} 的贸易商队在你的领地边缘等候：他们的敌人正在你的集市。</RimMarket.RouteConvoyWaiting>
+	<RimMarket.RouteConvoyDelayed>来自 {0} 的贸易商队已抵达你的领地，但暂时无法进入。它会再试一次。</RimMarket.RouteConvoyDelayed>
+	<RimMarket.RouteConvoyTurnedBack>来自 {0} 的贸易商队等不下去了，返回了家乡。</RimMarket.RouteConvoyTurnedBack>
+	<RimMarket.RouteStrike>在你的集市经历了糟糕的一天（{2} 次中的 {1} 次）后，{0} 正对这条贸易路线失去信心。</RimMarket.RouteStrike>
+	<RimMarket.RouteClosedGone>与 {0} 的贸易路线已关闭：{1} 已不再是他们可以派出商队的城镇。</RimMarket.RouteClosedGone>
+	<RimMarket.RouteClosedHostile>与 {0} 的贸易路线已关闭：他们现在处于敌对状态。</RimMarket.RouteClosedHostile>
+	<RimMarket.RouteClosedHome>与 {0} 的贸易路线已关闭：你的集市城镇已不存在。</RimMarket.RouteClosedHome>
+	<RimMarket.RouteClosedGrudge>{0} 关闭了来自 {1} 的贸易路线：他们不再信任你的集市。</RimMarket.RouteClosedGrudge>
+	<RimMarket.RouteClosedStrikes>在你的集市经历了太多糟糕的日子后，{0} 关闭了来自 {1} 的贸易路线。</RimMarket.RouteClosedStrikes>
+	<RimMarket.RouteClosedNoRoad>与 {0} 的贸易路线已关闭：从 {1} 已没有道路通往你的集市。</RimMarket.RouteClosedNoRoad>
+	<RimMarket.RouteClosedNoCaravans>与 {0} 的贸易路线已关闭：{1} 没有能前往你领地的商队。</RimMarket.RouteClosedNoCaravans>
+	<RimMarket.OrderParcelRefunded>{0} 的信使在交付你的订单前就离开了。退还 {1} 银。</RimMarket.OrderParcelRefunded>
+	<RimMarket.OrderNoCaravans>{0} 没有能前往你领地的商队，因此你在 {1} 的订单作废。全部 {2} 银退回。</RimMarket.OrderNoCaravans>
+	<RimMarket.ConvoyBound>前往 {0}，约 {1} 后抵达。</RimMarket.ConvoyBound>
+	<RimMarket.ConvoyWaiting>等待进入 {0}。</RimMarket.ConvoyWaiting>
+	<RimMarket.ConvoyCarrying>商人：{0}。</RimMarket.ConvoyCarrying>
+
+	<!-- 指南 -->
+	<RimMarket.Settings.OpenGuide>打开集市指南</RimMarket.Settings.OpenGuide>
+	<RimMarket.Guide.GizmoLabel>指南</RimMarket.Guide.GizmoLabel>
+	<RimMarket.Guide.GizmoDesc>打开集市指南：各种物件该放在哪里、这张地图上的集市还缺什么，以及为什么还没有商队来。</RimMarket.Guide.GizmoDesc>
+	<RimMarket.GuideLetterLabel>你的第一个集市</RimMarket.GuideLetterLabel>
+	<RimMarket.GuideLetterText>标记已经放下。现在在它的范围内建几个集市摊位，让每个柜台末端的商人位置保持空闲，并为商队留出一条从地图边缘进来的路。\n\n选中标记并按下"指南"，即可一步步查看你的集市还缺什么，以及为什么还没有商队到来。</RimMarket.GuideLetterText>
+	<RimMarket.Guide.Title>集市指南</RimMarket.Guide.Title>
+	<RimMarket.Guide.Progress>你的集市：已完成 {1} 步中的 {0} 步</RimMarket.Guide.Progress>
+	<RimMarket.Guide.NoMap>载入一个殖民地以查看你的集市状况。</RimMarket.Guide.NoMap>
+	<RimMarket.Guide.Optional>可选</RimMarket.Guide.Optional>
+	<RimMarket.Guide.More>还有待办</RimMarket.Guide.More>
+	<RimMarket.Guide.On>开启</RimMarket.Guide.On>
+	<RimMarket.Guide.Off>关闭</RimMarket.Guide.Off>
+	<RimMarket.Guide.PlaceMarker>放置标记</RimMarket.Guide.PlaceMarker>
+	<RimMarket.Guide.ShowMarker>显示标记</RimMarket.Guide.ShowMarker>
+	<RimMarket.Guide.PlaceStall>放置摊位</RimMarket.Guide.PlaceStall>
+	<RimMarket.Guide.ShowStalls>显示我的摊位</RimMarket.Guide.ShowStalls>
+	<RimMarket.Guide.PlaceCamp>放置商队营地</RimMarket.Guide.PlaceCamp>
+	<RimMarket.Guide.PlaceRest>放置护卫休息点</RimMarket.Guide.PlaceRest>
+	<RimMarket.Guide.PlaceAuction>放置拍卖柱</RimMarket.Guide.PlaceAuction>
+	<RimMarket.Guide.OpenSettings>打开设置</RimMarket.Guide.OpenSettings>
+	<RimMarket.Guide.MarkerTitle>集市标记</RimMarket.Guide.MarkerTitle>
+	<RimMarket.Guide.MarkerBody>一切从集市标记开始（建筑菜单，杂项）。把它放在广场中央：其范围内的每个摊位都归这个集市所有。初始范围是以它为中心的圆形。\n\n选中它可以像活动区一样手动绘制范围或擦除一部分，设置摊位费，开市或闭市，查看声望并宣布大集市。广场建好后可以将其隐藏。\n\n范围最远可达标记周围 30 格。若想更大的集市，或在墙内墙外各有一个，就再放一个标记：你可以拥有多个，在这张地图或别的地图上都行。</RimMarket.Guide.MarkerBody>
+	<RimMarket.Guide.MarkerPlaced>这张地图上有一个集市标记</RimMarket.Guide.MarkerPlaced>
+	<RimMarket.Guide.MarkerOpen>集市处于开放状态</RimMarket.Guide.MarkerOpen>
+	<RimMarket.Guide.StallsTitle>你的摊位</RimMarket.Guide.StallsTitle>
+	<RimMarket.Guide.StallsBody>在标记范围内建造集市摊位（建筑菜单，杂项）。每个摊位都需要空闲的商人位置：即柜台末端的那一格，放置时以白色轮廓标示。\n\n商队会从地图边缘走进来，像任何友好访客一样开门进入，所以要给他们留条路。柜台会呈现其材料的颜色，遮阳篷可以在摊位上自行涂装。</RimMarket.Guide.StallsBody>
+	<RimMarket.Guide.StallInside>标记范围内至少有一个摊位</RimMarket.Guide.StallInside>
+	<RimMarket.Guide.StallNoneOutside>标记范围外没有遗留摊位</RimMarket.Guide.StallNoneOutside>
+	<RimMarket.Guide.StallSpotFree>每个摊位的商人位置都空闲</RimMarket.Guide.StallSpotFree>
+	<RimMarket.Guide.StallFromEdge>商队能从地图边缘走到每个摊位</RimMarket.Guide.StallFromEdge>
+	<RimMarket.Guide.StallThree>至少三个摊位，以满足大集市要求</RimMarket.Guide.StallThree>
+	<RimMarket.Guide.SpotsTitle>营地与休息点</RimMarket.Guide.SpotsTitle>
+	<RimMarket.Guide.SpotsBody>两个地点能让广场保持整洁（建筑菜单，杂项）。商队营地是驮运动物等候的地方：用围栏围住它们就不会乱跑。护卫休息点是下班的护卫坐着聊天吃饭的地方，同时有一人在摊位站岗。选中地点可以像活动区一样手动绘制范围。\n\n两者都是可选的，可以放在地图任何位置，集市内外皆可：商队会使用最近的一个。若不设置，动物和护卫会在集市外等候。知道位置后，每个地点都可以隐藏。</RimMarket.Guide.SpotsBody>
+	<RimMarket.Guide.SpotCamp>供驮运动物使用的商队营地</RimMarket.Guide.SpotCamp>
+	<RimMarket.Guide.SpotRest>供护卫使用的休息点</RimMarket.Guide.SpotRest>
+	<RimMarket.Guide.FeesTitle>费用与砍价</RimMarket.Guide.FeesTitle>
+	<RimMarket.Guide.FeesBody>商人到场时在柜台上点清摊位费，然后停留一个集市日。你可以在摊位上与他们交易，或通过与商人交谈使用常规交易窗口。\n\n每次来访可以从交易窗口砍价一次：使用你谈判者的社交技能，失败造成的损失与成功本可获得的收益相当。费用、砍价和集市日时长都在模组设置中，每个标记也可以自行设置费用。</RimMarket.Guide.FeesBody>
+	<RimMarket.Guide.FeeMode>摊位费：{0}</RimMarket.Guide.FeeMode>
+	<RimMarket.Guide.FeeDifficulty>集市难度：{0}</RimMarket.Guide.FeeDifficulty>
+	<RimMarket.Guide.FeeHaggle>砍价：{0}</RimMarket.Guide.FeeHaggle>
+	<RimMarket.Guide.FeeDay>集市日：{0}</RimMarket.Guide.FeeDay>
+	<RimMarket.Guide.ColonyStallTitle>你的殖民地摊位</RimMarket.Guide.ColonyStallTitle>
+	<RimMarket.Guide.ColonyStallBody>任何摊位都可以出售你自己的货物：选中它并设为殖民地摊位。其销售表会列出你拥有的东西。选择卖什么、卖多少、什么价，你的搬运工会把货物送过来。\n\n友好派系的顾客和你的客人会在柜台付款。价格越低，顾客来得越勤。大量出售同一种东西会降低它几天内的需求，销售表中每个名称下的进度条会显示这一点，所以要丰富货品种类。</RimMarket.Guide.ColonyStallBody>
+	<RimMarket.Guide.ColonyStallBuilt>一个殖民地摊位</RimMarket.Guide.ColonyStallBuilt>
+	<RimMarket.Guide.ColonyStallStocked>销售表上已有货物</RimMarket.Guide.ColonyStallStocked>
+	<RimMarket.Guide.InnTitle>旅店</RimMarket.Guide.InnTitle>
+	<RimMarket.Guide.InnBody>任何床都可以成为旅店床位：选中它并按下集市旅店按钮。它可以在地图任何位置，不必在集市内。商人、他们的护卫和顾客按夜付费，商队则从驮包里支付。房间分三类：宿舍（共用或简陋）收半价，普通房间收全价，套间（带双人床和床头柜或梳妆台的豪华私人房间）收双倍。商人和护卫优先入住，商人住最好的房间。标记或任何旅店床上的旅店登记册会列出每张床、设定价格，并记录客人对住宿的评价。在好房间以公道价格过夜的商人会把摊位多开半天，在旅店过夜的护卫次日扑倒窃贼也更快。\n\n一间好的私人房间会让你的集市更有吸引力，糟糕的房间或高昂的价格则相反。以公道价格睡得好觉的客人离开时对你的态度也会稍好一些。</RimMarket.Guide.InnBody>
+	<RimMarket.Guide.InnBed>至少一张旅店床位</RimMarket.Guide.InnBed>
+	<RimMarket.Guide.FairTitle>大集市</RimMarket.Guide.FairTitle>
+	<RimMarket.Guide.FairBody>拥有三个或更多摊位时，标记可以提前三天宣布大集市。当天最多六支商队同时驻扎，成群顾客带着更鼓的钱包前来，你的殖民者也会来凑热闹。\n\n傍晚六点，评委选出最佳摊位。集市在十点以天灯（若多数摊位由金属建成则为烟花）闭幕。</RimMarket.Guide.FairBody>
+	<RimMarket.Guide.AuctionTitle>奴隶拍卖</RimMarket.Guide.AuctionTitle>
+	<RimMarket.Guide.AuctionBody>在集市内建造拍卖柱（建筑菜单，杂项）。当商队带来奴隶时，拍卖会提前两小时宣布，买家前来坐在拍卖柱前。每件从半价起拍。\n\n拍卖进行时选中拍卖柱即可出价。若无人高过你，银将从你的库存中扣除，奴隶加入你的殖民地。</RimMarket.Guide.AuctionBody>
+	<RimMarket.Guide.AuctionPost>一座拍卖柱</RimMarket.Guide.AuctionPost>
+	<RimMarket.Guide.RoutesTitle>路线、订单与通告</RimMarket.Guide.RoutesTitle>
+	<RimMarket.Guide.HegemonyTitle>霸权</RimMarket.Guide.HegemonyTitle>
+	<RimMarket.Guide.HegemonyBody>装有 Hegemony 时，与你交易的城镇拥有真实的库存。\n\n当你的商队在城镇里摆摊时，按该城镇的价格出售：城镇缺的东西卖得贵，充足的东西卖得便宜。你出售的材料会进入城镇的储备。\n\n在殖民地摊位、你在其他城镇的摊位和拍卖上的销售，都会计入 Hegemony 的贸易好感，如同在原版交易窗口中交易一样。\n\n穿越敌对派系领地的贸易商队可能遭到其伏击。\n\n每一部分都可以在贸易设置中关闭。</RimMarket.Guide.HegemonyBody>
+	<RimMarket.Guide.SettingState>{0}：{1}</RimMarket.Guide.SettingState>
+	<RimMarket.Guide.RoutesBody>在通讯台上，你可以开辟一条贸易路线（某座城镇每隔一两周派出一支商队）、为一批货物下特殊订单，或张贴悬赏通告。城镇会在接下来几天回应通告，你可以在标记上接受他们的报价。\n\n你自己的商队也可以在友好城镇里摆一个摊位度过一个集市日。</RimMarket.Guide.RoutesBody>
+	<RimMarket.Guide.DiagTitle>为什么没有商队？</RimMarket.Guide.DiagTitle>
+	<RimMarket.Guide.DiagBody>贸易商队按叙事者的节奏前来，大约每几天一支，好名声还会带来额外的商队。如果商队来了却从你的集市旁走过，原因就在下面的列表里。</RimMarket.Guide.DiagBody>
+	<RimMarket.Guide.DiagOpen>集市处于开放状态</RimMarket.Guide.DiagOpen>
+	<RimMarket.Guide.DiagFreeStall>有空闲摊位且商人位置畅通</RimMarket.Guide.DiagFreeStall>
+	<RimMarket.Guide.DiagReach>商队能从地图边缘走到空闲摊位</RimMarket.Guide.DiagReach>
+	<RimMarket.Guide.DiagRoom>还能容纳商人（已占用 {1} 个中的 {0} 个）</RimMarket.Guide.DiagRoom>
+	<RimMarket.Guide.DiagFactions>会派出商队的友好派系：{0}</RimMarket.Guide.DiagFactions>
+	<RimMarket.Guide.DiagNoRefuse>没有派系拒绝你的集市</RimMarket.Guide.DiagNoRefuse>
+	<RimMarket.Guide.DiagRefuse>你的声望使一些派系望而却步：{0}</RimMarket.Guide.DiagRefuse>
+	<RimMarket.Guide.DiagBroke>付不起摊位费的商队会被拒之门外（模组设置）</RimMarket.Guide.DiagBroke>
+	<RimMarket.Guide.DiagWaiting>来自 {0} 的一支商队正在等候：{1}</RimMarket.Guide.DiagWaiting>
+
+	<!-- 交易面板 -->
+	<RimMarket.DealsGizmo>集市事务（{0}）</RimMarket.DealsGizmo>
+	<RimMarket.DealsGizmoDesc>查看你的集市正在进行的一切：贸易路线及其商队、特殊订单、你的悬赏通告及其报价，以及你在其他城镇摆摊的自有商队。</RimMarket.DealsGizmoDesc>
+	<RimMarket.DealsTitle>集市事务</RimMarket.DealsTitle>
+	<RimMarket.DealsTabRoutes>贸易路线（{0}/{1}）</RimMarket.DealsTabRoutes>
+	<RimMarket.DealsTabOrders>特殊订单（{0}）</RimMarket.DealsTabOrders>
+	<RimMarket.DealsTabWanted>悬赏通告（{0}）</RimMarket.DealsTabWanted>
+	<RimMarket.DealsTabAway>外地摊位（{0}）</RimMarket.DealsTabAway>
+	<RimMarket.DealsColTown>城镇</RimMarket.DealsColTown>
+	<RimMarket.DealsColMerchant>商人</RimMarket.DealsColMerchant>
+	<RimMarket.DealsColGoods>货物</RimMarket.DealsColGoods>
+	<RimMarket.DealsColSold>已售出</RimMarket.DealsColSold>
+	<RimMarket.DealsColStatus>状态</RimMarket.DealsColStatus>
+	<RimMarket.DealsEvery>每 {0} 天</RimMarket.DealsEvery>
+	<RimMarket.DealsPaid>已付 {0} 银</RimMarket.DealsPaid>
+	<RimMarket.DealsAtMarket>他们的商队在你的集市。</RimMarket.DealsAtMarket>
+	<RimMarket.DealsShowConvoy>显示商队</RimMarket.DealsShowConvoy>
+	<RimMarket.DealsShowTown>显示城镇</RimMarket.DealsShowTown>
+	<RimMarket.DealsShowCaravan>显示商队</RimMarket.DealsShowCaravan>
+	<RimMarket.DealsOpenBoard>报价板</RimMarket.DealsOpenBoard>
+	<RimMarket.DealsYourNotice>你的通告</RimMarket.DealsYourNotice>
+	<RimMarket.DealsNoticeStatus>还有 {0} 座城镇未回应，目前收到 {1} 份报价。回应截止于 {2}。</RimMarket.DealsNoticeStatus>
+	<RimMarket.DealsOffer>开价 {0}，约 {1} 后送达。</RimMarket.DealsOffer>
+	<RimMarket.DealsPrice>{0} 银</RimMarket.DealsPrice>
+	<RimMarket.DealsBarter>以物易物</RimMarket.DealsBarter>
+	<RimMarket.DealsSold>{0} 件，{1} 银</RimMarket.DealsSold>
+	<RimMarket.DealsAwayStatus>{0} 还将继续摆摊 {1}。</RimMarket.DealsAwayStatus>
+	<RimMarket.DealsNoRoutes>没有开通的贸易路线。通过通讯台与派系交谈即可开辟。</RimMarket.DealsNoRoutes>
+	<RimMarket.DealsNoOrders>没有进行中的特殊订单。通过通讯台与派系交谈即可下单。</RimMarket.DealsNoOrders>
+	<RimMarket.DealsNoNotice>没有张贴悬赏通告。可从通讯台张贴。</RimMarket.DealsNoNotice>
+	<RimMarket.DealsNoAway>你的商队都没有在摆摊。派一支前往友好城镇，抵达后选择"摆摊"。</RimMarket.DealsNoAway>
+	<RimMarket.DealsHintComms>从通讯台与派系交谈即可开通、关闭或更改这些内容。</RimMarket.DealsHintComms>
+	<RimMarket.DealsHintAway>集市日结束时，商队会自行收拾离开。</RimMarket.DealsHintAway>
+
+</LanguageData>

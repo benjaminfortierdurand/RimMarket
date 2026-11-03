@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<RimMarket_MarketMarker.label>集市标记</RimMarket_MarketMarker.label>
+	<RimMarket_MarketMarker.description>一块涂在地上的标记，标示集市广场的中心。在它周围建造摊位：集市范围内的任何摊位都属于这个集市。选中标记可以像活动区一样绘制范围，选择摊位费的收取方式，开市或闭市，并在广场布置满意后隐藏这块标记。大集市期间，五月柱会直接立在它上面。\n\n找到空摊位的贸易商队会在这里开店，而不是在墙外闲逛。</RimMarket_MarketMarker.description>
+
+	<RimMarket_CaravanCamp.label>商队营地</RimMarket_CaravanCamp.label>
+	<RimMarket_CaravanCamp.description>一块画在地上的标记，告诉来访商队把驮运动物留在何处，而商人去集市做生意。鞍袋里的货物无论动物离柜台多远都计入交易，你买的东西会在柜台交付。\n\n选中该地点可以像活动区一样绘制范围，或在知道位置后隐藏它。用墙把营地围起来，动物就不会乱跑：它们不会开门。下班的护卫会在护卫休息点等候，若没有设置就等在营地外。没有营地时，动物会在集市外等候，不挡顾客的路。</RimMarket_CaravanCamp.description>
+
+	<RimMarket_GuardRestSpot.label>护卫休息点</RimMarket_GuardRestSpot.label>
+	<RimMarket_GuardRestSpot.description>指定来访商队的护卫在休息时待的地方，同时其中一人在摊位站岗。他们会坐在范围内的任何椅子、凳子或长椅上，没有就站着，闲聊八卦，从驮包里吃东西，天黑后睡在地上。选中地点可以像活动区一样绘制范围，或隐藏它。\n\n没有休息点时，下班的护卫会在商队营地外徘徊，照看动物；若也没有营地，就和动物一起在集市外等候。</RimMarket_GuardRestSpot.description>
+
+	<RimMarket_Stall.label>集市摊位</RimMarket_Stall.label>
+	<RimMarket_Stall.description>一个空集市摊位：一张带遮阳篷的柜台。在集市标记范围内建造，并让柜台末端的商人位置保持空闲（放置时以白色轮廓标示）。当贸易商队来到集市，商人会占用摊位，站在柜台末端，货物摆在遮阳篷下，一名护卫在旁边站岗，驮运动物在商队营地等候，其他护卫在护卫休息点。你可以在摊位上或与商人本人交易。\n\n也可以把它设为殖民地摊位来出售自己的货物：在销售表中选择卖什么、卖多少、什么价，你的搬运工会把货送来，顾客和客人则在柜台付款。\n\n商人会像任何友好访客一样开门进来，但广场必须能从地图边缘到达。柜台及其支柱会呈现你所用材料的颜色。遮阳篷可以自行涂装：选择边缘、图案和两种颜色。若用金属建造，集市期间会挂上串灯而不是彩旗。</RimMarket_Stall.description>
+
+	<RimMarket_AuctionBlock.label>拍卖柱</RimMarket_AuctionBlock.label>
+	<RimMarket_AuctionBlock.description>一根带铁环和一截锁链的柱子，立在人人都看得见的地方。当带着奴隶出售的商队在你的集市驻扎时，奴隶贩子会把每一批奴隶依次锁到柱上并开始竞价。其他派系的买家前来就座出价，你的客人也会加入，你也可以：在某批拍卖进行时选中这根柱子。请在集市标记范围内建造，若想让买家坐得舒服，可在前面摆几把椅子。\n\n你的殖民者能否接受这一幕，取决于他们对奴隶制的看法。</RimMarket_AuctionBlock.description>
+	<RimMarket_AuctionBlock.comps.0.optionalNames.0>铁柱</RimMarket_AuctionBlock.comps.0.optionalNames.0>
+	<RimMarket_AuctionBlock.comps.0.optionalNames.1>钢柱</RimMarket_AuctionBlock.comps.0.optionalNames.1>
+
+</LanguageData>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<RimMarket_TendColonyStall.label>照看殖民地摊位</RimMarket_TendColonyStall.label>
+	<RimMarket_TendColonyStall.verb>照看</RimMarket_TendColonyStall.verb>
+	<RimMarket_TendColonyStall.gerund>照看</RimMarket_TendColonyStall.gerund>
+
+	<RimMarket_StockColonyStall.label>给殖民地摊位补货</RimMarket_StockColonyStall.label>
+	<RimMarket_StockColonyStall.verb>补货</RimMarket_StockColonyStall.verb>
+	<RimMarket_StockColonyStall.gerund>补货</RimMarket_StockColonyStall.gerund>
+
+</LanguageData>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<RimMarket_StallRobbed.label>在你的集市遭抢</RimMarket_StallRobbed.label>
+	<RimMarket_ThiefCaught.label>在你的集市抓住窃贼</RimMarket_ThiefCaught.label>
+	<RimMarket_AwayStall.label>在他们的集市摆摊</RimMarket_AwayStall.label>
+	<RimMarket_FairPrize.label>在你的大集市赢得最佳摊位</RimMarket_FairPrize.label>
+	<RimMarket_TradeRoute.label>贸易路线上的好日子</RimMarket_TradeRoute.label>
+	<RimMarket_ConvoySaved.label>救了他们的商队</RimMarket_ConvoySaved.label>
+	<RimMarket_InnStay.label>在你的旅店睡得好</RimMarket_InnStay.label>
+
+</LanguageData>
