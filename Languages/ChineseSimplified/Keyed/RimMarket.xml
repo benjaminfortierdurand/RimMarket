@@ -38,6 +38,7 @@
 	<RimMarket.Settings.ShoppersVisit>路过的顾客</RimMarket.Settings.ShoppersVisit>
 	<RimMarket.Settings.ShoppersVisitHint>商人摆摊一两小时后，友好派系的几个人会带着银走过来，浏览摊位，买得起什么就买什么，大约五小时后回家；若在旅店睡了一晚则次日早晨再走。没有商人进城时，也会有客人成群来逛殖民地的摊位，频率见下方设置。无需访客模组。\n\n关闭：完全没有顾客。访客模组的客人仍会购买。</RimMarket.Settings.ShoppersVisitHint>
 	<RimMarket.ShoppersArrived>来自 {0} 的顾客听说这里有集市，正走过来。</RimMarket.ShoppersArrived>
+	<RimMarket.ShoppersRich>来自 {0} 的富商看上了你的{1}。</RimMarket.ShoppersRich>
 	<RimMarket.ShoppersForColonyStall>来自 {0} 的顾客来看看殖民地摊位上有什么。</RimMarket.ShoppersForColonyStall>
 	<RimMarket.ShoppersForBargains>来自 {0} 的顾客听说殖民地卖得便宜，前来捡漏。</RimMarket.ShoppersForBargains>
 	<RimMarket.Settings.InnPrice>集市旅店，每晚银价</RimMarket.Settings.InnPrice>
@@ -219,10 +220,10 @@
 	<RimMarket.QualityUpTo>最高 {0}</RimMarket.QualityUpTo>
 	<RimMarket.QualityFromShort>{0}+</RimMarket.QualityFromShort>
 	<RimMarket.StallSetupRefill>补货</RimMarket.StallSetupRefill>
-	<RimMarket.StallSetupRefillTip>勾选：摊位保留这么多在柜台上，每次卖出后搬运工会补货。该行永不售罄。\n未勾选：卖出这么多后，该行结束。</RimMarket.StallSetupRefillTip>
+	<RimMarket.StallSetupRefillTip>勾选：摊位保留这么多在柜台上，每次卖出后搬运工会补货。该行永不售罄。\n未勾选：卖出这么多后，该行结束。\n\n在多个框上拖动可一次设置多行。</RimMarket.StallSetupRefillTip>
 	<RimMarket.StallSetupReserve>留在家中</RimMarket.StallSetupReserve>
 	<RimMarket.StallSetupReserveTip>当殖民地只剩这么多时，搬运工就不再往摊位送，这样你永远不会卖掉最后的药。已在柜台上的仍会出售。\n\n按住 Shift 每次 10，Ctrl 每次 100。</RimMarket.StallSetupReserveTip>
-	<RimMarket.StallSetupAdjustTip>要从殖民地库存中卖多少。勾选“补货”时，为柜台上保留多少。可在框中输入数字，或用按钮：按住 Shift 每次 10，Ctrl 每次 100。全部：全卖，若已全卖则不卖。</RimMarket.StallSetupAdjustTip>
+	<RimMarket.StallSetupAdjustTip>要从殖民地库存中卖多少。勾选“补货”时，为柜台上保留多少。可在框中输入数字，或用按钮：按住 Shift 每次 10，Ctrl 每次 100。全部：全卖，若已全卖则不卖。在“全部”按钮上拖动可一次设置多行。</RimMarket.StallSetupAdjustTip>
 	<RimMarket.StallSetupPriceHeaderTip>要价，为物品售价的一定比例。与原版一样，武器按其价值的 20% 出售，家具 70%。Shift：每次 25%。</RimMarket.StallSetupPriceHeaderTip>
 	<RimMarket.StallSetupPriceTip>其售价的 {0}：每件 {1} 银。此价格下，看上它的顾客有 {2} 的概率买下。</RimMarket.StallSetupPriceTip>
 	<RimMarket.StallSetupSummary>共 {1} 行、{0} 件商品，全部卖出约 {2} 银。</RimMarket.StallSetupSummary>
