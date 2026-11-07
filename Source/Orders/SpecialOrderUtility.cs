@@ -505,7 +505,7 @@ namespace RimMarket.Orders
 			mgr.RemoveOrder(o);
 			if (o.convoy != null && !o.convoy.Destroyed) o.convoy.Destroy();
 			o.convoy = null;
-			Map map = o.home?.Map;
+			Map map = o.home?.Map ?? Find.AnyPlayerHomeMap;
 			int refund = map == null ? 0 : Mathf.RoundToInt(o.paid * refundFraction);
 			if (refund > 0) Refund(map, refund);
 			Messages.Message(key.Translate(o.faction?.Name ?? "?", o.SettlementName, refund), MessageTypeDefOf.NegativeEvent, historical: true);
