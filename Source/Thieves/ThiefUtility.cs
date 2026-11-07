@@ -119,8 +119,8 @@ namespace RimMarket.Thieves
 			Map map = stall.Map;
 			foreach (Pawn p in map.mapPawns.AllPawnsSpawned)
 			{
-				if (p == null || !p.RaceProps.Humanlike || !Watching(p)) continue;
-				bool colonist = p.IsColonist;
+				if (p == null || !Watching(p)) continue;
+				bool colonist = p.IsColonist || p.IsColonyMech;
 				bool guard = !colonist && IsCaravanGuard(p);
 				if (!colonist && !guard) continue;
 				if (!p.Position.InHorDistOf(stall.Position, radius)) continue;
