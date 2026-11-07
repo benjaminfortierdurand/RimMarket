@@ -32,6 +32,8 @@ namespace RimMarket.Market
 			this.stayTicks = stayTicks;
 		}
 
+		public override bool CanBlockHostileVisitors => false;
+
 		public override void LordJobTick()
 		{
 			if (Find.TickManager.TicksGame % FeedInterval == 0) MarketUtility.TopUpFood(lord, full: false);
