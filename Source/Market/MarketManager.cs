@@ -37,6 +37,7 @@ namespace RimMarket.Market
 		private const float GuardAlertRadius = 45f;
 		private const int CaughtGoodwill = 2;
 		private const int RobbedGoodwill = -3;
+		private const int HostileGoodwill = -75;
 
 		public static bool AnyThefts => Instance != null && Instance.thefts.Count > 0;
 
@@ -1518,8 +1519,9 @@ namespace RimMarket.Market
 			StallVisit v = VisitById(t.visitId);
 			Record(v, t.merchantFaction, MarketReputation.Safety, ReputationUtility.ThiefEscaped, "RimMarket.ReasonRobbed");
 			Faction f = t.merchantFaction;
-			if (f != null && !f.IsPlayer && !f.defeated && !f.HostileTo(Faction.OfPlayer))
-				f.TryAffectGoodwillWith(Faction.OfPlayer, RobbedGoodwill, canSendMessage: true, canSendHostilityLetter: false,
+			int robbed = f == null ? 0 : Mathf.Max(RobbedGoodwill, HostileGoodwill + 1 - f.PlayerGoodwill);
+			if (f != null && !f.IsPlayer && !f.defeated && !f.HostileTo(Faction.OfPlayer) && robbed < 0)
+				f.TryAffectGoodwillWith(Faction.OfPlayer, robbed, canSendMessage: true, canSendHostilityLetter: false,
 					RimMarketDefOf.RimMarket_StallRobbed);
 			if (v != null) v.endTick = Mathf.Min(v.endTick, Mathf.Max(Find.TickManager.TicksGame + 2500, v.endTick - 15000));
 			LookTargets targets = v != null && v.StallOk ? new LookTargets(v.stall.parent) : null;
