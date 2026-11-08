@@ -852,4 +852,27 @@ Elles sont à vous maintenant. Vos transporteurs les rangeront, ou vous pouvez y
 	<RimMarket.DealsNoAway>Aucune de vos caravanes ne tient d'étal. Envoyez-en une dans une ville amie et choisissez « Tenir un étal de marché » à son arrivée.</RimMarket.DealsNoAway>
 	<RimMarket.DealsHintComms>Ouvrez, fermez ou modifiez ces éléments depuis une console de communication, en parlant à la faction.</RimMarket.DealsHintComms>
 	<RimMarket.DealsHintAway>Une caravane plie bagage d'elle-même à la fin du jour de marché.</RimMarket.DealsHintAway>
+	
+		<!-- Thief reaction settings (ajouts récents) -->
+	<RimMarket.Settings.ThiefReaction>Quand un voleur frappe</RimMarket.Settings.ThiefReaction>
+	<RimMarket.Settings.ThiefReactionHint>Ce que fait le jeu quand un voleur attrape quelque chose.\n\nGarder la vitesse : rien ne change.\nVitesse normale : le jeu passe en vitesse normale jusqu'à ce que le voleur soit attrapé ou parti, comme en combat.\nPause : le jeu se met en pause dès que cela se produit.</RimMarket.Settings.ThiefReactionHint>
+	<RimMarket.Settings.ThiefKeepSpeed>Garder la vitesse</RimMarket.Settings.ThiefKeepSpeed>
+	<RimMarket.Settings.ThiefNormalSpeed>Vitesse normale</RimMarket.Settings.ThiefNormalSpeed>
+	<RimMarket.Settings.ThiefPause>Pause</RimMarket.Settings.ThiefPause>
+	<RimMarket.ShoppersRich>Un acheteur fortuné de {0} est venu pour votre {1}.</RimMarket.ShoppersRich>
+	<RimMarket.DealsGizmo>Affaires du marché ({0})</RimMarket.DealsGizmo>
+	<RimMarket.DealsGizmoDesc>Voyez tout ce que votre marché a en cours : routes commerciales et leurs convois, commandes spéciales, votre avis de recherche et ses offres, et vos propres caravanes tenant un étal dans une autre ville.</RimMarket.DealsGizmoDesc>
+	<RimMarket.DealsTitle>Affaires du marché</RimMarket.DealsTitle>
+	<RimMarket.DealsTabRoutes>Routes commerciales ({0}/{1})</RimMarket.DealsTabRoutes>
+	<RimMarket.DealsTabOrders>Commandes spéciales ({0})</RimMarket.DealsTabOrders>
+	<RimMarket.DealsTabWanted>Avis de recherche ({0})</RimMarket.DealsTabWanted>
+	<RimMarket.DealsTabAway>Étals en déplacement ({0})</RimMarket.DealsTabAway>
+	<RimMarket.DealsColTown>Ville</RimMarket.DealsColTown>
+	<RimMarket.DealsColMerchant>Marchand</RimMarket.DealsColMerchant>
+	<RimMarket.DealsColGoods>Marchandises</RimMarket.DealsColGoods>
+	<RimMarket.DealsColSold>Vendu</RimMarket.DealsColSold>
+	<RimMarket.DealsColStatus>Statut</RimMarket.DealsColStatus>
+	<RimMarket.DealsEvery>tous les {0} jours</RimMarket.DealsEvery>
+	<RimMarket.DealsPaid>{0} argent payés</RimMarket.DealsPaid>
+	
 </LanguageData>

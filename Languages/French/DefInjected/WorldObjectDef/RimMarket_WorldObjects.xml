@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RimMarket_TradeConvoy.label>convoi commercial</RimMarket_TradeConvoy.label>
+  <RimMarket_TradeConvoy.description>Des marchands en route vers votre marché le long d'une route commerciale, avec des gardes, des bêtes de somme et plus d'optimisme que les routes ne le méritent.</RimMarket_TradeConvoy.description>
+
+  <RimMarket_ConvoyBattle.label>combat de convoi</RimMarket_ConvoyBattle.label>
+  <RimMarket_ConvoyBattle.description>Un convoi commercial encerclé et se battant pour ses marchandises, avec vos gens au milieu.</RimMarket_ConvoyBattle.description>
+</LanguageData>

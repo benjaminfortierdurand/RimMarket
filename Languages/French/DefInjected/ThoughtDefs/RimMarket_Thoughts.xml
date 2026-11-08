@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RimMarket_BrowsedMarket.stages.browsed_the_market.label>a flâné au marché</RimMarket_BrowsedMarket.stages.browsed_the_market.label>
+  <RimMarket_BrowsedMarket.stages.browsed_the_market.description>J'ai flâné devant les étals, tripoté le tissu et discuté des prix que je n'avais pas l'intention de payer. Un bon après-midi.</RimMarket_BrowsedMarket.stages.browsed_the_market.description>
+
+  <RimMarket_BoughtAtMarket.stages.bought_something_at_the_market.label>a acheté quelque chose au marché</RimMarket_BoughtAtMarket.stages.bought_something_at_the_market.label>
+  <RimMarket_BoughtAtMarket.stages.bought_something_at_the_market.description>J'ai acheté quelque chose au marché. Je n'en avais probablement pas besoin. Ce n'est pas la question.</RimMarket_BoughtAtMarket.stages.bought_something_at_the_market.description>
+
+  <RimMarket_WentToFair.stages.went_to_the_Great_Fair.label>est allé à la Grande Foire</RimMarket_WentToFair.stages.went_to_the_Great_Fair.label>
+  <RimMarket_WentToFair.stages.went_to_the_Great_Fair.description>Des fanions, des foules, six caravanes et un homme vendant des noix grillées à un prix scandaleux. Notre petite ville s'est sentie comme une cité pendant un jour.</RimMarket_WentToFair.stages.went_to_the_Great_Fair.description>
+
+  <RimMarket_FairStallWon.stages.our_stall_won_the_fair.label>notre étal a gagné la foire</RimMarket_FairStallWon.stages.our_stall_won_the_fair.label>
+  <RimMarket_FairStallWon.stages.our_stall_won_the_fair.description>Six caravanes de marchands professionnels, et le meilleur étal de la foire était le nôtre. Des navets, surtout. De très bons navets.</RimMarket_FairStallWon.stages.our_stall_won_the_fair.description>
+
+  <RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-0.label>vente d'esclaves en ville</RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-0.label>
+  <RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-0.description>Des gens ont été vendus au poteau de notre marché aujourd'hui, comme il se doit, avec des enchères et un marteau. Les affaires comme elles devraient être.</RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-0.description>
+
+  <RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-1.label>vente d'esclaves en ville</RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-1.label>
+  <RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-1.description>Ils ont vendu des gens à notre marché aujourd'hui. J'ai détourné le regard. Ça n'a pas beaucoup aidé.</RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-1.description>
+
+  <RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-2.label>vente d'esclaves en ville</RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-2.label>
+  <RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-2.description>Des gens ont été mis aux enchères comme du bétail sur notre propre place du marché. J'entends encore les enchères.</RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-2.description>
+
+  <RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-3.label>vente d'esclaves en ville</RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-3.label>
+  <RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-3.description>Nous les avons laissés vendre des êtres humains au poteau dans notre ville. Quel genre d'endroit sommes-nous devenus ?</RimMarket_SlaveAuctionHeld.stages.slave_auction_in_town-3.description>
+</LanguageData>

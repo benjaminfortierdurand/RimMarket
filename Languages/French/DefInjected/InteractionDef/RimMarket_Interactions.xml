@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RimMarket_ChangeOfGuard.label>relève de la garde</RimMarket_ChangeOfGuard.label>
+  <RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings>
+    <li>r_logentry->[INITIATOR_nameDef] a passé la garde de l'étal à [RECIPIENT_nameDef].</li>
+    <li>r_logentry->[INITIATOR_nameDef] a dit à [RECIPIENT_nameDef] que rien ne s'était passé, puis l'a décrit en détail.</li>
+    <li>r_logentry->[INITIATOR_nameDef] a passé la garde à [RECIPIENT_nameDef], avec une liste de colons à ne pas truster.</li>
+    <li>r_logentry->[INITIATOR_nameDef] a prévenu [RECIPIENT_nameDef] à propos du colon qui n'arrête pas de toucher les marchandises.</li>
+    <li>r_logentry->[RECIPIENT_nameDef] a pris la garde de [INITIATOR_nameDef], qui baillait déjà.</li>
+  </RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings>
+</LanguageData>

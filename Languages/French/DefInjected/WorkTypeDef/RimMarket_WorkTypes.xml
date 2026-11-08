@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RimMarket_Shopkeeping.description>Se tenir aux étals de la colonie quand les clients sont en ville, annoncer un prix avec un visage impassible et prendre leur argent. Un bon causeur obtient plus pour les mêmes navets.</RimMarket_Shopkeeping.description>
+  <RimMarket_Shopkeeping.gerundLabel>tenue de boutique</RimMarket_Shopkeeping.gerundLabel>
+  <RimMarket_Shopkeeping.labelShort>boutiquier</RimMarket_Shopkeeping.labelShort>
+  <RimMarket_Shopkeeping.pawnLabel>Boutiquier</RimMarket_Shopkeeping.pawnLabel>
+  <RimMarket_Shopkeeping.verb>Tenir</RimMarket_Shopkeeping.verb>
+</LanguageData>

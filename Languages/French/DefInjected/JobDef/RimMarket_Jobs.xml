@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RimMarket_PostWantedNotice.reportString>rédige un avis de recherche.</RimMarket_PostWantedNotice.reportString>
+  <RimMarket_StandAtStall.reportString>s'occupe de l'étal.</RimMarket_StandAtStall.reportString>
+  <RimMarket_CallAuction.reportString>lance l'enchère.</RimMarket_CallAuction.reportString>
+  <RimMarket_StandOnBlock.reportString>enchaîné au poteau d'enchères.</RimMarket_StandOnBlock.reportString>
+  <RimMarket_WatchAuction.reportString>regarde l'enchère.</RimMarket_WatchAuction.reportString>
+  <RimMarket_AttendAuction.reportString>assiste à l'enchère.</RimMarket_AttendAuction.reportString>
+  <RimMarket_RestAtSpot.reportString>hors service.</RimMarket_RestAtSpot.reportString>
+  <RimMarket_CheckAnimals.reportString>vérifie les bêtes de somme.</RimMarket_CheckAnimals.reportString>
+  <RimMarket_SleepAtInn.reportString>dort à l'auberge.</RimMarket_SleepAtInn.reportString>
+  <RimMarket_PayStallFee.reportString>paie les frais d'étal.</RimMarket_PayStallFee.reportString>
+  <RimMarket_BrowseStall.reportString>flâne devant l'étal.</RimMarket_BrowseStall.reportString>
+  <RimMarket_BuyAtStall.reportString>fait du shopping à l'étal.</RimMarket_BuyAtStall.reportString>
+  <RimMarket_Snatch.reportString>chipe quelque chose à l'étal.</RimMarket_Snatch.reportString>
+  <RimMarket_CatchThief.reportString>poursuit TargetA.</RimMarket_CatchThief.reportString>
+  <RimMarket_TradeAtStall.reportString>commerce à l'étal.</RimMarket_TradeAtStall.reportString>
+  <RimMarket_TendColonyStall.reportString>s'occupe de l'étal de la colonie.</RimMarket_TendColonyStall.reportString>
+</LanguageData>

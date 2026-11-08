@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RimMarket_Concept_Guide.label>le guide du marché</RimMarket_Concept_Guide.label>
+  <RimMarket_Concept_Guide.helpText>Votre marqueur de marché a un bouton Guide. Il montre, étape par étape, ce dont votre marché a encore besoin sur cette carte, avec des boutons pour placer chaque élément, et une page qui explique pourquoi aucune caravane n'est encore venue.</RimMarket_Concept_Guide.helpText>
+
+  <RimMarket_Concept_Stall.label>les étals de marché</RimMarket_Concept_Stall.label>
+  <RimMarket_Concept_Stall.helpText>Un étal a besoin de l'emplacement du marchand au bout de son comptoir libre, et d'un chemin d'accès depuis le bord de la carte. Peignez son auvent d'ici, ou faites-en un étal de colonie pour vendre vos propres marchandises.</RimMarket_Concept_Stall.helpText>
+
+  <RimMarket_Concept_Spots.label>les emplacements du marché</RimMarket_Concept_Spots.label>
+  <RimMarket_Concept_Spots.helpText>Les bêtes de somme attendent au camp de caravane et les gardes hors service au poste de repos des gardes. Clôturez le camp et les animaux resteront sur place. Vous pouvez masquer un emplacement une fois que vous savez où il est.</RimMarket_Concept_Spots.helpText>
+</LanguageData>

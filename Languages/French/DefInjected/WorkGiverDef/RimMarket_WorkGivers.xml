@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RimMarket_TendColonyStall.label>s'occuper des étals de la colonie</RimMarket_TendColonyStall.label>
+  <RimMarket_TendColonyStall.gerund>s'occuper de</RimMarket_TendColonyStall.gerund>
+  <RimMarket_TendColonyStall.verb>s'occuper de</RimMarket_TendColonyStall.verb>
+
+  <RimMarket_StockColonyStall.label>réapprovisionner les étals de la colonie</RimMarket_StockColonyStall.label>
+  <RimMarket_StockColonyStall.gerund>réapprovisionnement de</RimMarket_StockColonyStall.gerund>
+  <RimMarket_StockColonyStall.verb>réapprovisionner</RimMarket_StockColonyStall.verb>
+</LanguageData>

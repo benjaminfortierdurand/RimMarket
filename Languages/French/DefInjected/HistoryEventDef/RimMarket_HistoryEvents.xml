@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RimMarket_StallRobbed.label>volé à votre marché</RimMarket_StallRobbed.label>
+  <RimMarket_ThiefCaught.label>voleur attrapé à votre marché</RimMarket_ThiefCaught.label>
+  <RimMarket_AwayStall.label>a tenu un étal à leur marché</RimMarket_AwayStall.label>
+  <RimMarket_FairPrize.label>a gagné le meilleur étal de votre foire</RimMarket_FairPrize.label>
+  <RimMarket_TradeRoute.label>une bonne journée sur la route commerciale</RimMarket_TradeRoute.label>
+  <RimMarket_ConvoySaved.label>a sauvé leur convoi</RimMarket_ConvoySaved.label>
+  <RimMarket_InnStay.label>a bien dormi à votre auberge</RimMarket_InnStay.label>
+</LanguageData>
