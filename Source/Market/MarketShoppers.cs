@@ -109,9 +109,9 @@ namespace RimMarket.Market
 		private const int MaxGroupsOnMap = 3;
 		private const int MinSilver = 60;
 		private const int MaxSilver = 220;
-		private const float RichBuyerChance = 0.2f;
+		private const float RichBuyerChance = 0.33f;
 		private const float RichPurseSlack = 1.15f;
-		private const int RichPurseCap = 1500;
+		private const int RichPurseCap = 3000;
 
 		public static bool MarketOpen(Map map)
 		{
