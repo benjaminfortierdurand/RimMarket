@@ -259,7 +259,7 @@ namespace RimMarket.Orders
 		private static void Depart(SpecialOrder o)
 		{
 			int now = Find.TickManager.TicksGame;
-			if (!TradeRouteUtility.TryPath(o.settlement.Tile, o.home.Tile, out List<int> nodes, out int ticks))
+			if (!TradeRouteUtility.TryRoute(o.settlement.Tile, o.home.Tile, out List<int> nodes, out int ticks, out bool sea))
 			{
 				o.pathFailures++;
 				o.departTick = now + TicksPerDay;
@@ -269,7 +269,7 @@ namespace RimMarket.Orders
 			var convoy = (TradeConvoy)WorldObjectMaker.MakeWorldObject(RimMarketDefOf.RimMarket_TradeConvoy);
 			convoy.Tile = o.settlement.Tile;
 			convoy.SetFaction(o.faction);
-			convoy.Setup(0, nodes);
+			convoy.Setup(0, nodes, sea);
 			convoy.orderId = o.id;
 			Find.WorldObjects.Add(convoy);
 			o.convoy = convoy;

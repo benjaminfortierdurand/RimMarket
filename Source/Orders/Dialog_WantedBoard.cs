@@ -89,7 +89,7 @@ namespace RimMarket.Orders
 		private static string OfferText(WantedOffer o, Map map)
 		{
 			string title = "RimMarket.WantedOfferTitle".Translate(o.faction.Name.Colorize(o.faction.Color), o.settlement.LabelCap,
-				(o.travelTicks + 30000).ToStringTicksToPeriod(), TradeRouteUtility.RiskText(o.risk, o.threat));
+				(o.travelTicks + 30000).ToStringTicksToPeriod(), TradeRouteUtility.RiskText(o.risk, o.threat, o.sea));
 			string goods = WantedUtility.ListOf(o.goods);
 			if (o.quality >= 0) goods += ", " + ((QualityCategory)o.quality).GetLabel();
 			if (o.partial) goods += " " + "RimMarket.WantedPartial".Translate();

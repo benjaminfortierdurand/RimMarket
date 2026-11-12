@@ -19,6 +19,7 @@ namespace RimMarket.Orders
 		public int travelTicks;
 		public float risk;
 		public Faction threat;
+		public bool sea;
 		public bool partial;
 		public int expiresTick;
 		public bool haggled;
@@ -39,6 +40,7 @@ namespace RimMarket.Orders
 			Scribe_Values.Look(ref travelTicks, "travelTicks");
 			Scribe_Values.Look(ref risk, "risk");
 			Scribe_References.Look(ref threat, "threat");
+			Scribe_Values.Look(ref sea, "sea");
 			Scribe_Values.Look(ref partial, "partial");
 			Scribe_Values.Look(ref expiresTick, "expiresTick");
 			Scribe_Values.Look(ref haggled, "haggled");

@@ -78,7 +78,7 @@ namespace RimMarket.Orders
 			for (int i = 0; i < towns.Count; i++)
 			{
 				Settlement s = towns[i];
-				if (!TradeRouteUtility.TryPath(s.Tile, home, out List<int> nodes, out int ticks))
+				if (!TradeRouteUtility.TryRoute(s.Tile, home, out List<int> nodes, out int ticks, out bool sea))
 				{
 					var none = new DiaOption(s.LabelCap);
 					none.Disable("RimMarket.RouteNoRoad".Translate());
@@ -86,9 +86,11 @@ namespace RimMarket.Orders
 					continue;
 				}
 				int tiles = nodes.Count - 1;
-				float risk = TradeRouteUtility.TripRisk(nodes, s.Tile.Layer, faction, false, out Faction threat);
-				var opt = new DiaOption("RimMarket.RouteSettlementOption".Translate(s.LabelCap, tiles, ticks.ToStringTicksToPeriod(),
-					TradeRouteUtility.RiskText(risk, threat)));
+				Faction threat = null;
+				float risk = sea ? 0f : TradeRouteUtility.TripRisk(nodes, s.Tile.Layer, faction, false, out threat);
+				string key = sea ? "RimMarket.RouteSeaOption" : "RimMarket.RouteSettlementOption";
+				var opt = new DiaOption(key.Translate(s.LabelCap, tiles, ticks.ToStringTicksToPeriod(),
+					TradeRouteUtility.RiskText(risk, threat, sea)));
 				opt.linkLateBind = () => WhatNode(negotiator, faction, s, tiles);
 				node.options.Add(opt);
 			}

@@ -42,6 +42,11 @@ namespace RimMarket.Routes
 		private static readonly float[] EscortOutcomeOdds = { 0.75f, 0.2f, 0.05f };
 		private const float PlunderMin = 0.3f;
 		private const float PlunderMax = 0.6f;
+		private const float SeaTicksFactor = 1.4f;
+		private const int MaxSeaSteps = 3000;
+		private static readonly List<PlanetTile> neighbors = new List<PlanetTile>();
+
+		public static int SeaStepTicks => Mathf.RoundToInt(CaravanTicksPerMoveUtility.DefaultTicksPerMove * SeaTicksFactor);
 
 		private static MarketManager Mgr => MarketManager.Instance;
 
@@ -154,8 +159,9 @@ namespace RimMarket.Routes
 			return 1f - keep;
 		}
 
-		public static string RiskText(float risk, Faction threat)
+		public static string RiskText(float risk, Faction threat, bool sea = false)
 		{
+			if (sea) return "RimMarket.RouteRiskSea".Translate();
 			if (risk < 0.03f) return "RimMarket.RouteRiskSafe".Translate();
 			return "RimMarket.RouteRisk".Translate(risk.ToStringPercent(), threat?.Name ?? "?");
 		}
@@ -163,7 +169,7 @@ namespace RimMarket.Routes
 		public static bool RollAmbush(TradeConvoy convoy, PlanetTile tile, out Faction attacker)
 		{
 			attacker = null;
-			if (convoy?.Faction == null) return false;
+			if (convoy?.Faction == null || convoy.sea) return false;
 			float c = ChanceAt(tile, convoy.Faction, convoy.escort, out attacker);
 			return attacker != null && Rand.Chance(c);
 		}
@@ -286,9 +292,55 @@ namespace RimMarket.Routes
 				for (int i = reversed.Count - 1; i >= 0; i--) nodes.Add(reversed[i].tileId);
 			}
 			for (int i = 0; i < nodes.Count - 1; i++)
-				ticks += Caravan_PathFollower.CostToMove(CaravanTicksPerMoveUtility.DefaultTicksPerMove,
-					new PlanetTile(nodes[i], from.Layer), new PlanetTile(nodes[i + 1], from.Layer));
+				ticks += StepCost(new PlanetTile(nodes[i], from.Layer), new PlanetTile(nodes[i + 1], from.Layer), false);
 			return nodes.Count > 0;
+		}
+
+		public static int StepCost(PlanetTile a, PlanetTile b, bool sea)
+		{
+			if (sea) return a == b ? 0 : SeaStepTicks;
+			return Caravan_PathFollower.CostToMove(CaravanTicksPerMoveUtility.DefaultTicksPerMove, a, b);
+		}
+
+		public static bool TrySeaPath(PlanetTile from, PlanetTile to, out List<int> nodes, out int ticks)
+		{
+			nodes = null;
+			ticks = 0;
+			if (!from.Valid || !to.Valid || from.Layer != to.Layer || from == to) return false;
+			WorldGrid grid = Find.WorldGrid;
+			Vector3 goal = grid.GetTileCenter(to);
+			var list = new List<int> { from.tileId };
+			PlanetTile cur = from;
+			float dist = Vector3.Distance(grid.GetTileCenter(cur), goal);
+			while (cur != to)
+			{
+				if (list.Count > MaxSeaSteps) return false;
+				grid.GetTileNeighbors(cur, neighbors);
+				PlanetTile best = PlanetTile.Invalid;
+				float bestDist = dist;
+				for (int i = 0; i < neighbors.Count; i++)
+				{
+					float d = Vector3.Distance(grid.GetTileCenter(neighbors[i]), goal);
+					if (d >= bestDist) continue;
+					bestDist = d;
+					best = neighbors[i];
+				}
+				if (!best.Valid) return false;
+				cur = best;
+				dist = bestDist;
+				list.Add(cur.tileId);
+			}
+			nodes = list;
+			ticks = (list.Count - 1) * SeaStepTicks;
+			return true;
+		}
+
+		public static bool TryRoute(PlanetTile from, PlanetTile to, out List<int> nodes, out int ticks, out bool sea)
+		{
+			sea = false;
+			if (TryPath(from, to, out nodes, out ticks)) return true;
+			sea = TrySeaPath(from, to, out nodes, out ticks);
+			return sea;
 		}
 
 		public static bool CaravansCanReach(Faction faction, Map map)
@@ -413,7 +465,7 @@ namespace RimMarket.Routes
 		public static bool Depart(TradeRoute r)
 		{
 			int now = Find.TickManager.TicksGame;
-			if (!TryPath(r.settlement.Tile, r.home.Tile, out List<int> nodes, out int ticks))
+			if (!TryRoute(r.settlement.Tile, r.home.Tile, out List<int> nodes, out int ticks, out bool sea))
 			{
 				r.pathFailures++;
 				r.nextDepartureTick = now + TicksPerDay;
@@ -423,7 +475,7 @@ namespace RimMarket.Routes
 			var convoy = (TradeConvoy)WorldObjectMaker.MakeWorldObject(RimMarketDefOf.RimMarket_TradeConvoy);
 			convoy.Tile = r.settlement.Tile;
 			convoy.SetFaction(r.faction);
-			convoy.Setup(r.id, nodes);
+			convoy.Setup(r.id, nodes, sea);
 			convoy.escort = r.escort;
 			Find.WorldObjects.Add(convoy);
 			r.convoy = convoy;

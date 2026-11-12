@@ -700,7 +700,9 @@ They are yours now. Your haulers will put them away, or you can jump to them fro
 	<RimMarket.RouteCloseYes>Close it</RimMarket.RouteCloseYes>
 	<RimMarket.RoutePickSettlement>Which town of {0} should send the convoys? The farther it is, the longer the road and the higher the fee.</RimMarket.RoutePickSettlement>
 	<RimMarket.RouteSettlementOption>{0} ({1} tiles, about {2} on the road, {3})</RimMarket.RouteSettlementOption>
+	<RimMarket.RouteSeaOption>{0} ({1} tiles, about {2}, {3})</RimMarket.RouteSeaOption>
 	<RimMarket.RouteRiskSafe>a safe road</RimMarket.RouteRiskSafe>
+	<RimMarket.RouteRiskSea>by sea, no ambushes</RimMarket.RouteRiskSea>
 	<RimMarket.RouteRisk>{0} chance of an ambush, mostly {1}</RimMarket.RouteRisk>
 	<RimMarket.RouteEscortNote>On this road, about {0} of convoys run into trouble, mostly from {1}. An escort brings that down to about {2}, and escorted convoys that are attacked usually come through.</RimMarket.RouteEscortNote>
 	<RimMarket.RouteWeeklyEscort>Every week, with an escort: {0} silver to open, then {1} per convoy</RimMarket.RouteWeeklyEscort>
@@ -715,6 +717,7 @@ They are yours now. Your haulers will put them away, or you can jump to them fro
 	<RimMarket.ConvoyUnderAttack>Under attack by {0}! They can hold out for about {1}.</RimMarket.ConvoyUnderAttack>
 	<RimMarket.ConvoyUnderAttackHelped>Under attack by {0}! Your people are fighting alongside them.</RimMarket.ConvoyUnderAttackHelped>
 	<RimMarket.ConvoyEscorted>Travelling with an escort.</RimMarket.ConvoyEscorted>
+	<RimMarket.ConvoyBySea>Travelling by sea.</RimMarket.ConvoyBySea>
 	<RimMarket.ConvoyPlunderedLine>Lost about {0} of its goods on the way.</RimMarket.ConvoyPlunderedLine>
 	<RimMarket.ConvoyAmbushedLabel>Convoy ambushed</RimMarket.ConvoyAmbushedLabel>
 	<RimMarket.ConvoyAmbushedHelp>The trade convoy from {0} has been ambushed by {1}!\n\nThey circled up and can hold out for about {2}. Send a caravan if you want to lend a hand, or let them sort it out.</RimMarket.ConvoyAmbushedHelp>

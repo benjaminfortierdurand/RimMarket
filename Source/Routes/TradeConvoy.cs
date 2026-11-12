@@ -18,6 +18,7 @@ namespace RimMarket.Routes
 		private float costTotal;
 		public int waitingSince = -1;
 		public bool escort;
+		public bool sea;
 		public Faction attacker;
 		public int ambushUntil = -1;
 		public float plunder;
@@ -88,9 +89,10 @@ namespace RimMarket.Routes
 			ClearSurvivors();
 		}
 
-		public void Setup(int routeId, List<int> nodes)
+		public void Setup(int routeId, List<int> nodes, bool sea)
 		{
 			this.routeId = routeId;
+			this.sea = sea;
 			path = new List<int>(nodes);
 			index = 0;
 			waitingSince = -1;
@@ -106,7 +108,7 @@ namespace RimMarket.Routes
 				costLeft = costTotal = 0f;
 				return;
 			}
-			costTotal = costLeft = Caravan_PathFollower.CostToMove(CaravanTicksPerMoveUtility.DefaultTicksPerMove, At(index), At(index + 1));
+			costTotal = costLeft = TradeRouteUtility.StepCost(At(index), At(index + 1), sea);
 		}
 
 		public bool StepForward()
@@ -133,7 +135,7 @@ namespace RimMarket.Routes
 				if (Waiting || AtEnd) return 0;
 				float total = costLeft;
 				for (int i = index + 1; i < path.Count - 1; i++)
-					total += Caravan_PathFollower.CostToMove(CaravanTicksPerMoveUtility.DefaultTicksPerMove, At(i), At(i + 1));
+					total += TradeRouteUtility.StepCost(At(i), At(i + 1), sea);
 				return Mathf.RoundToInt(total);
 			}
 		}
@@ -239,6 +241,7 @@ namespace RimMarket.Routes
 			if (route?.kind != null) line += "\n" + "RimMarket.ConvoyCarrying".Translate(route.kind.label);
 			Orders.SpecialOrder order = Orders.SpecialOrderUtility.OrderOf(this);
 			if (order != null) line += "\n" + "RimMarket.ConvoyCarryingOrder".Translate(Orders.SpecialOrderUtility.What(order));
+			if (sea) line += "\n" + "RimMarket.ConvoyBySea".Translate();
 			if (escort) line += "\n" + "RimMarket.ConvoyEscorted".Translate();
 			if (plunder > 0f) line += "\n" + "RimMarket.ConvoyPlunderedLine".Translate(plunder.ToStringPercent());
 			return text.NullOrEmpty() ? line : text + "\n" + line;
@@ -264,6 +267,7 @@ namespace RimMarket.Routes
 			Scribe_Values.Look(ref costTotal, "costTotal");
 			Scribe_Values.Look(ref waitingSince, "waitingSince", -1);
 			Scribe_Values.Look(ref escort, "escort");
+			Scribe_Values.Look(ref sea, "sea");
 			Scribe_References.Look(ref attacker, "attacker");
 			Scribe_Values.Look(ref ambushUntil, "ambushUntil", -1);
 			Scribe_Values.Look(ref plunder, "plunder");

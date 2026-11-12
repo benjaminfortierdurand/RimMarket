@@ -143,12 +143,14 @@ namespace RimMarket.Orders
 			Settlement town = null;
 			List<int> path = null;
 			int travel = 0;
+			bool bySea = false;
 			foreach (Settlement s in Find.WorldObjects.Settlements.Where(s => s.Faction == f && s.Spawned).OrderBy(s => Find.WorldGrid.ApproxDistanceInTiles(s.Tile, home)).Take(4))
 			{
-				if (!TradeRouteUtility.TryPath(s.Tile, home, out List<int> nodes, out int ticks)) continue;
+				if (!TradeRouteUtility.TryRoute(s.Tile, home, out List<int> nodes, out int ticks, out bool sea)) continue;
 				town = s;
 				path = nodes;
 				travel = ticks;
+				bySea = sea;
 				break;
 			}
 			if (town == null) return null;
@@ -179,6 +181,8 @@ namespace RimMarket.Orders
 			float markup = Mathf.Lerp(StrangerMarkup, FriendMarkup, liking) * Rand.Range(0.95f, 1.05f);
 			int tiles = path.Count - 1;
 			int price = Round10(value * markup + SpecialOrderUtility.TripPrice(tiles) * TripFactor);
+			Faction threat = null;
+			float risk = bySea ? 0f : TradeRouteUtility.TripRisk(path, town.Tile.Layer, f, false, out threat);
 			var offer = new WantedOffer
 			{
 				id = n.nextOfferId++,
@@ -189,8 +193,9 @@ namespace RimMarket.Orders
 				price = price,
 				tiles = tiles,
 				travelTicks = travel,
-				risk = TradeRouteUtility.TripRisk(path, town.Tile.Layer, f, false, out Faction threat),
+				risk = risk,
 				threat = threat,
+				sea = bySea,
 				partial = partial,
 				expiresTick = Now + OfferLifeTicks,
 			};

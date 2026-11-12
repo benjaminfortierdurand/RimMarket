@@ -119,7 +119,7 @@ namespace RimMarket.Routes
 			for (int i = 0; i < towns.Count; i++)
 			{
 				Settlement s = towns[i];
-				if (!TradeRouteUtility.TryPath(s.Tile, home, out List<int> nodes, out int ticks))
+				if (!TradeRouteUtility.TryRoute(s.Tile, home, out List<int> nodes, out int ticks, out bool sea))
 				{
 					var none = new DiaOption(s.LabelCap);
 					none.Disable("RimMarket.RouteNoRoad".Translate());
@@ -127,14 +127,16 @@ namespace RimMarket.Routes
 					continue;
 				}
 				int tiles = nodes.Count - 1;
-				float risk = TradeRouteUtility.TripRisk(nodes, s.Tile.Layer, faction, false, out Faction threat);
-				var opt = new DiaOption("RimMarket.RouteSettlementOption".Translate(s.LabelCap, tiles, ticks.ToStringTicksToPeriod(),
-					TradeRouteUtility.RiskText(risk, threat)));
+				Faction threat = null;
+				float risk = sea ? 0f : TradeRouteUtility.TripRisk(nodes, s.Tile.Layer, faction, false, out threat);
+				string key = sea ? "RimMarket.RouteSeaOption" : "RimMarket.RouteSettlementOption";
+				var opt = new DiaOption(key.Translate(s.LabelCap, tiles, ticks.ToStringTicksToPeriod(),
+					TradeRouteUtility.RiskText(risk, threat, sea)));
 				if (TradeRouteUtility.RouteFrom(mgr, s) != null) opt.Disable("RimMarket.RouteExists".Translate());
 				else
 				{
 					List<int> path = nodes;
-					opt.linkLateBind = () => KindNode(negotiator, faction, s, path);
+					opt.linkLateBind = () => KindNode(negotiator, faction, s, path, sea);
 				}
 				node.options.Add(opt);
 			}
@@ -143,7 +145,7 @@ namespace RimMarket.Routes
 			return node;
 		}
 
-		private static DiaNode KindNode(Pawn negotiator, Faction faction, Settlement s, List<int> path)
+		private static DiaNode KindNode(Pawn negotiator, Faction faction, Settlement s, List<int> path, bool sea)
 		{
 			Map map = negotiator.Map;
 			var node = new DiaNode("RimMarket.RoutePickKind".Translate(s.LabelCap));
@@ -151,20 +153,21 @@ namespace RimMarket.Routes
 			for (int i = 0; i < kinds.Count; i++)
 			{
 				TraderKindDef k = kinds[i];
-				node.options.Add(new DiaOption(k.LabelCap) { link = CadenceNode(negotiator, faction, s, path, k) });
+				node.options.Add(new DiaOption(k.LabelCap) { link = CadenceNode(negotiator, faction, s, path, k, sea) });
 			}
 			if (kinds.Count == 0) node.text += "\n\n" + "RimMarket.RouteNoKinds".Translate();
 			node.options.Add(Back(negotiator, faction));
 			return node;
 		}
 
-		private static DiaNode CadenceNode(Pawn negotiator, Faction faction, Settlement s, List<int> path, TraderKindDef kind)
+		private static DiaNode CadenceNode(Pawn negotiator, Faction faction, Settlement s, List<int> path, TraderKindDef kind, bool sea)
 		{
 			Map map = negotiator.Map;
 			int silver = AuctionUtility.ColonySilver(map);
 			int tiles = path.Count - 1;
-			float risk = TradeRouteUtility.TripRisk(path, s.Tile.Layer, faction, false, out Faction threat);
-			float escorted = TradeRouteUtility.TripRisk(path, s.Tile.Layer, faction, true, out _);
+			Faction threat = null;
+			float risk = sea ? 0f : TradeRouteUtility.TripRisk(path, s.Tile.Layer, faction, false, out threat);
+			float escorted = sea ? 0f : TradeRouteUtility.TripRisk(path, s.Tile.Layer, faction, true, out _);
 			string text = "RimMarket.RoutePickCadence".Translate(kind.label, s.LabelCap, silver);
 			if (risk >= 0.03f) text += "\n\n" + "RimMarket.RouteEscortNote".Translate(risk.ToStringPercent(), threat?.Name ?? "?", escorted.ToStringPercent());
 			var node = new DiaNode(text);
