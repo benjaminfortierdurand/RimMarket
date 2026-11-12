@@ -1701,9 +1701,22 @@ namespace RimMarket.Market
 
 		private List<LeavingGroup> leaving = new List<LeavingGroup>();
 
+		private int nextReputationTick;
+		private int nextAwayTick;
+		private int nextFairTick;
+		private int nextPatrolTick;
+
+		private static bool Due(ref int next, int interval)
+		{
+			int now = Find.TickManager.TicksGame;
+			if (now < next) return false;
+			next = now + interval;
+			return true;
+		}
+
 		public override void GameComponentTick()
 		{
-			if (Find.TickManager.TicksGame % ReputationInterval == 0)
+			if (Due(ref nextReputationTick, ReputationInterval))
 			{
 				Step(ReputationTick);
 				if (InnBeds.Any || innPaid.Count > 0) Step(InnTick);
@@ -1713,10 +1726,10 @@ namespace RimMarket.Market
 				if (S.shoppersVisit) Step(ColonyShoppers);
 				if (leaving.Count > 0) Step(() => Stragglers.Tick(leaving));
 			}
-			if (awayStalls.Count > 0 && Find.TickManager.TicksGame % AwayCheckInterval == 0) Step(AwayTick);
-			if (fairs.Count > 0 && Find.TickManager.TicksGame % FairCheckInterval == 0) Step(FairTick);
+			if (awayStalls.Count > 0 && Due(ref nextAwayTick, AwayCheckInterval)) Step(AwayTick);
+			if (fairs.Count > 0 && Due(ref nextFairTick, FairCheckInterval)) Step(FairTick);
 			if (visits.Count == 0 && thefts.Count == 0) return;
-			if (Find.TickManager.TicksGame % PatrolInterval != 0) return;
+			if (!Due(ref nextPatrolTick, PatrolInterval)) return;
 			try
 			{
 				Patrol();
