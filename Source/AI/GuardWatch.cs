@@ -187,7 +187,7 @@ namespace RimMarket.AI
 			{
 				Pawn p = pawns[i];
 				if (p == null || !p.Spawned || p.jobs?.curJob == null || !p.Awake()) continue;
-				if (Idle(p.CurJobDef)) p.jobs.EndCurrentJob(JobCondition.InterruptForced);
+				if (Idle(p.CurJobDef) || GuardPastimes.Playing(p.CurJob)) p.jobs.EndCurrentJob(JobCondition.InterruptForced);
 			}
 			pawns.Clear();
 		}

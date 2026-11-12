@@ -409,7 +409,7 @@ namespace RimMarket.Inn
 					v.innExtended = true;
 					v.endTick += GoodNightExtraTicks;
 					if (RimMarketMod.Settings.showMessages)
-						Messages.Message("RimMarket.InnStayLonger".Translate(p.LabelShortCap), new LookTargets(p), MessageTypeDefOf.PositiveEvent, historical: false);
+						Messages.Message("RimMarket.InnStayLonger".Translate(p.LabelShortCap), new LookTargets(p), MessageTypeDefOf.PositiveEvent, historical: true);
 				}
 				return;
 			}

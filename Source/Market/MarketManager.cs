@@ -1218,7 +1218,7 @@ namespace RimMarket.Market
 					return;
 			}
 			if (!S.showMessages) return;
-			Messages.Message(text + " " + ReputationUtility.TakingsText(v), targets, type, historical: false);
+			Messages.Message(text + " " + ReputationUtility.TakingsText(v), targets, type, historical: true);
 		}
 
 		public void Notify_Traded(Pawn trader, float bought, float sold)
@@ -1494,6 +1494,12 @@ namespace RimMarket.Market
 		private const int KnownThievesKept = 100;
 
 		private List<int> knownThieves = new List<int>();
+		private List<int> letInLords = new List<int>();
+
+		public void MarkLetIn(Lord lord)
+		{
+			if (lord != null && !letInLords.Contains(lord.loadID)) letInLords.Add(lord.loadID);
+		}
 
 		public void MarkThief(Pawn thief)
 		{
@@ -1656,6 +1662,7 @@ namespace RimMarket.Market
 					rival.ReceiveMemo(LordJob_AuctionBuyers.MemoDone);
 					continue;
 				}
+				if (letInLords.Contains(v.lord.loadID)) continue;
 				PackUpForFeud(v, rival.faction);
 			}
 		}
@@ -1771,19 +1778,19 @@ namespace RimMarket.Market
 		private static void Say(string key, NamedArgument a, LookTargets targets, MessageTypeDef type)
 		{
 			if (!S.showMessages) return;
-			Messages.Message(key.Translate(a), targets, type, historical: false);
+			Messages.Message(key.Translate(a), targets, type, historical: true);
 		}
 
 		private static void Say(string key, NamedArgument a, NamedArgument b, LookTargets targets, MessageTypeDef type)
 		{
 			if (!S.showMessages) return;
-			Messages.Message(key.Translate(a, b), targets, type, historical: false);
+			Messages.Message(key.Translate(a, b), targets, type, historical: true);
 		}
 
 		private static void Say(string key, NamedArgument a, NamedArgument b, NamedArgument c, LookTargets targets, MessageTypeDef type)
 		{
 			if (!S.showMessages) return;
-			Messages.Message(key.Translate(a, b, c), targets, type, historical: false);
+			Messages.Message(key.Translate(a, b, c), targets, type, historical: true);
 		}
 
 		public override void ExposeData()
@@ -1822,9 +1829,12 @@ namespace RimMarket.Market
 			Scribe_Values.Look(ref guideOffered, "guideOffered");
 			Scribe_Collections.Look(ref leaving, "leaving", LookMode.Deep);
 			Scribe_Collections.Look(ref knownThieves, "knownThieves", LookMode.Value);
+			if (Scribe.mode == LoadSaveMode.Saving) letInLords.RemoveAll(id => !Find.Maps.Any(m => m.lordManager.lords.Any(l => l.loadID == id)));
+			Scribe_Collections.Look(ref letInLords, "letInLords", LookMode.Value);
 			if (Scribe.mode == LoadSaveMode.PostLoadInit)
 			{
 				if (knownThieves == null) knownThieves = new List<int>();
+				if (letInLords == null) letInLords = new List<int>();
 				if (leaving == null) leaving = new List<LeavingGroup>();
 				leaving.RemoveAll(g => g == null || g.faction == null);
 				if (fairs == null) fairs = new List<GreatFair>();

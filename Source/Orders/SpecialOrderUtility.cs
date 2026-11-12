@@ -276,7 +276,7 @@ namespace RimMarket.Orders
 			o.departed = true;
 			if (ShowMessages)
 				Messages.Message("RimMarket.OrderLeft".Translate(o.SettlementName, ticks.ToStringTicksToPeriod()),
-					new LookTargets(convoy), MessageTypeDefOf.PositiveEvent, historical: false);
+					new LookTargets(convoy), MessageTypeDefOf.PositiveEvent, historical: true);
 		}
 
 		public static bool TryArrive(TradeConvoy convoy)
@@ -290,7 +290,7 @@ namespace RimMarket.Orders
 				return false;
 			}
 			int now = Find.TickManager.TicksGame;
-			bool welcome = MarketTruce.Welcome(map, o.faction);
+			bool welcome = convoy.letIn || MarketTruce.Welcome(map, o.faction);
 			if (welcome && !TradeRouteUtility.CaravansCanReach(o.faction, map))
 			{
 				Cancel(o, "RimMarket.OrderNoCaravans", 1f);
@@ -308,6 +308,7 @@ namespace RimMarket.Orders
 				if (ConvoyBattleUtility.ArriveWith(convoy, () => Compat.RimTollBridge.WithoutBooth(() => IncidentDefOf.TraderCaravanArrival.Worker.TryExecute(parms))))
 				{
 					Lord lord = TradeRouteUtility.NewestTraderLord(map, o.faction);
+					if (convoy.letIn) Mgr?.MarkLetIn(lord);
 					o.arrivedLordId = lord?.loadID ?? -1;
 					o.arrivedTick = now;
 					o.delivered = true;
@@ -332,9 +333,12 @@ namespace RimMarket.Orders
 				Cancel(o, "RimMarket.OrderTurnedBack", LostRefund);
 				return false;
 			}
-			if (now == convoy.waitingSince && ShowMessages)
-				Messages.Message((welcome ? "RimMarket.RouteConvoyDelayed" : "RimMarket.RouteConvoyWaiting").Translate(o.SettlementName),
-					new LookTargets(convoy), MessageTypeDefOf.NeutralEvent, historical: false);
+			if (now == convoy.waitingSince)
+			{
+				if (!welcome) TradeRouteUtility.AskToLetIn(convoy, map, o.faction, o.SettlementName);
+				else if (ShowMessages)
+					Messages.Message("RimMarket.RouteConvoyDelayed".Translate(o.SettlementName), new LookTargets(convoy), MessageTypeDefOf.NeutralEvent, historical: true);
+			}
 			return false;
 		}
 

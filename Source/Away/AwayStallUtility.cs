@@ -244,7 +244,7 @@ namespace RimMarket.Away
 		{
 			if (!S.showMessages) return;
 			LookTargets targets = st?.caravan != null && st.caravan.Spawned ? new LookTargets(st.caravan) : null;
-			Messages.Message(text, targets, type, historical: false);
+			Messages.Message(text, targets, type, historical: true);
 		}
 	}
 }

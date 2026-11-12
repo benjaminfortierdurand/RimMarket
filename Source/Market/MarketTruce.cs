@@ -23,14 +23,31 @@ namespace RimMarket.Market
 			List<Lord> lords = map.lordManager.lords;
 			for (int i = 0; i < lords.Count; i++)
 			{
-				Lord l = lords[i];
-				if (l.faction == null || l.faction == faction || l.faction == home || !l.AnyActivePawn) continue;
-				LordJob job = l.LordJob;
-				if (job != null && (!job.CanBlockHostileVisitors || job is LordJob_VoluntarilyJoinable)) continue;
-				if (HotelsBridge.PeacefulGuests(l)) continue;
-				if (l.faction.HostileTo(faction) && !l.faction.HostileTo(home)) return l;
+				if (Blocks(lords[i], faction, home)) return lords[i];
 			}
 			return null;
+		}
+
+		public static List<Faction> BlockingFactions(Map map, Faction faction)
+		{
+			var found = new List<Faction>();
+			if (map == null || faction == null) return found;
+			Faction home = map.ParentFaction ?? Faction.OfPlayer;
+			List<Lord> lords = map.lordManager.lords;
+			for (int i = 0; i < lords.Count; i++)
+			{
+				if (Blocks(lords[i], faction, home) && !found.Contains(lords[i].faction)) found.Add(lords[i].faction);
+			}
+			return found;
+		}
+
+		private static bool Blocks(Lord l, Faction faction, Faction home)
+		{
+			if (l.faction == null || l.faction == faction || l.faction == home || !l.AnyActivePawn) return false;
+			LordJob job = l.LordJob;
+			if (job != null && (!job.CanBlockHostileVisitors || job is LordJob_VoluntarilyJoinable)) return false;
+			if (HotelsBridge.PeacefulGuests(l)) return false;
+			return l.faction.HostileTo(faction) && !l.faction.HostileTo(home);
 		}
 
 		public static Lord RivalOf(Lord lord)

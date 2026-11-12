@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<LetterDef ParentName="CustomChoiceLetterBase">
+		<defName>RimMarket_ConvoyBlocked</defName>
+		<letterClass>RimMarket.Routes.ChoiceLetter_ConvoyBlocked</letterClass>
+	</LetterDef>
+
+</Defs>

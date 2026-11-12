@@ -40,6 +40,8 @@ namespace RimMarket
 
 		public static WorldObjectDef RimMarket_ConvoyBattle;
 
+		public static LetterDef RimMarket_ConvoyBlocked;
+
 		public static HistoryEventDef RimMarket_ConvoySaved;
 
 		public static HistoryEventDef RimMarket_TradeRoute;

@@ -17,6 +17,7 @@ namespace RimMarket.Routes
 		private float costLeft;
 		private float costTotal;
 		public int waitingSince = -1;
+		public bool letIn;
 		public bool escort;
 		public bool sea;
 		public Faction attacker;
@@ -96,6 +97,7 @@ namespace RimMarket.Routes
 			path = new List<int>(nodes);
 			index = 0;
 			waitingSince = -1;
+			letIn = false;
 			NextCost();
 		}
 
@@ -141,6 +143,8 @@ namespace RimMarket.Routes
 		}
 
 		private const int ArriveErrorKey = 0x524D4B31;
+
+		public void ArriveNow() => SafeArrive();
 
 		private void SafeArrive()
 		{
@@ -266,6 +270,7 @@ namespace RimMarket.Routes
 			Scribe_Values.Look(ref costLeft, "costLeft");
 			Scribe_Values.Look(ref costTotal, "costTotal");
 			Scribe_Values.Look(ref waitingSince, "waitingSince", -1);
+			Scribe_Values.Look(ref letIn, "letIn");
 			Scribe_Values.Look(ref escort, "escort");
 			Scribe_Values.Look(ref sea, "sea");
 			Scribe_References.Look(ref attacker, "attacker");

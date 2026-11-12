@@ -311,22 +311,22 @@ namespace RimMarket.Orders
 				{
 					for (int i = 0; i < o.barter.Count; i++) o.barter[i].count = Mathf.Max(1, Mathf.RoundToInt(o.barter[i].count * keep));
 					o.barterFallback = Round10(o.barterFallback * keep);
-					Messages.Message("RimMarket.WantedHaggleWonBarter".Translate(negotiator.LabelShort, town), MessageTypeDefOf.PositiveEvent, historical: false);
+					Messages.Message("RimMarket.WantedHaggleWonBarter".Translate(negotiator.LabelShort, town), MessageTypeDefOf.PositiveEvent, historical: true);
 				}
 				else
 				{
 					o.price = Round10(o.price * keep);
-					Messages.Message("RimMarket.WantedHaggleWon".Translate(negotiator.LabelShort, town, o.price), MessageTypeDefOf.PositiveEvent, historical: false);
+					Messages.Message("RimMarket.WantedHaggleWon".Translate(negotiator.LabelShort, town, o.price), MessageTypeDefOf.PositiveEvent, historical: true);
 				}
 				return;
 			}
 			if (Rand.Chance(HaggleWalkout[step]))
 			{
 				n.offers.Remove(o);
-				Messages.Message("RimMarket.WantedHaggleWalked".Translate(town), MessageTypeDefOf.NegativeEvent, historical: false);
+				Messages.Message("RimMarket.WantedHaggleWalked".Translate(town), MessageTypeDefOf.NegativeEvent, historical: true);
 				return;
 			}
-			Messages.Message("RimMarket.WantedHaggleRefused".Translate(town), MessageTypeDefOf.NeutralEvent, historical: false);
+			Messages.Message("RimMarket.WantedHaggleRefused".Translate(town), MessageTypeDefOf.NeutralEvent, historical: true);
 		}
 
 		public static bool HasBarterNow(WantedOffer o, Map map)

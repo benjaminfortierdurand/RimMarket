@@ -21,6 +21,8 @@ namespace RimMarket.Fair
 		public const int MaxCaravans = 6;
 		public const int MerchantCap = 8;
 		public const int MaxShopperGroups = 5;
+		private const int MaxCrowdMin = 5;
+		private const int MaxCrowd = 7;
 		public const int MinStalls = 3;
 		public const int WaveTicks = 5000;
 		public const int LastWaveMargin = 10000;
@@ -130,7 +132,7 @@ namespace RimMarket.Fair
 		{
 			MarketManager.Instance?.RemoveFair(fair);
 			if (!key.NullOrEmpty())
-				Messages.Message(key.Translate(), new LookTargets(fair.marker), MessageTypeDefOf.NegativeEvent, historical: false);
+				Messages.Message(key.Translate(), new LookTargets(fair.marker), MessageTypeDefOf.NegativeEvent, historical: true);
 		}
 
 		public static void Tick(MarketManager mgr, GreatFair fair)
@@ -206,10 +208,11 @@ namespace RimMarket.Fair
 			if (MarketShoppers.GroupsOn(fair.map) >= MaxShopperGroups) return;
 			CompMarketStall target = TargetStall(fair);
 			if (target == null) return;
-			string from = MarketShoppers.Send(fair.map, target, null, ShopperPurse);
+			CrowdSize(StallsOf(fair).Count, out int min, out int max);
+			string from = MarketShoppers.Send(fair.map, target, null, ShopperPurse, false, min, max);
 			if (from == null) return;
 			fair.waves++;
-			Messages.Message("RimMarket.FairCrowd".Translate(from), new LookTargets(target.parent), MessageTypeDefOf.NeutralEvent, historical: false);
+			Messages.Message("RimMarket.FairCrowd".Translate(from), new LookTargets(target.parent), MessageTypeDefOf.NeutralEvent, historical: true);
 		}
 
 		private static int MerchantTakings(StallVisit v) => Mathf.RoundToInt(v.silverEarned + v.colonyBought);
@@ -300,6 +303,12 @@ namespace RimMarket.Fair
 				if (stalls[i].Spawned && MarketUtility.MarkerFor(stalls[i]) == marker) list.Add(stalls[i]);
 			}
 			return list;
+		}
+
+		public static void CrowdSize(int stalls, out int min, out int max)
+		{
+			min = Mathf.Clamp(2 + stalls / 4, 2, MaxCrowdMin);
+			max = Mathf.Clamp(3 + stalls / 2, 4, MaxCrowd);
 		}
 
 		private static CompMarketStall TargetStall(GreatFair fair)

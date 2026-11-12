@@ -428,7 +428,7 @@ namespace RimMarket.Routes
 			if (route.convoy != null && !route.convoy.Destroyed) route.convoy.Destroy();
 			route.convoy = null;
 			if (!messageKey.NullOrEmpty() && ShowMessages)
-				Messages.Message(messageKey.Translate(route.faction?.Name ?? "?", route.SettlementName), MessageTypeDefOf.NegativeEvent, historical: false);
+				Messages.Message(messageKey.Translate(route.faction?.Name ?? "?", route.SettlementName), MessageTypeDefOf.NegativeEvent, historical: true);
 		}
 
 		private static string BrokenReason(MarketManager mgr, TradeRoute r)
@@ -483,7 +483,7 @@ namespace RimMarket.Routes
 			r.nextDepartureTick = now + r.intervalDays * TicksPerDay;
 			if (ShowMessages)
 				Messages.Message("RimMarket.RouteConvoyLeft".Translate(r.SettlementName, r.kind?.label ?? "?", ticks.ToStringTicksToPeriod()),
-					new LookTargets(convoy), MessageTypeDefOf.PositiveEvent, historical: false);
+					new LookTargets(convoy), MessageTypeDefOf.PositiveEvent, historical: true);
 			return true;
 		}
 
@@ -498,7 +498,7 @@ namespace RimMarket.Routes
 				return false;
 			}
 			int now = Find.TickManager.TicksGame;
-			bool welcome = MarketTruce.Welcome(map, r.faction);
+			bool welcome = convoy.letIn || MarketTruce.Welcome(map, r.faction);
 			int toll = EffectiveToll(r.toll);
 			if (welcome && toll > 0 && AuctionUtility.ColonySilver(map) < toll)
 			{
@@ -525,6 +525,7 @@ namespace RimMarket.Routes
 				if (ConvoyBattleUtility.ArriveWith(convoy, () => RimTollBridge.WithoutBooth(() => IncidentDefOf.TraderCaravanArrival.Worker.TryExecute(parms))))
 				{
 					Lord lord = NewestTraderLord(map, r.faction);
+					if (convoy.letIn) Mgr?.MarkLetIn(lord);
 					r.arrivedLordId = lord?.loadID ?? -1;
 					r.arrivedTick = now;
 					if (convoy.plunder > 0f) Plunder(lord, convoy.plunder);
@@ -540,13 +541,26 @@ namespace RimMarket.Routes
 				r.convoy = null;
 				if (!convoy.Destroyed) convoy.Destroy();
 				if (ShowMessages)
-					Messages.Message("RimMarket.RouteConvoyTurnedBack".Translate(r.SettlementName), MessageTypeDefOf.NegativeEvent, historical: false);
+					Messages.Message("RimMarket.RouteConvoyTurnedBack".Translate(r.SettlementName), MessageTypeDefOf.NegativeEvent, historical: true);
 				return false;
 			}
-			if (now == convoy.waitingSince && ShowMessages)
-				Messages.Message((welcome ? "RimMarket.RouteConvoyDelayed" : "RimMarket.RouteConvoyWaiting").Translate(r.SettlementName),
-					new LookTargets(convoy), MessageTypeDefOf.NeutralEvent, historical: false);
+			if (now == convoy.waitingSince)
+			{
+				if (!welcome) AskToLetIn(convoy, map, r.faction, r.SettlementName);
+				else if (ShowMessages)
+					Messages.Message("RimMarket.RouteConvoyDelayed".Translate(r.SettlementName), new LookTargets(convoy), MessageTypeDefOf.NeutralEvent, historical: true);
+			}
 			return false;
+		}
+
+		public static void AskToLetIn(TradeConvoy convoy, Map map, Faction faction, string from)
+		{
+			List<Faction> enemies = MarketTruce.BlockingFactions(map, faction);
+			string names = enemies.Count == 0 ? "?" : string.Join(", ", enemies.ConvertAll(f => f.Name.ToString()));
+			ChoiceLetter made = LetterMaker.MakeLetter("RimMarket.ConvoyBlockedLabel".Translate(),
+				"RimMarket.ConvoyBlockedText".Translate(from, faction.Name, names), RimMarketDefOf.RimMarket_ConvoyBlocked, new LookTargets(convoy), faction);
+			if (made is ChoiceLetter_ConvoyBlocked letter) letter.convoy = convoy;
+			Find.LetterStack.ReceiveLetter(made);
 		}
 
 		public static void GiveUp(TradeConvoy convoy)
@@ -591,7 +605,7 @@ namespace RimMarket.Routes
 				r.strikes++;
 				if (r.strikes < MaxStrikes && ShowMessages)
 					Messages.Message("RimMarket.RouteStrike".Translate(r.faction?.Name ?? "?", r.strikes, MaxStrikes),
-						MessageTypeDefOf.NegativeEvent, historical: false);
+						MessageTypeDefOf.NegativeEvent, historical: true);
 				return;
 			}
 			if (verdict <= 0) return;

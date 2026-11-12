@@ -180,10 +180,10 @@ namespace RimMarket.Market
 				buyer.inventory.innerContainer.TryAdd(silver);
 			}
 			if (RimMarketMod.Settings.showMessages)
-				Messages.Message("RimMarket.ShoppersRich".Translate(buyer.Faction?.Name ?? "?", wanted.LabelNoCount), new LookTargets(buyer), MessageTypeDefOf.NeutralEvent, historical: false);
+				Messages.Message("RimMarket.ShoppersRich".Translate(buyer.Faction?.Name ?? "?", wanted.LabelNoCount), new LookTargets(buyer), MessageTypeDefOf.NeutralEvent, historical: true);
 		}
 
-		public static string Send(Map map, CompMarketStall stall, Faction exclude, float purse = 1f, bool rich = false)
+		public static string Send(Map map, CompMarketStall stall, Faction exclude, float purse = 1f, bool rich = false, int minSize = 1, int maxSize = 3)
 		{
 			if (map == null || stall == null || !stall.Spawned) return null;
 			Thing marker = MarketUtility.MarkerFor(stall);
@@ -197,7 +197,7 @@ namespace RimMarket.Market
 			PawnKindDef kind = MarketUtility.CivilianKind(faction);
 			if (kind == null) return null;
 			var group = new List<Pawn>();
-			int size = Rand.RangeInclusive(1, 3);
+			int size = Rand.RangeInclusive(minSize, Mathf.Max(minSize, maxSize));
 			for (int i = 0; i < size; i++)
 			{
 				Pawn p = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, faction, PawnGenerationContext.NonPlayer, forceGenerateNewPawn: true));

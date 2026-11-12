@@ -213,7 +213,7 @@ namespace RimMarket.Orders
 			foreach (KeyValuePair<ThingDef, int> kv in wanted) goods.Add(new ThingDefCountClass(kv.Key, kv.Value));
 			int replies = WantedUtility.Post(map, goods);
 			Messages.Message(replies > 0 ? "RimMarket.WantedPosted".Translate() : "RimMarket.WantedNobody".Translate(),
-				replies > 0 ? MessageTypeDefOf.NeutralEvent : MessageTypeDefOf.NegativeEvent, historical: false);
+				replies > 0 ? MessageTypeDefOf.NeutralEvent : MessageTypeDefOf.NegativeEvent, historical: true);
 			Close();
 		}
 	}

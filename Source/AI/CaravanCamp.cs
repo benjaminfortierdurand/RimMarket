@@ -311,6 +311,7 @@ namespace RimMarket.AI
 
 	public class JobGiver_RestAtSpot : ThinkNode_JobGiver
 	{
+		private const float PlayWeight = 0.35f;
 		private const float SitWeight = 0.5f;
 		private const float StrollWeight = 0.3f;
 		private const int MinSit = 1200;
@@ -325,6 +326,12 @@ namespace RimMarket.AI
 			PawnDuty duty = pawn.mindState?.duty;
 			if (!(CaravanCamp.SpotOf(duty) is Thing spot) || !spot.Spawned) return null;
 			float roll = Rand.Value;
+			if (roll < PlayWeight)
+			{
+				Job play = GuardPastimes.PlayJob(pawn, spot, duty.wanderRadius ?? CaravanCamp.SpotRadius);
+				return play ?? SitJob(pawn, spot, duty);
+			}
+			roll = (roll - PlayWeight) / (1f - PlayWeight);
 			if (roll >= SitWeight)
 			{
 				roll -= SitWeight;

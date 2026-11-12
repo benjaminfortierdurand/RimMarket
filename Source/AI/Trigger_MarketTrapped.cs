@@ -39,7 +39,7 @@ namespace RimMarket.AI
 				if (!toldWaiting)
 				{
 					toldWaiting = true;
-					Messages.Message("RimMarket.CaravanWaitsDanger".Translate(lord.faction?.Name ?? "?"), new LookTargets(stuck), MessageTypeDefOf.NeutralEvent, historical: false);
+					Messages.Message("RimMarket.CaravanWaitsDanger".Translate(lord.faction?.Name ?? "?"), new LookTargets(stuck), MessageTypeDefOf.NeutralEvent, historical: true);
 				}
 				return false;
 			}

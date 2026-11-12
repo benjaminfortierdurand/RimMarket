@@ -266,7 +266,7 @@ namespace RimMarket.Reputation
 			parms.traderKind = kind;
 			if (!def.Worker.TryExecute(parms)) return false;
 			if (announce && RimMarketMod.Settings.showMessages)
-				Messages.Message("RimMarket.MessageWordSpread".Translate(faction.Name, kind.label), MessageTypeDefOf.PositiveEvent, historical: false);
+				Messages.Message("RimMarket.MessageWordSpread".Translate(faction.Name, kind.label), MessageTypeDefOf.PositiveEvent, historical: true);
 			return true;
 		}
 

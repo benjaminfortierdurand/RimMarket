@@ -544,7 +544,7 @@ namespace RimMarket.Market
 			MoteMaker.ThrowText(v.stall.DrawPos, v.map, "+" + value, 3.9f);
 			if (RimMarketMod.Settings.showMessages)
 				Messages.Message("RimMarket.MessageSharePaid".Translate(v.faction?.Name ?? "?", value),
-					new LookTargets(v.stall.parent), MessageTypeDefOf.PositiveEvent, historical: false);
+					new LookTargets(v.stall.parent), MessageTypeDefOf.PositiveEvent, historical: true);
 		}
 
 		public static AcceptanceReport CanNegotiate(Pawn colonist, Pawn trader, CompMarketStall stall)
