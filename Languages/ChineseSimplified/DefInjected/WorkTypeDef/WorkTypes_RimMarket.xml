@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<RimMarket_Shopkeeping.labelShort>售货</RimMarket_Shopkeeping.labelShort>
+	<RimMarket_Shopkeeping.pawnLabel>店主</RimMarket_Shopkeeping.pawnLabel>
+	<RimMarket_Shopkeeping.gerundLabel>售货</RimMarket_Shopkeeping.gerundLabel>
+	<RimMarket_Shopkeeping.description>顾客进城时守在殖民地摊位前，面不改色地报个价，然后收下他们的银。会说话的人能把同样的萝卜卖出更多钱。</RimMarket_Shopkeeping.description>
+	<RimMarket_Shopkeeping.verb>照看</RimMarket_Shopkeeping.verb>
+
+</LanguageData>

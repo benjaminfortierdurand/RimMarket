@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<RimMarket_BrowsedMarket.stages.0.label>逛了集市</RimMarket_BrowsedMarket.stages.0.label>
+	<RimMarket_BrowsedMarket.stages.0.description>我从摊位间走过，摸了摸布料，为根本不打算付钱的东西争了半天价。愉快的下午。</RimMarket_BrowsedMarket.stages.0.description>
+
+	<RimMarket_BoughtAtMarket.stages.0.label>在集市买了东西</RimMarket_BoughtAtMarket.stages.0.label>
+	<RimMarket_BoughtAtMarket.stages.0.description>我在集市上买了点东西。我大概并不需要它。重点不在这里。</RimMarket_BoughtAtMarket.stages.0.description>
+
+	<RimMarket_WentToFair.stages.0.label>去了大集市</RimMarket_WentToFair.stages.0.label>
+	<RimMarket_WentToFair.stages.0.description>彩旗、人群、六支商队，还有个卖烤坚果的家伙开价离谱。我们的小镇这一天仿佛成了城市。</RimMarket_WentToFair.stages.0.description>
+
+	<RimMarket_FairStallWon.stages.0.label>我们的摊位赢得了集市</RimMarket_FairStallWon.stages.0.label>
+	<RimMarket_FairStallWon.stages.0.description>六支专业商人组成的商队同台竞技，集市最佳摊位是我们的。主要是萝卜。非常好的萝卜。</RimMarket_FairStallWon.stages.0.description>
+
+	<RimMarket_SlaveAuctionHeld.stages.0.label>城中奴隶拍卖</RimMarket_SlaveAuctionHeld.stages.0.label>
+	<RimMarket_SlaveAuctionHeld.stages.0.description>今天在我们的集市上，人们在拍卖台上被卖掉，规规矩矩，有竞价有落槌。生意本该如此。</RimMarket_SlaveAuctionHeld.stages.0.description>
+
+	<RimMarket_SlaveAuctionHeld.stages.1.label>城中奴隶拍卖</RimMarket_SlaveAuctionHeld.stages.1.label>
+	<RimMarket_SlaveAuctionHeld.stages.1.description>今天他们在我们的集市上卖人。我假装没看见。没什么用。</RimMarket_SlaveAuctionHeld.stages.1.description>
+
+	<RimMarket_SlaveAuctionHeld.stages.2.label>城中奴隶拍卖</RimMarket_SlaveAuctionHeld.stages.2.label>
+	<RimMarket_SlaveAuctionHeld.stages.2.description>人们像牲口一样在我们自己的集市广场上被拍卖。我总听见那些报价。</RimMarket_SlaveAuctionHeld.stages.2.description>
+
+	<RimMarket_SlaveAuctionHeld.stages.3.label>城中奴隶拍卖</RimMarket_SlaveAuctionHeld.stages.3.label>
+	<RimMarket_SlaveAuctionHeld.stages.3.description>我们竟允许他们在我们的镇子上把人放上拍卖台。我们成了什么地方？</RimMarket_SlaveAuctionHeld.stages.3.description>
+
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<RimMarket_TradeConvoy.label>贸易商队</RimMarket_TradeConvoy.label>
+	<RimMarket_TradeConvoy.description>沿贸易路线赶往你集市的商人，带着护卫、驮运动物，以及比这条路应得的更多的乐观。</RimMarket_TradeConvoy.description>
+
+	<RimMarket_ConvoyBattle.label>商队交战</RimMarket_ConvoyBattle.label>
+	<RimMarket_ConvoyBattle.description>一支贸易商队围成一圈，为自己的货物而战，你的人正身处其中。</RimMarket_ConvoyBattle.description>
+
+</LanguageData>

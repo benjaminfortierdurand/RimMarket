@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<RimMarket_ChangeOfGuard.label>换岗</RimMarket_ChangeOfGuard.label>
+	<RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings.0>r_logentry->[INITIATOR_nameDef] 把摊位的值守交给了 [RECIPIENT_nameDef]。</RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings.0>
+	<RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings.1>r_logentry->[INITIATOR_nameDef] 告诉 [RECIPIENT_nameDef] 什么都没发生，然后详细描述了一番。</RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings.1>
+	<RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings.2>r_logentry->[INITIATOR_nameDef] 把值守交给 [RECIPIENT_nameDef]，还附上一份不能信任的殖民者名单。</RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings.2>
+	<RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings.3>r_logentry->[INITIATOR_nameDef] 提醒 [RECIPIENT_nameDef] 提防那个老爱摸商品的殖民者。</RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings.3>
+	<RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings.4>r_logentry->[RECIPIENT_nameDef] 从 [INITIATOR_nameDef] 手中接过值守，后者已经在打哈欠了。</RimMarket_ChangeOfGuard.logRulesInitiator.rulesStrings.4>
+
+</LanguageData>
