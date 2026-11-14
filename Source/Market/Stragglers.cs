@@ -111,7 +111,7 @@ namespace RimMarket.Market
 			}
 		}
 
-		private static bool Leaving(LordToil toil)
+		public static bool Leaving(LordToil toil)
 		{
 			return toil is LordToil_ExitMapAndEscortCarriers || toil is LordToil_ExitMap || toil is LordToil_ExitMapTraderFighting;
 		}

@@ -1646,7 +1646,7 @@ namespace RimMarket.Market
 				}
 				Stragglers.Remember(v);
 				LordToil cur = v.lord.CurLordToil;
-				if (cur is LordToil_ExitMapAndEscortCarriers || cur is LordToil_ExitMap || cur is LordToil_ExitMapTraderFighting)
+				if (Stragglers.Leaving(cur))
 				{
 					EndVisit(v, StallVisit.EndLeft);
 					continue;
