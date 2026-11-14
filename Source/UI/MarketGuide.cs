@@ -287,7 +287,8 @@ namespace RimMarket.UI
 			lines.Add(new GuideCheck(L("DiagFreeStall"), free.Count > 0, GuideLine.Problem));
 			lines.Add(new GuideCheck(L("DiagReach"), free.Any(FromEdge), GuideLine.Problem));
 			int busy = mgr?.ActiveVisits(map) ?? 0;
-			lines.Add(new GuideCheck("RimMarket.Guide.DiagRoom".Translate(busy, s.maxMerchants), busy < s.maxMerchants, GuideLine.Problem));
+			string room = s.NoMerchantCap ? "RimMarket.Guide.DiagRoomNoLimit".Translate(busy) : "RimMarket.Guide.DiagRoom".Translate(busy, s.maxMerchants);
+			lines.Add(new GuideCheck(room, busy < s.MerchantCap, GuideLine.Problem));
 			List<Faction> traders = Reputation.ReputationUtility.TraderFactions().Where(f => !f.HostileTo(Faction.OfPlayer)).ToList();
 			lines.Add(new GuideCheck("RimMarket.Guide.DiagFactions".Translate(traders.Count), traders.Count > 0, GuideLine.Problem));
 			List<string> refusing = mgr == null ? new List<string>() : traders.Where(f => mgr.RefusalChance(f) > 0f).Select(f => f.Name).ToList();

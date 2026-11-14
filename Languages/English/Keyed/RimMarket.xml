@@ -842,6 +842,7 @@ They are yours now. Your haulers will put them away, or you can jump to them fro
 	<RimMarket.Guide.DiagFreeStall>A free stall with its merchant's spot clear</RimMarket.Guide.DiagFreeStall>
 	<RimMarket.Guide.DiagReach>A free stall caravans can reach from the map edge</RimMarket.Guide.DiagReach>
 	<RimMarket.Guide.DiagRoom>Room for another merchant ({0} of {1} taken)</RimMarket.Guide.DiagRoom>
+	<RimMarket.Guide.DiagRoomNoLimit>Room for another merchant ({0} trading, no limit)</RimMarket.Guide.DiagRoomNoLimit>
 	<RimMarket.Guide.DiagFactions>Friendly factions that send caravans: {0}</RimMarket.Guide.DiagFactions>
 	<RimMarket.Guide.DiagNoRefuse>No faction refuses your market</RimMarket.Guide.DiagNoRefuse>
 	<RimMarket.Guide.DiagRefuse>Your reputation keeps some away: {0}</RimMarket.Guide.DiagRefuse>

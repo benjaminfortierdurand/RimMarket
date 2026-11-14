@@ -18,6 +18,7 @@ namespace RimMarket
 		public const bool DefWaiveFeeAfterToll = true;
 		public const float DefMarketDays = 1f;
 		public const int DefMaxMerchants = 3;
+		public const int NoMerchantLimit = 16;
 		public const int DefGuardsAtStall = 1;
 		public const int DefMaxGuards = 4;
 		public const int NoGuardLimit = 10;
@@ -95,6 +96,8 @@ namespace RimMarket
 
 		public static bool ShareModeEnabled => HospitalityBridge.Active || HotelsBridge.Active;
 
+		public bool NoMerchantCap => maxMerchants >= NoMerchantLimit;
+		public int MerchantCap => NoMerchantCap ? int.MaxValue : maxMerchants;
 		public int GuardCap => maxGuards >= NoGuardLimit ? int.MaxValue : System.Math.Max(maxGuards, guardsAtStall + 1);
 
 		public int MarketTicks => (int)(marketDays * 60000f);

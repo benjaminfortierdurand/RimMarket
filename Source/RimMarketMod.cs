@@ -124,7 +124,8 @@ namespace RimMarket
 			}
 			Caption("CaptionCaravans");
 			s.marketDays = Slider("MarketDays", s.marketDays, 0.5f, 3f, 0.25f, Days(s.marketDays), Hint("MarketDays"));
-			s.maxMerchants = Mathf.RoundToInt(Slider("MaxMerchants", s.maxMerchants, 1f, 8f, 1f, s.maxMerchants.ToString(), Hint("MaxMerchants")));
+			string merchants = s.NoMerchantCap ? "RimMarket.Settings.NoLimit".Translate().ToString() : s.maxMerchants.ToString();
+			s.maxMerchants = Mathf.RoundToInt(Slider("MaxMerchants", s.maxMerchants, 1f, RimMarketSettings.NoMerchantLimit, 1f, merchants, Hint("MaxMerchants")));
 			s.guardsAtStall = Mathf.RoundToInt(Slider("GuardsAtStall", s.guardsAtStall, 0f, 3f, 1f, s.guardsAtStall.ToString(), Hint("GuardsAtStall")));
 			int least = s.guardsAtStall + 1;
 			string most = s.maxGuards >= RimMarketSettings.NoGuardLimit ? "RimMarket.Settings.NoLimit".Translate().ToString() : Mathf.Max(s.maxGuards, least).ToString();

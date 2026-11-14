@@ -1026,7 +1026,7 @@ namespace RimMarket.Market
 				ExplainSkip(lord, trader, ReputationUtility.RefusalKey(OpinionOf(lord.faction), HoldsGrudge(lord.faction)));
 				return false;
 			}
-			if (ActiveVisits(lord.Map) >= (FairUtility.Running(lord.Map) ? Mathf.Max(S.maxMerchants, FairUtility.MerchantCap) : S.maxMerchants))
+			if (ActiveVisits(lord.Map) >= (FairUtility.Running(lord.Map) ? Mathf.Max(S.MerchantCap, FairUtility.MerchantCap) : S.MerchantCap))
 			{
 				MarkWaiting(lord, "RimMarket.WaitMarketFull");
 				ExplainSkip(lord, trader, "RimMarket.MessageMarketFull");
@@ -1709,7 +1709,7 @@ namespace RimMarket.Market
 			{
 				Map map = maps[i];
 				if (!map.IsPlayerHome || !HasOpenMarket(map)) continue;
-				if (ActiveVisits(map) >= S.maxMerchants || !MarketUtility.AnyFreeStall(map)) continue;
+				if (ActiveVisits(map) >= S.MerchantCap || !MarketUtility.AnyFreeStall(map)) continue;
 				if (TraderCaravanOnMap(map)) continue;
 				if (!Rand.MTBEventOccurs(1f / perDay, 60000f, ReputationInterval)) continue;
 				ReputationUtility.TrySendMarketCaravan(map, announce: true);
