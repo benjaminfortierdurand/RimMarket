@@ -138,6 +138,7 @@ namespace RimMarket
 		{
 			Check("ColonistsBrowse", ref s.colonistsBrowse, Hint("ColonistsBrowse"));
 			if (HospitalityBridge.Active || HotelsBridge.Active) Check("GuestsShop", ref s.guestsShop, Hint("GuestsShop"));
+			if (KiiroBridge.Active) Check("AllowKiiroTrade", ref s.allowKiiroTrade, Hint("AllowKiiroTrade"));
 			Check("ShoppersVisit", ref s.shoppersVisit, Hint("ShoppersVisit"));
 			if (s.shoppersVisit)
 			{

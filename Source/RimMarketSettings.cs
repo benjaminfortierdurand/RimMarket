@@ -26,6 +26,7 @@ namespace RimMarket
 		public const bool DefShowMessages = true;
 		public const bool DefColonistsBrowse = true;
 		public const bool DefGuestsShop = true;
+		public const bool DefAllowKiiroTrade = true;
 		public const bool DefThievesEnabled = true;
 		public const float DefThiefMtbDays = 2.5f;
 		public const int ThiefKeepSpeed = 0;
@@ -68,6 +69,7 @@ namespace RimMarket
 		public bool colonistsBrowse = DefColonistsBrowse;
 		public bool guestsShop = DefGuestsShop;
 		public bool shoppersVisit = true;
+		public bool allowKiiroTrade = DefAllowKiiroTrade;
 		public bool thievesEnabled = DefThievesEnabled;
 		public float thiefMtbDays = DefThiefMtbDays;
 		public int thiefReaction = DefThiefReaction;
@@ -148,6 +150,7 @@ namespace RimMarket
 			colonistsBrowse = DefColonistsBrowse;
 			guestsShop = DefGuestsShop;
 			shoppersVisit = true;
+			allowKiiroTrade = DefAllowKiiroTrade;
 			colonyShopperDays = DefColonyShopperDays;
 			bargainEffect = DefBargainEffect;
 			shopkeepers = DefShopkeepers;
@@ -202,6 +205,7 @@ namespace RimMarket
 			Scribe_Values.Look(ref colonistsBrowse, "colonistsBrowse", DefColonistsBrowse);
 			Scribe_Values.Look(ref guestsShop, "guestsShop", DefGuestsShop);
 			Scribe_Values.Look(ref shoppersVisit, "shoppersVisit", true);
+			Scribe_Values.Look(ref allowKiiroTrade, "allowKiiroTrade", DefAllowKiiroTrade);
 			Scribe_Values.Look(ref thievesEnabled, "thievesEnabled", DefThievesEnabled);
 			Scribe_Values.Look(ref thiefMtbDays, "thiefMtbDays", DefThiefMtbDays);
 			Scribe_Values.Look(ref thiefReaction, "thiefReaction", DefThiefReaction);

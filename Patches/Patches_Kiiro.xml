@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!-- Kiiro cashiers can take RimMarket customers, so give them the stall comp.
+	     Wares are left off: Kiiro draws the cashier itself. -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Kiiro_Cashier"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Kiiro_Cashier"]/comps</xpath>
+			<value>
+				<li Class="RimMarket.Buildings.CompProperties_MarketStall">
+					<drawWares>false</drawWares>
+				</li>
+			</value>
+		</match>
+	</Operation>
+
+</Patch>

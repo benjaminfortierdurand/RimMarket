@@ -22,7 +22,7 @@ namespace RimMarket.AI
 				return base.GetChance(pawn) * (Fair.FairUtility.Running(pawn.Map) ? Fair.FairUtility.JoyFactor : 1f);
 			}
 			if (!s.guestsShop || !MarketUtility.IsShoppingGuest(pawn)) return 0f;
-			if (!merchants && !ColonyStalls.AnyOpen(pawn.Map)) return 0f;
+			if (!merchants && !ColonyStalls.AnyOpen(pawn.Map) && !(s.allowKiiroTrade && KiiroBridge.AnyReady(pawn.Map))) return 0f;
 			bool canBuy = MarketUtility.SilverOf(pawn) >= MarketUtility.MinGuestPurchase;
 			return base.GetChance(pawn) * (canBuy ? BuyerChanceFactor : BrokeGuestChanceFactor);
 		}
