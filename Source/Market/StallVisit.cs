@@ -26,6 +26,8 @@ namespace RimMarket.Market
 		public CompMarketStall stall;
 		public int startTick;
 		public int endTick;
+		public int raidHoldSince = -1;
+		public int raidLastDanger = -1;
 		public int feeMode;
 		public int feeAmount;
 		public bool feeDue;
@@ -118,6 +120,8 @@ namespace RimMarket.Market
 			if (Scribe.mode == LoadSaveMode.ResolvingCrossRefs) stall = MarketStallDefs.StallOf(stallThing);
 			Scribe_Values.Look(ref startTick, "startTick");
 			Scribe_Values.Look(ref endTick, "endTick");
+			Scribe_Values.Look(ref raidHoldSince, "raidHoldSince", -1);
+			Scribe_Values.Look(ref raidLastDanger, "raidLastDanger", -1);
 			Scribe_Values.Look(ref feeMode, "feeMode");
 			Scribe_Values.Look(ref feeAmount, "feeAmount");
 			Scribe_Values.Look(ref feeDue, "feeDue");

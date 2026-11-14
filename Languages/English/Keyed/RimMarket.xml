@@ -181,6 +181,7 @@
 	<RimMarket.SwapSideBusy>A merchant is using this stall</RimMarket.SwapSideBusy>
 	<RimMarket.StallTaken>{0} of {1} ({2})</RimMarket.StallTaken>
 	<RimMarket.StallTimeLeft>Packs up in {0} hours</RimMarket.StallTimeLeft>
+	<RimMarket.StallFightingHold>Waiting for the fighting to end before packing up</RimMarket.StallFightingHold>
 	<RimMarket.StallFeePaid>Stall fee paid: {0} silver</RimMarket.StallFeePaid>
 	<RimMarket.StallFeeDue>Stall fee due: {0} silver</RimMarket.StallFeeDue>
 	<RimMarket.StallFeeUnpaid>Stall fee: they had nothing to pay with</RimMarket.StallFeeUnpaid>
@@ -276,6 +277,7 @@
 	<RimMarket.HaggleFailed>Haggle failed: {0}% worse</RimMarket.HaggleFailed>
 	<RimMarket.MoteDeal>Deal!</RimMarket.MoteDeal>
 	<RimMarket.MoteRefused>No.</RimMarket.MoteRefused>
+	<RimMarket.CaravanWaitsFighting>The {0} caravan was about to pack up, but there is fighting on the map. They stay at their stall until it is over.</RimMarket.CaravanWaitsFighting>
 	<RimMarket.CaravanWaitsDanger>The {0} caravan is shut in behind your walls. They saw the danger out there and will wait for it to pass rather than break out.</RimMarket.CaravanWaitsDanger>
 	<RimMarket.ChantOpen1>Lot {0}! {1}, {2} {3}, who starts me off?</RimMarket.ChantOpen1>
 	<RimMarket.ChantOpen2>Lot {0}, folks! {1}, {2} {3}, fine stock!</RimMarket.ChantOpen2>

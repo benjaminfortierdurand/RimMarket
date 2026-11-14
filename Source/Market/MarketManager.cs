@@ -1119,11 +1119,31 @@ namespace RimMarket.Market
 		{
 			StallVisit v = VisitFor(lord);
 			if (v == null) return false;
-			if (normal) return !v.closed && v.StallOk && Find.TickManager.TicksGame >= v.endTick;
+			if (normal) return !v.closed && v.StallOk && Find.TickManager.TicksGame >= v.endTick && !HoldForFighting(v);
 			if (v.closed) return true;
 			if (!v.StallOk) return true;
 			if (!v.TraderOk) return true;
 			return false;
+		}
+
+		private const int FightingCalmTicks = 1250;
+		private const int MaxFightingHold = 60000;
+
+		private static bool HoldForFighting(StallVisit v)
+		{
+			int now = Find.TickManager.TicksGame;
+			if (v.raidHoldSince >= 0 && now - v.raidHoldSince >= MaxFightingHold) return false;
+			if (Trigger_MarketTrapped.DangerOnMap(v.map, v.faction))
+			{
+				if (v.raidHoldSince < 0)
+				{
+					v.raidHoldSince = now;
+					Say("RimMarket.CaravanWaitsFighting", v.faction?.Name ?? "?", new LookTargets(v.trader), MessageTypeDefOf.NeutralEvent);
+				}
+				v.raidLastDanger = now;
+				return true;
+			}
+			return v.raidHoldSince >= 0 && now - v.raidLastDanger < FightingCalmTicks;
 		}
 
 		public void Notify_LeavingStall(Lord lord, bool normal)

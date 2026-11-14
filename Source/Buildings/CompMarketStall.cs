@@ -342,7 +342,8 @@ namespace RimMarket.Buildings
 			}
 			lines.Add("RimMarket.StallTaken".Translate(v.trader?.LabelShortCap ?? "?", v.faction?.Name ?? "?",
 				v.trader?.TraderKind?.label ?? "?"));
-			lines.Add("RimMarket.StallTimeLeft".Translate((v.TicksLeft / 2500f).ToString("F1")));
+			if (v.raidHoldSince >= 0) lines.Add("RimMarket.StallFightingHold".Translate());
+			else lines.Add("RimMarket.StallTimeLeft".Translate((v.TicksLeft / 2500f).ToString("F1")));
 			if (v.orderId > 0) lines.Add("RimMarket.StallOrderLine".Translate());
 			if (v.feeMode == RimMarketSettings.FeeArrival)
 			{
