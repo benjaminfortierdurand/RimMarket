@@ -11,7 +11,7 @@ namespace RimMarket.UI
 		public static readonly Texture2D OpenMarket = Load("RimMarket_OpenMarket");
 		public static readonly Texture2D CloseMarket = Load("RimMarket_CloseMarket");
 		public static readonly Texture2D FeeMode = Load("RimMarket_FeeMode");
-		public static readonly Texture2D ShowMarker = Load("RimMarket_ShowMarker");
+		public static readonly Texture2D ShowMarker = TexCommand.GatherSpotActive;
 		public static readonly Texture2D Bid = Load("RimMarket_Bid");
 		public static readonly Texture2D Reputation = Load("RimMarket_Reputation");
 		public static readonly Texture2D ColonyStall = Load("RimMarket_ColonyStall");
