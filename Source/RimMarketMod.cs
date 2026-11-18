@@ -176,6 +176,7 @@ namespace RimMarket
 			if (s.reputationEffects)
 				s.extraCaravans = Slider("ExtraCaravans", s.extraCaravans, 0f, 2f, 0.1f, s.extraCaravans.ToStringPercent(), Hint("ExtraCaravans"), SubIndent);
 			Check("Messages", ref s.showMessages, Hint("Messages"));
+			Check("News", ref s.showNews, Hint("News"));
 		}
 
 		private void TradeTab(RimMarketSettings s)

@@ -920,10 +920,13 @@ namespace RimMarket.Market
 			InnBeds.Reset();
 		}
 
+		public int newsSeen = RimMarket.UI.MarketNews.Latest;
+
 		public override void FinalizeInit()
 		{
 			base.FinalizeInit();
 			Instance = this;
+			RimMarket.UI.MarketNews.CheckOnLoad(this);
 		}
 
 		private static RimMarketSettings S => RimMarketMod.Settings;
@@ -1818,6 +1821,7 @@ namespace RimMarket.Market
 			base.ExposeData();
 			Scribe_Collections.Look(ref visits, "visits", LookMode.Deep);
 			Scribe_Values.Look(ref nextId, "nextId", 1);
+			Scribe_Values.Look(ref newsSeen, "newsSeen");
 			Scribe_Values.Look(ref totalFees, "totalFees");
 			Scribe_Values.Look(ref totalGuestSales, "totalGuestSales");
 			Scribe_Values.Look(ref totalColonySales, "totalColonySales");

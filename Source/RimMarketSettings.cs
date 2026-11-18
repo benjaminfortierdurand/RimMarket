@@ -66,6 +66,8 @@ namespace RimMarket
 		public bool haggleEnabled = DefHaggleEnabled;
 		public float haggleBonus = DefHaggleBonus;
 		public bool showMessages = DefShowMessages;
+		public bool showNews = true;
+		public int newsSeen;
 		public bool colonistsBrowse = DefColonistsBrowse;
 		public bool guestsShop = DefGuestsShop;
 		public bool shoppersVisit = true;
@@ -170,6 +172,7 @@ namespace RimMarket
 			reputationEffects = DefReputationEffects;
 			extraCaravans = DefExtraCaravans;
 			showMessages = DefShowMessages;
+			showNews = true;
 		}
 
 		public void ResetTrade()
@@ -202,6 +205,8 @@ namespace RimMarket
 			Scribe_Values.Look(ref haggleEnabled, "haggleEnabled", DefHaggleEnabled);
 			Scribe_Values.Look(ref haggleBonus, "haggleBonus", DefHaggleBonus);
 			Scribe_Values.Look(ref showMessages, "showMessages", DefShowMessages);
+			Scribe_Values.Look(ref showNews, "showNews", true);
+			Scribe_Values.Look(ref newsSeen, "newsSeen");
 			Scribe_Values.Look(ref colonistsBrowse, "colonistsBrowse", DefColonistsBrowse);
 			Scribe_Values.Look(ref guestsShop, "guestsShop", DefGuestsShop);
 			Scribe_Values.Look(ref shoppersVisit, "shoppersVisit", true);

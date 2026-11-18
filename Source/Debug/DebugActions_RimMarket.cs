@@ -299,6 +299,14 @@ namespace RimMarket.Debug
 				Messages.Message("[RimMarket] could not find a thief faction or an entry cell.", MessageTypeDefOf.RejectInput, false);
 		}
 
+		[DebugAction("RimMarket", "Show update news",
+			actionType = DebugActionType.Action,
+			allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void ShowNews()
+		{
+			Find.WindowStack.Add(new RimMarket.UI.Dialog_MarketNews());
+		}
+
 		[DebugAction("RimMarket", "Log market state",
 			actionType = DebugActionType.Action,
 			allowedGameStates = AllowedGameStates.PlayingOnMap)]
