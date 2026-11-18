@@ -45,6 +45,10 @@ namespace RimMarket.Buildings
 		private static readonly Texture2D BaseSideMask;
 		private static readonly Mesh DepthMesh;
 		private static readonly Mesh DepthMeshFlip;
+		private static readonly Texture2D GlassSouthTex;
+		private static readonly Texture2D GlassSideTex;
+		private static readonly Material GlassSouth;
+		private static readonly Material GlassSide;
 
 		public sealed class RoofLook
 		{
@@ -73,6 +77,10 @@ namespace RimMarket.Buildings
 			BaseSideMask = Tex("RimMarket_StallBase1_westm");
 			DepthMesh = StripMesh(false);
 			DepthMeshFlip = StripMesh(true);
+			GlassSouthTex = Tex("RimMarket_StallGlass_south");
+			GlassSideTex = Tex("RimMarket_StallGlass_west");
+			GlassSouth = MaterialPool.MatFrom(GlassSouthTex, ShaderDatabase.Transparent, Color.white);
+			GlassSide = MaterialPool.MatFrom(GlassSideTex, ShaderDatabase.Transparent, Color.white);
 		}
 
 		private static Texture2D Tex(string name) => ContentFinder<Texture2D>.Get(Dir + name);
@@ -136,6 +144,11 @@ namespace RimMarket.Buildings
 			Mesh plane = flip ? MeshPool.GridPlaneFlip(Size) : MeshPool.GridPlane(Size);
 			pos.y = AltitudeLayer.Building.AltitudeFor();
 			Graphics.DrawMesh(plane, pos, Quaternion.identity, side ? look.baseSide : look.baseSouth, 0);
+			if (stall.Freezer)
+			{
+				pos.y = AltitudeLayer.BuildingOnTop.AltitudeFor() + Altitudes.AltInc / 2f;
+				Graphics.DrawMesh(plane, pos, Quaternion.identity, side ? GlassSide : GlassSouth, 0);
+			}
 			if (side)
 			{
 				pos.y = AltitudeLayer.BuildingOnTop.AltitudeFor() + Altitudes.AltInc;
@@ -148,15 +161,17 @@ namespace RimMarket.Buildings
 			Graphics.DrawMesh(plane, pos, Quaternion.identity, look.roofSouth, 0);
 		}
 
-		public static void DrawPreview(Rect rect, RoofLook look, int shape, int pattern, bool side)
+		public static void DrawPreview(Rect rect, RoofLook look, int shape, int pattern, bool side, bool glass = false)
 		{
 			if (side)
 			{
 				Widgets.DrawTextureFitted(rect, BaseSide, 1f, look.baseSide);
+				if (glass) Widgets.DrawTextureFitted(rect, GlassSideTex, 1f);
 				Widgets.DrawTextureFitted(rect, RoofSide[ClampPattern(pattern)], 1f, look.roofSide);
 				return;
 			}
 			Widgets.DrawTextureFitted(rect, BaseSouth[ClampShape(shape) - 1], 1f, look.baseSouth);
+			if (glass) Widgets.DrawTextureFitted(rect, GlassSouthTex, 1f);
 			Widgets.DrawTextureFitted(rect, RoofSouth[ClampShape(shape) - 1], 1f, look.roofSouth);
 		}
 

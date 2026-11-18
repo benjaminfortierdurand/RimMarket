@@ -25,6 +25,7 @@
 	<RimMarket.Settings.ThiefNormalSpeed>Normal speed</RimMarket.Settings.ThiefNormalSpeed>
 	<RimMarket.Settings.ThiefPause>Pause</RimMarket.Settings.ThiefPause>
 	<RimMarket.Settings.MessagesHint>Messages in the corner of the screen about what happens at the market.</RimMarket.Settings.MessagesHint>
+	<RimMarket.Settings.NewsHint>A window that shows what is new, once, the first time you load a colony with a market after a RimMarket update.</RimMarket.Settings.NewsHint>
 	<RimMarket.Settings.FairCostHint>What the heralds charge to announce a Great Fair, in silver.</RimMarket.Settings.FairCostHint>
 	<RimMarket.Settings.FairCooldownHint>The least number of days between two Great Fairs.</RimMarket.Settings.FairCooldownHint>
 	<RimMarket.Settings.RouteOpenCostHint>Scales the price to open a route: about {0} silver for a town 20 tiles away.</RimMarket.Settings.RouteOpenCostHint>
@@ -121,6 +122,7 @@
 	<RimMarket.Settings.ThievesHint>Now and then a pickpocket mingles with the crowd, lifts something from a counter and runs for it. The caravan's guards give chase, and your colonists can tackle a fleeing thief with a right click. The more people around a stall, the less a thief dares.</RimMarket.Settings.ThievesHint>
 	<RimMarket.Settings.ThiefMtb>One every</RimMarket.Settings.ThiefMtb>
 	<RimMarket.Settings.Messages>Market messages</RimMarket.Settings.Messages>
+	<RimMarket.Settings.News>Update news</RimMarket.Settings.News>
 
 	<!-- Fee modes -->
 	<RimMarket.FeeModeNone>none</RimMarket.FeeModeNone>
@@ -235,6 +237,15 @@
 	<RimMarket.StallSetupNothing>Nothing in the colony matches.</RimMarket.StallSetupNothing>
 	<RimMarket.ColonyStallKeeper>Shopkeeper: {0}</RimMarket.ColonyStallKeeper>
 	<RimMarket.ColonyStallNoKeeper>No shopkeeper at the counter, so nothing sells</RimMarket.ColonyStallNoKeeper>
+	<RimMarket.StallFreezerOn>Freezer running: the goods on this stall do not spoil</RimMarket.StallFreezerOn>
+	<RimMarket.StallFreezerOff>Freezer off: the goods on this stall spoil as usual</RimMarket.StallFreezerOff>
+	<RimMarket.News.Title>New in RimMarket</RimMarket.News.Title>
+	<RimMarket.News.FreezerTitle>Freezer stall</RimMarket.News.FreezerTitle>
+	<RimMarket.News.FreezerBody>A steel market stall with a freezer built into the counter. While it has power, the goods you sell from it as a colony stall stay frozen and do not spoil.
+
+It costs an advanced component on top of the steel. You will find it next to the market stall in the Misc tab.</RimMarket.News.FreezerBody>
+	<RimMarket.News.Also>Also in this update: market, camp and guard rest areas can be painted up to 60 cells from their spot, and cooks no longer take their ingredients from your colony stalls.</RimMarket.News.Also>
+	<RimMarket.News.KeepShowing>Show news after updates</RimMarket.News.KeepShowing>
 	<RimMarket.ColonyStallTakings>Sold so far: {0} silver over {1} sales</RimMarket.ColonyStallTakings>
 	<RimMarket.ColonyStallNothingToSell>The stall has nothing to sell</RimMarket.ColonyStallNothingToSell>
 	<RimMarket.StallWatch>On watch: {0}</RimMarket.StallWatch>

@@ -392,6 +392,7 @@ namespace RimMarket.Market
 				Pawn k = KeeperAt(s);
 				lines.Add(k != null ? "RimMarket.ColonyStallKeeper".Translate(k.LabelShortCap).ToString() : "RimMarket.ColonyStallNoKeeper".Translate().ToString());
 			}
+			if (s.Freezer) lines.Add((s.TryGetFreezerTemperature(out _) ? "RimMarket.StallFreezerOn" : "RimMarket.StallFreezerOff").Translate());
 			if (s.sales > 0) lines.Add("RimMarket.ColonyStallTakings".Translate(s.takings, s.sales));
 			return string.Join("\n", lines);
 		}

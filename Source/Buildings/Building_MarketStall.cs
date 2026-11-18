@@ -86,6 +86,20 @@ namespace RimMarket.Buildings
 
 		public bool PaintableRoof => Stall?.Props.paintableRoof == true;
 
+		public bool Freezer => def.HasModExtension<StallFreezerExtension>();
+
+		public bool TryGetFreezerTemperature(out float temperature)
+		{
+			StallFreezerExtension freezer = def.GetModExtension<StallFreezerExtension>();
+			if (freezer != null && this.TryGetComp<CompPowerTrader>()?.PowerOn == true)
+			{
+				temperature = freezer.temperature;
+				return true;
+			}
+			temperature = 0f;
+			return false;
+		}
+
 		public int RoofShape => roofShape;
 
 		public int RoofPattern => roofPattern;

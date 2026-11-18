@@ -112,7 +112,7 @@ Select the spot to paint its area like a stockpile zone, or hide it once you kno
 		</comps>
 	</ThingDef>
 
-	<ThingDef ParentName="BuildingBase">
+	<ThingDef ParentName="BuildingBase" Name="RimMarket_StallBase">
 		<defName>RimMarket_Stall</defName>
 		<label>market stall</label>
 		<description>An empty market stall: a counter with an awning over it. Build it inside a market marker's radius and leave the merchant's spot at the end of the counter free (outlined in white while placing). When a trade caravan comes to the market, its merchant takes the stall and stands at the end of the counter with the wares laid out under the awning, one guard keeps watch beside it, the pack animals wait at the caravan camp and the other guards at the guard rest spot. Trade from the stall or from the merchant.\n\nOr make it a colony stall and sell your own goods: choose what, how many and at what price in its sales table, your haulers bring them over, and shoppers and guests pay at the counter.\n\nMerchants open your doors like any friendly visitor, but the square must be reachable from the map edge. The counter and its legs take the colour of the material you build it from. The awning is yours to paint: pick an edge, a pattern and two colours. Built from metal, it hangs string lights instead of bunting during a fair.</description>
@@ -194,6 +194,33 @@ Select the spot to paint its area like a stockpile zone, or hide it once you kno
 			<canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
 			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
 		</building>
+	</ThingDef>
+
+	<ThingDef ParentName="RimMarket_StallBase">
+		<defName>RimMarket_StallFreezer</defName>
+		<label>freezer stall</label>
+		<description>A metal market stall with a freezer built into the counter. It works like any other market stall, for visiting merchants or as a colony stall.\n\nWhile it has power, the goods you sell from it as a colony stall stay frozen and do not spoil. Without power they spoil as usual.</description>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<ComponentSpacer>1</ComponentSpacer>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>150</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Flickable" />
+		</comps>
+		<modExtensions>
+			<li Class="RimMarket.Buildings.StallFreezerExtension">
+				<temperature>-10</temperature>
+				<waresShift>(0,0,-0.24)</waresShift>
+				<verticalWaresShift>(0,0,-0.2)</verticalWaresShift>
+				<verticalWaresScale>0.58</verticalWaresScale>
+			</li>
+		</modExtensions>
 	</ThingDef>
 
 	<ThingDef ParentName="FurnitureBase">

@@ -243,6 +243,12 @@ namespace RimMarket.Buildings
 			Vector3 offset = vertical ? Props.verticalWaresOffset : Props.waresOffset;
 			float scale = vertical ? Props.verticalWaresScale : Props.waresScale;
 			float spacing = vertical ? 1f : Props.waresSpacing;
+			StallFreezerExtension freezer = parent.def.GetModExtension<StallFreezerExtension>();
+			if (freezer != null)
+			{
+				offset += vertical ? freezer.verticalWaresShift : freezer.waresShift;
+				if (vertical && freezer.verticalWaresScale > 0f) scale = freezer.verticalWaresScale;
+			}
 			var size = new Vector3(scale, 1f, scale);
 			int ware = 0;
 			for (int slot = firstSlot; slot < DisplayCount && ware < display.Count; slot++)
