@@ -182,6 +182,7 @@
 	<RimMarket.SwapSideBusy>有商人正在使用此摊位</RimMarket.SwapSideBusy>
 	<RimMarket.StallTaken>{1} 中的 {0}（{2}）</RimMarket.StallTaken>
 	<RimMarket.StallTimeLeft>{0} 小时后收拾离开</RimMarket.StallTimeLeft>
+	<RimMarket.StallFightingHold>等待战斗结束再收拾离开</RimMarket.StallFightingHold>
 	<RimMarket.StallFeePaid>已付摊位费：{0} 银</RimMarket.StallFeePaid>
 	<RimMarket.StallFeeDue>应付摊位费：{0} 银</RimMarket.StallFeeDue>
 	<RimMarket.StallFeeUnpaid>摊位费：他们没有任何东西可付</RimMarket.StallFeeUnpaid>
@@ -277,6 +278,7 @@
 	<RimMarket.HaggleFailed>砍价失败：价格差 {0}%</RimMarket.HaggleFailed>
 	<RimMarket.MoteDeal>成交！</RimMarket.MoteDeal>
 	<RimMarket.MoteRefused>不。</RimMarket.MoteRefused>
+	<RimMarket.CaravanWaitsFighting>{0} 商队正要收拾离开，但地图上正在交战。他们会留在摊位直到战斗结束。</RimMarket.CaravanWaitsFighting>
 	<RimMarket.CaravanWaitsDanger>{0} 商队被困在你的墙内。他们看见了外面的危险，宁愿等它过去也不硬闯。</RimMarket.CaravanWaitsDanger>
 	<RimMarket.ChantOpen1>第 {0} 号！{1}，{3} {2} 级，谁来开头？</RimMarket.ChantOpen1>
 	<RimMarket.ChantOpen2>第 {0} 号，各位！{1}，{3} {2} 级，好货！</RimMarket.ChantOpen2>
@@ -689,7 +691,9 @@
 	<RimMarket.RouteCloseYes>关闭</RimMarket.RouteCloseYes>
 	<RimMarket.RoutePickSettlement>应由 {0} 的哪座城镇派出商队？距离越远，路途越长，费用越高。</RimMarket.RoutePickSettlement>
 	<RimMarket.RouteSettlementOption>{0}（{1} 格，路上约 {2}，{3}）</RimMarket.RouteSettlementOption>
+	<RimMarket.RouteSeaOption>{0}（{1} 格，约 {2} 后抵达，{3}）</RimMarket.RouteSeaOption>
 	<RimMarket.RouteRiskSafe>安全的道路</RimMarket.RouteRiskSafe>
+	<RimMarket.RouteRiskSea>走海路，不会遭伏击</RimMarket.RouteRiskSea>
 	<RimMarket.RouteRisk>{0} 的伏击几率，多来自 {1}</RimMarket.RouteRisk>
 	<RimMarket.RouteEscortNote>这条路上约 {0} 的商队会遇上麻烦，多来自 {1}。雇佣护卫可将其降至约 {2}，而且受袭的护卫商队通常能闯过去。</RimMarket.RouteEscortNote>
 	<RimMarket.RouteWeeklyEscort>每周一次，带护卫：开辟 {0} 银，之后每支商队 {1} 银</RimMarket.RouteWeeklyEscort>
@@ -704,6 +708,7 @@
 	<RimMarket.ConvoyUnderAttack>正遭受 {0} 的攻击！他们大约能撑 {1}。</RimMarket.ConvoyUnderAttack>
 	<RimMarket.ConvoyUnderAttackHelped>正遭受 {0} 的攻击！你的人正在与他们并肩作战。</RimMarket.ConvoyUnderAttackHelped>
 	<RimMarket.ConvoyEscorted>有护卫随行。</RimMarket.ConvoyEscorted>
+	<RimMarket.ConvoyBySea>经海路前来。</RimMarket.ConvoyBySea>
 	<RimMarket.ConvoyPlunderedLine>途中损失了约 {0} 的货物。</RimMarket.ConvoyPlunderedLine>
 	<RimMarket.ConvoyAmbushedLabel>商队遭伏击</RimMarket.ConvoyAmbushedLabel>
 	<RimMarket.ConvoyAmbushedHelp>来自 {0} 的贸易商队遭到了 {1} 的伏击！\n\n他们围成一圈，大约能撑 {2}。想帮忙就派一支商队过去，否则就让他们自己解决。</RimMarket.ConvoyAmbushedHelp>
@@ -740,7 +745,10 @@
 	<RimMarket.RouteGrudge>他们对你的集市心存芥蒂</RimMarket.RouteGrudge>
 	<RimMarket.RouteLimit>已达路线上限</RimMarket.RouteLimit>
 	<RimMarket.RouteConvoyLeft>一支载着 {1} 的贸易商队已离开 {0} 前往你的集市。约 {2} 后抵达。</RimMarket.RouteConvoyLeft>
-	<RimMarket.RouteConvoyWaiting>来自 {0} 的贸易商队在你的领地边缘等候：他们的敌人正在你的集市。</RimMarket.RouteConvoyWaiting>
+	<RimMarket.ConvoyBlockedLabel>商队等待中</RimMarket.ConvoyBlockedLabel>
+	<RimMarket.ConvoyBlockedText>来自 {0}（{1}）的贸易商队已抵达你的领地边缘，但 {2} 的人此刻正在你的地图上，而且他们正与 {1} 交战。\n\n商队不会自行进入。它最多等待一天，然后返回家乡。\n\n你也可以放它进来。若双方碰上，可能会打起来。</RimMarket.ConvoyBlockedText>
+	<RimMarket.ConvoyLetIn>放他们进来</RimMarket.ConvoyLetIn>
+	<RimMarket.ConvoyKeepWaiting>让他们等着</RimMarket.ConvoyKeepWaiting>
 	<RimMarket.RouteConvoyDelayed>来自 {0} 的贸易商队已抵达你的领地，但暂时无法进入。它会再试一次。</RimMarket.RouteConvoyDelayed>
 	<RimMarket.RouteConvoyTurnedBack>来自 {0} 的贸易商队等不下去了，返回了家乡。</RimMarket.RouteConvoyTurnedBack>
 	<RimMarket.RouteStrike>在你的集市经历了糟糕的一天（{2} 次中的 {1} 次）后，{0} 正对这条贸易路线失去信心。</RimMarket.RouteStrike>
@@ -822,6 +830,7 @@
 	<RimMarket.Guide.DiagFreeStall>有空闲摊位且商人位置畅通</RimMarket.Guide.DiagFreeStall>
 	<RimMarket.Guide.DiagReach>商队能从地图边缘走到空闲摊位</RimMarket.Guide.DiagReach>
 	<RimMarket.Guide.DiagRoom>还能容纳商人（已占用 {1} 个中的 {0} 个）</RimMarket.Guide.DiagRoom>
+	<RimMarket.Guide.DiagRoomNoLimit>还能容纳商人（{0} 位交易中，不限数量）</RimMarket.Guide.DiagRoomNoLimit>
 	<RimMarket.Guide.DiagFactions>会派出商队的友好派系：{0}</RimMarket.Guide.DiagFactions>
 	<RimMarket.Guide.DiagNoRefuse>没有派系拒绝你的集市</RimMarket.Guide.DiagNoRefuse>
 	<RimMarket.Guide.DiagRefuse>你的声望使一些派系望而却步：{0}</RimMarket.Guide.DiagRefuse>
