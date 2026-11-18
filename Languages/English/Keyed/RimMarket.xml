@@ -25,7 +25,7 @@
 	<RimMarket.Settings.ThiefNormalSpeed>Normal speed</RimMarket.Settings.ThiefNormalSpeed>
 	<RimMarket.Settings.ThiefPause>Pause</RimMarket.Settings.ThiefPause>
 	<RimMarket.Settings.MessagesHint>Messages in the corner of the screen about what happens at the market.</RimMarket.Settings.MessagesHint>
-	<RimMarket.Settings.NewsHint>A window that shows what is new, once, the first time you load a colony with a market after a RimMarket update.</RimMarket.Settings.NewsHint>
+	<RimMarket.Settings.NewsHint>A window that shows what is new, once, the first time you load a colony after a RimMarket update.</RimMarket.Settings.NewsHint>
 	<RimMarket.Settings.FairCostHint>What the heralds charge to announce a Great Fair, in silver.</RimMarket.Settings.FairCostHint>
 	<RimMarket.Settings.FairCooldownHint>The least number of days between two Great Fairs.</RimMarket.Settings.FairCooldownHint>
 	<RimMarket.Settings.RouteOpenCostHint>Scales the price to open a route: about {0} silver for a town 20 tiles away.</RimMarket.Settings.RouteOpenCostHint>

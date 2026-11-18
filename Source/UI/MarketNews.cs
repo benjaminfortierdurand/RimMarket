@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using RimMarket.Buildings;
 using RimMarket.Market;
 using RimWorld;
@@ -11,15 +10,16 @@ namespace RimMarket.UI
 	{
 		public const int Latest = 1;
 
-		public static void CheckOnLoad(MarketManager mgr)
+		public static bool Unseen(MarketManager mgr)
 		{
 			RimMarketSettings s = RimMarketMod.Settings;
-			if (mgr == null || s == null || !s.showNews) return;
-			if (mgr.newsSeen >= Latest || s.newsSeen >= Latest) return;
-			LongEventHandler.ExecuteWhenFinished(delegate
-			{
-				if (AnyMarket() && !Find.WindowStack.IsOpen<Dialog_MarketNews>()) Find.WindowStack.Add(new Dialog_MarketNews());
-			});
+			if (mgr == null || s == null || !s.showNews) return false;
+			return mgr.newsSeen < Latest && s.newsSeen < Latest;
+		}
+
+		public static void Show()
+		{
+			if (!Find.WindowStack.IsOpen<Dialog_MarketNews>()) Find.WindowStack.Add(new Dialog_MarketNews());
 		}
 
 		public static void MarkSeen()
@@ -30,17 +30,6 @@ namespace RimMarket.UI
 			if (s == null) return;
 			s.newsSeen = Latest;
 			LoadedModManager.GetMod<RimMarketMod>()?.WriteSettings();
-		}
-
-		private static bool AnyMarket()
-		{
-			if (Current.ProgramState != ProgramState.Playing) return false;
-			List<Map> maps = Find.Maps;
-			for (int i = 0; i < maps.Count; i++)
-			{
-				if (maps[i].listerThings.ThingsOfDef(RimMarketDefOf.RimMarket_MarketMarker).Count > 0) return true;
-			}
-			return false;
 		}
 	}
 

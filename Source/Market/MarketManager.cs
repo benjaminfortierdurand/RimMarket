@@ -921,12 +921,21 @@ namespace RimMarket.Market
 		}
 
 		public int newsSeen = RimMarket.UI.MarketNews.Latest;
+		private bool newsPending;
 
 		public override void FinalizeInit()
 		{
 			base.FinalizeInit();
 			Instance = this;
-			RimMarket.UI.MarketNews.CheckOnLoad(this);
+			newsPending = RimMarket.UI.MarketNews.Unseen(this);
+		}
+
+		public override void GameComponentUpdate()
+		{
+			base.GameComponentUpdate();
+			if (!newsPending) return;
+			newsPending = false;
+			RimMarket.UI.MarketNews.Show();
 		}
 
 		private static RimMarketSettings S => RimMarketMod.Settings;
