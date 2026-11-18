@@ -10,7 +10,7 @@ if ((Test-Path $pubId) -and -not (Test-Path $devId)) { Copy-Item $pubId $devId }
 
 # /R:3 /W:2: sans ca robocopy reessaie un million de fois toutes les 30s quand
 # RimWorld est ouvert et verrouille la dll
-robocopy $dev $pub /MIR /XD Source .research .git .claude _concept Screenshots /XF publish.ps1 *.md .gitignore LICENSE /R:3 /W:2 /NFL /NDL /NJH
+robocopy $dev $pub /MIR /XD Source .* _* Screenshots /XF publish.ps1 *.md .gitignore LICENSE /R:3 /W:2 /NFL /NDL /NJH
 if ($LASTEXITCODE -ge 8) {
     Write-Host "SYNC INCOMPLET: fichier verrouille (RimWorld ouvert ?). Ferme le jeu et relance."
 } else {
