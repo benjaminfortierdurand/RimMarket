@@ -15,7 +15,7 @@ namespace RimMarket.Buildings
 	public class CompMarketQuarter : ThingComp
 	{
 		public const float MinRadius = 6f;
-		public const float MaxRadius = 30f;
+		public const float MaxRadius = 60f;
 		public const float DefRadius = 15f;
 
 		private float radius = DefRadius;
