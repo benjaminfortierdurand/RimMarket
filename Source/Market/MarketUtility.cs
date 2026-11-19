@@ -288,9 +288,10 @@ namespace RimMarket.Market
 		}
 
 		private static readonly List<Building_MarketStall> colonyBuffer = new List<Building_MarketStall>();
+	private static readonly List<Thing> cashierBuffer = new List<Thing>();
 
-		public static CompMarketStall PickStallToVisit(Pawn pawn, out Pawn seller)
-		{
+	public static CompMarketStall PickStallToVisit(Pawn pawn, out Pawn seller)
+	{
 			seller = null;
 			MarketManager mgr = MarketManager.Instance;
 			if (pawn?.Map == null) return null;
@@ -324,6 +325,20 @@ namespace RimMarket.Market
 					stalls.Add(c);
 					sellers.Add(ColonyStalls.KeeperAt(colonyBuffer[i]));
 				}
+				if (RimMarketMod.Settings.allowKiiroTrade)
+				{
+					KiiroBridge.CollectReady(pawn.Map, cashierBuffer);
+					for (int i = 0; i < cashierBuffer.Count; i++)
+					{
+						Thing cashier = cashierBuffer[i];
+						CompMarketStall c = MarketStallDefs.StallOf(cashier);
+						if (c == null) continue;
+						IntVec3 cell = KiiroBridge.CustomerCell(cashier);
+						if (!cell.IsValid || !cell.InAllowedArea(pawn) || !pawn.CanReach(cell, PathEndMode.OnCell, Danger.None)) continue;
+						stalls.Add(c);
+						sellers.Add(KiiroBridge.MerchantOf(cashier));
+					}
+				}
 			}
 			if (stalls.Count == 0) return null;
 			int pick = Rand.Range(0, stalls.Count);
@@ -335,6 +350,8 @@ namespace RimMarket.Market
 		{
 			Map map = stall.Map;
 			var cells = new List<IntVec3>();
+			IntVec3 kiiro = KiiroBridge.CustomerCell(stall.parent);
+			if (kiiro.IsValid) cells.Add(kiiro);
 			int near = stall.CustomerReach;
 			for (int d = near; d <= near + 1; d++)
 			{

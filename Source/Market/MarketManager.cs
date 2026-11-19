@@ -906,6 +906,15 @@ namespace RimMarket.Market
 			if (v.shareOwed >= ShareDueThreshold) v.feeDue = true;
 		}
 
+		/// <summary>A cashier sale that has no StallVisit behind it, such as a Kiiro cashier.</summary>
+		public void RecordKiiroSale(int price)
+		{
+			if (price <= 0) return;
+			totalGuestSales += price;
+			AddTakings(price);
+			Record(null, null, MarketReputation.Appeal, Mathf.Min(4f, price / 100f), "RimMarket.ReasonGoodSales");
+		}
+
 		public void AddFees(int value)
 		{
 			totalFees += Mathf.Max(0, value);

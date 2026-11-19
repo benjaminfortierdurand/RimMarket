@@ -37,5 +37,6 @@ BenFD</description>
 		<li>Orion.Hospitality</li>
 		<li>forti.rimtoll</li>
 		<li>TradingControl.Tad.Rimworld.Core</li>
+		<li>Ancot.KiiroStoryEventsExpanded</li>
 	</loadAfter>
 </ModMetaData>

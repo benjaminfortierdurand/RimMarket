@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RimMarket.Buildings;
+using RimMarket.Compat;
 using RimMarket.Market;
 using RimWorld;
 using Verse;
@@ -22,6 +23,16 @@ namespace RimMarket.Jobs
 
 		private Building_MarketStall ColonyStall => job.GetTarget(TargetIndex.A).Thing is Building_MarketStall b && b.ColonyStall ? b : null;
 
+		/// <summary>A Kiiro cashier, which runs its own queue instead of a RimMarket visit.</summary>
+		private Thing Cashier
+		{
+			get
+			{
+				Thing target = job.GetTarget(TargetIndex.A).Thing;
+				return KiiroBridge.IsCashier(target) ? target : null;
+			}
+		}
+
 		public override bool TryMakePreToilReservations(bool errorOnFailed)
 		{
 			return pawn.Reserve(job.GetTarget(TargetIndex.B), job, 1, -1, null, errorOnFailed);
@@ -29,6 +40,8 @@ namespace RimMarket.Jobs
 
 		private bool StallOpen()
 		{
+			Thing cashier = Cashier;
+			if (cashier != null) return RimMarketMod.Settings.allowKiiroTrade && KiiroBridge.CanServe(cashier);
 			Building_MarketStall colony = ColonyStall;
 			if (colony != null) return ColonyStalls.OpenForSale(colony);
 			StallVisit v = Visit;
@@ -73,6 +86,12 @@ namespace RimMarket.Jobs
 			buy.defaultCompleteMode = ToilCompleteMode.Instant;
 			buy.initAction = delegate
 			{
+				Thing cashier = Cashier;
+				if (cashier != null)
+				{
+					KiiroBridge.Enqueue(cashier, pawn);
+					return;
+				}
 				Building_MarketStall colony = ColonyStall;
 				if (colony != null)
 				{
