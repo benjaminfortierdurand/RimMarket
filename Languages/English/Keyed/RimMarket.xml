@@ -553,6 +553,8 @@ It costs an advanced component on top of the steel. You will find it next to the
 	<RimMarket.MarkerWealthThieves>Word of your takings draws thieves: x{0}</RimMarket.MarkerWealthThieves>
 	<RimMarket.Settings.MarketSaturation>Demand drops when you flood the market</RimMarket.Settings.MarketSaturation>
 	<RimMarket.Settings.MarketSaturationHint>Selling a lot of the same thing at your colony stalls lowers demand for it: it sells less often and for less, then demand comes back over a few days. Vary what you sell. With Vanilla Trading Expanded only the selling chance drops, VTE already lowers the price.</RimMarket.Settings.MarketSaturationHint>
+	<RimMarket.Settings.SellTainted>Tainted apparel on colony stalls</RimMarket.Settings.SellTainted>
+	<RimMarket.Settings.SellTaintedHint>Off: apparel taken from a corpse is never put on a colony stall, so it stays out of your sales and your refills.</RimMarket.Settings.SellTaintedHint>
 	<RimMarket.StallSetupDemandTip>Demand: {0}. Every sale of this lowers it, it comes back over a few days. Low demand means fewer and cheaper sales.</RimMarket.StallSetupDemandTip>
 	<RimMarket.StallSetupDemandVte>With Vanilla Trading Expanded, demand only changes how often it sells. The price follows VTE's market.</RimMarket.StallSetupDemandVte>
 	<RimMarket.Settings.Shopkeepers>Colony stalls need a shopkeeper</RimMarket.Settings.Shopkeepers>

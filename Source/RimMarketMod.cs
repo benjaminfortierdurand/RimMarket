@@ -148,6 +148,7 @@ namespace RimMarket
 			Caption("CaptionColony");
 			Check("Shopkeepers", ref s.shopkeepers, Hint("Shopkeepers"));
 			Check("MarketSaturation", ref s.marketSaturation, Hint("MarketSaturation"));
+			Check("SellTainted", ref s.sellTainted, Hint("SellTainted"));
 			s.innPrice = Mathf.RoundToInt(Slider("InnPrice", s.innPrice, 0f, 60f, 5f, s.innPrice.ToString(), Hint("InnPrice")));
 		}
 

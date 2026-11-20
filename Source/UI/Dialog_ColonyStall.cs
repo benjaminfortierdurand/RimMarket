@@ -96,7 +96,7 @@ namespace RimMarket.UI
 				Thing t = things[i];
 				if (!t.Spawned || t.Position.Fogged(map) || t.IsForbidden(Faction.OfPlayer)) continue;
 				ThingDef sold = ColonyStalls.StockDef(t);
-				if (!ColonyStalls.CanSell(sold) || !MarketUtility.Tradeable(t)) continue;
+				if (!ColonyStalls.CanSell(sold) || !MarketUtility.Tradeable(t) || ColonyStalls.KeptOffStalls(t)) continue;
 				Count(RowFor(sold), t, true);
 			}
 			IReadOnlyList<Thing> stock = stall.Stock;

@@ -46,6 +46,7 @@ namespace RimMarket.Buildings
 
 		public bool Allows(Thing t)
 		{
+			if (ColonyStalls.KeptOffStalls(t)) return false;
 			return !t.TryGetQuality(out QualityCategory q) || quality.Includes(q);
 		}
 

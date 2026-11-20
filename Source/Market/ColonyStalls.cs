@@ -81,6 +81,8 @@ namespace RimMarket.Market
 
 		public static bool IsArt(ThingDef def) => def != null && def.category == ThingCategory.Building && def.Minifiable && def.IsArt;
 
+		public static bool KeptOffStalls(Thing t) => !RimMarketMod.Settings.sellTainted && t is Apparel worn && worn.WornByCorpse;
+
 		public static bool CanSell(ThingDef def)
 		{
 			if (IsArt(def)) return true;
