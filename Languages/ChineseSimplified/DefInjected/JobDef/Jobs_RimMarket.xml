@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<RimMarket_PostWantedNotice.reportString>正在张贴悬赏通告。</RimMarket_PostWantedNotice.reportString>
+
+	<RimMarket_StandAtStall.reportString>正在照看摊位。</RimMarket_StandAtStall.reportString>
+
+	<RimMarket_CallAuction.reportString>正在主持拍卖。</RimMarket_CallAuction.reportString>
+
+	<RimMarket_StandOnBlock.reportString>被锁在拍卖柱上。</RimMarket_StandOnBlock.reportString>
+
+	<RimMarket_WatchAuction.reportString>正在观看拍卖。</RimMarket_WatchAuction.reportString>
+
+	<RimMarket_AttendAuction.reportString>正在参加拍卖。</RimMarket_AttendAuction.reportString>
+
+	<RimMarket_RestAtSpot.reportString>正在休息。</RimMarket_RestAtSpot.reportString>
+
+	<RimMarket_CheckAnimals.reportString>正在照料驮运动物。</RimMarket_CheckAnimals.reportString>
+
+	<RimMarket_SleepAtInn.reportString>正在旅店睡觉。</RimMarket_SleepAtInn.reportString>
+
+	<RimMarket_PayStallFee.reportString>正在支付摊位费。</RimMarket_PayStallFee.reportString>
+
+	<RimMarket_BrowseStall.reportString>正在浏览集市摊位。</RimMarket_BrowseStall.reportString>
+
+	<RimMarket_BuyAtStall.reportString>正在集市摊位购物。</RimMarket_BuyAtStall.reportString>
+
+	<RimMarket_Snatch.reportString>正在集市摊位挑挑拣拣。</RimMarket_Snatch.reportString>
+
+	<RimMarket_CatchThief.reportString>正在追赶 TargetA。</RimMarket_CatchThief.reportString>
+
+	<RimMarket_TradeAtStall.reportString>正在摊位交易。</RimMarket_TradeAtStall.reportString>
+
+	<RimMarket_TendColonyStall.reportString>正在照看殖民地摊位。</RimMarket_TendColonyStall.reportString>
+
+</LanguageData>
