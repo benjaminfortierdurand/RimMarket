@@ -164,6 +164,9 @@ Select the spot to paint its area like a stockpile zone, or hide it once you kno
 		<costStuffCount>75</costStuffCount>
 		<designationCategory>Misc</designationCategory>
 		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<researchPrerequisites>
+			<li>RimMarket_MarketStalls</li>
+		</researchPrerequisites>
 		<placeWorkers>
 			<li>RimMarket.Buildings.PlaceWorker_MarketStall</li>
 		</placeWorkers>
@@ -206,6 +209,9 @@ Select the spot to paint its area like a stockpile zone, or hide it once you kno
 		<costList>
 			<ComponentSpacer>1</ComponentSpacer>
 		</costList>
+		<researchPrerequisites>
+			<li>AirConditioning</li>
+		</researchPrerequisites>
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>

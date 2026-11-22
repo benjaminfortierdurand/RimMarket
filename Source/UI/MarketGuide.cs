@@ -200,6 +200,7 @@ namespace RimMarket.UI
 			List<CompMarketStall> inside = all.Where(s => MarketUtility.MarkerFor(s) != null).ToList();
 			return new List<GuideCheck>
 			{
+				new GuideCheck(L("StallResearch"), RimMarketDefOf.RimMarket_MarketStalls == null || RimMarketDefOf.RimMarket_MarketStalls.IsFinished, GuideLine.Required),
 				new GuideCheck(L("StallInside"), inside.Count > 0, GuideLine.Required),
 				new GuideCheck(L("StallNoneOutside"), all.Count > 0 && inside.Count == all.Count, GuideLine.Required),
 				new GuideCheck(L("StallSpotFree"), inside.Count > 0 && inside.All(SpotFree), GuideLine.Required),

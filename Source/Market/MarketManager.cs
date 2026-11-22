@@ -922,12 +922,39 @@ namespace RimMarket.Market
 
 		public int newsSeen = RimMarket.UI.MarketNews.Latest;
 		private bool newsPending;
+		private const int DataVersion = 1;
+		private int dataVersion = DataVersion;
 
 		public override void FinalizeInit()
 		{
 			base.FinalizeInit();
 			Instance = this;
 			newsPending = RimMarket.UI.MarketNews.Unseen(this);
+			Migrate();
+		}
+
+		private void Migrate()
+		{
+			if (dataVersion >= DataVersion) return;
+			dataVersion = DataVersion;
+			ResearchProjectDef stalls = RimMarketDefOf.RimMarket_MarketStalls;
+			if (stalls == null || stalls.IsFinished || !AnyMarketBuilt()) return;
+			Find.ResearchManager.FinishProject(stalls, false, null, false);
+		}
+
+		private static bool AnyMarketBuilt()
+		{
+			List<Map> maps = Find.Maps;
+			List<ThingDef> stallDefs = MarketStallDefs.All;
+			for (int m = 0; m < maps.Count; m++)
+			{
+				if (maps[m].listerThings.ThingsOfDef(RimMarketDefOf.RimMarket_MarketMarker).Count > 0) return true;
+				for (int d = 0; d < stallDefs.Count; d++)
+				{
+					if (maps[m].listerThings.ThingsOfDef(stallDefs[d]).Count > 0) return true;
+				}
+			}
+			return false;
 		}
 
 		public override void GameComponentUpdate()
@@ -1831,6 +1858,7 @@ namespace RimMarket.Market
 			Scribe_Collections.Look(ref visits, "visits", LookMode.Deep);
 			Scribe_Values.Look(ref nextId, "nextId", 1);
 			Scribe_Values.Look(ref newsSeen, "newsSeen");
+			Scribe_Values.Look(ref dataVersion, "dataVersion");
 			Scribe_Values.Look(ref totalFees, "totalFees");
 			Scribe_Values.Look(ref totalGuestSales, "totalGuestSales");
 			Scribe_Values.Look(ref totalColonySales, "totalColonySales");

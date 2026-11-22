@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ResearchProjectDef>
+		<defName>RimMarket_MarketStalls</defName>
+		<label>market stalls</label>
+		<description>Build market stalls: a counter under an awning where visiting merchants set up their wares, or where you sell your own goods to shoppers.</description>
+		<baseCost>300</baseCost>
+		<techLevel>Neolithic</techLevel>
+		<researchViewX>0.00</researchViewX>
+		<researchViewY>6.30</researchViewY>
+	</ResearchProjectDef>
+
+</Defs>

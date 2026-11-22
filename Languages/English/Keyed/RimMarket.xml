@@ -819,6 +819,7 @@ They are yours now. Your haulers will put them away, or you can jump to them fro
 	<RimMarket.Guide.MarkerOpen>The market is open</RimMarket.Guide.MarkerOpen>
 	<RimMarket.Guide.StallsTitle>Your stalls</RimMarket.Guide.StallsTitle>
 	<RimMarket.Guide.StallsBody>Build market stalls (Architect, Misc) inside the marker's area. Each one needs its merchant's spot free: the cell at the end of the counter, outlined in white while you place it.\n\nCaravans walk in from the map edge and open your doors like any friendly visitor, so leave them a way in. The counter takes the colour of its material, and the awning is yours to paint from the stall.</RimMarket.Guide.StallsBody>
+	<RimMarket.Guide.StallResearch>The Market stalls research is done</RimMarket.Guide.StallResearch>
 	<RimMarket.Guide.StallInside>At least one stall inside the marker's area</RimMarket.Guide.StallInside>
 	<RimMarket.Guide.StallNoneOutside>No stall left outside the marker's area</RimMarket.Guide.StallNoneOutside>
 	<RimMarket.Guide.StallSpotFree>The merchant's spot is free on every stall</RimMarket.Guide.StallSpotFree>

@@ -10,6 +10,7 @@ namespace RimMarket
 		public static ThingDef RimMarket_MarketMarker;
 
 		public static ThingDef RimMarket_Stall;
+		public static ResearchProjectDef RimMarket_MarketStalls;
 
 		public static DutyDef RimMarket_TendStall;
 		public static DutyDef RimMarket_CallAuctionDuty;
