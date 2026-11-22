@@ -610,6 +610,8 @@ It costs an advanced component on top of the steel. You will find it next to the
 	<RimMarket.Settings.RouteToll>Fee per convoy</RimMarket.Settings.RouteToll>
 	<RimMarket.Settings.SpecialOrders>Special orders</RimMarket.Settings.SpecialOrders>
 	<RimMarket.Settings.SpecialOrdersHint>From the comms console (or a messenger table with Medieval Overhaul), pay a faction to bring a caravan full of what you asked for. They set up at a stall and skip the stall fee, since you already paid them to come.</RimMarket.Settings.SpecialOrdersHint>
+	<RimMarket.Settings.WantedPrice>Wanted notice prices</RimMarket.Settings.WantedPrice>
+	<RimMarket.Settings.WantedPriceHint>Scales what factions ask, in silver or in goods, when they answer one of your wanted notices.</RimMarket.Settings.WantedPriceHint>
 	<RimMarket.OrderOption>Special order</RimMarket.OrderOption>
 	<RimMarket.OrderPending>an order is already on its way</RimMarket.OrderPending>
 	<RimMarket.OrderLimit>order limit reached ({0})</RimMarket.OrderLimit>

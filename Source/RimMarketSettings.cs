@@ -43,6 +43,7 @@ namespace RimMarket
 		public const bool DefSpecialOrders = true;
 		public const float DefRouteOpenFactor = 1f;
 		public const float DefRouteTollFactor = 1f;
+		public const float DefWantedPriceFactor = 1f;
 		public const bool DefShopkeepers = false;
 		public const bool DefMarketSaturation = true;
 		public const int DefMarketDifficulty = 1;
@@ -87,6 +88,7 @@ namespace RimMarket
 		public bool specialOrders = DefSpecialOrders;
 		public float routeOpenFactor = DefRouteOpenFactor;
 		public float routeTollFactor = DefRouteTollFactor;
+		public float wantedPriceFactor = DefWantedPriceFactor;
 		public bool shopkeepers = DefShopkeepers;
 		public bool marketSaturation = DefMarketSaturation;
 		public bool sellTainted = true;
@@ -182,6 +184,7 @@ namespace RimMarket
 			tradeRoutes = DefTradeRoutes;
 			routeOpenFactor = DefRouteOpenFactor;
 			routeTollFactor = DefRouteTollFactor;
+			wantedPriceFactor = DefWantedPriceFactor;
 			specialOrders = DefSpecialOrders;
 			awayStalls = DefAwayStalls;
 			hegemonyPrices = DefHegemony;
@@ -228,6 +231,7 @@ namespace RimMarket
 			Scribe_Values.Look(ref specialOrders, "specialOrders", DefSpecialOrders);
 			Scribe_Values.Look(ref routeOpenFactor, "routeOpenFactor", DefRouteOpenFactor);
 			Scribe_Values.Look(ref routeTollFactor, "routeTollFactor", DefRouteTollFactor);
+			Scribe_Values.Look(ref wantedPriceFactor, "wantedPriceFactor", DefWantedPriceFactor);
 			Scribe_Values.Look(ref shopkeepers, "shopkeepers", DefShopkeepers);
 			Scribe_Values.Look(ref marketSaturation, "marketSaturation", DefMarketSaturation);
 			Scribe_Values.Look(ref sellTainted, "sellTainted", true);

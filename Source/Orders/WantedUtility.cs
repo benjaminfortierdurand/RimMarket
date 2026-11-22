@@ -180,7 +180,8 @@ namespace RimMarket.Orders
 			float liking = Mathf.InverseLerp(-100f, 100f, f.PlayerGoodwill);
 			float markup = Mathf.Lerp(StrangerMarkup, FriendMarkup, liking) * Rand.Range(0.95f, 1.05f);
 			int tiles = path.Count - 1;
-			int price = Round10(value * markup + SpecialOrderUtility.TripPrice(tiles) * TripFactor);
+			float scale = RimMarketMod.Settings.wantedPriceFactor;
+			int price = Round10((value * markup + SpecialOrderUtility.TripPrice(tiles) * TripFactor) * scale);
 			Faction threat = null;
 			float risk = bySea ? 0f : TradeRouteUtility.TripRisk(path, town.Tile.Layer, f, false, out threat);
 			var offer = new WantedOffer
@@ -199,7 +200,7 @@ namespace RimMarket.Orders
 				partial = partial,
 				expiresTick = Now + OfferLifeTicks,
 			};
-			if (Rand.Chance(BarterChance)) offer.barter = PickBarter(map, Round10(value * BarterValue), n.goods);
+			if (Rand.Chance(BarterChance)) offer.barter = PickBarter(map, Round10(value * BarterValue * scale), n.goods);
 			if (offer.Barter) offer.barterFallback = Round10(price * BarterSurcharge);
 			return offer;
 		}

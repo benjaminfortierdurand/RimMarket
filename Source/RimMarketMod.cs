@@ -191,6 +191,7 @@ namespace RimMarket
 				s.routeTollFactor = Slider("RouteToll", s.routeTollFactor, 0f, 3f, 0.05f, s.routeTollFactor.ToStringPercent(), toll, SubIndent);
 			}
 			Check("SpecialOrders", ref s.specialOrders, Hint("SpecialOrders"));
+			if (s.specialOrders) s.wantedPriceFactor = Slider("WantedPrice", s.wantedPriceFactor, 0f, 5f, 0.05f, s.wantedPriceFactor.ToStringPercent(), Hint("WantedPrice"), SubIndent);
 			Check("AwayStalls", ref s.awayStalls, Hint("AwayStalls"));
 			if (HegemonyBridge.Installed)
 			{
