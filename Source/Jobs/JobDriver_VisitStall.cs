@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using RimMarket.Buildings;
 using RimMarket.Market;
 using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 using Verse.Sound;
@@ -97,6 +98,55 @@ namespace RimMarket.Jobs
 				MoteMaker.ThrowText(pawn.DrawPos, pawn.Map,
 					"RimMarket.MoteBought".Translate(bought.LabelShort, price), 3.5f);
 			pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(RimMarketDefOf.RimMarket_BoughtAtMarket);
+			UseNow(bought.def);
+		}
+
+		private const float SnackBelow = 0.75f;
+		private const float CravingBelow = 0.5f;
+
+		private void UseNow(ThingDef def)
+		{
+			if (def?.ingestible == null || pawn.IsColonist || !pawn.RaceProps.Humanlike || pawn.inventory == null || pawn.jobs == null) return;
+			ThingOwner carried = pawn.inventory.innerContainer;
+			Thing item = null;
+			for (int i = 0; i < carried.Count; i++)
+			{
+				if (carried[i].def == def)
+				{
+					item = carried[i];
+					break;
+				}
+			}
+			if (item == null || !WantsNow(item)) return;
+			Job use = JobMaker.MakeJob(JobDefOf.Ingest, item);
+			use.count = def.IsDrug ? 1 : Mathf.Clamp(FoodUtility.WillIngestStackCountOf(pawn, def, FoodUtility.GetNutrition(pawn, item, def)), 1, item.stackCount);
+			pawn.jobs.jobQueue.EnqueueFirst(use);
+		}
+
+		private bool WantsNow(Thing item)
+		{
+			ThingDef def = item.def;
+			if (def.IsDrug)
+			{
+				if (!pawn.CanTakeDrug(def)) return false;
+				ChemicalDef chemical = item.TryGetComp<CompDrug>()?.Props.chemical;
+				if (chemical != null && AddictionUtility.IsAddicted(pawn, chemical))
+				{
+					Need craving = chemical.addictionHediff?.chemicalNeed == null ? null : pawn.needs?.TryGetNeed(chemical.addictionHediff.chemicalNeed);
+					return craving != null && craving.CurLevelPercentage < CravingBelow;
+				}
+				if (def.ingestible.drugCategory != DrugCategory.Social) return false;
+				List<IngestionOutcomeDoer> effects = def.ingestible.outcomeDoers;
+				if (effects == null) return true;
+				for (int i = 0; i < effects.Count; i++)
+				{
+					if (effects[i] is IngestionOutcomeDoer_GiveHediff high && high.hediffDef != null && pawn.health.hediffSet.HasHediff(high.hediffDef)) return false;
+				}
+				return true;
+			}
+			if (!def.IsNutritionGivingIngestible || def.ingestible.preferability < FoodPreferability.RawTasty) return false;
+			Need_Food food = pawn.needs?.food;
+			return food != null && food.CurLevelPercentage < SnackBelow && pawn.WillEat(item);
 		}
 
 		public override void ExposeData()
