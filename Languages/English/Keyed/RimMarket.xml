@@ -319,6 +319,22 @@ It costs an advanced component on top of the steel. You will find it next to the
 	<RimMarket.ChantNoTakers1>No takers? Shame.</RimMarket.ChantNoTakers1>
 	<RimMarket.ChantNoTakers2>Nobody? Moving on, folks.</RimMarket.ChantNoTakers2>
 	<RimMarket.MoteBought>{0}: {1} silver</RimMarket.MoteBought>
+	<RimMarket.Cry1>{0}! Come have a look!</RimMarket.Cry1>
+	<RimMarket.Cry2>Fine {0}, fair price!</RimMarket.Cry2>
+	<RimMarket.Cry3>{0}, right here!</RimMarket.Cry3>
+	<RimMarket.Cry4>Who needs {0}?</RimMarket.Cry4>
+	<RimMarket.Cry5>Best {0} on this side of the rim!</RimMarket.Cry5>
+	<RimMarket.Cry6>{0}! Won't last long!</RimMarket.Cry6>
+	<RimMarket.Cry7>Take a look at this {0}!</RimMarket.Cry7>
+	<RimMarket.Cry8>{0} for sale!</RimMarket.Cry8>
+	<RimMarket.Cry9>Good {0}, good price!</RimMarket.Cry9>
+	<RimMarket.Cry10>Looking for {0}? Over here!</RimMarket.Cry10>
+	<RimMarket.Cry11>Hey, you! Need {0}?</RimMarket.Cry11>
+	<RimMarket.Cry12>{0}, straight off the road!</RimMarket.Cry12>
+	<RimMarket.Cry13>Nobody else has {0} like this!</RimMarket.Cry13>
+	<RimMarket.Cry14>{0}! Cheaper than you think!</RimMarket.Cry14>
+	<RimMarket.Cry15>Come closer, looking is free!</RimMarket.Cry15>
+	<RimMarket.Cry16>Last {0} before we pack up!</RimMarket.Cry16>
 	<RimMarket.MoteThief>Thief!</RimMarket.MoteThief>
 	<RimMarket.MoteNotToday>Not today.</RimMarket.MoteNotToday>
 	<RimMarket.MoteGotYou>Got you!</RimMarket.MoteGotYou>
@@ -555,6 +571,8 @@ It costs an advanced component on top of the steel. You will find it next to the
 	<RimMarket.Settings.MarketSaturationHint>Selling a lot of the same thing at your colony stalls lowers demand for it: it sells less often and for less, then demand comes back over a few days. Vary what you sell. With Vanilla Trading Expanded only the selling chance drops, VTE already lowers the price.</RimMarket.Settings.MarketSaturationHint>
 	<RimMarket.Settings.SellTainted>Tainted apparel on colony stalls</RimMarket.Settings.SellTainted>
 	<RimMarket.Settings.SellTaintedHint>Off: apparel taken from a corpse is never put on a colony stall, so it stays out of your sales and your refills.</RimMarket.Settings.SellTaintedHint>
+	<RimMarket.Settings.EveningGathering>Evening at the market</RimMarket.Settings.EveningGathering>
+	<RimMarket.Settings.EveningGatheringHint>From 8 in the evening until bedtime, merchants, off duty guards and shoppers sit together at a table or a lit campfire inside the market area. The stalls are left alone meanwhile, a merchant walks back when one of your colonists comes to trade. Does nothing without a table or a campfire in the market.</RimMarket.Settings.EveningGatheringHint>
 	<RimMarket.StallSetupDemandTip>Demand: {0}. Every sale of this lowers it, it comes back over a few days. Low demand means fewer and cheaper sales.</RimMarket.StallSetupDemandTip>
 	<RimMarket.StallSetupDemandVte>With Vanilla Trading Expanded, demand only changes how often it sells. The price follows VTE's market.</RimMarket.StallSetupDemandVte>
 	<RimMarket.Settings.Shopkeepers>Colony stalls need a shopkeeper</RimMarket.Settings.Shopkeepers>
@@ -826,9 +844,12 @@ They are yours now. Your haulers will put them away, or you can jump to them fro
 	<RimMarket.Guide.StallFromEdge>Caravans can walk to every stall from the map edge</RimMarket.Guide.StallFromEdge>
 	<RimMarket.Guide.StallThree>Three stalls or more, for a Great Fair</RimMarket.Guide.StallThree>
 	<RimMarket.Guide.SpotsTitle>Camp and rest spot</RimMarket.Guide.SpotsTitle>
-	<RimMarket.Guide.SpotsBody>Two spots keep the square tidy (Architect, Misc). The caravan camp is where the pack animals wait: fence it in and they stay put. The guard rest spot is where off duty guards sit, chat, eat and play at any game table or TV in its area while one of them stands post at the stall. Select a spot to paint its area by hand, like a stockpile.\n\nBoth are optional and can go anywhere on the map, inside or outside the market: caravans use the nearest one. Without them, animals and guards wait just outside the market. Each spot can be hidden once you know where it is.</RimMarket.Guide.SpotsBody>
+	<RimMarket.Guide.SpotsBody>Two spots keep the square tidy (Architect, Misc). The caravan camp is where the pack animals wait: fence it in and they stay put. The guard rest spot is where off duty guards sit, chat, eat and play at any game table or TV in its area while one of them stands post at the stall. Select a spot to paint its area by hand, like a stockpile.\n\nBoth are optional and can go anywhere on the map, inside or outside the market: caravans use the nearest one. Without them, animals and guards wait just outside the market. Each spot can be hidden once you know where it is.
+
+A table with chairs or a campfire inside the market area gives them a place for the evening: from 8 until bedtime, merchants, off duty guards and shoppers sit there together.</RimMarket.Guide.SpotsBody>
 	<RimMarket.Guide.SpotCamp>A caravan camp for the pack animals</RimMarket.Guide.SpotCamp>
 	<RimMarket.Guide.SpotRest>A guard rest spot for the escort</RimMarket.Guide.SpotRest>
+	<RimMarket.Guide.SpotEvening>A table or a campfire in the market area for the evenings</RimMarket.Guide.SpotEvening>
 	<RimMarket.Guide.FeesTitle>Fees and haggling</RimMarket.Guide.FeesTitle>
 	<RimMarket.Guide.FeesBody>Merchants pay a stall fee on arrival, counted out on the counter, then stay a market day. Trade with them from the stall or by talking to the merchant, with the usual trade window.\n\nOnce per visit you can haggle from the trade window: it uses your negotiator's Social skill, and a failure costs as much as a success would have gained. The fee, haggling and the length of a market day are in the mod settings, and a marker can set its own fee.</RimMarket.Guide.FeesBody>
 	<RimMarket.Guide.FeeMode>Stall fee: {0}</RimMarket.Guide.FeeMode>

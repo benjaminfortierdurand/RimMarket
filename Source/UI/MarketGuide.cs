@@ -215,6 +215,7 @@ namespace RimMarket.UI
 			{
 				new GuideCheck(L("SpotCamp"), map != null && map.listerThings.ThingsOfDef(RimMarketDefOf.RimMarket_CaravanCamp).Count > 0, GuideLine.Optional),
 				new GuideCheck(L("SpotRest"), map != null && map.listerThings.ThingsOfDef(RimMarketDefOf.RimMarket_GuardRestSpot).Count > 0, GuideLine.Optional),
+				new GuideCheck(L("SpotEvening"), RimMarket.AI.MarketEvening.AnySpot(map), GuideLine.Optional),
 			};
 		}
 

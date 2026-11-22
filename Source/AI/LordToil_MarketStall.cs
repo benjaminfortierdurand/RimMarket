@@ -165,6 +165,7 @@ namespace RimMarket.AI
 			if (relieved || v.dutiesDirty || DutiesDrifted(v)) UpdateAllDuties();
 			GuardWatch.Nudge(nudged);
 			if (now % FeedInterval == 0) MarketUtility.TopUpFood(lord, full: false);
+			MerchantCries.TryCry(v);
 			if (!v.arrivalSignalled && (MarketUtility.MerchantAtPost(v) || now - v.startTick > ArrivalFallbackTicks))
 			{
 				v.arrivalSignalled = true;

@@ -85,7 +85,11 @@ namespace RimMarket.Jobs
 				if (job.GetTarget(TargetIndex.C).IsValid) pawn.rotationTracker.FaceCell(job.GetTarget(TargetIndex.C).Cell);
 				if (!pawn.IsHashIntervalTick(CheckInterval, delta)) return;
 				if (!ColonyStalls.CustomersAround(pawn.Map) || !ColonyStalls.InMarket(s) || !ColonyStalls.HasStock(s))
+				{
 					EndJobWith(JobCondition.Succeeded);
+					return;
+				}
+				if (pawn.Position == job.GetTarget(TargetIndex.B).Cell) MerchantCries.TryCry(s, pawn);
 			};
 			tend.AddFinishAction(delegate
 			{

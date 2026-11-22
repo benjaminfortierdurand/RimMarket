@@ -33,6 +33,8 @@ namespace RimMarket
 
 		public static JobDef RimMarket_CheckAnimals;
 
+		public static JobDef RimMarket_EveningGather;
+
 		public static DutyDef RimMarket_ShopAtMarket;
 
 		public static JobDef RimMarket_SleepAtInn;

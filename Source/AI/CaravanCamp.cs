@@ -225,7 +225,7 @@ namespace RimMarket.AI
 			return cells;
 		}
 
-		private static bool OnOtherStall(Map map, CompMarketStall self, IntVec3 c)
+		public static bool OnOtherStall(Map map, CompMarketStall self, IntVec3 c)
 		{
 			List<ThingDef> defs = MarketStallDefs.All;
 			for (int i = 0; i < defs.Count; i++)

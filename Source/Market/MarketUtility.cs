@@ -295,7 +295,7 @@ namespace RimMarket.Market
 
 		private static readonly List<Building_MarketStall> colonyBuffer = new List<Building_MarketStall>();
 
-		public static CompMarketStall PickStallToVisit(Pawn pawn, out Pawn seller)
+		public static CompMarketStall PickStallToVisit(Pawn pawn, out Pawn seller, CompMarketStall exclude = null, IntVec3 center = default, float maxDist = 0f)
 		{
 			seller = null;
 			MarketManager mgr = MarketManager.Instance;
@@ -308,7 +308,8 @@ namespace RimMarket.Market
 				for (int i = 0; i < visits.Count; i++)
 				{
 					StallVisit v = visits[i];
-					if (v.map != pawn.Map || !MerchantAtPost(v)) continue;
+					if (v.map != pawn.Map || v.stall == exclude || !MerchantAtPost(v)) continue;
+					if (maxDist > 0f && !v.stall.Position.InHorDistOf(center, maxDist)) continue;
 					if (!v.stall.CustomerCell.InAllowedArea(pawn) || !pawn.CanReach(v.stall.CustomerCell, PathEndMode.OnCell, Danger.None)) continue;
 					stalls.Add(v.stall);
 					sellers.Add(v.trader);
@@ -322,6 +323,7 @@ namespace RimMarket.Market
 				{
 					CompMarketStall c = colonyBuffer[i].Stall;
 					if (c == null || !c.CustomerCell.InAllowedArea(pawn) || !pawn.CanReach(c.CustomerCell, PathEndMode.OnCell, Danger.None)) continue;
+					if (maxDist > 0f && !c.Position.InHorDistOf(center, maxDist)) continue;
 					if (ColonyStalls.HoldsDearFor(colonyBuffer[i], purse))
 					{
 						seller = ColonyStalls.KeeperAt(colonyBuffer[i]);
@@ -344,11 +346,7 @@ namespace RimMarket.Market
 			int near = stall.CustomerReach;
 			for (int d = near; d <= near + 1; d++)
 			{
-				for (int s = -1; s <= 1; s++)
-				{
-					IntVec3 c = stall.Position + stall.Front * d + stall.Side * s;
-					if (c != stall.CustomerCell) cells.Add(c);
-				}
+				for (int s = -1; s <= 1; s += 2) cells.Add(stall.Position + stall.Front * d + stall.Side * s);
 			}
 			cells.Shuffle();
 			cells.Add(stall.CustomerCell);
@@ -362,13 +360,48 @@ namespace RimMarket.Market
 			return IntVec3.Invalid;
 		}
 
-		public static Job MakeVisitJob(Pawn pawn, bool shopper = false)
+		public const int MaxQueue = 4;
+
+		public static IntVec3 QueueCell(CompMarketStall stall, int index) => stall.CustomerCell + stall.Front * index;
+
+		public static int QueueIndex(CompMarketStall stall, IntVec3 cell)
 		{
-			CompMarketStall stall = PickStallToVisit(pawn, out Pawn seller);
+			if (stall == null) return -1;
+			for (int i = 0; i < MaxQueue; i++)
+			{
+				if (QueueCell(stall, i) == cell) return i;
+			}
+			return -1;
+		}
+
+		private static bool QueueCellOk(CompMarketStall stall, int index, Pawn pawn)
+		{
+			Map map = stall.Map;
+			IntVec3 c = QueueCell(stall, index);
+			if (!c.InBounds(map) || !c.Standable(map) || !c.InAllowedArea(pawn)) return false;
+			return index == 0 || !RimMarket.AI.CaravanCamp.OnOtherStall(map, stall, c);
+		}
+
+		public static IntVec3 FindBuyCell(CompMarketStall stall, Pawn pawn)
+		{
+			int room = 0;
+			while (room < MaxQueue && QueueCellOk(stall, room, pawn)) room++;
+			for (int i = 0; i < room; i++)
+			{
+				IntVec3 c = QueueCell(stall, i);
+				if (pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.None)) return c;
+			}
+			return room < 2 ? FindBrowseCell(stall, pawn) : IntVec3.Invalid;
+		}
+
+		public static Job MakeVisitJob(Pawn pawn, bool shopper = false, bool browseOnly = false, CompMarketStall exclude = null, float maxDist = 0f)
+		{
+			IntVec3 center = exclude != null ? exclude.Position : (pawn != null ? pawn.Position : IntVec3.Invalid);
+			CompMarketStall stall = PickStallToVisit(pawn, out Pawn seller, exclude, center, maxDist);
 			if (stall == null) return null;
-			IntVec3 cell = FindBrowseCell(stall, pawn);
+			bool buyer = !browseOnly && !pawn.IsColonist && (shopper || RimMarketMod.Settings.guestsShop) && Purse(pawn) >= MinGuestPurchase;
+			IntVec3 cell = buyer ? FindBuyCell(stall, pawn) : FindBrowseCell(stall, pawn);
 			if (!cell.IsValid) return null;
-			bool buyer = !pawn.IsColonist && (shopper || RimMarketMod.Settings.guestsShop) && Purse(pawn) >= MinGuestPurchase;
 			JobDef def = buyer ? RimMarketDefOf.RimMarket_BuyAtStall : RimMarketDefOf.RimMarket_BrowseStall;
 			return JobMaker.MakeJob(def, stall.parent, cell, seller);
 		}
@@ -571,6 +604,7 @@ namespace RimMarket.Market
 			Job job = JobMaker.MakeJob(RimMarketDefOf.RimMarket_TradeAtStall, stall.parent, trader);
 			job.playerForced = true;
 			colonist.jobs?.TryTakeOrderedJob(job, JobTag.Misc);
+			RimMarket.AI.MarketBreaks.CallBack(trader);
 			PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.InteractingWithTraders, KnowledgeAmount.Total);
 		}
 
@@ -637,6 +671,7 @@ namespace RimMarket.Market
 				job.playerForced = true;
 				if (first) colonist.jobs?.TryTakeOrderedJob(job, JobTag.Misc);
 				else colonist.jobs?.jobQueue.EnqueueLast(job, JobTag.Misc);
+				RimMarket.AI.MarketBreaks.CallBack(next.trader);
 				first = false;
 			}
 			PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.InteractingWithTraders, KnowledgeAmount.Total);

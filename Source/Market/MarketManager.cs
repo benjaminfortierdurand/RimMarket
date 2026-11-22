@@ -929,6 +929,9 @@ namespace RimMarket.Market
 		{
 			base.FinalizeInit();
 			Instance = this;
+			PurchaseCarry.Clear();
+			MerchantCries.Clear();
+			RimMarket.AI.MarketBreaks.Clear();
 			newsPending = RimMarket.UI.MarketNews.Unseen(this);
 			Migrate();
 		}
@@ -960,6 +963,7 @@ namespace RimMarket.Market
 		public override void GameComponentUpdate()
 		{
 			base.GameComponentUpdate();
+			if (PurchaseCarry.Any) PurchaseCarry.Draw();
 			if (!newsPending) return;
 			newsPending = false;
 			RimMarket.UI.MarketNews.Show();

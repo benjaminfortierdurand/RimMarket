@@ -21,6 +21,9 @@ namespace RimMarket.Market
 		public Thing marker;
 		public int stayTicks = MarketShoppers.StayTicks;
 		public bool innRated;
+		private List<Pawn> buyers = new List<Pawn>();
+		private List<ThingDef> boughtDefs = new List<ThingDef>();
+		private bool purchasesShown;
 
 		public LordJob_MarketShoppers()
 		{
@@ -36,7 +39,42 @@ namespace RimMarket.Market
 
 		public override void LordJobTick()
 		{
-			if (Find.TickManager.TicksGame % FeedInterval == 0) MarketUtility.TopUpFood(lord, full: false);
+			int now = Find.TickManager.TicksGame;
+			if (now % FeedInterval == 0) MarketUtility.TopUpFood(lord, full: false);
+			if (!purchasesShown && now % CheckInterval == 0 && lord.CurLordToil is LordToil_ExitMap) ShowPurchases();
+		}
+
+		public void Notify_Bought(Pawn pawn, ThingDef def)
+		{
+			if (pawn == null || def == null) return;
+			for (int i = 0; i < buyers.Count; i++)
+			{
+				if (buyers[i] == pawn && boughtDefs[i] == def) return;
+			}
+			buyers.Add(pawn);
+			boughtDefs.Add(def);
+		}
+
+		private void ShowPurchases()
+		{
+			purchasesShown = true;
+			for (int i = 0; i < lord.ownedPawns.Count; i++)
+			{
+				Pawn p = lord.ownedPawns[i];
+				Thing best = null;
+				float bestValue = 0f;
+				for (int k = 0; k < buyers.Count; k++)
+				{
+					if (buyers[k] != p) continue;
+					Thing t = MarketSnacks.Carried(p, boughtDefs[k]);
+					if (t == null) continue;
+					float value = t.MarketValue * t.stackCount;
+					if (best != null && value <= bestValue) continue;
+					best = t;
+					bestValue = value;
+				}
+				if (best != null) PurchaseCarry.Show(p, best);
+			}
 		}
 
 		public override StateGraph CreateGraph()
@@ -57,6 +95,7 @@ namespace RimMarket.Market
 			done.AddTrigger(new Trigger_BecamePlayerEnemy());
 			done.AddTrigger(new Trigger_PawnHarmed());
 			done.AddPreAction(new TransitionAction_EndAllJobs());
+			done.AddPostAction(new TransitionAction_Custom((System.Action)ShowPurchases));
 			graph.AddTransition(done);
 			return graph;
 		}
@@ -66,6 +105,14 @@ namespace RimMarket.Market
 			Scribe_References.Look(ref marker, "marker");
 			Scribe_Values.Look(ref stayTicks, "stayTicks", MarketShoppers.StayTicks);
 			Scribe_Values.Look(ref innRated, "innRated");
+			Scribe_Collections.Look(ref buyers, "buyers", LookMode.Reference);
+			Scribe_Collections.Look(ref boughtDefs, "boughtDefs", LookMode.Def);
+			if (Scribe.mode != LoadSaveMode.PostLoadInit) return;
+			if (buyers == null || boughtDefs == null || buyers.Count != boughtDefs.Count)
+			{
+				buyers = new List<Pawn>();
+				boughtDefs = new List<ThingDef>();
+			}
 		}
 	}
 

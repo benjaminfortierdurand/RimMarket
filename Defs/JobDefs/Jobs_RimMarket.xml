@@ -70,6 +70,14 @@
 	</JobDef>
 
 	<JobDef>
+		<defName>RimMarket_EveningGather</defName>
+		<driverClass>RimMarket.AI.JobDriver_RestAtSpot</driverClass>
+		<reportString>spending the evening at the market.</reportString>
+		<casualInterruptible>true</casualInterruptible>
+		<allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
 		<defName>RimMarket_SleepAtInn</defName>
 		<driverClass>RimMarket.Inn.JobDriver_SleepAtInn</driverClass>
 		<reportString>sleeping at the inn.</reportString>

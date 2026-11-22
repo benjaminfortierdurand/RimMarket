@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using RimMarket.Buildings;
 using RimMarket.Market;
 using RimWorld;
-using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.AI.Group;
 using Verse.Sound;
 
 namespace RimMarket.Jobs
@@ -12,8 +12,12 @@ namespace RimMarket.Jobs
 	public class JobDriver_VisitStall : JobDriver
 	{
 		private const int MinTicksForThought = 300;
+		private const int LineCheck = 30;
+		private const int MaxLineWait = 3000;
+		private const int ServedBrowse = 450;
 
 		private int browseTicks;
+		private int waited;
 
 		private CompMarketStall Stall => MarketStallDefs.StallOf(job.GetTarget(TargetIndex.A).Thing);
 
@@ -42,12 +46,18 @@ namespace RimMarket.Jobs
 			this.FailOn(() => !StallOpen());
 			yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
 
+			if (Buying) yield return WaitInLine();
+
 			Toil browse = ToilMaker.MakeToil("BrowseStall");
 			browse.defaultCompleteMode = ToilCompleteMode.Delay;
 			browse.defaultDuration = job.def.joyDuration;
 			browse.handlingFacing = true;
 			browse.socialMode = RandomSocialMode.Normal;
-			browse.initAction = () => pawn.pather.StopDead();
+			browse.initAction = delegate
+			{
+				pawn.pather.StopDead();
+				if (waited > 0 && ticksLeftThisToil > ServedBrowse) ticksLeftThisToil = ServedBrowse;
+			};
 			browse.tickIntervalAction = delegate(int delta)
 			{
 				browseTicks += delta;
@@ -64,7 +74,7 @@ namespace RimMarket.Jobs
 				pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(RimMarketDefOf.RimMarket_BrowsedMarket);
 				if (pawn.IsColonist && Fair.FairUtility.Running(pawn.Map))
 					pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(RimMarketDefOf.RimMarket_WentToFair);
-				MarketManager.Instance?.Notify_Browsed(Stall);
+				if (!RimMarket.AI.MarketBreaks.CaravanFolk(pawn)) MarketManager.Instance?.Notify_Browsed(Stall);
 			});
 			yield return browse;
 
@@ -89,6 +99,60 @@ namespace RimMarket.Jobs
 			yield return buy;
 		}
 
+		private int LineIndex() => MarketUtility.QueueIndex(Stall, job.GetTarget(TargetIndex.B).Cell);
+
+		private bool Taken(IntVec3 cell)
+		{
+			List<Thing> things = cell.GetThingList(pawn.Map);
+			for (int i = 0; i < things.Count; i++)
+			{
+				if (things[i] is Pawn other && other != pawn && other.jobs?.curDriver is JobDriver_VisitStall) return true;
+			}
+			return false;
+		}
+
+		private Toil WaitInLine()
+		{
+			Toil wait = ToilMaker.MakeToil("WaitInLine");
+			wait.defaultCompleteMode = ToilCompleteMode.Never;
+			wait.handlingFacing = true;
+			wait.socialMode = RandomSocialMode.Normal;
+			wait.initAction = delegate
+			{
+				if (LineIndex() <= 0) ReadyForNextToil();
+			};
+			wait.tickIntervalAction = delegate(int delta)
+			{
+				CompMarketStall stall = Stall;
+				if (stall == null || pawn.pather.Moving) return;
+				int index = LineIndex();
+				if (index <= 0)
+				{
+					ReadyForNextToil();
+					return;
+				}
+				pawn.rotationTracker.FaceCell(stall.Position);
+				waited += delta;
+				if (waited > MaxLineWait)
+				{
+					EndJobWith(JobCondition.Incompletable);
+					return;
+				}
+				if (!pawn.IsHashIntervalTick(LineCheck, delta)) return;
+				IntVec3 ahead = MarketUtility.QueueCell(stall, index - 1);
+				if (Taken(ahead) || !pawn.CanReserve(ahead)) return;
+				pawn.Map.reservationManager.Release(job.GetTarget(TargetIndex.B), pawn, job);
+				if (!pawn.Reserve(ahead, job, 1, -1, null, false))
+				{
+					EndJobWith(JobCondition.Incompletable);
+					return;
+				}
+				job.SetTarget(TargetIndex.B, ahead);
+				pawn.pather.StartPath(ahead, PathEndMode.OnCell);
+			};
+			return wait;
+		}
+
 		private void Bought(Thing bought, int price)
 		{
 			CompMarketStall stall = Stall;
@@ -98,61 +162,23 @@ namespace RimMarket.Jobs
 				MoteMaker.ThrowText(pawn.DrawPos, pawn.Map,
 					"RimMarket.MoteBought".Translate(bought.LabelShort, price), 3.5f);
 			pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(RimMarketDefOf.RimMarket_BoughtAtMarket);
+			(pawn.GetLord()?.LordJob as LordJob_MarketShoppers)?.Notify_Bought(pawn, bought.def);
 			UseNow(bought.def);
 		}
 
-		private const float SnackBelow = 0.75f;
-		private const float CravingBelow = 0.5f;
-
 		private void UseNow(ThingDef def)
 		{
-			if (def?.ingestible == null || pawn.IsColonist || !pawn.RaceProps.Humanlike || pawn.inventory == null || pawn.jobs == null) return;
-			ThingOwner carried = pawn.inventory.innerContainer;
-			Thing item = null;
-			for (int i = 0; i < carried.Count; i++)
-			{
-				if (carried[i].def == def)
-				{
-					item = carried[i];
-					break;
-				}
-			}
-			if (item == null || !WantsNow(item)) return;
-			Job use = JobMaker.MakeJob(JobDefOf.Ingest, item);
-			use.count = def.IsDrug ? 1 : Mathf.Clamp(FoodUtility.WillIngestStackCountOf(pawn, def, FoodUtility.GetNutrition(pawn, item, def)), 1, item.stackCount);
-			pawn.jobs.jobQueue.EnqueueFirst(use);
-		}
-
-		private bool WantsNow(Thing item)
-		{
-			ThingDef def = item.def;
-			if (def.IsDrug)
-			{
-				if (!pawn.CanTakeDrug(def)) return false;
-				ChemicalDef chemical = item.TryGetComp<CompDrug>()?.Props.chemical;
-				if (chemical != null && AddictionUtility.IsAddicted(pawn, chemical))
-				{
-					Need craving = chemical.addictionHediff?.chemicalNeed == null ? null : pawn.needs?.TryGetNeed(chemical.addictionHediff.chemicalNeed);
-					return craving != null && craving.CurLevelPercentage < CravingBelow;
-				}
-				if (def.ingestible.drugCategory != DrugCategory.Social) return false;
-				List<IngestionOutcomeDoer> effects = def.ingestible.outcomeDoers;
-				if (effects == null) return true;
-				for (int i = 0; i < effects.Count; i++)
-				{
-					if (effects[i] is IngestionOutcomeDoer_GiveHediff high && high.hediffDef != null && pawn.health.hediffSet.HasHediff(high.hediffDef)) return false;
-				}
-				return true;
-			}
-			if (!def.IsNutritionGivingIngestible || def.ingestible.preferability < FoodPreferability.RawTasty) return false;
-			Need_Food food = pawn.needs?.food;
-			return food != null && food.CurLevelPercentage < SnackBelow && pawn.WillEat(item);
+			if (def?.ingestible == null || pawn.IsColonist || !pawn.RaceProps.Humanlike || pawn.jobs == null) return;
+			Thing item = MarketSnacks.Carried(pawn, def);
+			if (item == null || !MarketSnacks.WantsNow(pawn, item)) return;
+			pawn.jobs.jobQueue.EnqueueFirst(MarketSnacks.UseJob(pawn, item));
 		}
 
 		public override void ExposeData()
 		{
 			base.ExposeData();
 			Scribe_Values.Look(ref browseTicks, "browseTicks");
+			Scribe_Values.Look(ref waited, "waited");
 		}
 	}
 }

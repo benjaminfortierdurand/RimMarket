@@ -92,6 +92,7 @@ namespace RimMarket
 		public bool shopkeepers = DefShopkeepers;
 		public bool marketSaturation = DefMarketSaturation;
 		public bool sellTainted = true;
+		public bool eveningGathering = true;
 		public int marketDifficulty = DefMarketDifficulty;
 		public float colonyShopperDays = DefColonyShopperDays;
 		public bool fairEnabled = DefFairEnabled;
@@ -161,6 +162,7 @@ namespace RimMarket
 			shopkeepers = DefShopkeepers;
 			marketSaturation = DefMarketSaturation;
 			sellTainted = true;
+			eveningGathering = true;
 			innPrice = DefInnPrice;
 		}
 
@@ -235,6 +237,7 @@ namespace RimMarket
 			Scribe_Values.Look(ref shopkeepers, "shopkeepers", DefShopkeepers);
 			Scribe_Values.Look(ref marketSaturation, "marketSaturation", DefMarketSaturation);
 			Scribe_Values.Look(ref sellTainted, "sellTainted", true);
+			Scribe_Values.Look(ref eveningGathering, "eveningGathering", true);
 			Scribe_Values.Look(ref marketDifficulty, "marketDifficulty", DefMarketDifficulty);
 			Scribe_Values.Look(ref colonyShopperDays, "colonyShopperDays", DefColonyShopperDays);
 			Scribe_Values.Look(ref fairEnabled, "fairEnabled", DefFairEnabled);

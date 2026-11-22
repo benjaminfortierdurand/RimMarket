@@ -195,7 +195,8 @@ namespace RimMarket.AI
 		private static bool Idle(JobDef job)
 		{
 			return job == RimMarketDefOf.RimMarket_StandAtStall || job == RimMarketDefOf.RimMarket_RestAtSpot
-				|| job == RimMarketDefOf.RimMarket_CheckAnimals || job == JobDefOf.Wait || job == JobDefOf.Wait_Wander
+				|| job == RimMarketDefOf.RimMarket_CheckAnimals || job == RimMarketDefOf.RimMarket_BrowseStall
+				|| job == RimMarketDefOf.RimMarket_EveningGather || job == JobDefOf.Wait || job == JobDefOf.Wait_Wander
 				|| job == JobDefOf.GotoWander || job == JobDefOf.Goto || job == JobDefOf.Wait_MaintainPosture;
 		}
 
