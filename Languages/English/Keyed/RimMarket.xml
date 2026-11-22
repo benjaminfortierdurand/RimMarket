@@ -859,6 +859,9 @@ They are yours now. Your haulers will put them away, or you can jump to them fro
 	<RimMarket.Guide.DiagRoom>Room for another merchant ({0} of {1} taken)</RimMarket.Guide.DiagRoom>
 	<RimMarket.Guide.DiagRoomNoLimit>Room for another merchant ({0} trading, no limit)</RimMarket.Guide.DiagRoomNoLimit>
 	<RimMarket.Guide.DiagFactions>Friendly factions that send caravans: {0}</RimMarket.Guide.DiagFactions>
+	<RimMarket.Guide.DiagWeather>The temperature lets {0} of these {1} factions travel here</RimMarket.Guide.DiagWeather>
+	<RimMarket.Guide.DiagWeatherNone>Too cold or too hot outside for any of these factions to travel here</RimMarket.Guide.DiagWeatherNone>
+	<RimMarket.Guide.DiagCondition>{0} keeps visitors and caravans away</RimMarket.Guide.DiagCondition>
 	<RimMarket.Guide.DiagNoRefuse>No faction refuses your market</RimMarket.Guide.DiagNoRefuse>
 	<RimMarket.Guide.DiagRefuse>Your reputation keeps some away: {0}</RimMarket.Guide.DiagRefuse>
 	<RimMarket.Guide.DiagBroke>Caravans that cannot pay the stall fee are turned away (mod settings)</RimMarket.Guide.DiagBroke>

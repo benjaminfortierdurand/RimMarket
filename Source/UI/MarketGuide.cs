@@ -291,6 +291,17 @@ namespace RimMarket.UI
 			lines.Add(new GuideCheck(room, busy < s.MerchantCap, GuideLine.Problem));
 			List<Faction> traders = Reputation.ReputationUtility.TraderFactions().Where(f => !f.HostileTo(Faction.OfPlayer)).ToList();
 			lines.Add(new GuideCheck("RimMarket.Guide.DiagFactions".Translate(traders.Count), traders.Count > 0, GuideLine.Problem));
+			if (traders.Count > 0)
+			{
+				float outdoor = map.mapTemperature.OutdoorTemp;
+				float seasonal = map.mapTemperature.SeasonalTemp;
+				int able = traders.Count(f => f.def.allowedArrivalTemperatureRange.Includes(outdoor) && f.def.allowedArrivalTemperatureRange.Includes(seasonal));
+				lines.Add(able > 0
+					? new GuideCheck("RimMarket.Guide.DiagWeather".Translate(able, traders.Count), true, GuideLine.Problem)
+					: new GuideCheck(L("DiagWeatherNone"), false, GuideLine.Problem));
+			}
+			GameCondition blocking = map.GameConditionManager.ActiveConditions.FirstOrDefault(c => c.def.preventNeutralVisitors);
+			if (blocking != null) lines.Add(new GuideCheck("RimMarket.Guide.DiagCondition".Translate(blocking.LabelCap), false, GuideLine.Problem));
 			List<string> refusing = mgr == null ? new List<string>() : traders.Where(f => mgr.RefusalChance(f) > 0f).Select(f => f.Name).ToList();
 			lines.Add(refusing.Count == 0
 				? new GuideCheck(L("DiagNoRefuse"), true, GuideLine.Problem)
