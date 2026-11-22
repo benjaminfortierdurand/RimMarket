@@ -1,4 +1,3 @@
-using RimMarket.Buildings;
 using RimMarket.Market;
 using RimWorld;
 using UnityEngine;
@@ -8,7 +7,7 @@ namespace RimMarket.UI
 {
 	public static class MarketNews
 	{
-		public const int Latest = 1;
+		public const int Latest = 2;
 
 		public static bool Unseen(MarketManager mgr)
 		{
@@ -36,15 +35,17 @@ namespace RimMarket.UI
 	public class Dialog_MarketNews : Window
 	{
 		private const float TitleHeight = 38f;
-		private const float ArtSize = 240f;
-		private const float Gap = 18f;
-		private const float SubtitleHeight = 34f;
+		private const float ArtHeight = 260f;
+		private const float Gap = 12f;
+		private const float HeadlineHeight = 34f;
 		private const float ButtonHeight = 36f;
 		private const float ButtonWidth = 140f;
+		private const string ArtPath = "UI/News/RimMarket_News";
 
-		private StallRoof.RoofLook look;
+		private Texture2D art;
+		private bool artLooked;
 
-		public override Vector2 InitialSize => new Vector2(Mathf.Min(720f, Verse.UI.screenWidth - 32f), Mathf.Min(420f, Verse.UI.screenHeight - 48f));
+		public override Vector2 InitialSize => new Vector2(Mathf.Min(680f, Verse.UI.screenWidth - 32f), Mathf.Min(710f, Verse.UI.screenHeight - 48f));
 
 		public Dialog_MarketNews()
 		{
@@ -55,26 +56,30 @@ namespace RimMarket.UI
 			preventCameraMotion = false;
 		}
 
+		private static string L(string key) => ("RimMarket.News" + MarketNews.Latest + "." + key).Translate();
+
 		public override void DoWindowContents(Rect inRect)
 		{
 			Text.Font = GameFont.Medium;
 			Widgets.Label(new Rect(0f, 0f, inRect.width - 30f, TitleHeight), "RimMarket.News.Title".Translate());
-			float top = TitleHeight + 6f;
+			float y = TitleHeight + 6f;
 			float bottom = inRect.height - ButtonHeight - 12f;
-			var art = new Rect(0f, top, ArtSize, Mathf.Min(ArtSize, bottom - top));
-			Widgets.DrawMenuSection(art);
-			if (look == null)
+			if (!artLooked)
 			{
-				Color steel = ThingDefOf.Steel.stuffProps != null ? ThingDefOf.Steel.stuffProps.color : Color.gray;
-				look = StallRoof.Build(StallRoof.DefaultShape, 0, steel, StallRoof.DefaultCanvas, StallRoof.DefaultStripe);
+				artLooked = true;
+				art = ContentFinder<Texture2D>.Get(ArtPath + MarketNews.Latest, false);
 			}
-			float side = Mathf.Min(art.width, art.height) - 8f;
-			StallRoof.DrawPreview(new Rect(art.center.x - side / 2f, art.center.y - side / 2f, side, side), look, StallRoof.DefaultShape, 0, false, glass: true);
-			float x = ArtSize + Gap;
-			Widgets.Label(new Rect(x, top, inRect.width - x, SubtitleHeight), "RimMarket.News.FreezerTitle".Translate());
+			if (art != null)
+			{
+				var frame = new Rect(0f, y, inRect.width, Mathf.Min(ArtHeight, inRect.width * art.height / art.width));
+				GUI.DrawTexture(frame, art, ScaleMode.ScaleAndCrop);
+				Widgets.DrawBox(frame);
+				y = frame.yMax + Gap;
+			}
+			Widgets.Label(new Rect(0f, y, inRect.width, HeadlineHeight), L("Headline"));
+			y += HeadlineHeight;
 			Text.Font = GameFont.Small;
-			string body = "RimMarket.News.FreezerBody".Translate() + "\n\n" + "RimMarket.News.Also".Translate();
-			Widgets.Label(new Rect(x, top + SubtitleHeight, inRect.width - x, bottom - top - SubtitleHeight), body);
+			Widgets.Label(new Rect(0f, y, inRect.width, bottom - y), L("Body") + "\n\n" + L("Also"));
 			RimMarketSettings s = RimMarketMod.Settings;
 			bool show = s.showNews;
 			Widgets.CheckboxLabeled(new Rect(0f, inRect.height - ButtonHeight + 4f, 280f, 28f), "RimMarket.News.KeepShowing".Translate(), ref show);

@@ -240,11 +240,11 @@
 	<RimMarket.StallFreezerOn>Freezer running: the goods on this stall do not spoil</RimMarket.StallFreezerOn>
 	<RimMarket.StallFreezerOff>Freezer off: the goods on this stall spoil as usual</RimMarket.StallFreezerOff>
 	<RimMarket.News.Title>New in RimMarket</RimMarket.News.Title>
-	<RimMarket.News.FreezerTitle>Freezer stall</RimMarket.News.FreezerTitle>
-	<RimMarket.News.FreezerBody>A steel market stall with a freezer built into the counter. While it has power, the goods you sell from it as a colony stall stay frozen and do not spoil.
+	<RimMarket.News2.Headline>A livelier market</RimMarket.News2.Headline>
+	<RimMarket.News2.Body>Shoppers now line up in front of a busy stall and walk away with what they bought in their hands. Merchants call out their wares, and off duty guards and merchants go have a look at the other stalls.
 
-It costs an advanced component on top of the steel. You will find it next to the market stall in the Misc tab.</RimMarket.News.FreezerBody>
-	<RimMarket.News.Also>Also in this update: market, camp and guard rest areas can be painted up to 60 cells from their spot, and cooks no longer take their ingredients from your colony stalls.</RimMarket.News.Also>
+Put a table with chairs or a campfire inside the market area: from 8 in the evening until bedtime, market folk sit there together.</RimMarket.News2.Body>
+	<RimMarket.News2.Also>Also since the last news: building a stall now needs the Market stalls research, given for free to colonies that already had a market. Shoppers eat, drink or smoke what they just bought at the tables of the market, and Hospitality guests keep enough silver to pay for their bed.</RimMarket.News2.Also>
 	<RimMarket.News.KeepShowing>Show news after updates</RimMarket.News.KeepShowing>
 	<RimMarket.ColonyStallTakings>Sold so far: {0} silver over {1} sales</RimMarket.ColonyStallTakings>
 	<RimMarket.ColonyStallNothingToSell>The stall has nothing to sell</RimMarket.ColonyStallNothingToSell>
