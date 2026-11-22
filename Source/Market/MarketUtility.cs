@@ -266,6 +266,12 @@ namespace RimMarket.Market
 
 		public static bool IsShoppingGuest(Pawn p) => HospitalityBridge.IsArrivedGuest(p) || HotelsBridge.IsGuest(p);
 
+		public static int Purse(Pawn p)
+		{
+			int silver = SilverOf(p);
+			return silver - HospitalityBridge.BedReserve(p, silver);
+		}
+
 		public static int SilverOf(Pawn p)
 		{
 			if (HotelsBridge.IsGuest(p)) return HotelsBridge.BudgetOf(p);
@@ -362,7 +368,7 @@ namespace RimMarket.Market
 			if (stall == null) return null;
 			IntVec3 cell = FindBrowseCell(stall, pawn);
 			if (!cell.IsValid) return null;
-			bool buyer = !pawn.IsColonist && (shopper || RimMarketMod.Settings.guestsShop) && SilverOf(pawn) >= MinGuestPurchase;
+			bool buyer = !pawn.IsColonist && (shopper || RimMarketMod.Settings.guestsShop) && Purse(pawn) >= MinGuestPurchase;
 			JobDef def = buyer ? RimMarketDefOf.RimMarket_BuyAtStall : RimMarketDefOf.RimMarket_BrowseStall;
 			return JobMaker.MakeJob(def, stall.parent, cell, seller);
 		}
@@ -381,7 +387,7 @@ namespace RimMarket.Market
 			Pawn trader = v.trader;
 			TraderKindDef kind = trader.TraderKind;
 			if (kind == null || trader.trader == null) return false;
-			int silver = SilverOf(buyer);
+			int silver = Purse(buyer);
 			if (silver < MinGuestPurchase) return false;
 			var affordable = new List<Thing>();
 			foreach (Thing t in trader.trader.Goods)

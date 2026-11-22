@@ -174,7 +174,7 @@ namespace RimMarket.Market
 		{
 			if (p == null || !p.Spawned || p.Dead || p.Downed || p.Faction == null || p.Faction.IsPlayer) return false;
 			if (!p.RaceProps.Humanlike || p.HostileTo(Faction.OfPlayer)) return false;
-			if (MarketUtility.SilverOf(p) < MarketUtility.MinGuestPurchase) return false;
+			if (MarketUtility.Purse(p) < MarketUtility.MinGuestPurchase) return false;
 			if (p.GetLord()?.LordJob is LordJob_MarketShoppers) return true;
 			return RimMarketMod.Settings.guestsShop && MarketUtility.IsShoppingGuest(p);
 		}
@@ -321,7 +321,7 @@ namespace RimMarket.Market
 			bought = null;
 			price = 0;
 			if (buyer?.inventory == null || !OpenForSale(s)) return false;
-			int silver = MarketUtility.SilverOf(buyer);
+			int silver = MarketUtility.Purse(buyer);
 			if (silver < MarketUtility.MinGuestPurchase) return false;
 			float keeper = KeeperFactor(s);
 			var affordable = new List<Thing>();

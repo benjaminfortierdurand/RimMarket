@@ -165,7 +165,7 @@ namespace RimMarket.Auction
 				{
 					Pawn p = pawns[i];
 					if (!MarketUtility.IsShoppingGuest(p) || !FactionBuysSlaves(p.Faction)) continue;
-					int silver = MarketUtility.SilverOf(p);
+					int silver = MarketUtility.Purse(p);
 					if (silver < start) continue;
 					list.Add(new AuctionBidder
 					{

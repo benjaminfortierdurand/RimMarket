@@ -23,7 +23,7 @@ namespace RimMarket.AI
 			}
 			if (!s.guestsShop || !MarketUtility.IsShoppingGuest(pawn)) return 0f;
 			if (!merchants && !ColonyStalls.AnyOpen(pawn.Map)) return 0f;
-			bool canBuy = MarketUtility.SilverOf(pawn) >= MarketUtility.MinGuestPurchase;
+			bool canBuy = MarketUtility.Purse(pawn) >= MarketUtility.MinGuestPurchase;
 			return base.GetChance(pawn) * (canBuy ? BuyerChanceFactor : BrokeGuestChanceFactor);
 		}
 
