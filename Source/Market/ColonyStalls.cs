@@ -33,6 +33,10 @@ namespace RimMarket.Market
 		private static Map stockedMap;
 		private static int stockedTick = -99999;
 		private static Building_MarketStall stockedResult;
+		private const int HeldCacheTicks = 250;
+		private static Map heldMap;
+		private static int heldTick = -99999;
+		private static bool heldResult;
 		private static Map customerMap;
 		private static int customerTick = -99999;
 		private static bool customerResult;
@@ -55,6 +59,35 @@ namespace RimMarket.Market
 		}
 
 		public static bool IsColonyStall(Thing t) => t is Building_MarketStall s && s.ColonyStall;
+
+		public static void Notify_StockChanged()
+		{
+			heldTick = -99999;
+		}
+
+		public static bool AnyHeldStock(Map map)
+		{
+			if (map == null) return false;
+			int now = Find.TickManager.TicksGame;
+			if (map == heldMap && now >= heldTick && now - heldTick < HeldCacheTicks) return heldResult;
+			heldMap = map;
+			heldTick = now;
+			heldResult = false;
+			List<ThingDef> defs = MarketStallDefs.All;
+			for (int d = 0; d < defs.Count && !heldResult; d++)
+			{
+				List<Thing> things = map.listerThings.ThingsOfDef(defs[d]);
+				for (int i = 0; i < things.Count; i++)
+				{
+					if (things[i] is Building_MarketStall s && s.Stock.Count > 0)
+					{
+						heldResult = true;
+						break;
+					}
+				}
+			}
+			return heldResult;
+		}
 
 		public static Pawn KeeperAt(Building_MarketStall s)
 		{

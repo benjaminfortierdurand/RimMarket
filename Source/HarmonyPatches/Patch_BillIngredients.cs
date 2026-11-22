@@ -1,6 +1,7 @@
 using System;
 using HarmonyLib;
 using RimMarket.Buildings;
+using RimMarket.Market;
 using RimWorld;
 using Verse;
 
@@ -9,11 +10,15 @@ namespace RimMarket.HarmonyPatches
 	[HarmonyPatch(typeof(WorkGiver_DoBill), "TryFindBestIngredientsHelper")]
 	public static class Patch_BillIngredients_SkipStallStock
 	{
-		public static void Prefix(ref Predicate<Thing> thingValidator)
+		public static void Prefix(Pawn pawn, ref Predicate<Thing> thingValidator)
 		{
-			Predicate<Thing> inner = thingValidator;
-			if (inner == null) return;
-			thingValidator = t => !(t.ParentHolder is Building_MarketStall) && inner(t);
+			if (thingValidator == null || !ColonyStalls.AnyHeldStock(pawn?.Map)) return;
+			thingValidator = Wrap(thingValidator);
+		}
+
+		private static Predicate<Thing> Wrap(Predicate<Thing> inner)
+		{
+			return t => !(t.ParentHolder is Building_MarketStall) && inner(t);
 		}
 	}
 }

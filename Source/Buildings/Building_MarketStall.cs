@@ -283,12 +283,14 @@ namespace RimMarket.Buildings
 		public void Notify_ItemAdded(Thing item)
 		{
 			if (Spawned) MapHeld.listerHaulables.Notify_AddedThing(item);
+			ColonyStalls.Notify_StockChanged();
 			Stall?.MarkDisplayDirty();
 		}
 
 		public void Notify_ItemRemoved(Thing item)
 		{
 			if (Spawned) MapHeld.listerHaulables.Notify_DeSpawned(item);
+			ColonyStalls.Notify_StockChanged();
 			Stall?.MarkDisplayDirty();
 		}
 
