@@ -38,6 +38,12 @@ namespace RimMarket.UI
 			forcePause = true;
 		}
 
+		public override void PreClose()
+		{
+			base.PreClose();
+			MarketManager.Instance?.RememberAwayKeep(stall);
+		}
+
 		private bool Open => stall != null && MarketManager.Instance != null && MarketManager.Instance.AwayStallFor(stall.caravan) == stall;
 
 		private void Refresh()

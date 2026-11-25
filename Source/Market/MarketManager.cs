@@ -648,8 +648,14 @@ namespace RimMarket.Market
 
 		private List<AwayStall> awayStalls = new List<AwayStall>();
 		private Dictionary<int, int> awayCooldowns = new Dictionary<int, int>();
+		private List<ThingDef> awayKeep = new List<ThingDef>();
 
 		public IReadOnlyList<AwayStall> AwayStalls => awayStalls;
+
+		public void RememberAwayKeep(AwayStall st)
+		{
+			if (st?.keep != null) awayKeep = new List<ThingDef>(st.keep);
+		}
 
 		public AwayStall AwayStallFor(Caravan caravan)
 		{
@@ -697,6 +703,7 @@ namespace RimMarket.Market
 				startTick = now,
 				endTick = now + AwayStallUtility.MarketTicks,
 				nextHourTick = now + AwayStallUtility.HourTicks,
+				keep = new List<ThingDef>(awayKeep),
 			};
 			awayStalls.Add(st);
 			caravan.pather.StopDead();
@@ -1878,6 +1885,7 @@ namespace RimMarket.Market
 			Scribe_Collections.Look(ref awayStalls, "awayStalls", LookMode.Deep);
 			Scribe_Collections.Look(ref auctions, "auctions", LookMode.Deep);
 			Scribe_Collections.Look(ref awayCooldowns, "awayCooldowns", LookMode.Value, LookMode.Value);
+			Scribe_Collections.Look(ref awayKeep, "awayKeep", LookMode.Def);
 			Scribe_Collections.Look(ref innPaid, "innPaid", LookMode.Value, LookMode.Value);
 			Scribe_Collections.Look(ref innPrices, "innPrices", LookMode.Value);
 			Scribe_Collections.Look(ref guestBook, "guestBook", LookMode.Deep);
@@ -1921,6 +1929,8 @@ namespace RimMarket.Market
 				if (awayStalls == null) awayStalls = new List<AwayStall>();
 				awayStalls.RemoveAll(a => a == null || a.caravan == null || a.settlement == null);
 				if (awayCooldowns == null) awayCooldowns = new Dictionary<int, int>();
+				if (awayKeep == null) awayKeep = new List<ThingDef>();
+				awayKeep.RemoveAll(d => d == null);
 				if (reputation == null) reputation = new MarketReputation();
 				if (ledgers == null) ledgers = new List<FactionLedger>();
 				ledgers.RemoveAll(l => l == null || l.faction == null);
