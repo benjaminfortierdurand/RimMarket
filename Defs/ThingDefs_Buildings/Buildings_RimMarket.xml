@@ -24,7 +24,7 @@
 		<statBases>
 			<WorkToBuild>0</WorkToBuild>
 		</statBases>
-		<designationCategory>Misc</designationCategory>
+		<designationCategory>RimMarket_Market</designationCategory>
 		<uiOrder>2005</uiOrder>
 		<building>
 			<sowTag>SupportPlantsOnly</sowTag>
@@ -58,7 +58,7 @@ Select the spot to paint its area like a stockpile zone, or hide it once you kno
 		</statBases>
 		<useHitPoints>false</useHitPoints>
 		<scatterableOnMapGen>false</scatterableOnMapGen>
-		<designationCategory>Misc</designationCategory>
+		<designationCategory>RimMarket_Market</designationCategory>
 		<passability>Standable</passability>
 		<rotatable>false</rotatable>
 		<building>
@@ -94,7 +94,7 @@ Select the spot to paint its area like a stockpile zone, or hide it once you kno
 		</statBases>
 		<useHitPoints>false</useHitPoints>
 		<scatterableOnMapGen>false</scatterableOnMapGen>
-		<designationCategory>Misc</designationCategory>
+		<designationCategory>RimMarket_Market</designationCategory>
 		<passability>Standable</passability>
 		<rotatable>false</rotatable>
 		<building>
@@ -162,7 +162,7 @@ Select the spot to paint its area like a stockpile zone, or hide it once you kno
 			<li>Metallic</li>
 		</stuffCategories>
 		<costStuffCount>75</costStuffCount>
-		<designationCategory>Misc</designationCategory>
+		<designationCategory>RimMarket_Market</designationCategory>
 		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
 		<researchPrerequisites>
 			<li>RimMarket_MarketStalls</li>
@@ -248,7 +248,7 @@ Select the spot to paint its area like a stockpile zone, or hide it once you kno
 		<pathCost>30</pathCost>
 		<fillPercent>0.35</fillPercent>
 		<rotatable>false</rotatable>
-		<designationCategory>Misc</designationCategory>
+		<designationCategory>RimMarket_Market</designationCategory>
 		<size>(1,1)</size>
 		<stuffCategories>
 			<li>Woody</li>

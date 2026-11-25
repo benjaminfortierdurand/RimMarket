@@ -5,12 +5,30 @@
 		<mods>
 			<li>Better Architect Menu</li>
 		</mods>
-		<match Class="PatchOperationReplace">
+		<match Class="PatchOperationSequence">
 			<success>Always</success>
-			<xpath>/Defs/ThingDef[defName="RimMarket_MarketMarker" or defName="RimMarket_CaravanCamp" or defName="RimMarket_GuardRestSpot" or defName="RimMarket_Stall" or defName="RimMarket_AuctionBlock"]/designationCategory</xpath>
-			<value>
-				<designationCategory>Ferny_Market</designationCategory>
-			</value>
+			<operations>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/DesignationCategoryDef[defName="RimMarket_Market"]</xpath>
+					<value>
+						<li Class="BetterArchitect.NestedCategoryExtension">
+							<parentCategory>Ferny_World</parentCategory>
+						</li>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/DesignationCategoryDef[defName="RimMarket_Market"]/order</xpath>
+					<value>
+						<order>-1</order>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/DesignationCategoryDef[defName="RimMarket_Market"]/label</xpath>
+					<value>
+						<label>Market</label>
+					</value>
+				</li>
+			</operations>
 		</match>
 	</Operation>
 
