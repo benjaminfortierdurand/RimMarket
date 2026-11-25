@@ -7,7 +7,7 @@ namespace RimMarket.UI
 {
 	public static class MarketNews
 	{
-		public const int Latest = 2;
+		public const int Latest = 3;
 
 		public static bool Unseen(MarketManager mgr)
 		{

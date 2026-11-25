@@ -240,11 +240,11 @@
 	<RimMarket.StallFreezerOn>Freezer running: the goods on this stall do not spoil</RimMarket.StallFreezerOn>
 	<RimMarket.StallFreezerOff>Freezer off: the goods on this stall spoil as usual</RimMarket.StallFreezerOff>
 	<RimMarket.News.Title>New in RimMarket</RimMarket.News.Title>
-	<RimMarket.News2.Headline>A livelier market</RimMarket.News2.Headline>
-	<RimMarket.News2.Body>Shoppers now line up in front of a busy stall and walk away with what they bought in their hands. Merchants call out their wares, and off duty guards and merchants go have a look at the other stalls.
+	<RimMarket.News3.Headline>The market gets its own tab</RimMarket.News3.Headline>
+	<RimMarket.News3.Body>The market buildings left Misc. The marker, the stalls, the caravan camp, the guard rest spot and the auction post now sit in a Market tab of the Architect menu.
 
-Put a table with chairs or a campfire inside the market area: from 8 in the evening until bedtime, market folk sit there together.</RimMarket.News2.Body>
-	<RimMarket.News2.Also>Also since the last news: building a stall now needs the Market stalls research, given for free to colonies that already had a market. Shoppers eat, drink or smoke what they just bought at the tables of the market, and Hospitality guests keep enough silver to pay for their bed.</RimMarket.News2.Also>
+With Better Architect Menu, look in World, right under Miscellaneous.</RimMarket.News3.Body>
+	<RimMarket.News3.Also>Also: when a caravan sets up a stall in another town, what you untick stays unticked at your next stall.</RimMarket.News3.Also>
 	<RimMarket.News.KeepShowing>Show news after updates</RimMarket.News.KeepShowing>
 	<RimMarket.ColonyStallTakings>Sold so far: {0} silver over {1} sales</RimMarket.ColonyStallTakings>
 	<RimMarket.ColonyStallNothingToSell>The stall has nothing to sell</RimMarket.ColonyStallNothingToSell>
